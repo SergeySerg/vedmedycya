@@ -451,6 +451,19 @@
                                     <tr>
                                         <td class="center">
                                             <label>
+                                                <input type="checkbox" name="type" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            Тип
+                                        </td>
+                                        <td>type</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">
+                                            <label>
                                                 <input type="checkbox" name="short_description" />
                                                 <span class="lbl"></span>
                                             </label>

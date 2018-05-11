@@ -157,7 +157,7 @@ class AdminArticlesController extends Controller {
 		return response()->json([
 			"status" => 'success',
 			"message" => 'Успешно сохранено',
-			//"redirect" => URL::to('/adminDa6jo/articles/' . $type)
+			//"redirect" => URL::to('/adminorieT3/articles/' . $type)
 		]);
 	}
 
@@ -333,7 +333,7 @@ class AdminArticlesController extends Controller {
 		return response()->json([
 			"status" => 'success',
 			"message" => 'Успешно сохранено',
-			"redirect" => URL::to('/adminDa6jo/articles/' . $type)
+			"redirect" => URL::to('/adminorieT3/articles/' . $type)
 		]);
 	}
 

@@ -182,6 +182,15 @@
                             @endif
                         @endforeach
                     @endif
+                    @if($admin_category->hasField('type'))
+                        <div class="control-group">
+                            <label class="control-label" for="form-field-2">Тип</label>
+
+                            <div class="controls">
+                                <input type="text" id="form-field-2" name="type" @if(isset($admin_article)) value='{{$admin_article->type}}' @endif  />
+                            </div>
+                        </div>
+                    @endif
                     @if($admin_category->hasField('priority'))
                         <div class="control-group">
                             <label class="control-label" for="form-field-2">{{ trans('backend.priority') }}</label>

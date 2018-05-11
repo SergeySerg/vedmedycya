@@ -133,7 +133,7 @@ trait AuthenticatesAndRegistersUsers {
 	 */
 	public function loginPath()
 	{
-		return property_exists($this, 'loginPath') ? $this->loginPath : '/adminDa6jo/login';
+		return property_exists($this, 'loginPath') ? $this->loginPath : '/adminorieT3/login';
 	}
 
 }

@@ -23,7 +23,7 @@
 
 			<div class="space-6"></div>
 
-			<form class="form-horizontal" role="form" method="POST" action="{{ url('/adminDa6jo/login') }}">
+			<form class="form-horizontal" role="form" method="POST" action="{{ url('/adminorieT3/login') }}">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<fieldset>
 				<label>

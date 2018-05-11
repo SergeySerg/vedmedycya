@@ -71,9 +71,9 @@
     <div class="categoty-admin">
         <h3>Категории админки</h3>
         <ul class="list-admin">
-            <li><a href="/adminDa6jo/articles/rooms">Комнаты</a></li>
-            <li><a href="/adminDa6jo/articles/services">Услуги</a></li>
-            <li><a href="/adminDa6jo/articles/events">События</a></li>
+            <li><a href="/adminorieT3/articles/rooms">Комнаты</a></li>
+            <li><a href="/adminorieT3/articles/services">Услуги</a></li>
+            <li><a href="/adminorieT3/articles/events">События</a></li>
         </ul>
     </div>-->
 
@@ -110,7 +110,7 @@
                         </li>
 
                         <li>
-                            <a href="{{ url('/adminDa6jo/logout') }}">
+                            <a href="{{ url('/adminorieT3/logout') }}">
                             <i class="icon-off"></i>
                                 Logout
                             </a>

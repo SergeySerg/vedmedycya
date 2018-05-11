@@ -19,9 +19,9 @@ Route::controllers([
 ]);
 Route::get('/register', array('as' => 'signup', 'uses' => 'Auth\AuthController@getRegister'));
 Route::post('/register', array('as' => 'signup', 'uses' => 'Auth\AuthController@postRegister'));
-Route::get('adminDa6jo/login', array('as' => 'login', 'uses' => 'Auth\AuthController@getLogin'));
-Route::post('adminDa6jo/login', array('as' => 'login', 'uses' => 'Auth\AuthController@postLogin'));
-Route::get('adminDa6jo/logout', array('as' => 'logout', 'uses' => 'Auth\AuthController@getLogout'));
+Route::get('adminorieT3/login', array('as' => 'login', 'uses' => 'Auth\AuthController@getLogin'));
+Route::post('adminorieT3/login', array('as' => 'login', 'uses' => 'Auth\AuthController@postLogin'));
+Route::get('adminorieT3/logout', array('as' => 'logout', 'uses' => 'Auth\AuthController@getLogout'));
 /*Route::get('/forgot', array('as' => 'forgot', 'uses' => 'Auth\AuthController@getLogin'));
 Route::post('/forgot', array('as' => 'forgot', 'uses' => 'Auth\AuthController@postLogin'));*/
 
@@ -36,7 +36,7 @@ Route::post('/update_rate', ['uses' => 'Frontend\ArticleController@update_rate',
 /*/Callback group route*/
 
 /*Backend group routes*/
-Route::group(['prefix'=>'adminDa6jo', 'middleware' => ['auth', 'backend.init']], function(){
+Route::group(['prefix'=>'adminorieT3', 'middleware' => ['auth', 'backend.init']], function(){
 
 	//Routes for Articles (Backend)
 	Route::get('/',['uses' => 'Backend\AdminDashboardController@index','as' => 'admin_dashboard']);

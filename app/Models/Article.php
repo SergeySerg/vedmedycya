@@ -8,6 +8,7 @@ class Article extends Translate {
         'category_id',
         'article_id',
         'title',
+        'type',
         'short_description',
         'description',
         'attributes',

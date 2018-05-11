@@ -37,7 +37,7 @@ class AuthController extends Controller {
 	//Переопределение метода для возможности регистрации одного пользователя
 	public function getRegister(){
 		return abort(404);
-		/*return redirect('adminDa6jo/login');*/
+		/*return redirect('adminorieT3/login');*/
 
 	}
 

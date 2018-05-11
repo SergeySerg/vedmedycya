@@ -55,7 +55,7 @@ return [
 		'mysql' => [
 			'driver'    => 'mysql',
 			'host'      => env('DB_HOST', 'localhost'),
-			'database'  => env('DB_DATABASE', 'globaltobako_new_db'),
+			'database'  => env('DB_DATABASE', 'vedmedycya_db'),
 			'username'  => env('DB_USERNAME', 'root' ),
 			'password'  => env('DB_PASSWORD', '2'),
 			'charset'   => 'utf8',
