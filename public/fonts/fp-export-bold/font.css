@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Mirro Sans Bold';
+  src: url('/themes/softorg/fonts/fp-export-bold/Mirro.eot'); /* IE9 Compat Modes */
+  src: url('/themes/softorg/fonts/fp-export-bold/Mirro.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/themes/softorg/fonts/fp-export-bold/Mirro.woff') format('woff'), /* Modern Browsers */
+       url('/themes/softorg/fonts/fp-export-bold/Mirro.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/themes/softorg/fonts/fp-export-bold/Mirro.svg#c73c7aa79496b70b067386fea616f7f7') format('svg'); /* Legacy iOS */
+       
+  font-style:   normal;
+  font-weight:  700;
+}
+

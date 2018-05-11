@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Mirro Sans Light';
+  src: url('/themes/softorg/fonts/fp-export-light/mirroLight.eot'); /* IE9 Compat Modes */
+  src: url('/themes/softorg/fonts/fp-export-light/mirroLight.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/themes/softorg/fonts/fp-export-light/mirroLight.woff') format('woff'), /* Modern Browsers */
+       url('/themes/softorg/fonts/fp-export-light/mirroLight.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/themes/softorg/fonts/fp-export-light/mirroLight.svg#0bc9cd0dfb58104225f103d557253dc8') format('svg'); /* Legacy iOS */
+       
+  font-style:   normal;
+  font-weight:  200;
+}
+
