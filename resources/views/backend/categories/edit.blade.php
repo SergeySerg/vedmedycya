@@ -76,7 +76,7 @@
                                 <label class="control-label" for="form-field-1">Link</label>
 --}}
                                 <div class="controls">
-                                    <input type="text" id="form-field-1" name="link" @if(isset($admin_category)) value='{{$admin_category->link}}'@endif  />
+                                    <input type="text" id="form-field-1" name="link" @if(isset($admin_category)) value='{{$admin_category->link}}' disabled @endif  />
                                 </div>
                             </div>
                         </div>

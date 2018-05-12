@@ -49,9 +49,9 @@
                                 @if($attribute->type == 'input' )
                                     <div class="control-group">
                                         <label class="control-label" for="form-field-2">{{ $attribute->publick_name }}</label>
-                                        <div class="controls">
-                                            <input type="text" id="form-field-2" name='attributes[{{ $key }}]'  value='{{ $attributes[$key]  or ''}}'/>
-                                        </div>
+                                            <div class="controls">
+                                                <input type="text" id="form-field-2" name='attributes[{{ $key }}]'  value='{{ $attributes[$key]  or ''}}'/>
+                                            </div>                                        
                                     </div>
                                 @elseif ($attribute->type == 'checkbox')
                                     <div class="control-group">
@@ -187,7 +187,7 @@
                             <label class="control-label" for="form-field-2">Тип</label>
 
                             <div class="controls">
-                                <input type="text" id="form-field-2" name="type" @if(isset($admin_article)) value='{{$admin_article->type}}' @endif  />
+                                <input type="text" id="form-field-2" name="type" @if(isset($admin_article)) value='{{$admin_article->type}}'disabled @endif  />
                             </div>
                         </div>
                     @endif
@@ -267,11 +267,11 @@
 
                                             <div class="tools action-buttons">
                                                 <a href="#" class="blue">
-                                                    <i class="icon-pencil bigger-125 " id="image-edit" ></i>
+                                                    <i class="icon-pencil bigger-125 image-edit"></i>
                                                 </a>
 
                                                 <a href="#" class="red">
-                                                    <i class="icon-remove bigger-125" id="image-close"></i>
+                                                    <i class="icon-remove bigger-125 image-close" id=""></i>
                                                 </a>
                                             </div>
                                         </div>

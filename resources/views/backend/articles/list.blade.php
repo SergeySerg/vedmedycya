@@ -63,9 +63,13 @@
                             <i class="icon-time bigger-110 hidden-phone"></i>
                             {{ trans('backend.date_create') }}
                         </th>
-                        <th class="center hidden-phone">
-                            <i class="icon-time bigger-110 hidden-phone"></i>
-                            {{ trans('backend.date_update') }}
+                        <th class="center">
+                            @if($type == 'marketings')
+                                Приналежність до готелю                               
+                            @else
+                                <i class="icon-time bigger-110 hidden-phone"></i>
+                                {{ trans('backend.date_update') }}
+                            @endif                            
                         </th>
 
                        <!-- <th class="hidden-phone">
@@ -80,6 +84,7 @@
 
                     <tbody>
                         @foreach($admin_articles as $admin_article)
+                        
                             <tr>
                                 <td class="center">
                                     <label>
@@ -90,7 +95,11 @@
                                     <a href="{{ $url }}/articles/{{$type}}/{{$admin_article->id}}">{!! $admin_article->getTranslate('title') !!}</a>
                                 </td>
                                 <td  class="hidden-phone">{{ $admin_article->created_at }}</td>
-                                <td  class="hidden-phone">{{ $admin_article->updated_at }}</td>
+                                @if($type == 'marketings')
+                                    <td>{{ $admin_article->article_parent->getTranslate('title') }}</td>
+                                @else
+                                    <td  class="hidden-phone">{{ $admin_article->updated_at }}</td>
+                                @endif                               
 
                                 <td class="center">
                                     @if($admin_article->active)
@@ -198,7 +207,7 @@
                                                 <div class="tabbable">
                                                     <ul class="nav nav-tabs" id="myTab2">
                                                         @foreach($langs as $lang)
-                                                            <li @if(($lang->lang) == 'ua') class="active" @endif >
+                                                            <li @if(($lang->lang) == config('app.locale')) class="active" @endif >
                                                                 <a data-toggle="tab" href="#{{$lang->lang}}">{{$lang->lang}}</a>
                                                             </li>
                                                         @endforeach
@@ -207,7 +216,7 @@
 
                                                 <div class="tab-content">
                                                     @foreach($langs as $lang)
-                                                        <div id="{{$lang->lang}}" @if(($lang->lang) == 'ua') class="tab-pane in active" @else class="tab-pane" @endif>
+                                                        <div id="{{$lang->lang}}" @if(($lang->lang) == config('app.locale')) class="tab-pane in active" @else class="tab-pane" @endif>
 
                                                                 <div class="control-group">
                                                                     <label class="control-label" for="form-field-3">Назва категорії</label>

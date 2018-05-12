@@ -61,7 +61,7 @@
                                         <span class="lbl">{{ $admin_text->id }}</span>
                                     </label>
                                 </td>
-                                <td><a href="{{ $url }}/texts/{{ $admin_text->id }}">{{ $admin_text->getTranslate('title') }}</a></td>
+                                <td><a href="{{ $url }}/texts/{{ $admin_text->id }}">{{ $admin_text->title }}</a></td>
                                 <td>{{ str_limit($admin_text->getTranslate('description'), 80, '...') }}</td>
                                 <td class="hidden-phone center">{{ $admin_text->type }}</td>
                                 <td>{{ $admin_text->name }}</td>

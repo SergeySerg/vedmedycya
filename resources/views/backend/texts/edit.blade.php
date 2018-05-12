@@ -125,7 +125,7 @@
                                 <label class="control-label" for="description">{{$admin_text->title}}</label>
 
                                 <div class="controls">
-                                    <input type="text" name="description" value='{{ $admin_text->description }}' placeholder="Текст" />
+                                    <input type="text" name="description" value='{{ $admin_text->getTranslate('description') }}' placeholder="Текст" />
                                 </div>
                             </div>
                         @elseif ($admin_text->type == 'textarea' )

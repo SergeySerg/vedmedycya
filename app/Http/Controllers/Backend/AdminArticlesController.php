@@ -22,14 +22,24 @@ class AdminArticlesController extends Controller {
 
 	/* List articles - Display a listing of the Articles */
 
-	public function index($type)
-	{
-		$admin_category = Category::where("link","=",$type)->first();
+	public function index($type){		
+		$admin_category = Category::where("link",$type)->first();
 		$admin_category_parent = $admin_category->category_parent()->first();
 		$admin_category_children = $admin_category->category_children()->get();
 		$admin_articles = $admin_category->articles;
+		$article = Article::where('attributes->price', '100')
+		->first();
+		$parent_articles = $admin_category->article_parent()->first();
+		dd($article);
 		return view('backend.articles.list')
-			->with(compact('admin_category','admin_articles','type','admin_category_children','admin_category_parent'));
+			->with(
+				compact(
+				'admin_category',
+				'admin_articles',
+				'type',
+				'admin_category_children',
+				'admin_category_parent')
+			);
 
 	}
 
@@ -164,7 +174,7 @@ class AdminArticlesController extends Controller {
 	/*Show the form for editing the Article. (@param  int  $id @return Response*/
 
 	public function edit($type, $id)
-	{
+	{		
 		//Создание папки соответсвующие id
 		Storage::makeDirectory('upload/articles/' . $id, '0777', true, true);
 

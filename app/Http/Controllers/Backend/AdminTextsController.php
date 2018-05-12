@@ -111,7 +111,7 @@ class AdminTextsController extends Controller {
 
 		// Сreate array for multilanguage (example- (ua|ru|en))
 		$all = $this->prepareTextData($all);
-
+//dd($all);
 		//Update all data in DB
 		$admin_text->update($all);
 
@@ -166,26 +166,33 @@ class AdminTextsController extends Controller {
 	private function prepareTextData($all){
 		$langs = Lang::activelangs()->get();
 
-		if(isset($all['description']))
-			return $all;
+		//if(isset($all['description']))
+		//	return $all;
 
 		// Removing gaps at the beginning and end of each field
-		foreach($all as $key => $value){
-			$all[$key] = trim($value);
-		}
-		$all['description'] = '';
+		// foreach($all as $key => $value){
+		// 	$all[$key] = trim($value);
+		// }
+		// $all['description'] = '';
+	//dd($all);
+		$all['description'] = [];
 
 		// Сreate array example (ua|ru|en)
 		foreach($langs as $lang){
 
 			if($all['lang_active'] == 0){
-				$all['description'] .= (isset($all["description_{$lang['lang']}"]) ? $all["description_{$lang['lang']}"] : '');
-			}else{
-				$all['description'] .= (isset($all["description_{$lang['lang']}"]) ? $all["description_{$lang['lang']}"] : '') .'@|;';
+				//dd($all);
+				$all['description'] +=  [ $lang['lang'] => $all["description_{$lang['lang']}"]];
+				}else{
+				//dd($all);
+				$all['description'] +=  [ $lang['lang'] => (isset($all["description_{$lang['lang']}"]) ? $all["description_{$lang['lang']}"] : '') ];
 			}
+			//dd($all);
 			unset($all["description_{$lang['lang']}"]);
-
+			//dd($all);
 		}
+		$all['description'] = json_encode($all['description']);
+		//dd($all);
 		return $all;
 	}
 }

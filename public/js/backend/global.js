@@ -323,6 +323,7 @@ $(function(){
 /*/Save Article*/
 /*show-hide image in category*/
     $('.image-close, .image-edit').on('click', function(event){
+        //alert('тут');
         event.preventDefault();
         $('input[name=img_status]').prop('value', false);
 
@@ -334,38 +335,9 @@ $(function(){
         //$('#image-upload').show();
     });
 /*show-hide image in category*/
-    init_wysiwyg();
+    init_wysiwyg();   
 });
 
-/*Update rate*/
-$('a[data-attribute = "update_rate"]').on('click',function(event){
-    event.preventDefault();
-    var data = {
-        _token: $('#token_rate').text()
-    };
-    console.log(data);
-    $.ajax({
-        url: '/update_rate',
-        method: 'POST',
-        data: data,
-        dataType : "json",
-        success: function(data){
-            //console.info('Server response: ', data);
-            if(data.success){
-               alert('Успешно обновлено!');
-            }
-            else{
-                alert('Ошибка при обновлении!');
-            }
-        },
-        error:function(data){
-            alert('Ошибка при обновлении!');
-        }
-
-    });
-    event.preventDefault();
-});
-/*/Update rate*/
 function init_wysiwyg(){
     var id = '';
     var editors = $('textarea');
@@ -390,3 +362,4 @@ function get_wysiwyg(){
 
     });
 }
+
