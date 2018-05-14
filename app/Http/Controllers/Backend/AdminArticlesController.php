@@ -30,7 +30,7 @@ class AdminArticlesController extends Controller {
 		// $article = Article::where('attributes->price', '100')
 		// ->first();
 		//$parent_articles = $admin_category->article_parent()->first();
-		//dd($article);
+		//dd($admin_articles);
 		return view('backend.articles.list')
 			->with(
 				compact(
@@ -134,29 +134,39 @@ class AdminArticlesController extends Controller {
 		}
 
 		if (isset($all['attributes'])) {
+			
 			$attributes = $all['attributes'];
+			//dd($attributes);
+//dd($all);
+			foreach ($attributes  as $key => $attributes_values) {
+				foreach($attributes_values as $attribute){
+					//dd($attribute);
+					if (is_object($attribute) && $attribute){
+						$extension = $attribute->getClientOriginalExtension();
+						$name_img = $article->id . '-' . uniqid()  . '.' . $extension;
+						Storage::put('upload/articles/' . $article->id . '/img/' . $name_img, file_get_contents($attribute));
+						//$all['img'] = 'upload/articles/' . $article->id . '/main/' . $name_img;
+						$attributes[$key]['title'] = 'upload/articles/' . $article->id . '/img/' . $name_img;
+					}
+					//TODO: ПЕревірити роботу
+					elseif(!$attributes[$key] AND isset($all['saved-files-path']) AND $all['saved-files-path'] AND isset($all['saved-files-path'][$key]) AND $all['saved-files-path'][$key]){
+						//dd($attributes[$key]);
+						$attributes[$key]['title'] = $all['saved-files-path'][$key];
+					}
 
-			foreach ($attributes  as $key => $attribute ) {
-				if (is_object($attribute) && $attribute){
-					$extension = $attribute->getClientOriginalExtension();
-					$name_img = $article->id . '-' . uniqid()  . '.' . $extension;
-					Storage::put('upload/articles/' . $article->id . '/img/' . $name_img, file_get_contents($attribute));
-					//$all['img'] = 'upload/articles/' . $article->id . '/main/' . $name_img;
-					$attributes[$key] = 'upload/articles/' . $article->id . '/img/' . $name_img;
 				}
-				elseif(!$attributes[$key] AND isset($all['saved-files-path']) AND $all['saved-files-path'] AND isset($all['saved-files-path'][$key]) AND $all['saved-files-path'][$key]){
-					$attributes[$key] = $all['saved-files-path'][$key];
-				}
+				
 			}
 
 			unset($all['saved-files-path']);
-
+			//dd($attributes);
 			$all['attributes'] = $attributes;
+
 		}
 		if (isset($all['attributes'])){
 			$all['attributes'] = json_encode($this->prepareAttributesData($all['attributes']));
 		}
-
+//dd($all);
 		// Сreate array for multilanguage (example- (ua|ru|en))
 		$all = $this->prepareArticleData($all);
 		//dd($all);
@@ -226,11 +236,11 @@ class AdminArticlesController extends Controller {
 		}
 
 		$article = Article::where('id', $id)->first();
-		$article_attributes = json_decode($article->attributes, true);
+		//$article_attributes = json_decode($article->attributes, true);
 
 		//create var all for date from request
 		$all = $request->all();
-
+//dd($all);
 		//add img
 		$article_img = $request->file('img');
 
@@ -280,43 +290,40 @@ class AdminArticlesController extends Controller {
 		}
 		if (isset($all['attributes'])) {
 			$attributes = $all['attributes'];
-
-			foreach ($attributes  as $key => $attribute ) {
-
-				if (is_object($attribute) && $attribute){
-					/*Rewrite img when count lang = conts*/
-					$key_without_langs = stristr($key, '_', true);
-					/*if($key_without_langs){
-                        $key_data = $article_attributes[$key_without_langs];
-                        //dd($key_data);
-                        $lang_data = substr($key, -2);
-                        $img_data = explode("@|;", $key_data);
-                        //dd($img_data);
-                        /*foreach($langs as $i => $lang){
-
-                            if($img_data[$i] && isset($img_data[$i]) && $lang->lang == $lang_data){
-                                dd($img_data[$i]);
-                                Storage::delete($img_data[$i]);
-                            }
-                        }
-                    }
-                    else{
-                        Storage::deleteDirectory('upload/articles/' . $article->id . '/img');
-                    }*/
-
-					/*Rewrite img*/
-					$extension = $attribute->getClientOriginalExtension();
-					$name_img = $article->id . '-' . uniqid()  . '.' . $extension;
-					//dd($name_img);
-					Storage::put('upload/articles/' . $article->id . '/img/' . $name_img, file_get_contents($attribute));
-					$attributes[$key] = 'upload/articles/' . $article->id . '/img/' . $name_img;
+//dd($attributes);
+			foreach ($attributes  as $key => $attributes_values) {
+				
+				foreach($attributes_values as $attribute){
+					//dd($attributes[$key]['title']);
+					if (is_object($attribute) && $attribute){				
+						//dd($attribute);
+						/*Rewrite img*/
+						$extension = $attribute->getClientOriginalExtension();
+						$name_img = $article->id . '-' . uniqid()  . '.' . $extension;
+						//dd($name_img);
+						Storage::put('upload/articles/' . $article->id . '/img/' . $name_img, file_get_contents($attribute));
+						$attributes[$key]['title'] = 'upload/articles/' . $article->id . '/img/' . $name_img;
+						//dd($attributes[$key]);
+					}
 					//dd($attributes[$key]);
-				}
-				elseif(!$attributes[$key] AND isset($all['saved-files-path']) AND $all['saved-files-path'] AND isset($all['saved-files-path'][$key]) AND $all['saved-files-path'][$key]){
-					$attributes[$key] = $all['saved-files-path'][$key];
+					//TODO: ПЕревірити роботу
+					if(
+						array_key_exists('title', $attributes[$key])
+						// $attribute
+						// AND $attributes[$key]['title']						
+						AND is_null($attributes[$key]['title']) 
+						// AND isset($all['saved-files-path']['title']) 
+						// AND $all['saved-files-path']['title'] 
+						// AND isset($all['saved-files-path'][$key]['title']) 
+						// AND $all['saved-files-path'][$key]['title']
+						)
+					{
+						//dd($all['saved-files-path'][$key]['title']);
+						$attributes[$key]['title'] = $all['saved-files-path'][$key]['title'];
+					}
 				}
 			}
-
+//dd($all);
 			unset($all['saved-files-path']);
 
 			$all['attributes'] = $attributes;
@@ -324,9 +331,10 @@ class AdminArticlesController extends Controller {
 
 		//Encode attributes from request
 		if (isset($all['attributes'])){
+			//dd($all);
 			$all['attributes'] = json_encode($this->prepareAttributesData($all['attributes']));
 		}
-
+//dd($all);
 		//Encode images from request
 		$all['imgs'] = json_encode($files);
 //dd($all);
@@ -419,6 +427,7 @@ class AdminArticlesController extends Controller {
 		$first_lang = $langs->first()['lang'];
 		//dd($first_lang);
 		foreach($all as $key => $value){
+			//dd($all);
 			if(stristr($key, '_' . $first_lang) !== FALSE){
 				$key_without_lang = str_replace("_{$first_lang}", '', $key);
 
@@ -429,13 +438,23 @@ class AdminArticlesController extends Controller {
 				// 	unset($all[$key_without_lang . "_{$lang['lang']}"]);
 				// }
 				/*/Block for multilang with Delimiter*/
-				$all[$key_without_lang] = [];
+				$all[$key_without_lang]['title'] = [];
+				//dd($all[$key_without_lang]);
 				foreach($langs as $lang){
-					$all[$key_without_lang] +=  [ $lang['lang'] => $all[$key_without_lang . "_{$lang['lang']}"]];
+					$all[$key_without_lang]['title'] +=  [ $lang['lang'] => $all[$key_without_lang . "_{$lang['lang']}"]['title']];
 					unset($all[$key_without_lang . "_{$lang['lang']}"]);
 				}
-				$all[$key_without_lang] = json_encode($all[$key_without_lang]);
+				$all[$key_without_lang]['title'] = json_encode($all[$key_without_lang]['title']);
+			}else{
+				//dd($all[$key]['title']);
+				if(is_array($all[$key] AND isset($all[$key]['title']) AND $all[$key]['title'])){
+					//dd($all[$key]['title']);
+					$all[$key] = json_encode($all[$key]['title']);
+					//dd($all);
+				}
 			}
+			
+			
 		}
 		//dd($all);
 		return $all;

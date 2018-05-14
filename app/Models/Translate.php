@@ -36,6 +36,7 @@ class Translate extends Model {
     }
 
     public function getAttributeTranslate($key, $current_lang = null){
+        //dd('sdw');
         $langs = Lang::all();
         if(!$current_lang){
             $current_lang = App::getLocale();
@@ -44,25 +45,26 @@ class Translate extends Model {
         $articleArray =  $this->toArray();
        //dd($articleArray['attributes']);
         $attributes = json_decode($articleArray['attributes'], true);
-        
-        if(isset($attributes[$key]) AND $attributes[$key]) {
+        //dd($attributes);
+        if(isset($attributes[$key]['title']) AND $attributes[$key]['title']) {
             
             //dd($attributes);
+            //dd($attributes[$key]['title']);
             // $pieces = explode("@|;", $attributes[$key]);
             // //dd($pieces);
             // if (count($pieces) == 1)
-            $fields = json_decode($attributes[$key], true);
-            
+            $fields = json_decode($attributes[$key]['title'], true);
+            //dd($fields);
             if ($fields === null) {
                 //dd();
-                return $attributes[$key]; 
+                return $attributes[$key]['title']; 
             }
                  //return $attributes[$key];
             // if (!$current_lang) {
             //     $current_lang = App::getLocale();
-            // }            
+            // }     
+            
             return $this->getTranslateValue($fields, $current_lang);
-
             //$field = $this->getLangsParts($langs, $pieces, $current_lang);
             //dd($field);
             //return $field;
@@ -70,12 +72,20 @@ class Translate extends Model {
         return false;
     }
     public function getTranslateValue($fields, $current_lang){
-        $translate_value = ''; 
+        $translate_value = '';
+        //dd($fields);
+        // if($fields['title']){
+        //     $fields = fields['title'];  
+        //     dd($fields);  
+        // }
+       //dd($fields); 
         foreach($fields as $key => $item){
+
             if($key == $current_lang){
                 $translate_value =  $fields[$key];
             }
         }
+       // dd($translate_value);
         return $translate_value;
     }
 
