@@ -27,10 +27,10 @@ class AdminArticlesController extends Controller {
 		$admin_category_parent = $admin_category->category_parent()->first();
 		$admin_category_children = $admin_category->category_children()->get();
 		$admin_articles = $admin_category->articles;
-		$article = Article::where('attributes->price', '100')
-		->first();
-		$parent_articles = $admin_category->article_parent()->first();
-		dd($article);
+		// $article = Article::where('attributes->price', '100')
+		// ->first();
+		//$parent_articles = $admin_category->article_parent()->first();
+		//dd($article);
 		return view('backend.articles.list')
 			->with(
 				compact(
