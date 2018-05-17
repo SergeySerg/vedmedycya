@@ -50,12 +50,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="form-field-2">{{ $attribute->publick_name }}</label>
                                             <div class="controls">
-                                                <input type="text" id="form-field-2" name='attributes[{{ $key }}][title]'  value='{{ $attributes[$key]['title']  or ''}}'/>
-                                                @if($attribute->active)
-                                                        <input name='attributes[{{ $key }}][status]' type='hidden' value='0'>
-                                                        <input name='attributes[{{ $key }}][status]' class="ace-switch ace-switch-6" type="checkbox" value=1 @if(isset($attributes[$key]['status']) AND $attributes[$key]['status'] == '1') checked="checked" @endif />
-                                                        <span class="lbl"></span>
-                                                @endif        
+                                            <input type="text" id="form-field-2" name='attributes[{{ $key }}]'  value='{{ $attributes[$key]  or ''}}'/>
                                             </div>                                        
                                     </div>
                                 @elseif ($attribute->type == 'checkbox')
@@ -65,8 +60,8 @@
                                             <div class="row-fluid">
                                                 <div class="span3">
                                                     <label>
-                                                        <input name='attributes[{{ $key }}]['title']' type='hidden' value='0'>
-                                                        <input name='attributes[{{ $key }}]['title']' class="ace-switch ace-switch-6" type="checkbox" value=1 @if(isset($attributes[$key]['title']) AND $attributes[$key]['title'] == '1') checked="checked" @endif />
+                                                    <input name='attributes[{{ $key }}]' type='hidden' value='0'>
+                                                    <input name='attributes[{{ $key }}]' class="ace-switch ace-switch-6" type="checkbox" value=1 @if(isset($attributes[$key]) AND $attributes[$key] == '1') checked="checked" @endif />
                                                         <span class="lbl"></span>
                                                     </label>
                                                 </div>
@@ -76,12 +71,12 @@
                                 @elseif ($attribute->type == 'textarea' )
                                     <h4 class="header blue clearfix">{{ $attribute->publick_name }}</h4>
                                     <div class="control-group">
-                                        <textarea name='attributes[{{ $key }}][title]' class="span12" data-id="{{ $key }}" placeholder="{{ trans('backend.description_category') }}">{{ $attributes[$key]['title']  or ''}}</textarea>
+                                        <textarea name='attributes[{{ $key }}]' class="span12" data-id="{{ $key }}" placeholder="{{ trans('backend.description_category') }}">{{ $attributes[$key]  or ''}}</textarea>
                                     </div>
                                 @elseif ($attribute->type == 'textarea-no-wysiwyg')
                                     <h4 class="header blue clearfix">{{ $attribute->publick_name }}</h4>
                                     <div class="control-group">
-                                        <textarea name='attributes[{{ $key }}][title]' class="span12 no-wysiwyg" data-id="{{ $key }}" placeholder="{{ trans('backend.description_category') }}">{{ $attributes[$key]['title']  or ''}}</textarea>
+                                        <textarea name='attributes[{{ $key }}]' class="span12 no-wysiwyg" data-id="{{ $key }}" placeholder="{{ trans('backend.description_category') }}">{{ $attributes[$key]  or ''}}</textarea>
                                     </div>
                                 @elseif ($attribute->type == 'files' )
                                     <div class="control-group">
@@ -93,7 +88,7 @@
                                                     <div class="profile-activity clearfix" style="border-bottom: none">
                                                         <div>
                                                             <img class="pull-left" alt="#" style="max-width:200px;border-radius:0%" src="{{ asset( $admin_article->getAttributeTranslate($key)) }}">
-                                                            <input type="hidden" name="saved-files-path[{{ $key }}][title]" value="{{ $admin_article->getAttributeTranslate($key) }}">
+                                                            <input type="hidden" name="saved-files-path[{{ $key }}]" value="{{ $admin_article->getAttributeTranslate($key) }}">
                                                         </div>
 
                                                         <div class="tools action-buttons">
@@ -130,7 +125,7 @@
                                                                  <div class="ace-file-input"><input type="file" name="img" id="id-input-file-2"><label data-title="Choose"><span data-title="No File ..."><i class="icon-upload-alt"></i></span></label><a class="remove" href="#"><i class="icon-remove"></i></a></div>
                                                                 --}}
                                                                 <div class="ace-file-multiple">
-                                                                    <input name='attributes[{{ $key }}][title]' type="file" id="id-input-file-3">
+                                                                    <input name='attributes[{{ $key }}]' type="file" id="id-input-file-3">
                                                                     <a class="remove" href="#"><i class="icon-remove"></i></a>
                                                                 </div>
                                                                 {{--<label>
@@ -165,8 +160,8 @@
                                                                  <div class="ace-file-input"><input type="file" name="img" id="id-input-file-2"><label data-title="Choose"><span data-title="No File ..."><i class="icon-upload-alt"></i></span></label><a class="remove" href="#"><i class="icon-remove"></i></a></div>
                                                                 --}}
                                                                 <div class="ace-file-input ace-file-multiple">
-                                                                    <input name='attributes[{{ $key }}][title]' type="file" id="id-input-file-3">
-                                                                    <input type="hidden" name="saved-files-path[][title]" value="">
+                                                                    <input name='attributes[{{ $key }}]' type="file" id="id-input-file-3">
+                                                                    <input type="hidden" name="saved-files-path[]" value="">
 
 
                                                                     <a class="remove" href="#"><i class="icon-remove"></i></a>
@@ -389,24 +384,18 @@
                                                             <label class="control-label" for="form-field-2">{{ $attribute->publick_name }}</label>
 
                                                             <div class="controls">
-                                                                <input type="text" name='attributes[{{ $key }}_{{$lang->lang}}][title]' value='@if(isset($admin_article)){{ $admin_article->getAttributeTranslate($key, $lang->lang) }}@endif' id="form-field-{{ $key }}" placeholder="{{ $key }}" />
-                                                                @if($attribute->active AND ($lang->lang) == config('app.locale'))
-                                                                    <input name='attributes[{{ $key }}][status]' type='hidden' value='0'>
-                                                                    <input name='attributes[{{ $key }}][status]' class="ace-switch ace-switch-6" type="checkbox" value=1 @if(isset($attributes[$key]['status']) AND $attributes[$key]['status'] == '1') checked="checked" @endif />
-
-                                                                    <span class="lbl"></span>
-                                                                @endif  
+                                                                <input type="text" name='attributes[{{ $key }}_{{$lang->lang}}]' value='@if(isset($admin_article)){{ $admin_article->getAttributeTranslate($key, $lang->lang) }}@endif' id="form-field-{{ $key }}" placeholder="{{ $key }}" />
                                                             </div>
                                                         </div>
                                                     @elseif ($attribute->type == 'textarea' )
                                                         <h4 class="header blue clearfix">{{ $attribute->publick_name }}</h4>
                                                         <div class="control-group">
-                                                            <textarea name='attributes[{{ $key }}_{{$lang->lang}}][title]' class="span12" id="form-field-{{ $key }}" placeholder="Текст">@if(isset($admin_article)){{ $admin_article->getAttributeTranslate($key, $lang->lang) }}@endif</textarea>
+                                                        <textarea name='attributes[{{ $key }}_{{$lang->lang}}]' class="span12" id="form-field-{{ $key }}" placeholder="Текст">@if(isset($admin_article)){{ $admin_article->getAttributeTranslate($key, $lang->lang) }}@endif</textarea>
                                                         </div>
                                                     @elseif ($attribute->type == 'textarea-no-wysiwyg' )
                                                         <h4 class="header blue clearfix">{{ $attribute->publick_name }}</h4>
                                                         <div class="control-group">
-                                                            <textarea name='attributes[{{ $key }}_{{$lang->lang}}][title]' class="span12 no-wysiwyg" id="form-field-{{ $key }}" placeholder="Текст">@if(isset($admin_article)){{ $admin_article->getAttributeTranslate($key, $lang->lang) }}@endif</textarea>
+                                                            <textarea name='attributes[{{ $key }}_{{$lang->lang}}]' class="span12 no-wysiwyg" id="form-field-{{ $key }}" placeholder="Текст">@if(isset($admin_article)){{ $admin_article->getAttributeTranslate($key, $lang->lang) }}@endif</textarea>
                                                         </div>
                                                     @elseif (isset($attribute) AND$attribute->type == 'files' )
                                                         <div class="control-group">
@@ -418,7 +407,7 @@
                                                                             <div class="profile-activity clearfix" style="border-bottom: none">
                                                                                 <div>
                                                                                     <img class="pull-left" alt="#" style="max-width:200px;border-radius:0%" src="{{ asset( $admin_article->getAttributeTranslate($key, $lang->lang)) }}">
-                                                                                    <input type="hidden" name="saved-files-path[{{ $key . '_' . $lang->lang }}][title]" value="{{ $admin_article->getAttributeTranslate($key, $lang->lang) }}">
+                                                                                    <input type="hidden" name="saved-files-path[{{ $key . '_' . $lang->lang }}]" value="{{ $admin_article->getAttributeTranslate($key, $lang->lang) }}">
                                                                                 </div>
 
                                                                                 <div class="tools action-buttons">
@@ -455,7 +444,7 @@
                                                                                          <div class="ace-file-input"><input type="file" name="img" id="id-input-file-2"><label data-title="Choose"><span data-title="No File ..."><i class="icon-upload-alt"></i></span></label><a class="remove" href="#"><i class="icon-remove"></i></a></div>
                                                                                         --}}
                                                                                         <div class="ace-file-input ace-file-multiple">
-                                                                                            <input name='attributes[{{ $key }}_{{$lang->lang}}][title]' class="showing_img" type="file" id="id-input-file-{{$lang->lang}}">
+                                                                                            <input name='attributes[{{ $key }}_{{$lang->lang}}]' class="showing_img" type="file" id="id-input-file-{{$lang->lang}}">
                                                                                             <a class="remove" href="#"><i class="icon-remove"></i></a>
                                                                                         </div>
                                                                                         {{--<label>
@@ -490,8 +479,8 @@
                                                                                          <div class="ace-file-input"><input type="file" name="img" id="id-input-file-2"><label data-title="Choose"><span data-title="No File ..."><i class="icon-upload-alt"></i></span></label><a class="remove" href="#"><i class="icon-remove"></i></a></div>
                                                                                         --}}
                                                                                         <div class="ace-file-input ace-file-multiple">
-                                                                                            <input name='attributes[{{ $key }}_{{$lang->lang}}][title]' type="file" id="id-input-file-{{$lang->lang}}">
-                                                                                            <input type="hidden" name="saved-files-path[][title]" value="">
+                                                                                            <input name='attributes[{{ $key }}_{{$lang->lang}}]' type="file" id="id-input-file-{{$lang->lang}}">
+                                                                                            <input type="hidden" name="saved-files-path[]" value="">
 
 
                                                                                             <a class="remove" href="#"><i class="icon-remove"></i></a>

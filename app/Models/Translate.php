@@ -41,23 +41,24 @@ class Translate extends Model {
         if(!$current_lang){
             $current_lang = App::getLocale();
         }
-        //dd($current_lang);
+       
         $articleArray =  $this->toArray();
+        //dd($articleArray);
        //dd($articleArray['attributes']);
         $attributes = json_decode($articleArray['attributes'], true);
         //dd($attributes);
-        if(isset($attributes[$key]['title']) AND $attributes[$key]['title']) {
+        if(isset($attributes[$key]) AND $attributes[$key]) {
             
             //dd($attributes);
             //dd($attributes[$key]['title']);
             // $pieces = explode("@|;", $attributes[$key]);
             // //dd($pieces);
             // if (count($pieces) == 1)
-            $fields = json_decode($attributes[$key]['title'], true);
+            $fields = json_decode($attributes[$key], true);
             //dd($fields);
             if ($fields === null) {
                 //dd();
-                return $attributes[$key]['title']; 
+                return $attributes[$key]; 
             }
                  //return $attributes[$key];
             // if (!$current_lang) {
@@ -82,6 +83,7 @@ class Translate extends Model {
         foreach($fields as $key => $item){
 
             if($key == $current_lang){
+
                 $translate_value =  $fields[$key];
             }
         }

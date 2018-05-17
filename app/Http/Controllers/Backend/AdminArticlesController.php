@@ -134,47 +134,24 @@ class AdminArticlesController extends Controller {
 		}
 
 		if (isset($all['attributes'])) {
-			
 			$attributes = $all['attributes'];
-			//dd($attributes);
-//dd($all);
-			foreach ($attributes  as $key => $attributes_values) {
-				if(is_array($attributes_values)){
-					foreach($attributes_values as $attribute){
-						//dd($attribute);
-						if (is_object($attribute) && $attribute){
-							$extension = $attribute->getClientOriginalExtension();
-							$name_img = $article->id . '-' . uniqid()  . '.' . $extension;
-							Storage::put('upload/articles/' . $article->id . '/img/' . $name_img, file_get_contents($attribute));
-							//$all['img'] = 'upload/articles/' . $article->id . '/main/' . $name_img;
-							$attributes[$key]['title'] = 'upload/articles/' . $article->id . '/img/' . $name_img;
-						}
-						//TODO: ПЕревірити роботу
-						if(
-							array_key_exists('title', $attributes[$key])
-							// $attribute
-							// AND $attributes[$key]['title']						
-							AND is_null($attributes[$key]['title']) 
-							// AND isset($all['saved-files-path']['title']) 
-							// AND $all['saved-files-path']['title'] 
-							// AND isset($all['saved-files-path'][$key]['title']) 
-							// AND $all['saved-files-path'][$key]['title']
-							)
-						{
-							//dd($all['saved-files-path'][$key]['title']);
-							$attributes[$key]['title'] = $all['saved-files-path'][$key]['title'];
-						}
-	
-					}
+
+			foreach ($attributes  as $key => $attribute ) {
+				if (is_object($attribute) && $attribute){
+					$extension = $attribute->getClientOriginalExtension();
+					$name_img = $article->id . '-' . uniqid()  . '.' . $extension;
+					Storage::put('upload/articles/' . $article->id . '/img/' . $name_img, file_get_contents($attribute));
+					//$all['img'] = 'upload/articles/' . $article->id . '/main/' . $name_img;
+					$attributes[$key] = 'upload/articles/' . $article->id . '/img/' . $name_img;
 				}
-				
-				
+				elseif(!$attributes[$key] AND isset($all['saved-files-path']) AND $all['saved-files-path'] AND isset($all['saved-files-path'][$key]) AND $all['saved-files-path'][$key]){
+					$attributes[$key] = $all['saved-files-path'][$key];
+				}
 			}
 
 			unset($all['saved-files-path']);
-			//dd($attributes);
-			$all['attributes'] = $attributes;
 
+			$all['attributes'] = $attributes;
 		}
 		if (isset($all['attributes'])){
 			$all['attributes'] = json_encode($this->prepareAttributesData($all['attributes']));
@@ -220,7 +197,7 @@ class AdminArticlesController extends Controller {
 
 		//Decode attributes from categories DB
 		$attributes_fields = $fields->attributes;
-		//dd($attributes_fields);
+		//dd($fields);
 		return view('backend.articles.edit',[
 			'admin_article'=>$admin_article,
 			'admin_category' => $admin_category,
@@ -304,9 +281,9 @@ class AdminArticlesController extends Controller {
 		if (isset($all['attributes'])) {
 			$attributes = $all['attributes'];
 //dd($attributes);
-			foreach ($attributes  as $key => $attributes_values) {
+			foreach ($attributes  as $key => $attribute) {
 				
-				foreach($attributes_values as $attribute){
+				
 					//dd($attributes[$key]['title']);
 					if (is_object($attribute) && $attribute){				
 						//dd($attribute);
@@ -315,26 +292,13 @@ class AdminArticlesController extends Controller {
 						$name_img = $article->id . '-' . uniqid()  . '.' . $extension;
 						//dd($name_img);
 						Storage::put('upload/articles/' . $article->id . '/img/' . $name_img, file_get_contents($attribute));
-						$attributes[$key]['title'] = 'upload/articles/' . $article->id . '/img/' . $name_img;
+						$attributes[$key] = 'upload/articles/' . $article->id . '/img/' . $name_img;
 						//dd($attributes[$key]);
 					}
-					//dd($attributes[$key]);
-					//TODO: ПЕревірити роботу
-					if(
-						array_key_exists('title', $attributes[$key])
-						// $attribute
-						// AND $attributes[$key]['title']						
-						AND is_null($attributes[$key]['title']) 
-						// AND isset($all['saved-files-path']['title']) 
-						// AND $all['saved-files-path']['title'] 
-						// AND isset($all['saved-files-path'][$key]['title']) 
-						// AND $all['saved-files-path'][$key]['title']
-						)
-					{
-						//dd($all['saved-files-path'][$key]['title']);
-						$attributes[$key]['title'] = $all['saved-files-path'][$key]['title'];
+					elseif(!$attributes[$key] AND isset($all['saved-files-path']) AND $all['saved-files-path'] AND isset($all['saved-files-path'][$key]) AND $all['saved-files-path'][$key]){
+						$attributes[$key] = $all['saved-files-path'][$key];
 					}
-				}
+				
 			}
 //dd($all);
 			unset($all['saved-files-path']);
@@ -453,15 +417,14 @@ class AdminArticlesController extends Controller {
 				// 	unset($all[$key_without_lang . "_{$lang['lang']}"]);
 				// }
 				/*/Block for multilang with Delimiter*/
-				$all[$key_without_lang]['title'] = [];				
+				$all[$key_without_lang] = [];				
 				
 				foreach($langs as $lang){
-					$all[$key_without_lang]['title'] +=  [ $lang['lang'] => $all[$key_without_lang . "_{$lang['lang']}"]['title']];
+					$all[$key_without_lang] +=  [ $lang['lang'] => $all[$key_without_lang . "_{$lang['lang']}"]];
 					//dd($key);
 					unset($all[$key_without_lang . "_{$lang['lang']}"]);				
 				}
-
-				$all[$key_without_lang]['title'] = json_encode($all[$key_without_lang]['title']);
+				$all[$key_without_lang] = json_encode($all[$key_without_lang]);;
 			}		
 			
 			
