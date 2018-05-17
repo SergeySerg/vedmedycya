@@ -333,6 +333,7 @@ class AdminArticlesController extends Controller {
 		if (isset($all['attributes'])){
 			//dd($all);
 			$all['attributes'] = json_encode($this->prepareAttributesData($all['attributes']));
+			//$all['attributes'] = $this->prepareAttributesData($all['attributes']);
 		}
 //dd($all);
 		//Encode images from request
@@ -424,13 +425,14 @@ class AdminArticlesController extends Controller {
 	private function prepareAttributesData($all){
 		//dd($all);
 		$langs = Lang::activelangs()->get();
-		$first_lang = $langs->first()['lang'];
-		//dd($first_lang);
+		$first_lang = $langs->first()['lang'];		
 		foreach($all as $key => $value){
-			//dd($all);
+			//dd($value);
+			 
 			if(stristr($key, '_' . $first_lang) !== FALSE){
+				
 				$key_without_lang = str_replace("_{$first_lang}", '', $key);
-
+				//dd($key_without_lang);
 				/*Block for multilang with Delimiter*/
 				// $all[$key_without_lang] = '';
 				// foreach($langs as $lang){
@@ -438,24 +440,29 @@ class AdminArticlesController extends Controller {
 				// 	unset($all[$key_without_lang . "_{$lang['lang']}"]);
 				// }
 				/*/Block for multilang with Delimiter*/
-				$all[$key_without_lang]['title'] = [];
-				//dd($all[$key_without_lang]);
+				$all[$key_without_lang]['title'] = [];				
+				
 				foreach($langs as $lang){
 					$all[$key_without_lang]['title'] +=  [ $lang['lang'] => $all[$key_without_lang . "_{$lang['lang']}"]['title']];
-					unset($all[$key_without_lang . "_{$lang['lang']}"]);
+					//dd($key);
+					unset($all[$key_without_lang . "_{$lang['lang']}"]);				
 				}
+
 				$all[$key_without_lang]['title'] = json_encode($all[$key_without_lang]['title']);
-			}else{
+			}		
+			
+			
 				//dd($all[$key]['title']);
-				if(is_array($all[$key] AND isset($all[$key]['title']) AND $all[$key]['title'])){
-					//dd($all[$key]['title']);
-					$all[$key] = json_encode($all[$key]['title']);
-					//dd($all);
-				}
-			}
+			// if(is_array($all[$key] AND isset($all[$key]['title']) AND $all[$key]['title'])){
+			// 	dd($all[$key]['status']);
+			// 	$all[$key] = json_encode($all[$key]['title']);
+			// 	//dd($all);
+			// }
+			
 			
 			
 		}
+		//dd($all);
 		//dd($all);
 		return $all;
 	}

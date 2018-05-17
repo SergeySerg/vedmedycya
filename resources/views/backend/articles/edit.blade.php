@@ -390,7 +390,7 @@
 
                                                             <div class="controls">
                                                                 <input type="text" name='attributes[{{ $key }}_{{$lang->lang}}][title]' value='@if(isset($admin_article)){{ $admin_article->getAttributeTranslate($key, $lang->lang) }}@endif' id="form-field-{{ $key }}" placeholder="{{ $key }}" />
-                                                                @if($attribute->active)
+                                                                @if($attribute->active AND ($lang->lang) == config('app.locale'))
                                                                     <input name='attributes[{{ $key }}][status]' type='hidden' value='0'>
                                                                     <input name='attributes[{{ $key }}][status]' class="ace-switch ace-switch-6" type="checkbox" value=1 @if(isset($attributes[$key]['status']) AND $attributes[$key]['status'] == '1') checked="checked" @endif />
 
