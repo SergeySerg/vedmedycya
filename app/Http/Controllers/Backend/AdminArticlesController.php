@@ -139,22 +139,35 @@ class AdminArticlesController extends Controller {
 			//dd($attributes);
 //dd($all);
 			foreach ($attributes  as $key => $attributes_values) {
-				foreach($attributes_values as $attribute){
-					//dd($attribute);
-					if (is_object($attribute) && $attribute){
-						$extension = $attribute->getClientOriginalExtension();
-						$name_img = $article->id . '-' . uniqid()  . '.' . $extension;
-						Storage::put('upload/articles/' . $article->id . '/img/' . $name_img, file_get_contents($attribute));
-						//$all['img'] = 'upload/articles/' . $article->id . '/main/' . $name_img;
-						$attributes[$key]['title'] = 'upload/articles/' . $article->id . '/img/' . $name_img;
+				if(is_array($attributes_values)){
+					foreach($attributes_values as $attribute){
+						//dd($attribute);
+						if (is_object($attribute) && $attribute){
+							$extension = $attribute->getClientOriginalExtension();
+							$name_img = $article->id . '-' . uniqid()  . '.' . $extension;
+							Storage::put('upload/articles/' . $article->id . '/img/' . $name_img, file_get_contents($attribute));
+							//$all['img'] = 'upload/articles/' . $article->id . '/main/' . $name_img;
+							$attributes[$key]['title'] = 'upload/articles/' . $article->id . '/img/' . $name_img;
+						}
+						//TODO: ПЕревірити роботу
+						if(
+							array_key_exists('title', $attributes[$key])
+							// $attribute
+							// AND $attributes[$key]['title']						
+							AND is_null($attributes[$key]['title']) 
+							// AND isset($all['saved-files-path']['title']) 
+							// AND $all['saved-files-path']['title'] 
+							// AND isset($all['saved-files-path'][$key]['title']) 
+							// AND $all['saved-files-path'][$key]['title']
+							)
+						{
+							//dd($all['saved-files-path'][$key]['title']);
+							$attributes[$key]['title'] = $all['saved-files-path'][$key]['title'];
+						}
+	
 					}
-					//TODO: ПЕревірити роботу
-					elseif(!$attributes[$key] AND isset($all['saved-files-path']) AND $all['saved-files-path'] AND isset($all['saved-files-path'][$key]) AND $all['saved-files-path'][$key]){
-						//dd($attributes[$key]);
-						$attributes[$key]['title'] = $all['saved-files-path'][$key];
-					}
-
 				}
+				
 				
 			}
 
