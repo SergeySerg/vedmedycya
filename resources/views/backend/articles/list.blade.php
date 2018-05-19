@@ -64,7 +64,15 @@
                             {{ trans('backend.date_create') }}
                         </th>
                         <th class="center">
-                            @if($type == 'marketings' OR $type == 'rooms' )
+                            @if($type == 'marketings' 
+                                OR $type == 'rooms' 
+                                OR $type == 'contacts'
+                                OR $type == 'paid-services'
+                                OR $type == 'free-services'
+                                OR $type == 'reviews'
+                                OR $type == 'discounts' 
+                                
+                                )
                                 Приналежність до готелю                               
                             @else
                                 <i class="icon-time bigger-110 hidden-phone"></i>
@@ -95,7 +103,15 @@
                                     <a href="{{ $url }}/articles/{{$type}}/{{$admin_article->id}}">{!! $admin_article->getTranslate('title') !!}</a>
                                 </td>
                                 <td  class="hidden-phone">{{ $admin_article->created_at }}</td>
-                                @if($type == 'marketings' OR $type == 'rooms')
+                                @if($type == 'marketings' 
+                                    OR $type == 'rooms'
+                                    OR $type == 'contacts'
+                                    OR $type == 'paid-services'
+                                    OR $type == 'free-services'
+                                    OR $type == 'reviews'
+                                    OR $type == 'discounts'
+                                    
+                                    )
                                     <td>{{ $admin_article->article_parent->getTranslate('title') }}</td>
                                 @else
                                     <td  class="hidden-phone">{{ $admin_article->updated_at }}</td>
