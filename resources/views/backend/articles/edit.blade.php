@@ -178,6 +178,31 @@
                                         </div>
                                     @endif
                                 </div>
+                                @elseif($attribute->type == 'date-range-picker')
+                                    <div class="control-group">
+                                        <label class="control-label" for="id-date-range-picker-1">{{ $attribute->publick_name }}</label>
+                                            <div class="controls">
+                                                <div class="row-fluid input-prepend">
+                                                    <span class="add-on">
+                                                        <i class="icon-calendar"></i>
+                                                    </span>
+
+                                                    <input type="text" name='attributes[{{ $key }}]' id="id-date-range-picker-1"  value='{{ $attributes[$key]  or ''}}'/>
+                                                </div>
+                                            </div>    
+                                    </div>
+                                @elseif($attribute->type == 'date-picker')
+                                    <div class="control-group">
+                                        <label class="control-label" for="id-date-picker-{{ $key }}">{{ $attribute->publick_name }}</label>
+                                            <div class="controls">
+                                                    <div class="row-fluid input-append">
+                                                        <input class="span2 date-picker" name="attributes[{{ $key }}]" id="id-date-picker-{{ $key }}" type="text" data-date-format="dd-mm-yyyy" value='{{ $attributes[$key]  or ''}}'/>
+                                                        <span class="add-on">
+                                                            <i class="icon-calendar"></i>
+                                                    </span>
+                                            </div>
+                                    </div>
+                                
                                 @endif
                             @endif
                         @endforeach

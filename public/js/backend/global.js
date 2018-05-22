@@ -96,10 +96,10 @@ $(function(){
 /*/Delete attributes*/
 
 /*Edit attributes*/
-        $('.edit-attribute').on('click',function(event){
+        $('.edit-attribute').on('click',function(event){            
             event.preventDefault();
             $('#label-add').hide();
-            $('#label-edit').show();
+            $('#label-edit').show();         
             var title = $(this).attr('data-id');
             var data = fields.attributes[title];
             $('#modal-table-attributes input[name=title]').val(title);

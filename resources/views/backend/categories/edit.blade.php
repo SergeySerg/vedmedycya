@@ -684,6 +684,8 @@
                                                             </option><option value="textarea">{{ trans('backend.textarea') }}
                                                             </option><option value="textarea-no-wysiwyg">{{ trans('backend.textarea-no-wysiwyg') }}
                                                             </option><option value="files">{{ trans('backend.files') }}
+                                                            </option><option value="date-range-picker">Діапазон дат
+                                                            </option><option value="date-picker">Дата
                                                             </option>
                                                         </select>
                                                     </div>

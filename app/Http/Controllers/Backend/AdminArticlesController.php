@@ -106,7 +106,7 @@ class AdminArticlesController extends Controller {
 		//validation rules
 		foreach($langs as $lang){
 			$this->validate($request, [
-				'title_'.$lang['lang'] => 'max:255',
+				'title_'.$lang['lang'] => 'required|max:255',
 				'img' => 'mimes:jpeg,jpg,png,bmp,gif|max:5000'
 			]);
 		}

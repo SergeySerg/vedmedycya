@@ -112,7 +112,7 @@
                                     OR $type == 'discounts'
                                     
                                     )
-                                    <td>{{ $admin_article->article_parent->getTranslate('title') }}</td>
+                                    <td>@if($admin_article->article_parent) {{ $admin_article->article_parent->getTranslate('title') }}@endif</td>
                                 @else
                                     <td  class="hidden-phone">{{ $admin_article->updated_at }}</td>
                                 @endif                               
