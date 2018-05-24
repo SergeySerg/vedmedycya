@@ -134,25 +134,9 @@ class AdminArticlesController extends Controller {
 		}
 
 		if (isset($all['attributes'])) {
-			$attributes = $all['attributes'];
-
-			foreach ($attributes  as $key => $attribute ) {
-				if (is_object($attribute) && $attribute){
-					$extension = $attribute->getClientOriginalExtension();
-					$name_img = $article->id . '-' . uniqid()  . '.' . $extension;
-					Storage::put('upload/articles/' . $article->id . '/img/' . $name_img, file_get_contents($attribute));
-					//$all['img'] = 'upload/articles/' . $article->id . '/main/' . $name_img;
-					$attributes[$key] = 'upload/articles/' . $article->id . '/img/' . $name_img;
-				}
-				elseif(!$attributes[$key] AND isset($all['saved-files-path']) AND $all['saved-files-path'] AND isset($all['saved-files-path'][$key]) AND $all['saved-files-path'][$key]){
-					$attributes[$key] = $all['saved-files-path'][$key];
-				}
-			}
-
-			unset($all['saved-files-path']);
-
-			$all['attributes'] = $attributes;
+			$all= $this->saveImg($all, $article);
 		}
+		
 		if (isset($all['attributes'])){
 			$all['attributes'] = json_encode($this->prepareAttributesData($all['attributes']));
 		}
@@ -279,33 +263,8 @@ class AdminArticlesController extends Controller {
 			}
 		}
 		if (isset($all['attributes'])) {
-			$attributes = $all['attributes'];
-//dd($attributes);
-			foreach ($attributes  as $key => $attribute) {
-				
-				
-					//dd($attributes[$key]['title']);
-					if (is_object($attribute) && $attribute){				
-						//dd($attribute);
-						/*Rewrite img*/
-						$extension = $attribute->getClientOriginalExtension();
-						$name_img = $article->id . '-' . uniqid()  . '.' . $extension;
-						//dd($name_img);
-						Storage::put('upload/articles/' . $article->id . '/img/' . $name_img, file_get_contents($attribute));
-						$attributes[$key] = 'upload/articles/' . $article->id . '/img/' . $name_img;
-						//dd($attributes[$key]);
-					}
-					elseif(!$attributes[$key] AND isset($all['saved-files-path']) AND $all['saved-files-path'] AND isset($all['saved-files-path'][$key]) AND $all['saved-files-path'][$key]){
-						$attributes[$key] = $all['saved-files-path'][$key];
-					}
-				
-			}
-//dd($all);
-			unset($all['saved-files-path']);
-
-			$all['attributes'] = $attributes;
+			$all= $this->saveImg($all, $article);
 		}
-
 		//Encode attributes from request
 		if (isset($all['attributes'])){
 			//dd($all);
@@ -473,5 +432,28 @@ class AdminArticlesController extends Controller {
 		$all['meta_description'] = json_encode($all['meta_description']);
 		$all['meta_keywords'] = json_encode($all['meta_keywords']);		
 		return $all;
+	}
+	
+	public function saveImg($all, $article){
+		$attributes = $all['attributes'];
+			
+			foreach ($attributes  as $key => $attribute ) {
+				if (is_object($attribute) && $attribute){
+					$extension = $attribute->getClientOriginalExtension();
+					$name_img = $article->id . '-' . uniqid()  . '.' . $extension;
+					Storage::put('upload/articles/' . $article->id . '/img/' . $name_img, file_get_contents($attribute));
+					//$all['img'] = 'upload/articles/' . $article->id . '/main/' . $name_img;
+					$attributes[$key] = 'upload/articles/' . $article->id . '/img/' . $name_img;
+				}
+				elseif(!$attributes[$key] AND isset($all['saved-files-path']) AND $all['saved-files-path'] AND isset($all['saved-files-path'][$key]) AND $all['saved-files-path'][$key]){
+					$attributes[$key] = $all['saved-files-path'][$key];
+				}
+			}
+
+			unset($all['saved-files-path']);
+			
+			$all['attributes'] = $attributes;
+			return $all;
+		
 	}
 }

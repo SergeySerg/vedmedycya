@@ -80,6 +80,7 @@ return [
     'base_attributes' => 'Базові атрибути',
     'title_field' => 'Назва поля',
     'title_field_db' => 'Назва поля в БД',
+    'langs' => 'Локалізація',
     'img' => 'Картинка',
     'gallery' => 'Галерея',
     'close' => 'Закрити',

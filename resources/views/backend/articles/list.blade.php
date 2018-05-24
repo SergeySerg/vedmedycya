@@ -70,7 +70,8 @@
                                 OR $type == 'paid-services'
                                 OR $type == 'free-services'
                                 OR $type == 'reviews'
-                                OR $type == 'discounts' 
+                                OR $type == 'discounts'
+                                OR $type == 'slides' 
                                 
                                 )
                                 Приналежність до готелю                               
@@ -110,6 +111,8 @@
                                     OR $type == 'free-services'
                                     OR $type == 'reviews'
                                     OR $type == 'discounts'
+                                    OR $type == 'slides'
+
                                     
                                     )
                                     <td>@if($admin_article->article_parent) {{ $admin_article->article_parent->getTranslate('title') }}@endif</td>

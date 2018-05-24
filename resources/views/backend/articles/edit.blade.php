@@ -199,7 +199,8 @@
                                                         <input class="span2 date-picker" name="attributes[{{ $key }}]" id="id-date-picker-{{ $key }}" type="text" data-date-format="dd-mm-yyyy" value='{{ $attributes[$key]  or ''}}'/>
                                                         <span class="add-on">
                                                             <i class="icon-calendar"></i>
-                                                    </span>
+                                                        </span>
+                                                    </div>
                                             </div>
                                     </div>
                                 
