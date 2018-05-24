@@ -28,7 +28,7 @@ class BackendInit {
 			->orderBy('priority','desc')
 			->get();
 		//Подключение в Backend url типа
-		$url = url('adminorieT3');
+		$url = url(getSetting('admin.prefix'));
 		//Подключение в Backend version
 		view()->share('version', config('app.version'));
 		view()->share('url', $url);

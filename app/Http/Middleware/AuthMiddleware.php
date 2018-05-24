@@ -18,7 +18,7 @@ class AuthMiddleware {
 			return $next($request);
 		}
 		else{
-			return redirect('adminorieT3.login');
+			return redirect(getSetting('admin.prefix') . '.login');
 		}
 
 

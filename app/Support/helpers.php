@@ -24,8 +24,8 @@ if (! function_exists('getSetting')) {
      * @param  string  $value
      * @return string
      */
-    function getSetting($value){
-        $setting = Setting::where('name',$value)->first();
+    function getSetting($value){        
+        $setting = Setting::where('name',$value)->first();        
         if(isset($setting->description)){
             $setting_content = $setting->description;
             return $setting_content;

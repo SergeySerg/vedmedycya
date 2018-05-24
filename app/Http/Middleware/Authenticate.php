@@ -40,7 +40,7 @@ class Authenticate {
 			}
 			else
 			{
-				return redirect()->guest('adminorieT3/login');
+				return redirect()->guest(getSetting('admin.prefix') . '/login');
 			}
 		}
 

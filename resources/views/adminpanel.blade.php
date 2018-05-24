@@ -110,7 +110,7 @@
                         </li>
 
                         <li>
-                            <a href="{{ url('/adminorieT3/logout') }}">
+                            <a href="{{ url(getSetting('admin.prefix'). '/logout') }}">
                             <i class="icon-off"></i>
                                 Logout
                             </a>
@@ -127,7 +127,7 @@
         <span class="menu-text"></span>
     </a>
 
-    <div class="sidebar hidden-print" style="min-width: 200px" id="sidebar">
+    <div class="sidebar hidden-print" id="sidebar">
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             <div class="sidebar-shortcuts-large">
                 {{ trans('backend.menu') }}
@@ -244,16 +244,17 @@
             <li @if(Request::is('*/langs'))class="active"@endif>
                 <a href="{{ route('langs_index') }}">
                     <i class="icon-globe"></i>
-                    <span class="menu-text"> Локализация{{--{{ trans('backend.langs') }}--}} </span>
+                    <span class="menu-text"> {{ trans('backend.langs') }} </span>
                 </a>
             </li>
-
-            <li @if(Request::is('*/settings'))class="active"@endif>
-                <a href="{{ route('settings_index') }}">
-                    <i class="icon-cog"></i>
-                    <span class="menu-text"> {{ trans('backend.settings') }} </span>
-                </a>
-            </li>
+            @if( (Auth::user()->name) == 'root' )
+                <li @if(Request::is('*/settings'))class="active"@endif>
+                    <a href="{{ route('settings_index') }}">
+                        <i class="icon-cog"></i>
+                        <span class="menu-text"> {{ trans('backend.settings') }} </span>
+                    </a>
+                </li>
+            @endif
 
 
         </ul><!--/.nav-list-->

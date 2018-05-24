@@ -22,7 +22,7 @@ class AdminArticlesController extends Controller {
 
 	/* List articles - Display a listing of the Articles */
 
-	public function index($type){		
+	public function index($type){			
 		$admin_category = Category::where("link",$type)->first();
 		$admin_category_parent = $admin_category->category_parent()->first();
 		$admin_category_children = $admin_category->category_children()->get();
@@ -288,7 +288,7 @@ class AdminArticlesController extends Controller {
 		return response()->json([
 			"status" => 'success',
 			"message" => 'Успешно сохранено',
-			"redirect" => URL::to('/adminorieT3/articles/' . $type)
+			"redirect" => URL::to(getSetting('admin.prefix') . '/articles/' . $type)
 		]);
 	}
 
