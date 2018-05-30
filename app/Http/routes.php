@@ -10,8 +10,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+
 Route::get('home', 'HomeController@index');//Для відображення результата після логування
 Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
+
 /*Auth group routes*/
 Route::controllers([
 	/*'auth' => 'Auth\AuthController',*/
@@ -29,14 +31,14 @@ Route::post('/forgot', array('as' => 'forgot', 'uses' => 'Auth\AuthController@po
 
 Route::get('/', 'Frontend\HomeController@index');//Перенаправлення на адресу з локалю
 
-Route::post('/update_rate', ['uses' => 'Frontend\ArticleController@update_rate','as' => 'update_rate']);//Обновление тарифа
+//Route::post('/update_rate', ['uses' => 'Frontend\ArticleController@update_rate','as' => 'update_rate']);//Обновление тарифа
 //Route::get('/update_rate_debug', ['uses' => 'Frontend\ArticleController@update_rate','as' => 'update_rate']);//Обновление тарифа
 
 
 /*/Callback group route*/
 
 /*Backend group routes*/
-Route::group(['prefix'=> getSetting('admin.prefix'), 'middleware' => ['auth', 'backend.init']], function(){
+Route::group([/*'domain' => getSetting('domain'), */'prefix'=> getSetting('admin.prefix'), 'middleware' => ['auth', 'backend.init']], function(){
 
 	//Routes for Articles (Backend)
 	Route::get('/',['uses' => 'Backend\AdminDashboardController@index','as' => 'admin_dashboard']);
@@ -93,16 +95,29 @@ Route::group(['prefix'=> getSetting('admin.prefix'), 'middleware' => ['auth', 'b
 /*/Backend group routes*/
 
 /*Frontend group routes*/
-Route::group(['middleware' => 'frontend.init'], function(){
+Route::group(['domain' => '{subdomain}' . '.' . getSetting('domain'), 'middleware' => 'frontend.init'], function(){
+	//dd('rtyui');
 	/*Callback group route*/
-	Route::post('/{lang}/{type}', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи
-	Route::get('/{lang}/{type?}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index']);
-	Route::get('/{lang}/{type}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show']);
-
-
-
+	// Route::post('/{lang}/{type}', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи
+	// Route::get('/{lang}/{type?}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index']);
+	// Route::get('/{lang}/{type}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show']);
+	frontEndRoutes();
+});
+/*Frontend group routes*/
+/*Frontend group routes*/
+Route::group(['middleware' => 'frontend.init'], function(){
+	//dd('rtyui');
+	frontEndRoutes();
+	/*Callback group route*/
+	
 
 });
 /*Frontend group routes*/
+function frontEndRoutes(){
+	Route::post('/{lang}/{type}', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи
+	Route::get('/{lang}/{type?}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index']);
+	Route::get('/{lang}/{type}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show']);
+}
+
 
 

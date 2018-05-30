@@ -217,6 +217,15 @@
                             </div>
                         </div>
                     @endif
+                    @if($admin_category->hasField('subdomain'))
+                        <div class="control-group">
+                            <label class="control-label" for="form-field-2">Субдомен</label>
+
+                            <div class="controls">
+                                <input type="text" id="form-field-2" name="subdomain" @if(isset($admin_article)) value='{{$admin_article->subdomain}}' disabled @endif  />
+                            </div>
+                        </div>
+                    @endif
                     @if($admin_category->hasField('priority'))
                         <div class="control-group">
                             <label class="control-label" for="form-field-2">{{ trans('backend.priority') }}</label>

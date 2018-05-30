@@ -9,6 +9,7 @@ class Article extends Translate {
         'article_id',
         'title',
         'type',
+        'subdomain',
         'short_description',
         'description',
         'attributes',

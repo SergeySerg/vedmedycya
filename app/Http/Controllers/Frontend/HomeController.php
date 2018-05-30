@@ -13,7 +13,7 @@ class HomeController extends Controller {
 	 * @return Response
 	 */
 	public function index()
-	{
+	{		
 		return redirect('/ua/', 302);
 	}
 

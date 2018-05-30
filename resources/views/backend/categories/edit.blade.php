@@ -464,6 +464,19 @@
                                     <tr>
                                         <td class="center">
                                             <label>
+                                                <input type="checkbox" name="subdomain" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            Субдомен
+                                        </td>
+                                        <td>subdomain</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">
+                                            <label>
                                                 <input type="checkbox" name="short_description" />
                                                 <span class="lbl"></span>
                                             </label>

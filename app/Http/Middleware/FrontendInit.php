@@ -26,7 +26,9 @@ class FrontendInit {
 		// Get current lang object from db
 		$currentLang = Lang::where('lang', $request->lang)
 			->first();
-
+			//dd(request()->getHttpHost());
+			//dd($request->domain);
+//dd($request->subdomain);
 		//share type
 		$type = $request->type;
 		if(is_null($request->type)){
