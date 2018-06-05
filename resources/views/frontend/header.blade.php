@@ -1,5 +1,5 @@
         <!-- .header -->
-        <nav class="navbar navbar-expand-xl navbar-light navbar-shadowed fixed-top navbar-white">
+    <nav class="navbar navbar-expand-xl navbar-light navbar-shadowed fixed-top navbar-white">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -31,15 +31,15 @@
                                 {{ $texts->get('tel_2') }}                                
                                 <div class="h-line-bold"></div>
                                 @if(isset($messengers) AND count($messengers) !== 0 AND $categories_data['messengers']->active == 1)
-                                    <small class="text-muted">{{ $texts->get('write_messager') }}</small><br>
+                                    <small class="text-muted">{{trans('base.write_in_messenger')}}</small><br>
                                     <div class="mb-2"></div>
                                     @foreach($messengers as $messenger)
-                                        <a href="{{ $messenger->getAttributeTranslate('messenger_link') ? $messenger->getAttributeTranslate('messenger_link') : "#"}}" style=" text-decoration: none" class="{{ $messenger->getTranslate('title') }}-icon">{!! $messenger->getAttributeTranslate('icon') ? $messenger->getAttributeTranslate('icon') : " " !!} </a>
+                                        <a href="{{ $messenger->getAttributeTranslate('messenger_link') ? $messenger->getAttributeTranslate('messenger_link') : "#"}}" style=" text-decoration: none" class="{{ $messenger->getTranslate('title') }}-icon">{!! $messenger->getAttributeTranslate('icon') ? $messenger->getAttributeTranslate('icon') : " " !!}</a>
                                     @endforeach
                                 @endif
                             </div>
                         </div>
-                        <a class="btn btn-yellow-custom-little py-1 mt-1" href="#"> {{ $texts->get('reservation') }}</a>
+                        <a class="btn btn-yellow-custom-little py-1 mt-1" href="#">{{trans('base.reservation')}}</a>
                     </span>
                 </div>
                 <!-- .menu -->
@@ -54,10 +54,7 @@
                         <div class="dropdown-content">					
 						@foreach($langs as $key => $lang)												
 							<a class="nav-link font-weight-bold padding-4-px" @if(App::getLocale() == $lang->lang) style="display: none" @endif href="{{str_replace(url(App::getLocale()), url($lang->lang), Request::url())}}">{{$lang->country}}</a>
-                            @if ($loop->last)
-                                Это последняя итерация.
-                            @endif
-                            {{--@if($key !== count($langs)-2)--}}	
+							{{--@if($key !== count($langs)-2)--}}	
 							{{--<div @if(App::getLocale() == $lang->lang) style="display: none" @endif class="h-line-bold marginy-4-px"></div>--}}
 							{{--@endif--}}	
 						@endforeach                        

@@ -11,20 +11,22 @@ return [
 	| the simple pagination links. You are free to change them to anything
 	| you want to customize your views to better match your application.
 	|
-	*/'contacts' => 'Зв\'язатися з нами',
+	*/
+	'contacts' => 'Зв\'язатися з нами',
+	'reservation' => "Забронювати",
 	'name' => 'Ім\'я',
-	'questions' => 'Ваші питання та пропозиції',
-	'our_contacts' => 'Наші контакти',
-	'send' => 'Відправити',
-	'more' => 'Більше про нас',
+	'about_us' => 'про нас',
+	'hotel_city' => 'Готель/місто',
+	'date' => 'дата',
+	'count_guestі' => 'Кількість гостей',
 	'email' => 'E-mail',
-	'detale' => 'Детальніше',
-	'company' => "Компанії",
-	'directions' => "Виробництва",
-	'order' => "Замовити",
-	'more_detale' => 'Дізнатись більше',
-	"text" => "Текст повідомлення",
-	'require_field' => "Заповніть усі поля",
+	'check_price' => 'Перевірити ціни',
+	'phone' => "Номер телефону",
+	'tel' => "Тел",
+	'write' => "Написати",
+	'more_detale' => 'читати повністю',
+	"address" => "Адреса",
+	'write_in_messenger' => "написати в месенджер",
 	"all_text" => "Заповніть форму замовлення",
 
 
