@@ -1,23 +1,16 @@
+<li class="nav-item">
+    <a class="nav-link my-1 hover-underline" href="№">{{ $categories_data['hotels']->getTranslate('title') ? $categories_data['hotels']->getTranslate('title') : 'готелі' }}</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link my-1 hover-underline" href="#"> {{ $texts->get('about_us') }}</a>
+</li>
+<li class="nav-item text-center my-xl-1">
+    <a id="desktop-logo" href="/{{ App::getLocale() }}"><img class="img-fluid mx-center" src="{{ asset('/img/frontend/logo.png') }}" width="140px"></a>
+</li>
+<li class="nav-item">
+    <a class="nav-link my-1 hover-underline" href="#">{{ $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'відгуки' }}</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link my-1 hover-underline" href="#">{{ $categories_data['contacts']->getTranslate('title') ? $categories_data['contacts']->getTranslate('title') : 'контакти' }}</a>
+</li>
 
-<ul class="menu">
-
-    @if($categories_data['main']->active == 1)
-        <li @if(Request::is(App::getLocale())) class="active" @endif><a href="/{{ App::getLocale() }}">{{ $categories_data['main']->getTranslate('title') }}</a></li>
-    @endif
-
-    @if($categories_data['about']->active == 1)
-        <li @if(Request::is('*/about')) class="active" @endif><a href="/{{ App::getLocale() }}/about">{{ $categories_data['about']->getTranslate('title') }}</a></li>
-    @endif
-
-    @if($categories_data['products']->active == 1)
-        <li @if(Request::is('*/products')) class="active" @endif><a href="/{{ App::getLocale() }}/products">{{ $categories_data['products']->getTranslate('title') }}</a></li>
-    @endif
-
-    @if($categories_data['partners']->active == 1)
-        <li @if(Request::is('*/partners')) class="active" @endif><a href="/{{ App::getLocale() }}/partners">{{ $categories_data['partners']->getTranslate('title') }}</a></li>
-    @endif
-
-    @if($categories_data['contact']->active == 1)
-        <li @if(Request::is('*/contact')) class="active" @endif><a href="/{{ App::getLocale() }}/contact">{{ $categories_data['contact']->getTranslate('title') }}</a></li>
-    @endif
-</ul>

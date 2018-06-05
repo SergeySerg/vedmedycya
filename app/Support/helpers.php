@@ -35,3 +35,23 @@ if (! function_exists('getSetting')) {
         }
     }
 }
+/*Function for get Setting content*/
+if (! function_exists('getCurentLang')) {
+    /**
+     * Format text.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    function getCurentLang($value){        
+        $lang = Lang::where('lang',$value)->first();
+        //dd('tty');        
+        if(isset($lang->country)){
+            $country = $lang->country;
+            return $country;
+        }
+        else{
+            return $value;
+        }
+    }
+}

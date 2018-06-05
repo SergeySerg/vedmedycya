@@ -1,389 +1,324 @@
-$(document).ready(function(){ /* ... */ });
-
-window.onload = function(){ 
-    
-    page.init();
-    menu.init();
-    header.init();
-    inform.init();
-    
-    slidPresen.init();
-    commandSlider.init();
-    boardsSlider.init();
-};
-
-
-
-
-/* page ---------------------------------------*/
-var page = {
-    x: 0
-};
-
-page.init = function(){
-    page.events();
-
-    $(window).resize(function(){
-        page.events();
-    });
-};
-
-page.events = function(){
-    this.x = window.innerWidth;
-
-    if(this.x > 768){
-        menu.desktop();
-        disposition.desktop();
-        logos.desktop();
-    }else{
-        menu.mobile();
-        disposition.mobile();
-        logos.mobile();
-    } 
-    
-    if(this.x > 992){
-        aboutUs.desktop();
-        boards.desktop();
-    }else{
-        aboutUs.mobile();
-        boards.mobile();
-    } 
-};
-
-
-
-
-/* inform -------------------------------------*/
-var inform = {
-    active: 'active',      
-    bl: '.inform',
-    box: '.inform__box',
-    slider: '.informSlider'
-};
-
-inform.init = function(){
-
-    $(this.slider).slick({
-        arrows: false,
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-    });
-     
-    $(this.slider).addClass(this.active);  
-};
-
-
-
-
-/* menu ---------------------------------------*/
-var menu = {
-    active: 'active',
-    button: '.mobileMenu__button',  
-    cont: '.mobileMenu__cont',
-    tim: 250
-};
-
-menu.init = function(){
-    
-    this.events();
-};
-
-menu.events = function(){
-    
-    $('body').on('click', this.button, function(event){
-      
-        if($(this).hasClass(menu.active)){
-            menu.up();
-        }else{
-            menu.down();
-        } 
-    });
-};
-
-menu.up = function(){
-    $(menu.button).removeClass(menu.active);
-    $(menu.cont).stop(true);
-    $(menu.cont).slideUp(menu.tim);
-};
-
-menu.down = function(){
-    $(menu.button).addClass(menu.active);
-    $(menu.cont).slideDown(menu.tim);
-};
-
-menu.desktop = function(){
-    $('.header .container__col:nth-child(1)').append($('.mobileMenu .logo'));
-    $('.header .container__col:nth-child(2)').append($('.mobileMenu__cont .menu'));
-    $('.header .container__col:nth-child(3)').append($('.mobileMenu__cont .languages'));
-    $(menu.button).removeClass(menu.active);
-    $(menu.cont).removeAttr('style');
-};
-
-menu.mobile = function(){
-     $('.mobileMenu__cont').append($('.header .menu'));
-     $('.mobileMenu').append($('.header .logo'));
-     $('.mobileMenu__cont').append($('.header .languages'));
-};
-
-
-
-
-/* header -------------------------------------*/
-var header = {
-    h: '.header',
-    button: '.header__more span',
-    tim: 600
-};
-
-header.init = function(){
-
-    this.events();
-};
-
-header.events = function(){
-
-    $('body').on('click', this.button, function(event){
-
-        $('html, body').animate({scrollTop: $(header.h).height()}, header.tim);   
-    });
-};
-
-
-
-
-/* aboutUs ------------------------------------*/
-var aboutUs = {};
-aboutUs.desktop = function(){
-    $('.aboutUs-main .presenBox').append($('.aboutUs-main .container__col:nth-child(2) .button'));
-};
-
-aboutUs.mobile = function(){
-    $('.aboutUs-main .container__col:nth-child(2)').append($('.aboutUs-main .presenBox .button'));
-};
-
-
-
-
-/* disposition --------------------------------*/
-var disposition = {};
-disposition.desktop = function(){
-     $('.disposition .presenBox').append($('.disposition .container__col:nth-child(2) .button'));
-};
-
-disposition.mobile = function(){
-     $('.disposition .container__col:nth-child(2)').append($('.disposition .presenBox .button'));
-};
-
-
-
-
-/* boards -------------------------------------*/
-var boards = {};
-boards.desktop = function(){
-    $('.boards').each(function(){
-        $(this).find('.presenBox').append($(this).find('.container__col:nth-child(2) .button'));
-    });
-};
-
-boards.mobile = function(){
-    $('.boards').each(function(){
-        $(this).find('.container__col:nth-child(2)').append($(this).find('.presenBox .button'));
-    });
-};
-
-
-
-/* logos --------------------------------------*/
-var logos = {};
-logos.desktop = function(){
-     $('.logos .presenBox').append($('.logos .container__col:nth-child(2) .button'));
-};
-
-logos.mobile = function(){
-     $('.logos .container__col:nth-child(2)').append($('.logos .presenBox .button'));
-};
-
-
-
-
-/* slidPresen ---------------------------------*/
-var slidPresen = {
-    active: 'active',     
-    bl: '.slidPresen'
-};
-
-slidPresen.init = function(){
-
-    if(!$(this.bl).length) return;
-
-    $(this.bl).slick({
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-    });
-
-    $(this.bl).addClass(this.active);  
-};
-
-
-
-
-/* commandSlider ------------------------------*/
-var commandSlider = {
-    active: 'active',
-    bl: '.commandSlider'
-};
-
-commandSlider.init = function(){
-
-    if(!$(this.bl).length) return;
-
-    $(this.bl).slick({
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        responsive: [
-            {
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 3
-                }
-            },
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 2
-                }
-            },
-            {
-                breakpoint: 500,
-                settings: {
-                    slidesToShow: 1
-                }
-            }
-        ]
-    });
-
-    $(this.bl).addClass(this.active);  
-};
-
-
-
-
-/* boardsSlider -------------------------------*/
-var boardsSlider = {
-    active: 'active',
-    bl: '.boardsSlider'
-};
-
-boardsSlider.init = function(){
-
-    if(!$(this.bl).length) return;
-
-    $(this.bl).slick({
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-    });
-
-    $(this.bl).addClass(this.active);  
-};
-/**********call-back**************/
-$( document ).ready(function() {
-    $('#submit-send').on('click', function (event) {
-        event.preventDefault();
-        //console.info('Клік');
-        $('#submit-send').attr('disabled', true);
-        var data = new FormData($('form#callback')[0]);
-        var url = $( "input[name=url]" ).val();
-        console.info(url);
-        $.ajax({
-            url: url,
-            method: 'POST',
-            processData: false,
-            contentType: false,
-            data: data,
-            dataType: "json",
-            success: function (data) {
-                if (data.success) {
-                    //alert('OK');
-                    swal(trans['base.success'], "", "success");
-                    jQuery("#callback").trigger("reset");
-                    $("#submit-send").attr('disabled', false);
-                }
-                else {
-                    swal(trans['base.error'], data.message, "error");
-                    $("#submit-send").attr('disabled', false);
-                }
-            },
-            error: function (data) {
-                swal(trans['base.error']);
-                $("#submit-send").attr('disabled', false);
-            }
-
-        });
-        event.preventDefault();
-    });
-    /**********END call-back**************/
-    /* Set params for form*/
-    $('.order').on('click', function (event) {
-        var id = $(this).attr('data-id');
-        $( "input[name=id]" ).val( id );
-        var goodName = $(this).attr('data-name');
-        $( "input[name=goodName]" ).val( goodName );
-
-    })
-    /*Set params for form*/
-/**********call-back**************/
-
-    $('#submit-order').on('click', function (event) {
-        event.preventDefault();
-
-        $('#submit-order').attr('disabled', true);
-        var data = new FormData($('form#callback-order')[0]);
-
-        var lang = $( "input[name=lang]" ).val();
-        //console.info(url);
-        $.ajax({
-            url: lang + '/callback',
-            method: 'POST',
-            processData: false,
-            contentType: false,
-            data: data,
-            dataType: "json",
-            success: function (data) {
-                if (data.success) {
-                    //alert('OK');
-                    swal(trans['base.success'], "", "success");
-                    jQuery("#callback-order").trigger("reset");
-                    $("#submit-send").attr('disabled', false);
-                }
-                else {
-                    swal(trans['base.error'], data.message, "error");
-                    $("#submit-send").attr('disabled', false);
-                }
-            },
-            error: function (data) {
-                swal(trans['base.error']);
-                $("#submit-send").attr('disabled', false);
-            }
-
-        });
-        event.preventDefault();
-    });
-    /**********END call-back**************/
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+//Sliders start
+$('.rest-slider').slick({
+    autoplay: true,
+    autoplaySpeed: 2000,
+    infinite: true,
+    fade: true,
+    prevArrow: '.left-click',
+    nextArrow: '.right-click',
+    speed: 2000,
+    dots: true,
+    appendDots: $('.rest-dots'),
+    dotsClass: 'custom-dots',
+    customPaging: function (slider, i) {
+        return '<a class="dot" role="button"></a>';
+    }
 });
 
+$('.slider-class').slick({
+    infinite: true,
+    prevArrow: '#p-arrow',
+    nextArrow: '#n-arrow',
+    speed: 1000,
+    dots: true,
+    appendDots: $('.main-dots'),
+    dotsClass: 'custom-dots',
+    customPaging: function (slider, i) {
+        return '<a class="dot" role="button"></a>';
+    }
+});
+
+$('.feedback-slider').slick({
+    infinite: true,
+    prevArrow: '#feedback-arrow-left',
+    nextArrow: '#feedback-arrow-right',
+    adaptiveHeight: true,
+    speed: 1000
+});
+
+if ($(window).width() > 1199) {
+    $('.slider-class-2').slick({
+        infinite: true,
+        prevArrow: '#p-arrow',
+        nextArrow: '#n-arrow',
+        speed: 1000,
+        slidesToShow: 1,
+        centerMode: true,
+        variableWidth: true, 
+        dots: true,
+        appendDots: $('.main-dots-2'),
+        dotsClass: 'custom-dots',
+        customPaging: function (slider, i) {
+            return '<a class="dot" role="button"></a>';
+        }
+    });
+
+    $(".slider-class-2").find(".slick-slide").width(60 + "vw");
+    $(".slider-class-2").find(".slick-slide").css({
+        "padding-left": "8px",
+        "padding-right": "8px"
+    });
+} else {
+    $('.slider-class-2').slick({
+        infinite: true,
+        prevArrow: '#p-arrow',
+        nextArrow: '#n-arrow',
+        speed: 1000,
+        slidesToShow: 1,
+        dots: true,
+        appendDots: $('.main-dots-2'),
+        dotsClass: 'custom-dots',
+        customPaging: function (slider, i) {
+            return '<a class="dot" role="button"></a>';
+        }
+    });
+
+    $(".slider-class-2").find(".slick-slide").height(60 + "vh");
+    $(".slider-class-2").find(".slick-slide").height($(".slider-class-2").find(".slick-slide").height() + 52);
+    $(".slider-class-2").find(".slick-slide").css("padding", "0px");
+}
+
+$(".apart-image-slider").slick({
+    infinite: true,
+    prevArrow: '#p-arrow',
+    nextArrow: '#n-arrow',
+    speed: 1000
+});
+
+$(".apart-image").height($(".apart-image-slider").height());
+//END SLiders
+
+//Start form 
+$(document).ready(function() {
+    $('#div-datepicker').mouseover(function() {
+        $('#datepicker').focus();
+    });
+
+    $('.datepicker').mouseover(function() {
+        $('#datepicker').focus();
+    });
+
+    $('#div-datepicker').mouseout(function() {
+        $('#datepicker').blur();
+    });
+
+    $('.datepicker').mouseout(function() {
+        $('#datepicker').blur();
+    });
+
+    var selectorbarheight = $('#selector-bar-id').height() + "px";
+    $('.overflow-hidden').css("height", selectorbarheight);
+
+    var inputwidth = $('#div-datepicker').width() + "px";
+    $('.datepicker').css("width", inputwidth);
+
+    $('.input-location').click(function() {
+        $("#location").val($(this).text());
+    });
+
+    $("#adults_plus").click(function() {
+        var val = 1 + +$("#adults").val();
+        $("#adults").val(val);
+        check_input_guests();
+    });
+
+    $("#adults_minus").click(function() {
+        var val = -1 + +$("#adults").val();
+        if (val < 0) {
+            val = 0;
+        }
+        $("#adults").val(val);
+        check_input_guests();
+    });
+
+    $("#children_plus").click(function() {
+        var val = 1 + +$("#children").val();
+        $("#children").val(val);
+        check_input_guests();
+    });
+
+    $("#children_minus").click(function() {
+        var val = -1 + +$("#children").val();
+        if (val < 0) {
+            val = 0;
+        }
+        $("#children").val(val);
+        check_input_guests();
+    });
+
+    function check_input_guests() {
+        var adults = $("#adults").val();
+        var children = $("#children").val();
+
+        if (adults == "0" && children == "0") {
+            $("#guests").text("Кількість гостей");
+        } else {
+            $("#guests").text(adults + " дорослих, " + children + " дітей");
+        }
+    }
+});
+//end form
+
+//start functions
+function setBookingIcon() {
+    $('.booking-icon').css({
+        "border-style": "solid",
+        "border-color": "#ff8c00",
+        "border-width": $("#booking-id").width() * 0.01,
+        "width": $(".bb-toy-thin").height(),
+        "border-radius": "50%",
+        "color": "#ff8c00",
+        "font-size": $(".bb-toy-thin").width() * 0.35,
+        "padding": $(".bb-toy-thin").height() * 0.12,
+        "line-height": "120%"
+    });
+
+    $('.booking-icon').css("margin", "auto");
+    $('.booking-icon').height($('.booking-icon').width());
+}
+
+function setHotelCard() {
+    //hotel card settings
+    $('.div-hotel-card').height($('.div-hotel-card').width() * 0.76);
+    $('.fake').height($('.div-hotel-card').width() * 0.5);
+    $('.hotel-card-price').height($('.div-hotel-card').width() * 0.15);
+    $('.price-p-div').width($('.div-hotel-card').width() * 0.3);
+    $('.old-price').css("left", $('.price-p-div').width()/2 - $('.old-price').width()/2);
+    $('.old-price').css("font-size", $('.div-hotel-card').width() * 0.025);
+    $('.hotel-card-discount').find("p").css("font-size", $('.div-hotel-card').width() * 0.03);
+
+    $('.price-p').css("font-size", $('.div-hotel-card').width() * 0.025);
+    $('.price-p').find("strong").css("font-size", $('.div-hotel-card').width() * 0.045);
+    $('.hotel-title').css("font-size", $('.div-hotel-card').width() * 0.033);
+    $('.days-ends-end-text').css("font-size", $('.div-hotel-card').width() * 0.03);
+    $('.location-text').css("font-size", $('.div-hotel-card').width() * 0.03);
+
+    $('.hotel-card-price-hover').find("p").css("font-size", $('.div-hotel-card').width() * 0.03);
+    $('.hotel-card-price-hover').find("p").css("margin-top", $('.hotel-card-price').height()/2 - $('.div-hotel-card').width() * 0.03 * 0.7);
+    
+    $('.hotel-card-price-hover').find("p").width($('.div-hotel-card').width() * 0.3);
+
+    $('.hotel-card-price-hover').width($('.div-hotel-card').width() * 0.3 + 1);
+    //------d
+
+    $('.hotel-card').hover(function() {
+        if ($(window).width() > 1199) {
+            $(this).find('.hotel-card-price-hover').animate({width: 'toggle'});
+            $('.hotel-card').finish();
+        }
+    });
+}
+
+function animateValue(id, start, end, duration, step) {
+    var range = end - start;
+    var current = start;
+    var increment = end > start? step : -step;
+    var stepTime = Math.abs(Math.floor(duration / range));
+    var obj = document.getElementById(id);
 
 
+    var timer = setInterval(function() {
+        current += increment;
+        obj.innerHTML = current;
+        if (current == end) {
+            clearInterval(timer);
+        }
+    }, stepTime);
+}
 
+function isScrolledIntoView(elem) {
+    var $window = $(window),
+        docViewTop = $window.scrollTop(),
+        docViewBottom = docViewTop + $window.height(),
+        elemTop = $(elem).offset().top,
+        elemBottom = elemTop + $(elem).outerHeight();
+    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+}
+//end functions
 
+$(document).ready(function(){
+    setBookingIcon();
+    setHotelCard();
+});
+
+$('#datepicker').datepicker({
+    range: true,
+    minDate: new Date(),
+    dateFormat: "dd.mm",
+    position: "bottom left"
+});
+$('#datepicker').data('datepicker');
+
+if ($('.input-pattern').offset().top + $('.input-pattern').height() + 268 > $(window).innerHeight() + $(window).scrollTop()) {
+    $('#datepicker').datepicker().data('datepicker').update({
+        position: "top left"
+    });
+
+    $('.datepickers-container').css("top", $('.datepickers-container').offset().top + 24);
+}
+
+$(".input-dropdown").each(function() {
+    $(this).css({
+        top: 100 + "%"
+    });
+
+    if ($(this).offset().top + $(this).outerHeight() > $(window).innerHeight() + $(window).scrollTop()){
+        $(this).css({
+            top: - $(this).height()
+        });
+    }
+});
+
+var check = true;
+
+$(window).scroll(function() {
+    $(".input-dropdown").each(function() {
+        $(this).css({
+            top: 100 + "%"
+        });
+
+        if ($(this).offset().top + $(this).outerHeight() > $(window).innerHeight() + $(window).scrollTop()){
+            $(this).css({
+                top: - $(this).height()
+            });
+        }
+    });
+
+    $('#datepicker').datepicker().data('datepicker').update({
+        position: "top left"
+    });            
+
+    $('.datepickers-container').css("top", 260 + $('.input-pattern').height());
+
+    if ($('.input-pattern').offset().top + $('.input-pattern').height() + 268 > $(window).innerHeight() + $(window).scrollTop()) {
+        $('.datepickers-container').css("top", 0)
+
+        $('#datepicker').datepicker().data('datepicker').update({
+            position: "top left"
+        });            
+
+        $('.datepickers-container').css("top", $('.datepickers-container').offset().top + 24);
+    }
+
+    if (isScrolledIntoView("#giant-number")) {
+        if (check == true) {
+            check = false;
+            animateValue("giant-number", 9821, 10000, 5000, 1);   
+        }
+    }
+});
+
+$(window).resize(function() {
+    setBookingIcon();
+    setHotelCard();
+
+    var selectorbarheight = $('#selector-bar-id').height() + "px";
+    $('.overflow-hidden').css("height", selectorbarheight);
+
+    var inputwidth = $('#div-datepicker').width() + "px";
+    $('.datepicker').css("width", inputwidth);
+});

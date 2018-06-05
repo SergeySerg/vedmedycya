@@ -80,7 +80,7 @@
 <div class="navbar hidden-print">
     <div class="navbar-inner">
         <div class="container-fluid">
-            <a href="{{ route('admin_dashboard') }}" class="brand">GLOBAL TOBACCO
+            <a href="{{ route('admin_dashboard') }}" class="brand">Велика Ведмедиця
                 {{--<i class="icon-leaf"></i>--}}
                {{--<img style="display: block;position: absolute;margin-top: -3px;" width="105px" src="{{ asset('/img/backend/logo.png') }}" alt="{{$_SERVER['HTTP_HOST']}}" />--}}
                 {{--<small style="margin-left: 40px;">

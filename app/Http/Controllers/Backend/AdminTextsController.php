@@ -175,20 +175,23 @@ class AdminTextsController extends Controller {
 		// }
 		// $all['description'] = '';
 	//dd($all);
-		$all['description'] = [];
+		if(empty($all['description'])){
+			$all['description'] = [];
+		}
 
 		// Сreate array example (ua|ru|en)
 		foreach($langs as $lang){
 
-			if($all['lang_active'] == 0){
-				//dd($all);
-				$all['description'] +=  [ $lang['lang'] => $all["description_{$lang['lang']}"]];
-				}else{
+			if($all['lang_active'] != 0){
+				// //dd($all);
+				// $all['description'] .=  [ $lang['lang'] => $all["description"]];
+				// }else{
 				//dd($all);
 				$all['description'] +=  [ $lang['lang'] => (isset($all["description_{$lang['lang']}"]) ? $all["description_{$lang['lang']}"] : '') ];
+				unset($all["description_{$lang['lang']}"]);
+
 			}
 			//dd($all);
-			unset($all["description_{$lang['lang']}"]);
 			//dd($all);
 		}
 		$all['description'] = json_encode($all['description']);

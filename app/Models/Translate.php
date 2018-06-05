@@ -13,13 +13,19 @@ class Translate extends Model {
         
         //dd($this->$field);  
         $fields = json_decode($this->$field, true);
-        if ($fields === FALSE) {
+       //dd($fields);
+        if (is_string($fields)){ 
+            $field = str_replace("'","",$fields);           
+            return $field; 
+        }
+        if ($fields === FALSE) {            
             return $this->$field; 
         }
          
         // if(!$translate_value){
         //     $translate_value = '';    
         // }
+        //dd('тут');
         return $this->getTranslateValue($fields, $current_lang);
            
         /*Use for multilang with DECIMILAR*/
