@@ -24,8 +24,8 @@ class FrontendInit {
 	public function handle($request, Closure $next)
 	{
 		// Get current lang object from db
-		$currentLang = Lang::where('lang', $request->lang)
-			->first();
+		//$currentLang = Lang::where('lang', $request->lang)
+		//	->first();
 			//dd(request()->getHttpHost());
 			//dd($request->domain);
 //dd($request->subdomain);
@@ -35,9 +35,9 @@ class FrontendInit {
 		if(is_null($request->type)){
 			$type = 'main';
 		}
-		if (!$currentLang){
-			abort('404');
-		}
+		// if (!$currentLang){
+		// 	abort('404');
+		// }
 		$langs = Lang::activelangs()->orderBy('priority','desc')->get()/**/;
 		// Locale setting
 		App::setLocale($request->lang);

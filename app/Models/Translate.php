@@ -43,7 +43,7 @@ class Translate extends Model {
 
     public function getAttributeTranslate($key, $current_lang = null){
         //dd('sdw');
-        $langs = Lang::all();
+        //$langs = Lang::all();
         if(!$current_lang){
             $current_lang = App::getLocale();
         }

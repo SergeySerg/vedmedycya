@@ -10,7 +10,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+/*Frontend group routes*/
+//Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
+Route::group(array('domain' => getSetting('domain')), function() {
+	Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
+    // ...
+});
 Route::get('home', 'HomeController@index');//Для відображення результата після логування
 Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
 
@@ -93,27 +98,16 @@ Route::group([/*'domain' => getSetting('domain'), */'prefix'=> getSetting('admin
 
 });
 /*/Backend group routes*/
-
 /*Frontend group routes*/
 Route::group(['domain' => '{subdomain}' . '.' . getSetting('domain'), 'middleware' => 'frontend.init'], function(){
-	//dd('rtyui');
+	//dd('rtyui1');
 	/*Callback group route*/
 	//Route::post('/{lang}/{type}', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи
 	Route::get('/{lang}/{type}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain']);
 	Route::get('/{lang}/{type}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show']);
 	//frontEndRoutes();
 });
-/*Frontend group routes*/
-/*Frontend group routes*/
-Route::group(['middleware' => 'frontend.init'], function(){
-	//dd('rtyui');
-	Route::get('/{lang}', ['uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
 
-	//frontEndRoutes();
-	/*Callback group route*/
-	
-
-});
 /*Frontend group routes*/
 function frontEndRoutes(){
 	Route::post('/{lang}/{type}', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи

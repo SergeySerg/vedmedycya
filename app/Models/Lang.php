@@ -6,7 +6,7 @@ class Lang extends Translate {
     protected $fillable=[
         'lang',
         'country',
-        'active',
+        'active',        
         'img',
         'priority'
     ];

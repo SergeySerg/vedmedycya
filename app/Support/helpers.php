@@ -45,7 +45,7 @@ if (! function_exists('getCurentLang')) {
      */
     function getCurentLang($value){        
         $lang = Lang::where('lang',$value)->first();
-        //dd('tty');        
+        //dd($lang);        
         if(isset($lang->country)){
             $country = $lang->country;
             return $country;

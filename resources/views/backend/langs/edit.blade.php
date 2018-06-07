@@ -48,7 +48,7 @@
                     <div class="controls">
                         <input type="text" name="country" value='{{ $lang -> country or '' }}' placeholder="Название страны" />
                     </div>
-                </div>
+                </div>                
 
                 <div class="control-group">
                     <label class="control-label" for="priority">Обозначение</label>

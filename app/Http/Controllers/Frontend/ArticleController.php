@@ -31,16 +31,17 @@ class ArticleController extends Controller {
 	 */
 	public function index($subdomain, $lang, $type)
 	{		
+		//dd('nene');
 		
-			$hotels_articles = Category::where('link', $type)->first()->articles->where('subdomain', $subdomain);
-			//dd($hotels_articles);
-			//$article_group =  Article::where('category_id',$hotels_articles['parent_id'])->where('active', 1)->get();
-			//dd($article_group);
-			$test = Article::where('type', 'mark')->first();
-			$tests = $hotels_articles->map(function ($hotel_article) {
-				//dd($hotel_article);
-				return $hotel_article->article_children()->where('category_id', 8)->get();
-			});
+			// $hotels_articles = Category::where('link', $type)->first()->articles->where('subdomain', $subdomain);
+			// //dd($hotels_articles);
+			// //$article_group =  Article::where('category_id',$hotels_articles['parent_id'])->where('active', 1)->get();
+			// //dd($article_group);
+			// $test = Article::where('type', 'mark')->first();
+			// $tests = $hotels_articles->map(function ($hotel_article) {
+			// 	//dd($hotel_article);
+			// 	return $hotel_article->article_children()->where('category_id', 8)->get();
+			// });
 			//dd($tests->all());
 			// foreach($tests as $test){
 			// 	dd($test->first()->title);
@@ -68,6 +69,7 @@ class ArticleController extends Controller {
 	 */
 	public function indexMain($lang)
 	{	
+		//dd('Без субдомена');
 		return view('frontend.main');
 	}
 	/**
