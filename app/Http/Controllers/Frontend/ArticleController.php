@@ -24,23 +24,52 @@ class ArticleController extends Controller {
 	private $content;
 	private $code;
 
+	/**
+	 * Display a listing of the resource with subdomain.
+	 *
+	 * @return Response
+	 */
+	public function index($subdomain, $lang, $type)
+	{		
+		
+			$hotels_articles = Category::where('link', $type)->first()->articles->where('subdomain', $subdomain);
+			//dd($hotels_articles);
+			//$article_group =  Article::where('category_id',$hotels_articles['parent_id'])->where('active', 1)->get();
+			//dd($article_group);
+			$test = Article::where('type', 'mark')->first();
+			$tests = $hotels_articles->map(function ($hotel_article) {
+				//dd($hotel_article);
+				return $hotel_article->article_children()->where('category_id', 8)->get();
+			});
+			//dd($tests->all());
+			// foreach($tests as $test){
+			// 	dd($test->first()->title);
+			// }
+			// $articles = $test->article_children()->where('category_id', 2);
+			// dd($articles);
+		
+		//dd(request()->subdomain);
+		
+		//dump($news);
+		//dd($video->category()->first()->active);
+		return view('frontend.' . $type);
+		// ->with(
+		// 	compact(
+		// 	//'tests'		
+		// 	)
+		// );
 
+	}
 
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function index($lang, $type = 'main')
-	{
-		//dd(request()->subdomain);
-		//dd('ArticleController@index');
-		//dump($news);
-		//dd($video->category()->first()->active);
-		return view('frontend.' . $type);
-
+	public function indexMain($lang)
+	{	
+		return view('frontend.main');
 	}
-
 	/**
 	 * Display the specified resource.
 	 *

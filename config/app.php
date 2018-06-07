@@ -152,6 +152,7 @@ return [
 		 * laravel spec provides
 		 */
 		Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+		Barryvdh\Debugbar\ServiceProvider::class
 	],
 
 	/*
@@ -202,7 +203,8 @@ return [
 		'Image'     => 'Intervention\Image\Facades\Image',
 		'Laracurl'	=>	'Zjango\Laracurl\Facades\Laracurl',
 		'Form' => Collective\Html\FormFacade::class,
-      	'Html' => Collective\Html\HtmlFacade::class,
+		'Html' => Collective\Html\HtmlFacade::class,
+		  'Debugbar' => Barryvdh\Debugbar\Facade::class,
 	],
 
 ];

@@ -29,6 +29,7 @@ class FrontendInit {
 			//dd(request()->getHttpHost());
 			//dd($request->domain);
 //dd($request->subdomain);
+		$subdomain = $request->subdomain;
 		//share type
 		$type = $request->type;
 		if(is_null($request->type)){
@@ -43,15 +44,35 @@ class FrontendInit {
 		$texts = new Text();
 		//get all Category
 		$categories = Category::all();
-		$categories_data = [];
+		$categories_data = [];		
 		//dd($categories);
-		foreach($categories as $category){
+		foreach($categories as $category){			
 			//create arr for categories with type
 			$categories_data[$category->link] = $category;
 			$category_item = $category
 				->articles()
 				->activearticles()
 				->get();
+			//Children articles in request subdomain	
+			if($subdomain){				
+				//dd($category->id);
+				$subdomain_children_articles = Article::where('subdomain', $subdomain)->get()
+				//dd($subdomain_children_articles);
+				->map(function ($subdomain_child_article) use ($category) {
+					//dd($category);
+					//dd($subdomain_child_article);
+					return $subdomain_child_article
+							->article_children()				
+							->where('category_id', $category->id)
+							->first();
+							//d($subdomain_child_article);
+				})
+				->filter(function($subdomain_child_article){
+					return $subdomain_child_article !== null;
+				});	
+				//dd($subdomain_children_articles);
+			view()->share('children_' . $category->link, $subdomain_children_articles);	
+			}
 			// validate count for change method (get() or first()) if one item in array
 //			if(count($category_item) == 1){
 //				$category_item = $category_item->first();
@@ -61,6 +82,7 @@ class FrontendInit {
 			//share Article
 			view()->share($category->link, $category_item);
 		}
+		//dd($children_rooms);
 		//dd($categories_data);
 
 

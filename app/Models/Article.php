@@ -33,7 +33,7 @@ class Article extends Translate {
         return $this->belongsTo('App\Models\Article', 'article_id');
     }
 
-    public function article_children(){
+    public function article_children(){        
         return $this->hasMany('App\Models\Article', 'article_id');
     }
 

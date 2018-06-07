@@ -55,3 +55,25 @@ if (! function_exists('getCurentLang')) {
         }
     }
 }
+/*Function return id apartaments*/
+if (! function_exists('getIdApart')) {
+    /**
+     * Format text.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    function getIdApart($type){
+        if($type === 'mark' OR $type === 'white_house' OR $type === 'dream_house'){
+                $room =  Category::where('link','rooms')->first();
+                $hotel = Article::where('type',$type)->first(); 
+                $article = $room->articles->where('article_id', $hotel->id)->first();
+                if(!$article) return false;
+                $id = $article->id;
+            if($id){  
+                return $id;
+            }
+        }
+        return false;
+    }
+}
