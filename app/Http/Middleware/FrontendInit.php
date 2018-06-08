@@ -38,7 +38,7 @@ class FrontendInit {
 		// if (!$currentLang){
 		// 	abort('404');
 		// }
-		$langs = Lang::activelangs()->orderBy('priority','desc')->get()/**/;
+		$langs = Lang::activelangs()/**/;
 		// Locale setting
 		App::setLocale($request->lang);
 		$texts = new Text();

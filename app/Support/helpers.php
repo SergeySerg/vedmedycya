@@ -67,9 +67,10 @@ if (! function_exists('getIdApart')) {
         if($type === 'mark' OR $type === 'white_house' OR $type === 'dream_house'){
                 $room =  Category::where('link','rooms')->first();
                 $hotel = Article::where('type',$type)->first(); 
-                $article = $room->articles->where('article_id', $hotel->id)->first();
-                if(!$article) return false;
-                $id = $article->id;
+                $id = $room->articles->where('article_id', $hotel->id)->pluck('id')->first();
+                //dd($article);
+                if(!$id) return false;
+                //$id = $article->id;
             if($id){  
                 return $id;
             }
