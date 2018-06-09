@@ -216,7 +216,13 @@ $(function () {
       range: true,
       minDate: new Date(),
       dateFormat: "dd.mm",
-      position: "bottom left"
+      position: "bottom left",
+      onSelect: function() {
+          var temp = $("#datepicker").val();
+          if (temp.length == 5) {
+              $("#datepicker").val($("#datepicker").val() + " - дата виїзду");
+          }
+      }
   });
   $('#datepicker').data('datepicker');
   

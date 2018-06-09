@@ -65,10 +65,10 @@ if (! function_exists('getIdApart')) {
      */
     function getIdApart($type){
         if($type === 'mark' OR $type === 'white_house' OR $type === 'dream_house'){
-                $room =  Category::where('link','rooms')->first();
-                $hotel = Article::where('type',$type)->first(); 
-                $id = $room->articles->where('article_id', $hotel->id)->pluck('id')->first();
-                //dd($article);
+                //$room =  Category::with('articles')->getCategory('rooms')->first();
+                $article = Article::with('article_children')->select('id')->where('type',$type)->first(); 
+                $id = $article->article_children->where('article_id', $article->id)->where('category_id', 8)->pluck('id')->first();
+                //dd($id);
                 if(!$id) return false;
                 //$id = $article->id;
             if($id){  

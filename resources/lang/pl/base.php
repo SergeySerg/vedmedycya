@@ -27,7 +27,11 @@ return [
 	'more_detale' => 'przeczytaj całkowicie',
 	"address" => "Adres",
 	'write_in_messenger' => "napisz do messenger",
-	"all_text" => "Заповніть форму замовлення",
+	"all_text" => "	Wypełnij formularz zamówienia",
+	"adults" => "Dorośli",
+	"children" => "Dzieci",
+	'years' => 'lata',
+	"free_children" => 'dzieci poniżej 5 lat - bezpłatnie',
 
 
 	/* Script Contact*/

@@ -3,6 +3,7 @@ namespace App\Models;
 use App;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Lang;
+use Debugbar;
 
 class Translate extends Model {
 
@@ -53,6 +54,7 @@ class Translate extends Model {
        //dd($articleArray['attributes']);
         $attributes = json_decode($articleArray['attributes'], true);
         //dd($attributes);
+        
         if(isset($attributes[$key]) AND $attributes[$key]) {
             
             //dd($attributes);
@@ -62,6 +64,12 @@ class Translate extends Model {
             // if (count($pieces) == 1)
             $fields = json_decode($attributes[$key], true);
             //dd($fields);
+            Debugbar::info($fields);
+            if (is_string($fields) OR is_int($fields)){ 
+                //dd('asds');
+                $attributes[$key] = str_replace("'","", $attributes[$key]);           
+                return $attributes[$key]; 
+            }
             if ($fields === null) {
                 //dd();
                 return $attributes[$key]; 
@@ -84,7 +92,8 @@ class Translate extends Model {
         // if($fields['title']){
         //     $fields = fields['title'];  
         //     dd($fields);  
-        // }
+        // }       
+        //Debugbar::info($fields);
        //dd($fields); 
         foreach($fields as $key => $item){
 

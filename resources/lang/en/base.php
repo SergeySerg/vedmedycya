@@ -27,7 +27,11 @@ return [
 	'more_detale' => 'read completely',
 	"address" => "Address",
 	'write_in_messenger' => "write to messenger",
-	"all_text" => "Заповніть форму замовлення",
+	"all_text" => "Fill out the order form",
+	"adults" => "Adults",
+	"children" => "Children",
+	'years' => 'years',
+	"free_children" => 'children under 5 years - free',
 
 	/* Script Contact*/
 	'success_send_contact' => 'Your application was successfully sent!',

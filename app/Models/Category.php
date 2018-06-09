@@ -70,5 +70,25 @@ class Category extends Translate {
             return [];
         }
     }
+    public function scopegetCategory($query, $type){
+        $query->select(
+            'id',
+            'parent_id',
+            'article_parent',
+            'title',
+            'link',
+            'description',
+            'short_description',      
+            'active',
+            'meta_title',
+            'meta_description',
+            'meta_keywords'    
+        )
+        ->where ('link', $type);
+              
+    }
+    public function scopeactiveCategories($query){
+        $query->where ('active',1);
+    }
 }
 

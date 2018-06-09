@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Response;
 //use Illuminate\Contracts\View\View;
 use Mail;
 use Illuminate\Support\Facades\Validator;
-
+use Debugbar;
 class ArticleController extends Controller {
 
 	private $content;
@@ -67,10 +67,14 @@ class ArticleController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function indexMain($lang)
-	{	
-		//dd('Без субдомена');
-		return view('frontend.main');
+	public function indexMain($lang, $type = 'main')
+	{			
+		$main_slides = $this->showMainPage('slides');
+		$main_marketings = $this->showMainPage('marketings');
+
+		return view('frontend.main')
+		->with(compact('main_slides', 'main_marketings'));
+			
 	}
 	/**
 	 * Display the specified resource.
@@ -206,6 +210,17 @@ class ArticleController extends Controller {
 				'success' => 'true'
 			]);
 		}
+	}
+	public function showMainPage($type){
+		/*Select slide that check as show_main_page*/
+		$category_item = Category::with('articles')->select('id')->where('link', $type)->first();
+			Debugbar::info($category_item);
+		$main_item = $category_item->articles()->where('attributes->show_main_page', 1)->activeAndSortArticles()->get();
+			Debugbar::info($main_item);
+		return $main_item;
+		
+		 
+		
 	}
 
 }

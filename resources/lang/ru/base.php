@@ -28,7 +28,11 @@ return [
 	'more_detale' => 'читать полностью',
 	"address" => "Адрес",
 	'write_in_messenger' => "написать в мессенджер",
-	"all_text" => "Заповніть форму замовлення",
+	"all_text" => "Заполните форму заказа",
+	"adults" => "Взрослых",
+	"children" => "Детей",
+	'years' => 'лет',
+	"free_children" => 'дети до 5 лет - бесплатно',
 
 
 	/* Script Contact*/

@@ -10,40 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-/*Frontend group routes*/
-//Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
-Route::group(array('domain' => getSetting('domain')), function() {
-	Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
-    // ...
-});
-Route::get('home', 'HomeController@index');//Для відображення результата після логування
-Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
-
-/*Auth group routes*/
-Route::controllers([
-	/*'auth' => 'Auth\AuthController',*/
-	'password' => 'Auth\PasswordController',
-]);
-Route::get('/register', array('as' => 'signup', 'uses' => 'Auth\AuthController@getRegister'));
-Route::post('/register', array('as' => 'signup', 'uses' => 'Auth\AuthController@postRegister'));
-Route::get(getSetting('admin.prefix') . '/login', array('as' => 'login', 'uses' => 'Auth\AuthController@getLogin'));
-Route::post(getSetting('admin.prefix') . '/login', array('as' => 'login', 'uses' => 'Auth\AuthController@postLogin'));
-Route::get(getSetting('admin.prefix') . '/logout', array('as' => 'logout', 'uses' => 'Auth\AuthController@getLogout'));
-/*Route::get('/forgot', array('as' => 'forgot', 'uses' => 'Auth\AuthController@getLogin'));
-Route::post('/forgot', array('as' => 'forgot', 'uses' => 'Auth\AuthController@postLogin'));*/
-
-/*/Auth group routes*/
-
-Route::get('/', 'Frontend\HomeController@index');//Перенаправлення на адресу з локалю
-
-//Route::post('/update_rate', ['uses' => 'Frontend\ArticleController@update_rate','as' => 'update_rate']);//Обновление тарифа
-//Route::get('/update_rate_debug', ['uses' => 'Frontend\ArticleController@update_rate','as' => 'update_rate']);//Обновление тарифа
-
-
-/*/Callback group route*/
-
-/*Backend group routes*/
-Route::group([/*'domain' => getSetting('domain'), */'prefix'=> getSetting('admin.prefix'), 'middleware' => ['auth', 'backend.init']], function(){
+Route::group(['domain' => getSetting('domain'), 'prefix'=> getSetting('admin.prefix'), 'middleware' => ['auth', 'backend.init']], function(){
 
 	//Routes for Articles (Backend)
 	Route::get('/',['uses' => 'Backend\AdminDashboardController@index','as' => 'admin_dashboard']);
@@ -98,6 +65,40 @@ Route::group([/*'domain' => getSetting('domain'), */'prefix'=> getSetting('admin
 
 });
 /*/Backend group routes*/
+/*Frontend group routes*/
+//Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
+Route::group(['domain' => getSetting('domain')], function() {
+	Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
+    // ...
+});
+Route::get('home', 'HomeController@index');//Для відображення результата після логування
+Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
+
+/*Auth group routes*/
+Route::controllers([
+	/*'auth' => 'Auth\AuthController',*/
+	'password' => 'Auth\PasswordController',
+]);
+Route::get('/register', array('as' => 'signup', 'uses' => 'Auth\AuthController@getRegister'));
+Route::post('/register', array('as' => 'signup', 'uses' => 'Auth\AuthController@postRegister'));
+Route::get(getSetting('admin.prefix') . '/login', array('as' => 'login', 'uses' => 'Auth\AuthController@getLogin'));
+Route::post(getSetting('admin.prefix') . '/login', array('as' => 'login', 'uses' => 'Auth\AuthController@postLogin'));
+Route::get(getSetting('admin.prefix') . '/logout', array('as' => 'logout', 'uses' => 'Auth\AuthController@getLogout'));
+/*Route::get('/forgot', array('as' => 'forgot', 'uses' => 'Auth\AuthController@getLogin'));
+Route::post('/forgot', array('as' => 'forgot', 'uses' => 'Auth\AuthController@postLogin'));*/
+
+/*/Auth group routes*/
+
+Route::get('/', 'Frontend\HomeController@index');//Перенаправлення на адресу з локалю
+
+//Route::post('/update_rate', ['uses' => 'Frontend\ArticleController@update_rate','as' => 'update_rate']);//Обновление тарифа
+//Route::get('/update_rate_debug', ['uses' => 'Frontend\ArticleController@update_rate','as' => 'update_rate']);//Обновление тарифа
+
+
+/*/Callback group route*/
+
+/*Backend group routes*/
+
 /*Frontend group routes*/
 Route::group(['domain' => '{subdomain}' . '.' . getSetting('domain'), 'middleware' => 'frontend.init'], function(){
 	//dd('rtyui1');

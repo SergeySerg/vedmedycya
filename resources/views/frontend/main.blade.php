@@ -4,21 +4,11 @@
 
  <div id="main-slider">
         <div class="slider-class">
-            <div class="fullscreen-img d-flex align-items-center justify-content-center" style="background-image: url(img/headers/idealrelax.jpg);">
-                <h1>ВАШ ІДЕАЛЬНИЙ ВІДПОЧИНОК<br class="text-divider"> ЧЕКАЄ ВАС ТУТ</h1>
+        @foreach($main_slides as $slide)
+            <div class="fullscreen-img d-flex align-items-center justify-content-center" style="background-image: url('{{ asset( $slide->getAttributeTranslate('slide_img')) }}')">
+                <h1>{!! $slide->getTranslate('short_description') !!}</h1>                
             </div>
-            <div class="fullscreen-img d-flex align-items-center justify-content-center" style="background-image: url(img/headers/familyresort.jpg);">
-                <h1>СІМЕЙНИЙ ВІДПОЧИНОК<br class="text-divider"> У КАРПАТАХ</h1>
-            </div>
-            <div class="fullscreen-img d-flex align-items-center justify-content-center" style="background-image: url(img/headers/ecohotel.jpg);">
-                <h1>СПРАВЖНІЙ ЕКО-ГОТЕЛЬ<br class="text-divider"> У ЯРЕМЧЕ</h1>
-            </div>
-            <div class="fullscreen-img d-flex align-items-center justify-content-center" style="background-image: url(img/headers/pool.jpg);">
-                <h1>БАСЕЙН<br class="text-divider"> З ПІДІГРІВОМ</h1>
-            </div>
-            <div class="fullscreen-img d-flex align-items-center justify-content-center" style="background-image: url(img/headers/owncotedge.jpg);">
-                <h1>ВЛАСНИЙ КОТЕДЖ<br class="text-divider"> НА ЧАС ВІДПУСТКИ</h1>
-            </div>
+        @endforeach    
         </div>
         <nav class="main-dots"></nav>
         <div id="p-arrow">
@@ -39,30 +29,28 @@
                     <div class="row justify-content-center no-gutters py-md-3 py-1">
                         <div class="col-lg-2 col-md-3 col-6 my-1">
                             <div class="input-pattern">
-                                <input disabled id="location" type="text" name="location" placeholder="Готель/місто" readonly="readonly" class="cursor-pointer"/>
+                                <input disabled id="location" type="text" name="location" placeholder="{{ trans('base.hotel_city') }}" readonly="readonly" class="cursor-pointer"/>
                                 <i class="fas fa-map-marker-alt input-icon"></i>
                                 <div class="input-dropdown px-2">
-                                    <p class="input-location d-flex align-items-center"><span>Велика Ведмедиця<br/><sub> (Яремче)</sub></span></p>
-                                    <p class="input-location d-flex align-items-center"><span>Ведмежий Двір<br/><sub> (Яремче)</sub></span></p>
-                                    <p class="input-location d-flex align-items-center"><span>White House<br/><sub> (Яремче)</sub></span></p>
-                                    <p class="input-location d-flex align-items-center"><span>Dream House<br/><sub> (Яремче)</sub></span></p>
-                                    <p class="input-location d-flex align-items-center"><span>У Марка<br/><sub> (Яремче)</sub></span></p>
+                                    @foreach($hotels as $hotel)
+                                        <p class="input-location d-flex align-items-center"><span>{{ $hotel->getTranslate('title')}}<br/><sub> @if($hotel->getAttributeTranslate('location')) ({{ $hotel->getAttributeTranslate('location') }}) @else  @endif</sub></span></p>
+                                     @endForeach
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-3 col-6 my-1">
                             <div id="div-datepicker" class="input-pattern">
                                 <i class="fas fa-calendar-alt input-icon"></i>
-                                <input type='text' data-language="en" data-multiple-dates-separator=" - " class="datepicker-here cursor-pointer" id="datepicker" placeholder="Дата" readonly="readonly"/>
+                                <input type='text' data-language="{{ App::getLocale() }}" data-multiple-dates-separator=" - " class="datepicker-here cursor-pointer" id="datepicker" placeholder="{{ trans('base.date')}}" readonly="readonly"/>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-3 my-1">
                             <div class="input-pattern">
-                                <p id="guests" class="input-text">Кількість гостей</p>
+                                <p id="guests" class="input-text">{{ trans('base.count_guestі')}}</p>
                                 <i class="fas fa-male input-icon"></i>
                                 <div class="input-dropdown">
                                     <div class="input-members d-flex justify-content-between">
-                                        <p>Дорослі</p>
+                                        <p>{{ trans('base.adults')}}</p>
                                         <span>
                                             <span id="adults_minus">
                                                 <i class="fas fa-minus fa-lg add-member-btn"></i>
@@ -74,7 +62,7 @@
                                         </span>
                                     </div>
                                     <div class="input-members d-flex justify-content-between">
-                                        <p>Діти<br/><sup>5-12 років</sup></p>
+                                        <p>{{ trans('base.children')}}<br/><sup>5-12 {{ trans('base.years')}}</sup></p>
                                         <span>
                                             <span id="children_minus">
                                                 <i class="fas fa-minus fa-lg add-member-btn"></i>
@@ -85,13 +73,13 @@
                                             </span>
                                         </span>
                                     </div>
-                                    <p class="children-up-to-5"><sub>діти до 5 років - безкоштовно</sub></p>
+                                    <p class="children-up-to-5"><sub>{{ trans('base.free_children')}}</sub></p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-3 my-1">
                             <div class="input-pattern">
-                                <button type="submit" class="submit-button">ПЕРЕВІРИТИ ЦІНИ</button>
+                                <button type="submit" class="submit-button">{{ trans('base.check_price') }}</button>
                             </div>
                         </div>
                     </div>
@@ -102,149 +90,71 @@
    
     <div id="mobile-phones" class="text-center">
         <i class="fas fa-phone fa-2x my-2 color-ff8c00"></i>
-        <h5 class="mt-2"><a href="tel:+380975144702" class="phone-clickable">+38 (097) 514 4702</a><br></h5>
-        <h5 class="mb-3"><a href="tel:+380975144702" class="phone-clickable">+38 (097) 514 4702</a><br></h5>
-        <h6 class="mb-3">або пишіть у месенджери</h6>
-        <a href="#"><i class="fab fa-viber fa-2x color-viber"></i></a>
-        <a href="#"><i class="fab fa-whatsapp fa-2x mx-4 color-whatsapp"></i></a>
-        <a href="#"><i class="fab fa-telegram-plane fa-2x color-telegram"></i></a>
+        <h5 class="mt-2"><a href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_1'))}}" class="phone-clickable">{{ $texts->get('tel_1') }}</a><br></h5>
+        <h5 class="mb-3"><a href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_2'))}}" class="phone-clickable"> {{ $texts->get('tel_2') }}</a><br></h5>
+        <h6 class="mb-3">{{trans('base.write_in_messenger')}}</h6>        
+        @if(isset($messengers) AND count($messengers) !== 0 AND $categories_data['messengers']->active == 1)
+            @foreach($messengers as $messenger)
+                <a href="{{ $messenger->getAttributeTranslate('messenger_link') ? $messenger->getAttributeTranslate('messenger_link') : "#"}}"> {!! $messenger->getAttributeTranslate('icon_mobile') ? $messenger->getAttributeTranslate('icon_mobile') : " " !!}</a>
+            @endforeach
+        @endif         
         <div class="h-line-bold"></div>
     </div>
     
     <div class="container-fluid px-sm-5">
         <div class="row text-center" >
             <div class="col">
-                <h2 class="section-header-huge">МЕРЕЖА ГОТЕЛІВ "ВЕЛИКА ВЕДМЕДИЦЯ"</h2>
-                <h4 class="section-header-small">в яремче та буковелі</h4>
-                <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                <h2 class="section-header-huge">{{ $main->first()->getTranslate('title') }}</h2>
+                <h4 class="section-header-small">{!! $main->first()->getTranslate('short_description') !!}</h4>
+                <div class="section-description">{!! $main->first()->getTranslate('description') !!}</>
             </div>
         </div>
         <div class="row justify-content-center no-gutters px-md-5 px-0" id="section-hotels" >
-            <div class="col-xl-4 col-lg-6 p-2 mt-4">
-                <a href="#" class="a-card">
-                    <div class="apart-small-card">
-                        <div class="small-card-image" style="background-image: url(img/hotels/u_marka.JPG)"></div>
-                        <div class="row pt-3  px-md-4 px-3">
-                            <div class="col">
-                                <h5 class="small-hotel-header">Котедж У МАРКА</h5>
+            @foreach($hotels as $key => $hotel) 
+                <div class="col-xl-4 col-lg-6 p-2 mt-4">
+                    <a href="{{ route('article_index_subdomain', [$hotel->subdomain, App::getLocale(), 'hotels/' . getIdApart($hotel->type)])}}" class="a-card">
+                        <div class="apart-small-card shadow-hover">
+                            <div class="small-card-image" style="background-image: url('{{ asset( $hotel->getAttributeTranslate('hotel_photo')) }}')"></div>
+                            <div class="row pt-3  px-md-4 px-3">
+                                <div class="col-8">
+                                    <h5 class="small-hotel-header">{{ $hotel->getAttributeTranslate('type_build')}} {{ $hotel->getTranslate('title')}}</h5>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row pb-1  px-md-4 px-3">
-                            <div class="col-4">
-                                <p class="location-text"><i class="fas fa-map-marker-alt color-ff8c00"></i> Яремче</p>
+                            <div class="row pb-1  px-md-4 px-3">
+                                <div class="col-4">
+                                    <p class="location-text"><i class="fas fa-map-marker-alt color-ff8c00"></i> {{ $hotel->getAttributeTranslate('location')}}</p>
+                                </div>
+                                @if($hotel->getAttributeTranslate('marketing'))
+                                    <div class="col-8 text-right">
+                                        <small class="small-card-hotel">{{ $hotel->getAttributeTranslate('marketing')}}</small>
+                                    </div>
+                                @endif
                             </div>
-                            <div class="col-8 text-right">
-                                <small class="small-card-hotel">Залишилось 3 номери</small>
+                            <div class="apart-small-card-buy">
+                                <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between discount">{{trans('base.from')}} 
+                                    <span class="d-flex flex-column">
+                                        @if($hotel->getAttributeTranslate('discount'))
+                                            <span class="old-price-hotel-card">{{ $hotel->getAttributeTranslate('price')}}</span>
+                                        @endif
+                                        <strong>@if($hotel->getAttributeTranslate('discount')){{$hotel->getAttributeTranslate('price') - (($hotel->getAttributeTranslate('price') * $hotel->getAttributeTranslate('discount')) / 100)}}@else {{ $hotel->getAttributeTranslate('price')}} @endif</strong>
+                                    </span> {{trans('base.grn')}}
+                                </p>
                             </div>
+                            <div class="apart-small-card-buy-hover apart-small-hover-hotel"><p class="d-flex justify-content-center align-items-center">{{trans('base.reservation')}}</p></div>
+                            @if($hotel->getAttributeTranslate('discount'))
+                                <div class="apart-small-discount-hotel">
+                                    <p class="text-center py-1 text-uppercase">{{ trans('base.discount')}} {{ $hotel->getAttributeTranslate('discount')}}%</p>
+                                </div>
+                            @endif
                         </div>
-                        <div class="apart-small-card-buy">
-                            <p class="text-center apart-small-card-buy-hotel-p">від <strong>100</strong> грн</p>
-                        </div>
-                        <div class="apart-small-card-buy-hover apart-small-hover-hotel"><p class="d-flex justify-content-center align-items-center">ЗАБРОНЮВАТИ</p></div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xl-4 col-lg-6 p-2 mt-4">
-                <a href="#" class="a-card">
-                    <div class="apart-small-card">
-                        <div class="small-card-image" style="background-image: url(img/hotels/bigbear.JPG)"></div>
-                        <div class="row pt-3  px-md-4 px-3">
-                            <div class="col">
-                                <h5 class="small-hotel-header">Готель ВЕЛИКА ВЕДМЕДИЦЯ</h5>
-                            </div>
-                        </div>
-                        <div class="row pb-1  px-md-4 px-3">
-                            <div class="col-4">
-                                <p class="location-text"><i class="fas fa-map-marker-alt color-ff8c00"></i> Яремче</p>
-                            </div>
-                            <div class="col-8 text-right">
-                                <small class="small-card-hotel">Залишилось 3 номери</small>
-                            </div>
-                        </div>
-                        <div class="apart-small-card-buy">
-                            <p class="text-center apart-small-card-buy-hotel-p">від <strong>100</strong> грн</p>
-                        </div>
-                        <div class="apart-small-card-buy-hover apart-small-hover-hotel"><p class="d-flex justify-content-center align-items-center">ЗАБРОНЮВАТИ</p></div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xl-4 col-lg-6 p-2 mt-4">
-                <a href="#" class="a-card">
-                    <div class="apart-small-card">
-                        <div class="small-card-image" style="background-image: url(img/hotels/dreamhouse.jpg)"></div>
-                        <div class="row pt-3  px-md-4 px-3">
-                            <div class="col">
-                                <h5 class="small-hotel-header">Елітний котедж DREAM HOUSE</h5>
-                            </div>
-                        </div>
-                        <div class="row pb-1  px-md-4 px-3">
-                            <div class="col-4">
-                                <p class="location-text"><i class="fas fa-map-marker-alt color-ff8c00"></i> Яремче</p>
-                            </div>
-                            <div class="col-8 text-right">
-                                <small class="small-card-hotel">Залишилось 3 номери</small>
-                            </div>
-                        </div>
-                        <div class="apart-small-card-buy">
-                            <p class="text-center apart-small-card-buy-hotel-p">від <strong>100</strong> грн</p>
-                        </div>
-                        <div class="apart-small-card-buy-hover apart-small-hover-hotel"><p class="d-flex justify-content-center align-items-center">ЗАБРОНЮВАТИ</p></div>
-                    </div>
-                </a>                    
-            </div>
-            <div class="align-self-center fake col-xl-2 fake-left"></div>
-            <div class="col-xl-4 col-lg-6 p-2 mt-4">
-                <a href="#" class="a-card">
-                    <div class="apart-small-card">
-                        <div class="small-card-image" style="background-image: url(img/hotels/beardvir.jpg)"></div>
-                        <div class="row pt-3  px-md-4 px-3">
-                            <div class="col-8">
-                                <h5 class="small-hotel-header">Готель ВЕДМЕЖИЙ ДВІР</h5>
-                            </div>
-                        </div>
-                        <div class="row pb-1  px-md-4 px-3">
-                            <div class="col-4">
-                                <p class="location-text"><i class="fas fa-map-marker-alt color-ff8c00"></i> Буковель</p>
-                            </div>
-                            <div class="col-8 text-right">
-                                <small class="small-card-hotel">Залишилось 3 номери</small>
-                            </div>
-                        </div>
-                        <div class="apart-small-card-buy">
-                            <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between">від <strong>100</strong> грн</p>
-                        </div>
-                        <div class="apart-small-card-buy-hover apart-small-hover-hotel"><p class="d-flex justify-content-center align-items-center">ЗАБРОНЮВАТИ</p></div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xl-4 col-lg-6 p-2 mt-4">
-                <a href="#" class="a-card">
-                    <div class="apart-small-card">
-                        <div class="small-card-image" style="background-image: url(img/hotels/whitehouse.jpg)"></div>
-                        <div class="row pt-3  px-md-4 px-3">
-                            <div class="col-8">
-                                <h5 class="small-hotel-header">Елітний котедж WHITE HOUSE</h5>
-                            </div>
-                        </div>
-                        <div class="row pb-1  px-md-4 px-3">
-                            <div class="col-4">
-                                <p class="location-text"><i class="fas fa-map-marker-alt color-ff8c00"></i> Буковель</p>
-                            </div>
-                            <div class="col-8 text-right">
-                                <small class="small-card-hotel">Залишилось 3 номери</small>
-                            </div>
-                        </div>
-                        <div class="apart-small-card-buy">
-                            <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between discount">від <span class="d-flex flex-column"><span class="old-price-hotel-card">200</span><strong>100</strong></span> грн</p>
-                        </div>
-                        <div class="apart-small-card-buy-hover apart-small-hover-hotel"><p class="d-flex justify-content-center align-items-center">ЗАБРОНЮВАТИ</p></div>
-                        <div class="apart-small-discount-hotel">
-                            <p class="text-center py-1 text-uppercase">знижка 50%</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+                    </a>
+                </div>                                
+                @if($key == 3)
+                    <div class="align-self-center fake col-xl-2 fake-left"></div>
+                @endif
+            @endforeach             
             <div class="align-self-center fake col-xl-2 fake-right"></div>
+            
         </div>
     </div>
     

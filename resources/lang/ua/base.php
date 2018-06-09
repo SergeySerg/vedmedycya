@@ -28,6 +28,14 @@ return [
 	"address" => "Адреса",
 	'write_in_messenger' => "написати в месенджер",
 	"all_text" => "Заповніть форму замовлення",
+	"adults" => "Дорослі",
+	"children" => "Діти",
+	'years' => 'років',
+	"free_children" => 'діти до 5 років - безкоштовно',
+	'from' => 'від',
+	"grn" => 'грн',
+	'discount' => 'ЗНИЖКА',
+
 
 
 	/* Script Contact*/

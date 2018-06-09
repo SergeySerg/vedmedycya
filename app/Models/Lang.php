@@ -10,10 +10,10 @@ class Lang extends Translate {
         'img',
         'priority'
     ];
-    public function scopeActiveLangs($query){
+    public function scopeactiveLangs($query){
         $query->where ('active',1)
-                ->orderBy('priority','desc')
-                ->get();
+                ->orderBy('priority','desc');
+                
     }
 
 }

@@ -11,6 +11,7 @@ use App\Models\Text;
 use App\Models\Lang;
 use League\Flysystem\Config;
 //use DB;
+use Debugbar;
 
 class FrontendInit {
 
@@ -38,31 +39,39 @@ class FrontendInit {
 		// if (!$currentLang){
 		// 	abort('404');
 		// }
-		$langs = Lang::activelangs()/**/;
+		$langs = Lang::activelangs()->get()/**/;
+		
 		// Locale setting
 		App::setLocale($request->lang);
 		$texts = new Text();
 		//get all Category
-		$categories = Category::all();
+		$categories = Category::with('articles')->activeCategories()->get();
+			//Debugbar::info($categories);
 		$categories_data = [];		
 		//dd($categories);
-		foreach($categories as $category){			
+		foreach($categories as $category){
+			//dd($category);			
 			//create arr for categories with type
 			$categories_data[$category->link] = $category;
 			$category_item = $category
-				->articles()
-				->activearticles()
-				->get();
+				->articles
+				->where('active', 1)
+				->sortByDesc('priority');
+			//Debugbar::info($category_item);				
+
+			//$dd($category_item);	
+							
+				//dd($category_item);
 			//Children articles in request subdomain	
 			if($subdomain){				
 				//dd($category->id);
-				$subdomain_children_articles = Article::where('subdomain', $subdomain)->get()
+				$subdomain_children_articles = Article::with('article_children')->where('subdomain', $subdomain)->activeAndSortArticles()->get()
 				//dd($subdomain_children_articles);
 				->map(function ($subdomain_child_article) use ($category) {
 					//dd($category);
 					//dd($subdomain_child_article);
 					return $subdomain_child_article
-							->article_children()				
+							->article_children				
 							->where('category_id', $category->id)
 							->first();
 							//d($subdomain_child_article);
@@ -79,10 +88,12 @@ class FrontendInit {
 //				//dd($category_item);
 //			}
 			//dd($category_item);
-			//share Article
+			//share Article			
 			view()->share($category->link, $category_item);
 		}
 		//dd($children_rooms);
+		//dd($category_item);
+		//Debugbar::info($category_item);
 		//dd($categories_data);
 
 
