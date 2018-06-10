@@ -281,12 +281,12 @@
                                         </div>
                                     </div>
 
-                                    {{--<h4 class="header blue clearfix">{{ trans('backend.short_description_category') }}</h4>
+                                    <h4 class="header blue clearfix">{{ trans('backend.short_description_category') }}</h4>
                                     <div class="control-group">
                                         <textarea name="short_description_{{$lang->lang}}"class="span12" id="form-field-8" placeholder="{{ trans('backend.short_description_category') }}">@if(isset($admin_category)){{ $admin_category->getTranslate('short_description',$lang->lang) }}@endif</textarea>
                                     </div>
 
-                                    <h4 class="header blue clearfix">{{ trans('backend.description_category') }}</h4>
+                                    {{--<h4 class="header blue clearfix">{{ trans('backend.description_category') }}</h4>
                                     <div class="control-group">
                                         <textarea name="description_{{$lang->lang}}"class="span12" id="form-field-8" placeholder="{{ trans('backend.description_category') }}">@if(isset($admin_category)){{ $admin_category->getTranslate('description',$lang->lang) }}@endif</textarea>
                                     </div>--}}

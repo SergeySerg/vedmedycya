@@ -12,7 +12,7 @@
 </li>
 @if(isset($reviews) AND count($reviews) !== 0 AND $categories_data['reviews']->active == 1)
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="#section-reviews">{{ $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'відгуки' }}</a>
+        <a class="nav-link my-1 hover-underline" href="#section-reviews">{{ strstr( $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'відгуки' . ' ', ' ', true ) }}</a>
     </li>
 @endif
 @if(isset($contacts) AND count($contacts) !== 0 AND $categories_data['contacts']->active == 1)

@@ -100,63 +100,96 @@
         @endif         
         <div class="h-line-bold"></div>
     </div>
-    
     <div class="container-fluid px-sm-5">
-        <div class="row text-center" >
+        <div class="row text-center">
             <div class="col">
                 <h2 class="section-header-huge">{{ $main->first()->getTranslate('title') }}</h2>
                 <h4 class="section-header-small">{!! $main->first()->getTranslate('short_description') !!}</h4>
-                <div class="section-description">{!! $main->first()->getTranslate('description') !!}</>
+                <div class="section-description">{!! $main->first()->getTranslate('description') !!}</div>
             </div>
         </div>
-        <div class="row justify-content-center no-gutters px-md-5 px-0" id="section-hotels" >
-            @foreach($hotels as $key => $hotel) 
-                <div class="col-xl-4 col-lg-6 p-2 mt-4">
-                    <a href="{{ route('article_index_subdomain', [$hotel->subdomain, App::getLocale(), 'hotels/' . getIdApart($hotel->type)])}}" class="a-card">
-                        <div class="apart-small-card shadow-hover">
-                            <div class="small-card-image" style="background-image: url('{{ asset( $hotel->getAttributeTranslate('hotel_photo')) }}')"></div>
-                            <div class="row pt-3  px-md-4 px-3">
-                                <div class="col-8">
-                                    <h5 class="small-hotel-header">{{ $hotel->getAttributeTranslate('type_build')}} {{ $hotel->getTranslate('title')}}</h5>
-                                </div>
+        <div class="row justify-content-center no-gutters px-md-5 px-0">
+        @foreach($hotels as $key => $hotel)
+            <div class="col-xl-4 col-lg-6 p-2 mt-4">
+                <a href="{{ route('article_index_subdomain', [$hotel->subdomain, App::getLocale(), 'hotels/' . getIdApart($hotel->type)])}}" class="a-card">
+                    <div class="apart-small-card shadow-hover">
+                        <div class="small-card-image" style="background-image: url('{{ asset( $hotel->getAttributeTranslate('hotel_photo')) }}')"></div>
+                        <div class="row pt-3  px-md-4 px-3">
+                            <div class="col-8">
+                                <h5 class="small-hotel-header">{{ $hotel->getAttributeTranslate('type_build')}} {{ $hotel->getTranslate('title')}}</h5>
                             </div>
-                            <div class="row pb-1  px-md-4 px-3">
-                                <div class="col-4">
-                                    <p class="location-text"><i class="fas fa-map-marker-alt color-ff8c00"></i> {{ $hotel->getAttributeTranslate('location')}}</p>
-                                </div>
-                                @if($hotel->getAttributeTranslate('marketing'))
-                                    <div class="col-8 text-right">
-                                        <small class="small-card-hotel">{{ $hotel->getAttributeTranslate('marketing')}}</small>
-                                    </div>
-                                @endif
+                        </div>
+                        <div class="row pb-1  px-md-4 px-3">
+                            <div class="col-4">
+                                <p class="location-text"><i class="fas fa-map-marker-alt color-ff8c00"></i> {{ $hotel->getAttributeTranslate('location')}}</p>
                             </div>
-                            <div class="apart-small-card-buy">
-                                <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between discount">{{trans('base.from')}} 
-                                    <span class="d-flex flex-column">
-                                        @if($hotel->getAttributeTranslate('discount'))
-                                            <span class="old-price-hotel-card">{{ $hotel->getAttributeTranslate('price')}}</span>
-                                        @endif
-                                        <strong>@if($hotel->getAttributeTranslate('discount')){{$hotel->getAttributeTranslate('price') - (($hotel->getAttributeTranslate('price') * $hotel->getAttributeTranslate('discount')) / 100)}}@else {{ $hotel->getAttributeTranslate('price')}} @endif</strong>
-                                    </span> {{trans('base.grn')}}
-                                </p>
-                            </div>
-                            <div class="apart-small-card-buy-hover apart-small-hover-hotel"><p class="d-flex justify-content-center align-items-center">{{trans('base.reservation')}}</p></div>
-                            @if($hotel->getAttributeTranslate('discount'))
-                                <div class="apart-small-discount-hotel">
-                                    <p class="text-center py-1 text-uppercase">{{ trans('base.discount')}} {{ $hotel->getAttributeTranslate('discount')}}%</p>
+                            @if($hotel->getAttributeTranslate('marketing'))
+                                <div class="col-8 text-right">
+                                    <small class="small-card-hotel">{{ $hotel->getAttributeTranslate('marketing')}}</small>
                                 </div>
                             @endif
                         </div>
-                    </a>
-                </div>                                
-                @if($key == 3)
-                    <div class="align-self-center fake col-xl-2 fake-left"></div>
-                @endif
-            @endforeach             
+                        @if($hotel->getAttributeTranslate('discount'))
+                            <div class="apart-small-card-buy">
+                                <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between discount">
+                                    {{trans('base.from')}}
+                                    <span class="d-flex flex-column">
+                                        <span class="old-price-hotel-card">
+                                            {{ $hotel->getAttributeTranslate('price')}}
+                                        </span>
+                                        <strong>                                            
+                                            {{$hotel->getAttributeTranslate('price') - (($hotel->getAttributeTranslate('price') * $hotel->getAttributeTranslate('discount')) / 100)}}
+                                        </strong>
+                                    </span>
+                                    {{trans('base.grn')}}
+                                </p>
+                            </div>
+                        @else
+                            <div class="apart-small-card-buy">
+                                <p class="text-center apart-small-card-buy-hotel-p">{{trans('base.from')}} <strong>{{ $hotel->getAttributeTranslate('price')}}</strong> {{trans('base.grn')}}</p>
+                            </div>
+                        @endif    
+                        <!-- <div class="apart-small-card-buy">
+                            <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between" @if($hotel->getAttributeTranslate('discount')) class="discount" @endif>
+                                {{trans('base.from')}}  
+                                @if($hotel->getAttributeTranslate('discount'))
+                                    <span class="d-flex flex-column">
+                                    <span class="old-price-hotel-card">
+                                        {{ $hotel->getAttributeTranslate('price')}}
+                                    </span>
+                                @endif
+                                <strong>
+                                    @if($hotel->getAttributeTranslate('discount'))
+                                        {{$hotel->getAttributeTranslate('price') - (($hotel->getAttributeTranslate('price') * $hotel->getAttributeTranslate('discount')) / 100)}}
+                                    @else 
+                                        {{ $hotel->getAttributeTranslate('price')}}
+                                    @endif
+                                </strong>
+                                @if($hotel->getAttributeTranslate('discount'))
+                                    </span>
+                                @endif 
+                                {{trans('base.grn')}}
+                            </p>
+                        </div> -->
+                        <div class="apart-small-card-buy-hover apart-small-hover-hotel">
+                            <p class="d-flex justify-content-center align-items-center">{{trans('base.reservation')}}</p>
+                        </div>
+                        @if($hotel->getAttributeTranslate('discount'))
+                            <div class="apart-small-discount-hotel">
+                                <p class="text-center py-1 text-uppercase">{{ trans('base.discount')}} {{ $hotel->getAttributeTranslate('discount')}}%</p>
+                            </div>
+                        @endif
+                    </div>
+                </a>
+            </div>
+            @if($key == 3)
+                <div class="align-self-center fake col-xl-2 fake-left"></div>
+            @endif
+        @endforeach
+                       
             <div class="align-self-center fake col-xl-2 fake-right"></div>
-            
         </div>
-    </div>
+    </div>    
     
     <div class="container-fluid">
         <div class="row justify-content-center px-md-5 px-0 text-center">
@@ -187,152 +220,97 @@
             </div>
         </div>
     </div>
-    
+    @if(isset($main_marketings) AND count($main_marketings) !== 0 AND $categories_data['marketings']->active == 1)
     <div class="container-fluid">
         <div class="row text-center">
             <div class="col padding-0">
-                <h2 class="section-header-huge">більше ніж просто відпочинок</h2>
-                <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                <div class="rest-slider">
+                <h2 class="section-header-huge">{{ $categories_data['marketings']->getTranslate('title')}}</h2>
+                <div class="section-description">{!! $categories_data['marketings']->getTranslate('short_description') !!}</div>
+                <div class="rest-slider px-3">
+                @foreach($main_marketings as $marketing)
+    
                     <div class="pt-4">
-                        <div class="rest-image" style="background: url(img/impressions/familyrelax.jpg);">
+                    <div class="rest-image" style="background: url('{{ asset( $marketing->getAttributeTranslate('marketing_img')) }}')">
                             <div class="left-click"></div>
                             <div class="right-click"></div>
                         </div>
                         <div class="rest-details">
-                            <h4>ПОЇЗДКИ НА КВАДРОЦИКЛАХ</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                            <h4>{{ $marketing->getTranslate('title')}}</h4>
+                            {!! $marketing->getTranslate('short_description') !!}                       
                         </div>
-                    </div>
-                    <div class="pt-4">
-                        <div class="rest-image" style="background: url(img/impressions/gutsuls.jpg);">
-                            <div class="left-click"></div>
-                            <div class="right-click"></div>
-                        </div>
-                        <div class="rest-details">
-                            <h4>КВАДРОЦИКЛАХ ПОЇЗДКИ НА</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                        </div>
-                    </div>
-                    <div class="pt-4">
-                        <div class="rest-image" style="background: url(img/impressions/horsewalk.jpg);">
-                            <div class="left-click"></div>
-                            <div class="right-click"></div>
-                        </div>
-                        <div class="rest-details">
-                            <h4>ПОЇЗДКИ КВАДРОЦИКЛАХ НА</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                        </div>
-                    </div>
-                    <div class="pt-4">
-                        <div class="rest-image" style="background: url(img/impressions/karpathians.jpg);">
-                            <div class="left-click"></div>
-                            <div class="right-click"></div>
-                        </div>
-                        <div class="rest-details">
-                            <h4>НА ПОЇЗДКИ КВАДРОЦИКЛАХ</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                        </div>
-                    </div>
-                    <div class="pt-4">
-                        <div class="rest-image" style="background: url(img/impressions/quadbikes.jpg);">
-                            <div class="left-click"></div>
-                            <div class="right-click"></div>
-                        </div>
-                        <div class="rest-details">
-                            <h4>НА ПОЇЗДКИ КВАДРОЦИКЛАХ</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                        </div>
-                    </div>
-                    <div class="pt-4">
-                        <div class="rest-image" style="background: url(img/impressions/rafting.jpg);">
-                            <div class="left-click"></div>
-                            <div class="right-click"></div>
-                        </div>
-                        <div class="rest-details">
-                            <h4>НА ПОЇЗДКИ КВАДРОЦИКЛАХ</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                        </div>
-                    </div>
+                    </div>                 
+               @endforeach     
+                   
+                    
+                    
                 </div>
                 <nav class="rest-dots"></nav>
             </div>
         </div>
-    </div>
+    </div>   
+    @endif  
 
-    <div class="container-fluid pb-5 back-f4f4f4" id="section-reviews">
-        <div class="row text-center">
-            <div class="col">
-                <h2 class="section-header-huge">Відгуки наших відвідувачів</h2>
-                <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-                <div class="container-fluid position-relative">
-                    <div class="feedback-slider">
-                        <div class="d-flex justify-content-center">
-                            <div id="test" class="card feedback-card">
-                                <div class="card-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn... 
-                                    <a href="#" class="color-ff8c00">Читати повністю</a></p>
+    @if(isset($reviews) AND count($reviews) !== 0 AND $categories_data['reviews']->active == 1)
+
+        <div class="container-fluid pb-5 back-f4f4f4">
+            <div class="row text-center">
+                <div class="col">
+                    <h2 class="section-header-huge">{{ $categories_data['reviews']->getTranslate('title')}}</h2>
+                    <p class="section-description">{!! $categories_data['reviews']->getTranslate('short_description') !!}</p>
+                    <div class="container-fluid position-relative">
+                        <div class="feedback-slider">
+                            @foreach($reviews as $review)
+                                <div class="d-flex justify-content-center">
+                                    <div class="card feedback-card">
+                                        <div class="card-body">
+                                        {!! str_limit($review->getTranslate('description'), 400) !!}
+                                            @if(strlen($review->getTranslate('description')) > 400)                                            
+                                                <p><a href="#" class="color-ff8c00">Читати повністю</a></p>
+                                            @endif    
+                                        </div>
+                                        <div class="card-footer">
+                                            @if($review->getAttributeTranslate('source'))
+                                                <i class="fab fa-{{lcfirst($review->getAttributeTranslate('source'))}}-square" data-toggle="tooltip" data-placement="top" title="відгук взято з {{ $review->getAttributeTranslate('source') }}"></i>
+                                                <p class="name">{{ $review->getAttributeTranslate('name') }}
+                                                    <small class="text-muted">(відгук взято з {{ $review->getAttributeTranslate('source') }})</small>
+                                                </p>
+                                            @else
+                                                <p class="name">{{ $review->getAttributeTranslate('name') }}</p>
+                                            @endif
+                                            <p class="date">{{ $review->getAttributeTranslate('date_create_review') }}</p>
+                                        </div>
+                                        @if($review->getAttributeTranslate('profile_foto') )
+                                            <div id="profile-huge" class="profile-image" style="background: url('{{ asset( $review->getAttributeTranslate('profile_foto')) }}')"></div>
+                                        @endif
+                                    </div>
                                 </div>
-                                <div class="card-footer">
-                                    <i class="fab fa-facebook-square" data-toggle="tooltip" data-placement="top" title="Відгук взято з Facebook"></i>
-                                    <p class="name">Mark</p>
-                                    <p class="date">20.02.2018</p>
+                            @endforeach
+                        </div>
+                        <div id="feedback-arrow-left">
+                            <div class="div-arrows div-a-f">
+                                <div class="arrow-left f-arrow-left">
+                                    <div></div>
+                                    <div></div>
                                 </div>
-                                <div id="profile-huge" class="profile-image" style="background: url(img/dpx_0259.jpg);"></div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="card feedback-card">
-                                <div class="card-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <div id="feedback-arrow-right">
+                            <div class="div-arrows div-a-f">
+                                <div class="arrow-right f-arrow-right">
+                                    <div></div>
+                                    <div></div>
                                 </div>
-                                <div class="card-footer">
-                                    <i class="fab fa-facebook-square" data-toggle="tooltip" data-placement="top" title="Відгук взято з Facebook"></i>
-                                    <p class="name">Mark</p>
-                                    <p class="date">20.02.2018</p>
-                                </div>
-                                <div class="profile-image" style="background: url(img/dpx_0259.jpg);"></div>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="card feedback-card">
-                                <div class="card-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
-                                <div class="card-footer">
-                                    <i class="fab fa-facebook-square" data-toggle="tooltip" data-placement="top" title="Відгук взято з Facebook"></i>
-                                    <p class="name">Mark</p>
-                                    <p class="date">20.02.2018</p>
-                                </div>
-                                <div class="profile-image" style="background: url(img/dpx_0259.jpg);"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="feedback-arrow-left">
-                        <div class="div-arrows div-a-f">
-                            <div class="arrow-left f-arrow-left">
-                                <div></div>
-                                <div></div>
                             </div>
                         </div>
                     </div>
-                    <div id="feedback-arrow-right">
-                        <div class="div-arrows div-a-f">
-                            <div class="arrow-right f-arrow-right">
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
+                    <div class="feedback-button">
+                        <a href="#">Всі відгуки</a>
+                        <a href="#">Залишити відгук</a>
                     </div>
-                </div>
-                <div class="feedback-button">
-                    <a href="#">Всі відгуки</a>
-                    <a href="#">Залишити відгук</a>
                 </div>
             </div>
         </div>
-    </div>
-
+     @endif
     <div class="container-fluid px-1 back-747474">
         <form>
             <div class="row justify-content-center no-gutters py-md-4 py-1">

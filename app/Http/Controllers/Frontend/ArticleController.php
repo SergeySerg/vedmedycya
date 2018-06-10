@@ -71,7 +71,7 @@ class ArticleController extends Controller {
 	{			
 		$main_slides = $this->showMainPage('slides');
 		$main_marketings = $this->showMainPage('marketings');
-
+		//dd($main_marketings);
 		return view('frontend.main')
 		->with(compact('main_slides', 'main_marketings'));
 			

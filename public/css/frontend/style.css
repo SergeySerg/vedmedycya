@@ -1198,11 +1198,11 @@ body, footer {
 /*BB iconic font start*/
     @font-face {
       font-family: 'bb-icons';
-      src:  url('../fonts/bb-icons.eot?v6rr9l');
-      src:  url('../fonts/bb-icons.eot?v6rr9l#iefix') format('embedded-opentype'),
-        url('../fonts/bb-icons.ttf?v6rr9l') format('truetype'),
-        url('../fonts/bb-icons.woff?v6rr9l') format('woff'),
-        url('../fonts/bb-icons.svg?v6rr9l#bb-icons') format('svg');
+      src:  url('../frontend/fonts/bb-icons.eot?v6rr9l');
+      src:  url('../frontend/fonts/bb-icons.eot?v6rr9l#iefix') format('embedded-opentype'),
+        url('../frontend/fonts/bb-icons.ttf?v6rr9l') format('truetype'),
+        url('../frontend/fonts/bb-icons.woff?v6rr9l') format('woff'),
+        url('../frontend/fonts/bb-icons.svg?v6rr9l#bb-icons') format('svg');
       font-weight: normal;
       font-style: normal;
     }
