@@ -258,7 +258,11 @@
                                 <select name="article_id" id="form-field-select-1">
                                     <option value="">
                                         @foreach($article_group as $article)
-                                            </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
+                                            @if($article->type == 'vedmegyi-dvir' OR $article->type == 'velyka-vedmedycya')
+                                                </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
+                                            @elseif($type == 'rooms')
+                                                </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
+                                            @endif                        
                                         @endforeach
                                     </option>
                                 </select>

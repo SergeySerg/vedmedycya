@@ -3,15 +3,15 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
-        <a id="mobile-logo" class="mx-auto" href="/{{ App::getLocale() }}"><img class="img-fluid" src="{{ asset('/img/frontend/logo.png') }}" width="100px"></a>
+        <a id="mobile-logo" class="mx-auto" href="{{ route('article_index', [App::getLocale()])}}"><img class="img-fluid" src="{{ asset('/img/frontend/logo.png') }}" width="100px"></a>
         <div class="navbar-side-mobile text-right dropdown">
             <a id="mobile-lang-toggler" class="font-weight-bold" href="#">
-            @if(count($langs) > 1)<i class="fas fa-chevron-down mr-2"></i>@endif
+            @if(count($langs) > 1)<i class="fas fa-chevron-down mr-2 text-uppercase"></i>@endif
                 {{ getCurentLang(App::getLocale()) }}
             </a>
             <div class="dropdown-content left-6-px">
                     @foreach($langs as $key => $lang)												
-							<a class="toggler-a font-weight-bold" @if(App::getLocale() == $lang->lang) style="display: none" @endif href="{{str_replace(url(App::getLocale()), url($lang->lang), Request::url())}}">{{$lang->country}}</a>
+							<a class="toggler-a font-weight-bold text-uppercase" @if(App::getLocale() == $lang->lang) style="display: none" @endif href="{{str_replace(url(App::getLocale()), url($lang->lang), Request::url())}}">{{$lang->country}}</a>
 							{{--@if($key !== count($langs)-2)--}}	
 							{{--<div @if(App::getLocale() == $lang->lang) style="display: none" @endif class="h-line-bold marginy-4-px"></div>--}}
 							{{--@endif--}}	
@@ -46,18 +46,21 @@
 	            @include('frontend.menu')
                 <!-- END .menu -->
                 <div class="navbar-side-container-2 text-right dropdown">
-                    <a class="nav-link font-weight-bold" href="/{{ App::getLocale()}}">
-                    @if(count($langs) > 1)<i class="fas fa-chevron-down mr-2"></i>@endif
+                <a class="nav-link font-weight-bold"  @if(count($langs) > 1)href="/{{ App::getLocale()}}" @endif>
+                        @if(count($langs) > 1)<i class="fas fa-chevron-down mr-2"></i>@endif
                         {{ getCurentLang(App::getLocale()) }}
                     </a>
                     @if(count($langs) > 1)
-                        <div class="dropdown-content">					
-						@foreach($langs as $key => $lang)												
-							<a class="nav-link font-weight-bold padding-4-px" @if(App::getLocale() == $lang->lang) style="display: none" @endif href="{{str_replace(url(App::getLocale()), url($lang->lang), Request::url())}}">{{$lang->country}}</a>
-							{{--@if($key !== count($langs)-2)--}}	
-							{{--<div @if(App::getLocale() == $lang->lang) style="display: none" @endif class="h-line-bold marginy-4-px"></div>--}}
-							{{--@endif--}}	
-						@endforeach                        
+                        <div class="dropdown-content">
+                        <?php $p = 0 ?>					
+                            @foreach($langs as $key => $lang)                                                                            
+                                <a id='lang' class="nav-link font-weight-bold padding-4-px text-uppercase" @if(App::getLocale() == $lang->lang) style="display: none" @endif href="{{str_replace(url(App::getLocale()), url($lang->lang), Request::url())}}">{{$lang->country}}</a>
+                                @if($p < count($langs)-1)	
+                                    <div @if(App::getLocale() == $lang->lang) style="display: none" @endif class="h-line-bold marginy-4-px"></div>
+                                @endif
+                                <?php $p ++?>	
+                            @endforeach 
+
 					@endif	
                     </div>   
                 </div>

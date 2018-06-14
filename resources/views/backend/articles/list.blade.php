@@ -67,12 +67,12 @@
                             @if($type == 'marketings' 
                                 OR $type == 'rooms' 
                                 OR $type == 'contacts'
-                                OR $type == 'paid-services'
-                                OR $type == 'free-services'
+                                OR $type == 'servicespaid'
+                                OR $type == 'servicesfree'
                                 OR $type == 'reviews'
                                 OR $type == 'discounts'
                                 OR $type == 'slides' 
-                                
+                                OR $type == 'advantages'
                                 )
                                 Приналежність до готелю                               
                             @else
@@ -107,11 +107,12 @@
                                 @if($type == 'marketings' 
                                     OR $type == 'rooms'
                                     OR $type == 'contacts'
-                                    OR $type == 'paid-services'
-                                    OR $type == 'free-services'
+                                    OR $type == 'servicespaid'
+                                    OR $type == 'servicesfree'
                                     OR $type == 'reviews'
                                     OR $type == 'discounts'
                                     OR $type == 'slides'
+                                    OR $type == 'advantages'
 
                                     
                                     )

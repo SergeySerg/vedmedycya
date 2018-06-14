@@ -4,6 +4,12 @@ body, footer {
     font-family: 'Roboto', sans-serif;
 }
 
+@media screen and (min-width: 1400px) {
+    .rules-header {
+        margin-top: 3px;
+    }
+}
+
 @media screen and (min-width: 1200px) {
     #mobile-logo {
         display: none;
@@ -318,10 +324,6 @@ body, footer {
         font-size: 13px !important;
     }
 
-    .apart-small-card-buy-hover {
-        padding: 23px 0px 24px !important;
-    }
-
     .apart-small-discount {
         top: 65px !important;
     }
@@ -512,8 +514,7 @@ body, footer {
         transition: opacity 0.3s ease, transform 0.3s ease, left 0s 0.3s, -webkit-transform 0.3s ease;
     }
 
-
-    .input-pattern:hover .input-dropdown {
+    .add-drop {
         visibility: visible;
         opacity: 1;
         -webkit-transform: translate(0);
@@ -547,11 +548,20 @@ body, footer {
         margin: 0;
         padding-top: 8px;
         color: rgba(0,0,0,0.5);
+        text-align: left !important;
     }
 
     .input-members input {
         width: 30px !important;
-        margin-left: 8px;
+        padding: 0px !important;
+        padding-left: 6px !important;
+        margin-left: 8px !important;
+    }
+
+    .input-members button {
+        background-color: white;
+        border: 0px;
+        outline: 0px;
     }
 
     .input-pattern input:focus {outline: none;}
@@ -665,6 +675,13 @@ body, footer {
     }
 
     .datepicker--cell.-range-to- {
+        border: 0px;
+        background-color: #ff8c00;
+        border-radius: 0px; 
+        color: white;
+    }
+
+    .datepicker--cell.-range-to-.-current- {
         border: 0px;
         background-color: #ff8c00;
         border-radius: 0px; 
@@ -1198,11 +1215,11 @@ body, footer {
 /*BB iconic font start*/
     @font-face {
       font-family: 'bb-icons';
-      src:  url('../frontend/fonts/bb-icons.eot?v6rr9l');
-      src:  url('../frontend/fonts/bb-icons.eot?v6rr9l#iefix') format('embedded-opentype'),
-        url('../frontend/fonts/bb-icons.ttf?v6rr9l') format('truetype'),
-        url('../frontend/fonts/bb-icons.woff?v6rr9l') format('woff'),
-        url('../frontend/fonts/bb-icons.svg?v6rr9l#bb-icons') format('svg');
+      src:  url('../../fonts/frontend/bb-icons.eot?v6rr9l');
+      src:  url('../../fonts/frontend/bb-icons.eot?v6rr9l#iefix') format('embedded-opentype'),
+        url('../../fonts/frontend/bb-icons.ttf?v6rr9l') format('truetype'),
+        url('../../fonts/frontend/bb-icons.woff?v6rr9l') format('woff'),
+        url('../../fonts/frontend/bb-icons.svg?v6rr9l#bb-icons') format('svg');
       font-weight: normal;
       font-style: normal;
     }
@@ -1502,7 +1519,6 @@ body, footer {
 .apart-old-total-price {
     color: #4D3431;
     font-weight: 300;
-    text-decoration: line-through;
     margin-bottom: 0px;
     text-transform: uppercase;
 }
@@ -1550,7 +1566,6 @@ body, footer {
 }
 
 .apart-old-price {
-    text-decoration: line-through;
     margin-bottom: -2px;
     font-weight: 300;
 }
@@ -1741,33 +1756,31 @@ body, footer {
     top: -10px;
     left: 40px;
     width: 120px;
+    height: 70px;
     background-color: #ff8c00;
 }
 
 .apart-small-card-buy p {
     color: white;
-    margin: 10px 20px 0px;
+    margin: 0px 20px;
     font-size: 24px;
     font-weight: 600;
 }
 
 p.discount {
     color: white;
-    margin: 8px 11px !important;
     font-size: 24px;
     font-weight: 600;
 }
 
 .apart-small-card-buy-hotel-p {
     color: white;
-    margin: 20px 20px !important;
     font-size: 12px !important;
     font-weight: 300 !important;
 }
 
 .old-price-hotel-card {
     margin-top: 6px;
-    text-decoration: line-through;
 }
 
 .apart-small-card-buy-hotel-p strong {
@@ -1782,7 +1795,7 @@ p.discount {
 
 .apart-small-card-buy-hover {
     position: absolute;
-    padding: 31px 0px 32px;
+    height: 70px;
     width: 0px;
     top: -10px;
     left: 160px;
@@ -1792,10 +1805,6 @@ p.discount {
     -moz-transition: width .4s ease-in-out;
     -o-transition: width .4s ease-in-out;
     transition: width .4s ease-in-out;
-}
-
-.apart-small-hover-hotel {
-    padding: 26px 0px 27px !important;
 }
 
 .apart-small-card-buy-hover:before {
@@ -1869,11 +1878,6 @@ p.discount {
 
 .booking-icon {
     font-family: 'Oswald', sans-serif;
-}
-
-.booking-icon small {
-    color: grey;
-    font-family: Roboto;
 }
 
 .no-rounds {
@@ -1974,6 +1978,7 @@ p.discount {
     padding-left: 6px;
     color: rgba(0,0,0,0.5); 
     margin: 8px 0px 6px 0px;
+    text-align: left !important;
 }
 
 .color-ff8c00 {
@@ -2064,6 +2069,7 @@ p.discount {
 
 .text-line {
     text-decoration: line-through;
+    margin-bottom: 10px !important;
 }
 
 .color-white {
@@ -2072,7 +2078,7 @@ p.discount {
 
 .new-price-apart {
     color: #FFF; 
-    font-size: 14px;
+    font-size: 1rem;
 }
 
 .back-white {
@@ -2134,4 +2140,33 @@ font-size: 1.7rem;
 
 .shadow-hover:hover {
     box-shadow:  0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+.custom-line-throught {
+    position: relative;
+}
+
+.old-price-hotel-card.custom-line-throught::after{
+    left: 10%;
+    width: 80%;   
+}
+
+.apart-old-price.custom-line-throught::after{
+    left: 10%;
+    width: 80%;   
+}
+
+p.apart-old-total-price .custom-line-throught::after {
+    border-bottom: 1px solid #4D3431;
+    width: 110%;
+    left: -5%;
+}
+
+.custom-line-throught::after {
+    content: '';
+    border-bottom: 1px solid white;
+    position: absolute;
+    left: -15%;
+    top: calc(50% - 1px);
+    width: 130%;
 }

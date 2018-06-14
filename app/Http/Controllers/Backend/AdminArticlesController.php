@@ -94,6 +94,7 @@ class AdminArticlesController extends Controller {
 			'action_method' => 'post',
 			'attributes_fields' => $attributes_fields,
 			'article_group' => $article_group,
+			'type' => $type
 		]);
 	}
 

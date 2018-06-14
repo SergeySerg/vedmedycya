@@ -13,6 +13,7 @@ use League\Flysystem\Config;
 //use DB;
 use Debugbar;
 
+
 class FrontendInit {
 
 	/**
@@ -47,7 +48,8 @@ class FrontendInit {
 		//get all Category
 		$categories = Category::with('articles')->activeCategories()->get();
 			//Debugbar::info($categories);
-		$categories_data = [];		
+		$categories_data = [];
+		$child_article = [];		
 		//dd($categories);
 		foreach($categories as $category){
 			//dd($category);			
@@ -71,16 +73,35 @@ class FrontendInit {
 					//dd($category);
 					//dd($subdomain_child_article);
 					return $subdomain_child_article
-							->article_children				
+							->article_children()				
 							->where('category_id', $category->id)
-							->first();
-							//d($subdomain_child_article);
+							->activeAndSortArticles()
+							->get();
+							//->toArray();						
+							//dd($subdomain_child_article);
 				})
-				->filter(function($subdomain_child_article){
-					return $subdomain_child_article !== null;
-				});	
+				->reject(function($subdomain_child_article){
+					return count($subdomain_child_article) == 0;
+				});
 				//dd($subdomain_children_articles);
-			view()->share('children_' . $category->link, $subdomain_children_articles);	
+				if(count($subdomain_children_articles) != 0){
+					$child_articles = [];
+					foreach($subdomain_children_articles as $articles){
+						//dd($articles);
+						foreach($articles as $key => $article){
+							array_push($child_articles, $article);
+						}
+					}
+					$child_articles = collect($child_articles)->sortByDesc('priority');
+					
+					
+					view()->share('children_' . $category->link, $child_articles);	
+
+				}	
+				//dd($collection);
+				
+				
+			//view()->share('children_' . $category->link, $child_articles);	
 			}
 			// validate count for change method (get() or first()) if one item in array
 //			if(count($category_item) == 1){
@@ -88,7 +109,12 @@ class FrontendInit {
 //				//dd($category_item);
 //			}
 			//dd($category_item);
-			//share Article			
+			//share Article		
+				// if($category->link == 'slides'){
+					
+				// 		dd($category_item);
+					
+				// }	
 			view()->share($category->link, $category_item);
 		}
 		//dd($children_rooms);
@@ -104,7 +130,7 @@ class FrontendInit {
 		view()->share('texts', $texts->init());
 		view()->share('categories_data', $categories_data);
 		view()->share('version', config('app.version'));
-
+		view()->share('subdomain', $subdomain);
 		return $next($request);
 	}
 

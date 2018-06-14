@@ -29,9 +29,18 @@ class ArticleController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index($subdomain, $lang, $type)
-	{		
-		//dd('nene');
+	public function index($subdomain, $lang, $type, $link)
+	{	
+		//dd($link);
+		switch($subdomain){
+			case 'bukovel':
+			$parent_hotel = Article::where('type', $link)->first();
+			break;
+			case 'yaremche':
+			$parent_hotel = Article::where('type', $link)->first();
+			break;
+		}
+		//dd($parent_hotel);
 		
 			// $hotels_articles = Category::where('link', $type)->first()->articles->where('subdomain', $subdomain);
 			// //dd($hotels_articles);
@@ -53,12 +62,7 @@ class ArticleController extends Controller {
 		
 		//dump($news);
 		//dd($video->category()->first()->active);
-		return view('frontend.' . $type);
-		// ->with(
-		// 	compact(
-		// 	//'tests'		
-		// 	)
-		// );
+		return view('frontend.' . $type)->with(compact('parent_hotel'));
 
 	}
 
@@ -69,11 +73,12 @@ class ArticleController extends Controller {
 	 */
 	public function indexMain($lang, $type = 'main')
 	{			
-		$main_slides = $this->showMainPage('slides');
-		$main_marketings = $this->showMainPage('marketings');
+		// $main_slides = $this->showMainPage('slides');
+		// $main_marketings = $this->showMainPage('marketings');
+		// $main_advantages = $this->showMainPage('advantages');
 		//dd($main_marketings);
-		return view('frontend.main')
-		->with(compact('main_slides', 'main_marketings'));
+		return view('frontend.main');
+		//->with(compact('main_slides', 'main_marketings', 'main_advantages'));
 			
 	}
 	/**
@@ -82,9 +87,9 @@ class ArticleController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show()
+	public function show($subdomain, $lang, $type, $link, $id)
 	{
-		//
+		dd('show');
 
 	}
 

@@ -104,8 +104,8 @@ Route::group(['domain' => '{subdomain}' . '.' . getSetting('domain'), 'middlewar
 	//dd('rtyui1');
 	/*Callback group route*/
 	//Route::post('/{lang}/{type}', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи
-	Route::get('/{lang}/{type}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain']);
-	Route::get('/{lang}/{type}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show']);
+	Route::get('/{lang}/{type}/{link?}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain']);
+	Route::get('/{lang}/{type}/{link}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show']);
 	//frontEndRoutes();
 });
 

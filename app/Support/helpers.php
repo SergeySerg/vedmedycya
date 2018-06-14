@@ -64,15 +64,16 @@ if (! function_exists('getIdApart')) {
      * @return string
      */
     function getIdApart($type){
+        //TODO::оптимізувати
         if($type === 'mark' OR $type === 'white_house' OR $type === 'dream_house'){
                 //$room =  Category::with('articles')->getCategory('rooms')->first();
                 $article = Article::with('article_children')->select('id')->where('type',$type)->first(); 
                 $id = $article->article_children->where('article_id', $article->id)->where('category_id', 8)->pluck('id')->first();
-                //dd($id);
+                //dd($result);
                 if(!$id) return false;
                 //$id = $article->id;
             if($id){  
-                return $id;
+                return '/' . $type .'/' . $id;
             }
         }
         return false;

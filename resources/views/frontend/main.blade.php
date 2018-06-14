@@ -3,119 +3,34 @@
 @section('content')
 
  <div id="main-slider">
-        <div class="slider-class">
-        @foreach($main_slides as $slide)
-            <div class="fullscreen-img d-flex align-items-center justify-content-center" style="background-image: url('{{ asset( $slide->getAttributeTranslate('slide_img')) }}')">
-                <h1>{!! $slide->getTranslate('short_description') !!}</h1>                
-            </div>
-        @endforeach    
-        </div>
-        <nav class="main-dots"></nav>
-        <div id="p-arrow">
-            <div class="arrow-left main-arrow-left">
-                <div></div>
-                <div></div>
-            </div>
-        </div>
-        <div id="n-arrow">
-            <div class="arrow-right main-arrow-right">
-                <div></div>
-                <div></div>
-            </div>
-        </div>
-        <div id="selector-bar-id" class="selector-bar">
-            <div class="container-fluid px-1 main-form bottom-1-vh">
-                <form>
-                    <div class="row justify-content-center no-gutters py-md-3 py-1">
-                        <div class="col-lg-2 col-md-3 col-6 my-1">
-                            <div class="input-pattern">
-                                <input disabled id="location" type="text" name="location" placeholder="{{ trans('base.hotel_city') }}" readonly="readonly" class="cursor-pointer"/>
-                                <i class="fas fa-map-marker-alt input-icon"></i>
-                                <div class="input-dropdown px-2">
-                                    @foreach($hotels as $hotel)
-                                        <p class="input-location d-flex align-items-center"><span>{{ $hotel->getTranslate('title')}}<br/><sub> @if($hotel->getAttributeTranslate('location')) ({{ $hotel->getAttributeTranslate('location') }}) @else  @endif</sub></span></p>
-                                     @endForeach
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-3 col-6 my-1">
-                            <div id="div-datepicker" class="input-pattern">
-                                <i class="fas fa-calendar-alt input-icon"></i>
-                                <input type='text' data-language="{{ App::getLocale() }}" data-multiple-dates-separator=" - " class="datepicker-here cursor-pointer" id="datepicker" placeholder="{{ trans('base.date')}}" readonly="readonly"/>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-3 my-1">
-                            <div class="input-pattern">
-                                <p id="guests" class="input-text">{{ trans('base.count_guestі')}}</p>
-                                <i class="fas fa-male input-icon"></i>
-                                <div class="input-dropdown">
-                                    <div class="input-members d-flex justify-content-between">
-                                        <p>{{ trans('base.adults')}}</p>
-                                        <span>
-                                            <span id="adults_minus">
-                                                <i class="fas fa-minus fa-lg add-member-btn"></i>
-                                            </span>
-                                            <input id="adults" type="number" name="adults" min="0" value="0" readonly="readonly" />
-                                            <span id="adults_plus">
-                                                <i class="fas fa-plus fa-lg add-member-btn"></i>
-                                            </span>
-                                        </span>
-                                    </div>
-                                    <div class="input-members d-flex justify-content-between">
-                                        <p>{{ trans('base.children')}}<br/><sup>5-12 {{ trans('base.years')}}</sup></p>
-                                        <span>
-                                            <span id="children_minus">
-                                                <i class="fas fa-minus fa-lg add-member-btn"></i>
-                                            </span>
-                                            <input id="children" type="number" name="children" min="0" value="0" readonly="readonly" />
-                                            <span id="children_plus">
-                                                <i class="fas fa-plus fa-lg add-member-btn"></i>
-                                            </span>
-                                        </span>
-                                    </div>
-                                    <p class="children-up-to-5"><sub>{{ trans('base.free_children')}}</sub></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-3 my-1">
-                            <div class="input-pattern">
-                                <button type="submit" class="submit-button">{{ trans('base.check_price') }}</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-   
-    <div id="mobile-phones" class="text-center">
-        <i class="fas fa-phone fa-2x my-2 color-ff8c00"></i>
-        <h5 class="mt-2"><a href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_1'))}}" class="phone-clickable">{{ $texts->get('tel_1') }}</a><br></h5>
-        <h5 class="mb-3"><a href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_2'))}}" class="phone-clickable"> {{ $texts->get('tel_2') }}</a><br></h5>
-        <h6 class="mb-3">{{trans('base.write_in_messenger')}}</h6>        
-        @if(isset($messengers) AND count($messengers) !== 0 AND $categories_data['messengers']->active == 1)
-            @foreach($messengers as $messenger)
-                <a href="{{ $messenger->getAttributeTranslate('messenger_link') ? $messenger->getAttributeTranslate('messenger_link') : "#"}}"> {!! $messenger->getAttributeTranslate('icon_mobile') ? $messenger->getAttributeTranslate('icon_mobile') : " " !!}</a>
-            @endforeach
-        @endif         
-        <div class="h-line-bold"></div>
-    </div>
+    <!-- slider -->
+        @include('frontend.sections.slider')
+    <!-- END slider -->    
+    <!-- form for find -->
+         @include('frontend.sections.form_find')
+    <!-- END form for find -->   
+</div>    
+    <!-- mobile_messenger -->
+        @include('frontend.sections.mobile_messengers')
+    <!-- END mobile_messenger -->    
     <div class="container-fluid px-sm-5">
         <div class="row text-center">
             <div class="col">
                 <h2 class="section-header-huge">{{ $main->first()->getTranslate('title') }}</h2>
-                <h4 class="section-header-small">{!! $main->first()->getTranslate('short_description') !!}</h4>
+                <h4 class="section-header-small">{{ $main->first()->getAttributeTranslate('location')}}</h4>
                 <div class="section-description">{!! $main->first()->getTranslate('description') !!}</div>
             </div>
         </div>
         <div class="row justify-content-center no-gutters px-md-5 px-0">
+        <?php $i = 0 ?>
         @foreach($hotels as $key => $hotel)
+        
             <div class="col-xl-4 col-lg-6 p-2 mt-4">
-                <a href="{{ route('article_index_subdomain', [$hotel->subdomain, App::getLocale(), 'hotels/' . getIdApart($hotel->type)])}}" class="a-card">
+                <a href="{{ route('article_index_subdomain', [$hotel->subdomain, App::getLocale(), 'hotels' . getIdApart($hotel->type), (getIdApart($hotel->type)) ? '' : $hotel->type])}}" class="a-card">
                     <div class="apart-small-card shadow-hover">
                         <div class="small-card-image" style="background-image: url('{{ asset( $hotel->getAttributeTranslate('hotel_photo')) }}')"></div>
                         <div class="row pt-3  px-md-4 px-3">
-                            <div class="col-8">
+                            <div class="col">
                                 <h5 class="small-hotel-header">{{ $hotel->getAttributeTranslate('type_build')}} {{ $hotel->getTranslate('title')}}</h5>
                             </div>
                         </div>
@@ -128,52 +43,31 @@
                                     <small class="small-card-hotel">{{ $hotel->getAttributeTranslate('marketing')}}</small>
                                 </div>
                             @endif
-                        </div>
+                        </div>                        
                         @if($hotel->getAttributeTranslate('discount'))
-                            <div class="apart-small-card-buy">
-                                <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between discount">
-                                    {{trans('base.from')}}
+                            <div class="apart-small-card-buy d-flex flex-column justify-content-center">
+                                <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between">
+                                    {{trans('base.from')}} 
                                     <span class="d-flex flex-column">
-                                        <span class="old-price-hotel-card">
-                                            {{ $hotel->getAttributeTranslate('price')}}
-                                        </span>
-                                        <strong>                                            
-                                            {{$hotel->getAttributeTranslate('price') - (($hotel->getAttributeTranslate('price') * $hotel->getAttributeTranslate('discount')) / 100)}}
-                                        </strong>
-                                    </span>
-                                    {{trans('base.grn')}}
+                                        <span class="old-price-hotel-card">{{ $hotel->getAttributeTranslate('price')}}</span>
+                                            <strong>
+                                                {{$hotel->getAttributeTranslate('price') - (($hotel->getAttributeTranslate('price') * $hotel->getAttributeTranslate('discount')) / 100)}}
+                                            </strong>
+                                        </span> 
+                                        {{trans('base.grn')}}
                                 </p>
                             </div>
-                        @else
-                            <div class="apart-small-card-buy">
+                        @else 
+                            <div class="apart-small-card-buy d-flex flex-column justify-content-center">
                                 <p class="text-center apart-small-card-buy-hotel-p">{{trans('base.from')}} <strong>{{ $hotel->getAttributeTranslate('price')}}</strong> {{trans('base.grn')}}</p>
                             </div>
-                        @endif    
-                        <!-- <div class="apart-small-card-buy">
-                            <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between" @if($hotel->getAttributeTranslate('discount')) class="discount" @endif>
-                                {{trans('base.from')}}  
-                                @if($hotel->getAttributeTranslate('discount'))
-                                    <span class="d-flex flex-column">
-                                    <span class="old-price-hotel-card">
-                                        {{ $hotel->getAttributeTranslate('price')}}
-                                    </span>
-                                @endif
-                                <strong>
-                                    @if($hotel->getAttributeTranslate('discount'))
-                                        {{$hotel->getAttributeTranslate('price') - (($hotel->getAttributeTranslate('price') * $hotel->getAttributeTranslate('discount')) / 100)}}
-                                    @else 
-                                        {{ $hotel->getAttributeTranslate('price')}}
-                                    @endif
-                                </strong>
-                                @if($hotel->getAttributeTranslate('discount'))
-                                    </span>
-                                @endif 
-                                {{trans('base.grn')}}
-                            </p>
-                        </div> -->
+
+                        @endif
                         <div class="apart-small-card-buy-hover apart-small-hover-hotel">
-                            <p class="d-flex justify-content-center align-items-center">{{trans('base.reservation')}}</p>
-                        </div>
+                            <p class="d-flex justify-content-center align-items-center text-uppercase">
+                                {{trans('base.reservation')}}
+                            </p>
+                            </div>
                         @if($hotel->getAttributeTranslate('discount'))
                             <div class="apart-small-discount-hotel">
                                 <p class="text-center py-1 text-uppercase">{{ trans('base.discount')}} {{ $hotel->getAttributeTranslate('discount')}}%</p>
@@ -182,24 +76,25 @@
                     </div>
                 </a>
             </div>
-            @if($key == 3)
+            @if($i == 2)
                 <div class="align-self-center fake col-xl-2 fake-left"></div>
             @endif
+            <?php $i++ ?>
         @endforeach
                        
             <div class="align-self-center fake col-xl-2 fake-right"></div>
         </div>
     </div>    
-    
-    <div class="container-fluid">
-        <div class="row justify-content-center px-md-5 px-0 text-center">
-            <div class="col">
-                <h2 class="section-header-huge section-number-include">понад <span id="giant-number">9821</span> гостей</h2>
-                <p class="section-description">відвідали наш готельний комплекс за 6 років</p>
+    @if($main->first()->getAttributeTranslate('slogan'))
+        <div class="container-fluid">
+            <div class="row justify-content-center px-md-5 px-0 text-center">
+                <div class="col">
+                    <h2 class="section-header-huge section-number-include">{{ trans('base.under') }} <span id="giant-number">9821</span> {{ trans('base.guests') }}</h2>
+                    <div class="section-description text-lowercase">{!! $main->first()->getAttributeTranslate('slogan') !!}</div>
+                </div>
             </div>
         </div>
-    </div>
-
+    @endif
     <div class="container-fluid py-sm-5 py-3 back-f4f4f4">
         <div class="row no-gutters text-center">
             <div class="col-md-3 col-6 py-2 my-2">
@@ -220,117 +115,13 @@
             </div>
         </div>
     </div>
-    @if(isset($main_marketings) AND count($main_marketings) !== 0 AND $categories_data['marketings']->active == 1)
-    <div class="container-fluid">
-        <div class="row text-center">
-            <div class="col padding-0">
-                <h2 class="section-header-huge">{{ $categories_data['marketings']->getTranslate('title')}}</h2>
-                <div class="section-description">{!! $categories_data['marketings']->getTranslate('short_description') !!}</div>
-                <div class="rest-slider px-3">
-                @foreach($main_marketings as $marketing)
-    
-                    <div class="pt-4">
-                    <div class="rest-image" style="background: url('{{ asset( $marketing->getAttributeTranslate('marketing_img')) }}')">
-                            <div class="left-click"></div>
-                            <div class="right-click"></div>
-                        </div>
-                        <div class="rest-details">
-                            <h4>{{ $marketing->getTranslate('title')}}</h4>
-                            {!! $marketing->getTranslate('short_description') !!}                       
-                        </div>
-                    </div>                 
-               @endforeach     
-                   
-                    
-                    
-                </div>
-                <nav class="rest-dots"></nav>
-            </div>
-        </div>
-    </div>   
-    @endif  
+    <!-- marketings -->
+        @include('frontend.sections.marketings')
+    <!--  END marketings -->
+    <!-- reviews_callback -->
+        @include('frontend.sections.reviews_callback')
+    <!--  END reviews_callback -->
 
-    @if(isset($reviews) AND count($reviews) !== 0 AND $categories_data['reviews']->active == 1)
-
-        <div class="container-fluid pb-5 back-f4f4f4">
-            <div class="row text-center">
-                <div class="col">
-                    <h2 class="section-header-huge">{{ $categories_data['reviews']->getTranslate('title')}}</h2>
-                    <p class="section-description">{!! $categories_data['reviews']->getTranslate('short_description') !!}</p>
-                    <div class="container-fluid position-relative">
-                        <div class="feedback-slider">
-                            @foreach($reviews as $review)
-                                <div class="d-flex justify-content-center">
-                                    <div class="card feedback-card">
-                                        <div class="card-body">
-                                        {!! str_limit($review->getTranslate('description'), 400) !!}
-                                            @if(strlen($review->getTranslate('description')) > 400)                                            
-                                                <p><a href="#" class="color-ff8c00">Читати повністю</a></p>
-                                            @endif    
-                                        </div>
-                                        <div class="card-footer">
-                                            @if($review->getAttributeTranslate('source'))
-                                                <i class="fab fa-{{lcfirst($review->getAttributeTranslate('source'))}}-square" data-toggle="tooltip" data-placement="top" title="відгук взято з {{ $review->getAttributeTranslate('source') }}"></i>
-                                                <p class="name">{{ $review->getAttributeTranslate('name') }}
-                                                    <small class="text-muted">(відгук взято з {{ $review->getAttributeTranslate('source') }})</small>
-                                                </p>
-                                            @else
-                                                <p class="name">{{ $review->getAttributeTranslate('name') }}</p>
-                                            @endif
-                                            <p class="date">{{ $review->getAttributeTranslate('date_create_review') }}</p>
-                                        </div>
-                                        @if($review->getAttributeTranslate('profile_foto') )
-                                            <div id="profile-huge" class="profile-image" style="background: url('{{ asset( $review->getAttributeTranslate('profile_foto')) }}')"></div>
-                                        @endif
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                        <div id="feedback-arrow-left">
-                            <div class="div-arrows div-a-f">
-                                <div class="arrow-left f-arrow-left">
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="feedback-arrow-right">
-                            <div class="div-arrows div-a-f">
-                                <div class="arrow-right f-arrow-right">
-                                    <div></div>
-                                    <div></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="feedback-button">
-                        <a href="#">Всі відгуки</a>
-                        <a href="#">Залишити відгук</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-     @endif
-    <div class="container-fluid px-1 back-747474">
-        <form>
-            <div class="row justify-content-center no-gutters py-md-4 py-1">
-                <div class="col-lg-2 col-md-3 my-1">
-                    <div class="input-pattern">
-                        <input type="text" placeholder="Ім'я"/>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 my-1">
-                    <div class="input-pattern">
-                        <input type="tel" placeholder="Номер телефону"/>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 my-1">
-                    <div class="input-pattern">
-                        <a class="btn btn-yellow get-in-touch-btn" data-toggle="modal" data-target="#exampleModal">ЗВ'ЯЗАТИСЬ З НАМИ</a>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+   
 
 @endsection

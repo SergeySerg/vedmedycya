@@ -17,7 +17,7 @@ return [
 	'name' => 'Ім\'я',
 	'about_us' => 'про нас',
 	'hotel_city' => 'Готель/місто',
-	'date' => 'дата',
+	'date' => 'Дати',
 	'count_guestі' => 'Кількість гостей',
 	'email' => 'E-mail',
 	'check_price' => 'Перевірити ціни',
@@ -35,6 +35,13 @@ return [
 	'from' => 'від',
 	"grn" => 'грн',
 	'discount' => 'ЗНИЖКА',
+	'review_from' => 'відгук взято з',
+	'all_reviews' => 'Всі відгуки',
+	'add_review' => 'Залишити відгук',
+	"guests" => 'гості',
+	"under" => 'понад',
+	'hotel' => 'ГОТЕЛЮ',
+	'free_services' => 'Включено у вартість',
 
 
 

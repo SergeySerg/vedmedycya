@@ -18,7 +18,7 @@ return [
 	'name' => 'Имя',
 	'about_us' => 'о нас',
 	'hotel_city' => 'Отель/город',
-	'date' => 'дата',
+	'date' => 'Даты',
 	'count_guestі' => 'Количество гостей',
 	'email' => 'E-mail',
 	'check_price' => 'Проверить цены',

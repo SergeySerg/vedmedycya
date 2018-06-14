@@ -17,7 +17,7 @@ return [
 	'name' => 'Name',
 	'about_us' => 'about us',
 	'hotel_city' => 'Hotel/city',
-	'date' => 'date',
+	'date' => 'Dates',
 	'count_guestі' => 'Number of guests',
 	'email' => 'E-mail',
 	'check_price' => 'Check prices',

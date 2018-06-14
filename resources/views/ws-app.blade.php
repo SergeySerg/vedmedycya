@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!doctype html>
 <html lang="{{ App::getLocale() }}">
 <head>
 
@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="{{ asset('/css/frontend/slick-theme.css') }}">
     <link href="{{ asset('/css/frontend/datepicker.min.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ asset('/css/frontend/style.css') }}">   
+    <script defer src="{{ asset('/js/frontend/fontawesome-all.js') }}"></script>
+
 </head>
 <body>
 	<!-- .header -->
@@ -94,7 +96,7 @@
                             {{ $categories_data['hotels']->getTranslate('title') ? $categories_data['hotels']->getTranslate('title') : 'готелі' }}
                         </h6>
                         @foreach($hotels as $hotel)
-                            <a href="{{ route('article_index_subdomain', [$hotel->subdomain, App::getLocale(), 'hotels/' . getIdApart($hotel->type)])}}" class="text-white">{{ $hotel->getTranslate('title')}}</a><br>                            
+                            <a href="{{ route('article_index_subdomain', [$hotel->subdomain, App::getLocale(), 'hotels' . getIdApart($hotel->type), (getIdApart($hotel->type)) ? '' : $hotel->type])}}" class="text-white">{{ $hotel->getTranslate('title')}}</a><br>                            
                         @endforeach
                     </div>
                 @endif
@@ -128,15 +130,15 @@
 </script>
 {{--/Файл переводов--}}
 {{-- JS --}}
-<script defer src="{{ asset('/js/frontend/fontawesome-all.js') }}"></script>
-<script src="{{ asset('/js/frontend/jquery-3.3.1.min.js') }}"></script>
-<script src="{{ asset('/js/frontend/popper.min.js') }}"></script>
-<script src="{{ asset('/js/frontend/bootstrap.min.js') }}"></script>
-<script src="{{ asset('/js/frontend/datepicker.min.js') }}"></script>
-<script src="{{ asset('/js/frontend/datepicker.en.js') }}"></script>
-<script src="{{ asset('/js/frontend/slick.min.js') }}"></script>
-<script src="{{ asset('/js/frontend/main.js') }}"></script>
+<script defer src="{{ asset('/js/frontend/jquery-3.3.1.min.js') }}"></script>
+<script defer src="{{ asset('/js/frontend/popper.min.js') }}"></script>
+<script defer src="{{ asset('/js/frontend/bootstrap.min.js') }}"></script>
+<script defer src="{{ asset('/js/frontend/datepicker.min.js') }}"></script>
+<script defer src="{{ asset('/js/frontend/datepicker.ua.js') }}"></script>
+<script defer src="{{ asset('/js/frontend/datepicker.en.js') }}"></script>
+<script defer src="{{ asset('/js/frontend/slick.min.js') }}"></script>
 <script src="{{ asset('/js/plugins/sweetalert.min.js') }}"></script>
+<script defer src="{{ asset('/js/frontend/main.js') }}"></script>
 
 
 {{-- /JS --}}
