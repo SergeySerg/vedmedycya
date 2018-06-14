@@ -14,7 +14,7 @@
 <meta name="description" content="@if($categories_data[$type]->getTranslate('meta_description')){{ $categories_data[$type]->getTranslate('meta_description') }} @else МЕРЕЖА ГОТЕЛІВ 'ВЕЛИКА ВЕДМЕДИЦЯ' В ЯРЕМЧЕ ТА БУКОВЕЛІ@endif">
 <meta name="keywords" content="@if($categories_data[$type]->getTranslate('meta_keywords')){{ $categories_data[$type]->getTranslate('meta_keywords') }} @else Велика Ведмедиця @endif"> -->
 
-    <link rel="icon" type="image/png" href="{{ asset('/img/favicon/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('/img/favicon/favicon.png') }}?1" type="image/x-icon">
 	<!-- <link rel="shortcut icon" href="{{ asset('/img/favicon/favicon.png') }}" >
 	<link rel="apple-touch-icon" href="{{ asset('/img/favicon/apple-touch-icon.png') }}">
 	<link rel="apple-touch-icon" sizes="72x72" href="{{ asset('img/favicon/apple-touch-icon-72x72.png') }}">
@@ -135,9 +135,9 @@
 <script defer src="{{ asset('/js/frontend/bootstrap.min.js') }}"></script>
 <script defer src="{{ asset('/js/frontend/datepicker.min.js') }}"></script>
 <script defer src="{{ asset('/js/frontend/datepicker.ua.js') }}"></script>
-<script defer src="{{ asset('/js/frontend/datepicker.en.js') }}"></script>
+<!-- <script  src="{{ asset('/js/frontend/datepicker.en.js') }}"></script> -->
 <script defer src="{{ asset('/js/frontend/slick.min.js') }}"></script>
-<script src="{{ asset('/js/plugins/sweetalert.min.js') }}"></script>
+<script defer src="{{ asset('/js/plugins/sweetalert.min.js') }}"></script>
 <script defer src="{{ asset('/js/frontend/main.js') }}"></script>
 
 

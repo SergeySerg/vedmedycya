@@ -42,6 +42,21 @@ return [
 	"under" => 'понад',
 	'hotel' => 'ГОТЕЛЮ',
 	'free_services' => 'Включено у вартість',
+	'hair_dryer' => 'Фен',
+	'fridge' => 'Холодильник',
+	'safe' => 'Сейф',
+	'kettle' => 'Електрочайник',
+	'bathroom' => 'Cанвузол',
+	'Jacuzzi' => 'Джакузі',
+	'fireplace' => 'Камін',
+	'kitchen' => 'Повноцінна кухня',
+	'breakfast' => 'Сніданок',
+	'parking' => 'Парковка',
+	'coffe' => 'Кава та чай',
+	'сhildren_room' => 'Дитяча кімната',
+	'ski_storage_room' => 'Кімната зберігання лиж',	
+	'bowl_ski_equipment' => 'Cушка лижнього спорядження',
+	
 
 
 

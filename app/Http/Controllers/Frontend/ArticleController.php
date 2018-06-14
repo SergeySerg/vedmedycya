@@ -89,8 +89,10 @@ class ArticleController extends Controller {
 	 */
 	public function show($subdomain, $lang, $type, $link, $id)
 	{
-		dd('show');
-
+		$parent_hotel = Article::with('article_children')->where('type', $link)->first();
+		$article = Article::where('id', $id)->first();
+		//dd($article);
+		return view('frontend.rooms')->with(compact('article', 'parent_hotel'));
 	}
 
 	/**

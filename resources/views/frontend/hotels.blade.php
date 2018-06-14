@@ -23,11 +23,11 @@
         
         <div class="row justify-content-center no-gutters px-md-5 px-0">
         <?php $i = 0 ?>
-            @foreach($children_rooms as $key => $room)
+            @foreach($children_rooms->take(5) as $key => $room)
                 @if($room->getAttributeTranslate('show_hotel_page') AND $room->getAttributeTranslate('show_hotel_page') == 1)
                     <!-- Типова мала карточка номеру -->
                     <div class="col-xl-4 col-lg-6 p-2 mt-4">
-                        <a href="#" class="a-card">
+                        <a href="{{ route('article_show', [$parent_hotel->subdomain, App::getLocale(), 'hotels', $room->article_parent->type, $room->id])}}" class="a-card">
                             <div class="apart-small-card shadow-hover">
                                 <div class="small-card-image" style="background-image: url('{{ asset( $room->getAttributeTranslate('room_photo')) }}')"></div>
                                 <div class="row pt-3  px-md-4 px-3">
@@ -82,9 +82,7 @@
                         <div class="align-self-center fake col-xl-2 fake-left"></div>
                     @endif
                     <?php $i++;
-                        if($i > 4 ){
-                            break;
-                        }
+                        
                     ?>                  
                 @endif
             @endforeach
@@ -103,16 +101,17 @@
         </div>
         
         <div id="feature" class="row no-gutters text-center justify-content-center">
-            <?php $j = 0 ?>
-            @foreach($children_advantages as $advantage)
-                <div class="col-md-3 col-6 py-2 my-2 mb-5">
-                    {!! $advantage->getAttributeTranslate('icon') !!}
-                    <h5 class="feature-text">{!! $advantage->getTranslate('title') !!}</h5>
-                </div>
-                @if($j == 2)<div class="w-100 text-divider"></div>@endif
-                <?php $j++ ?>
-            @endforeach           
-        </div>
+                <?php $j = 0 ?>
+                @foreach($children_advantages->take(6) as $advantage)
+                    <div class="col-md-3 col-6 py-2 my-2 mb-5">
+                        {!! $advantage->getAttributeTranslate('icon') !!}
+                        <h5 class="feature-text">{!! $advantage->getTranslate('title') !!}</h5>
+                    </div>
+                    @if($j == 2)<div class="w-100 text-divider"></div>@endif
+                    <?php $j++ ?>
+                @endforeach  
+                
+            </div>
     </div>
     
       <!-- marketings -->

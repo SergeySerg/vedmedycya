@@ -59,6 +59,7 @@ class Article extends Translate {
                     }
                 }
             }
+            //dd($imgs);
             return $imgs ?: [];
         }
         else{

@@ -96,24 +96,17 @@
         </div>
     @endif
     <div class="container-fluid py-sm-5 py-3 back-f4f4f4">
-        <div class="row no-gutters text-center">
-            <div class="col-md-3 col-6 py-2 my-2">
-                <i class="bb-pool features-icon"></i>
-                <h5 class="feature-text">басейн<br>з підігрівом</h5>
-            </div>
-            <div class="col-md-3 col-6 py-2 my-2">
-                <i class="bb-feedback features-icon"></i>
-                <h5 class="feature-text">більш ніж<br>999 відгуків</h5>
-            </div>
-            <div id="booking-id" class="col-md-3 col-6 py-2 my-2">
-                <p class="booking-icon">9.1<br><sup><small><sup><small>out of 10</small></sup></small></sup></p>
-                <h5 class="feature-text">рейтинг на<br>booking.com</h5>
-            </div>
-            <div class="col-md-3 col-6 py-2 my-2">
-                <i class="bb-toy-thin features-icon"></i>
-                <h5 class="feature-text">розваги<br>для дітей</h5>
-            </div>
-        </div>
+        <div id="feature" class="row no-gutters text-center">
+                @foreach($advantages->take(4) as $advantage)
+                    @if($advantage->getAttributeTranslate('show_main_page') == 1)
+                        <div class="col-md-3 col-6 py-2 my-2">
+                            {!! $advantage->getAttributeTranslate('icon') !!}
+                            <h5 class="feature-text">{!! $advantage->getTranslate('title') !!}</h5>
+                        </div>
+                    @endif                   
+                @endforeach
+        </div>        
+        
     </div>
     <!-- marketings -->
         @include('frontend.sections.marketings')
