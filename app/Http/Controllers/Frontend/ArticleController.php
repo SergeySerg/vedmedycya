@@ -29,17 +29,19 @@ class ArticleController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index($subdomain, $lang, $type, $link)
+	public function index($subdomain, $lang, $type, $link=null)
 	{	
-		//dd($link);
-		switch($subdomain){
-			case 'bukovel':
-			$parent_hotel = Article::where('type', $link)->first();
-			break;
-			case 'yaremche':
-			$parent_hotel = Article::where('type', $link)->first();
-			break;
-		}
+		//if($link){
+			switch($subdomain){
+				case 'bukovel':
+				$parent_hotel = Article::where('type', $link)->first();
+				break;
+				case 'yaremche':
+				$parent_hotel = Article::where('type', $link)->first();
+				break;
+			}
+		//}
+		
 		//dd($parent_hotel);
 		
 			// $hotels_articles = Category::where('link', $type)->first()->articles->where('subdomain', $subdomain);

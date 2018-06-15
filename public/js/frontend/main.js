@@ -1,5 +1,5 @@
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip"]').tooltip()
   })
   
   //Sliders start
@@ -244,9 +244,9 @@ $(function () {
       return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
   }
   //end functions
-  setTimeout(setBookingIcon(), 5000);
+  
   $(document).ready(function(){
-    
+      setBookingIcon();
   
       $("#input-drop-location").click(function() {
           $(this).removeClass("add-drop");
@@ -342,7 +342,7 @@ $(function () {
   
   $(window).resize(function() {
       setBookingIcon();
-  //console.log('тут');
+  
       var selectorbarheight = $('#selector-bar-id').height() + "px";
       $('.overflow-hidden').css("height", selectorbarheight);
   

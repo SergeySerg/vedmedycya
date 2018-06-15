@@ -110,7 +110,7 @@ class FrontendInit {
 //			}
 			//dd($category_item);
 			//share Article		
-				// if($category->link == 'slides'){
+				// if($category->link == 'revsettings'){
 					
 				// 		dd($category_item);
 					

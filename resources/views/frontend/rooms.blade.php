@@ -106,6 +106,7 @@
             <div class="col-md-6">
                 <h4 class="apart-page-section-header mb-3 mobile-text-center">{{ trans('base.free_services') }}</h4>
                 <div id="justify" class="row text-orange text-center no-gutters d-flex">
+                {{--//TODO:write js func--}}
                     @if($article->getAttributeTranslate('breakfast') == 1)
                         <div class="col-md-2 col-4">
                             <i class="bb-breakfast fa-3x mobile-text-center"></i><br>
@@ -156,26 +157,40 @@
                     @endif    
                 </div>
                 <h4 class="apart-page-section-header mt-4 mobile-text-center">Опис</h4>
-                <p class="apart-page-sect-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                <h4 class="apart-page-section-header mt-4 mobile-text-center">Комплектація номеру</h4>
+                <div class="apart-page-sect-desc">{!! $article->getTranslate('description') !!}</div>
+                <h4 class="apart-page-section-header mt-4 mobile-text-center">{{ trans('base.complactation')}}</h4>
                 <div class="row small-features mb-5">
-                    <div class="col-md-4 col-6"><p><i class="fas fa-check text-orange"></i> Lorem ipsum</p></div>
-                    <div class="col-md-4 col-6"><p><i class="fas fa-check text-orange"></i> Lorem ipsum</p></div>
-                    <div class="col-md-4 col-6"><p><i class="fas fa-check text-orange"></i> Lorem ipsum</p></div>
-                    <div class="col-md-4 col-6"><p><i class="fas fa-check text-orange"></i> Lorem ipsum</p></div>
-                    <div class="col-md-4 col-6"><p><i class="fas fa-check text-orange"></i> Lorem ipsum</p></div>
-                    <div class="col-md-4 col-6"><p><i class="fas fa-check text-orange"></i> Lorem ipsum</p></div>
-                    <div class="col-md-4 col-6"><p><i class="fas fa-check text-orange"></i> Lorem ipsum</p></div>
-                    <div class="col-md-4 col-6"><p><i class="fas fa-check text-orange"></i> Lorem ipsum</p></div>
-                    <div class="col-md-4 col-6"><p><i class="fas fa-check text-orange"></i> Lorem ipsum</p></div>
+                    {!! $article->getAttributeTranslate('equipment_room')!!}
                 </div>
             </div>
+            {{--//TODO:order--}}
             <div class="col-md-4 text-md-right text-center">
-                <small id="people_max">Вартість вказана для <i class="fa fa-male align-text-top text-orange"></i> х8, максимум вміщає <i class="fa fa-male align-text-top text-orange"></i> х12</small>
+                <small id="people_max">{{ trans('base.price_for')}} <i class="fa fa-male align-text-top text-orange"></i> х {{ $article->getAttributeTranslate('base_count_ guests') }}, {{ trans('base.max_count_guests')}} <i class="fa fa-male align-text-top text-orange"></i> х{{ $article->getAttributeTranslate('max_count_guests') }}</small>
                 <div class="order-card mt-4">
                     <div class="d-flex justify-content-center margin-left-15">
                         <div class="apart-price-discount back-707070">
-                            <p class="d-flex align-items-center justify-content-around flex-xl-row flex-md-column color-white py-xl-0 py-md-3 px-xl-3"><span class="new-price-apart"><span class="custom-line-throught">6000</span><br><sup>UAH за ніч</sup></span>4500</p>
+                        @if($article->getAttributeTranslate('discount_room'))
+                            <p class="d-flex align-items-center justify-content-around flex-xl-row flex-md-column color-white py-xl-0 py-md-3 px-xl-3">
+                                <span class="new-price-apart">
+                                    <span class="custom-line-throught">
+                                        {{ $article->getAttributeTranslate('base_price')}}
+                                    </span>
+                                    <br>
+                                    <sup>
+                                        {{ trans('base.grn')}} {{ trans('base.price_night')}}
+                                    </sup>
+                                </span>
+                                {{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}
+                            </p>
+                        @else
+                            <p class="d-flex align-items-center justify-content-around flex-xl-row flex-md-column color-white py-xl-0 py-md-3 px-xl-3">
+                               {{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}
+                               <br>
+                                <sup>
+                                    {{ trans('base.grn')}} {{ trans('base.price_night')}}
+                                </sup>
+                            </p>
+                        @endif
                         </div>
                         <div class="apart-price back-white d-flex flex-column">
                             <p class="color-black pt-2 mt-auto">9000</p>
@@ -184,14 +199,14 @@
                     </div>
                     <div id="div-datepicker" class="input-pattern mt-1">
                         <i class="fas fa-calendar-alt order-form-icon"></i>
-                        <input type='text' data-language="ua" data-multiple-dates-separator=" - " class="datepicker-here cursor-pointer pl-2" id="datepicker" placeholder="Дати" readonly="readonly"/>
+                        <input type='text' data-language="{{ App::getLocale()}}" data-multiple-dates-separator=" - " class="datepicker-here cursor-pointer pl-2" id="datepicker" placeholder="Дати" readonly="readonly"/>
                     </div>
                     <div class="input-pattern d-flex justify-content-between mt-3">
-                        <p id="guests" class="input-text float-left">Кількість гостей</p>
+                        <p id="guests" class="input-text float-left">{{ trans('base.count_guestі')}}</p>
                         <i class="fas fa-male order-form-icon"></i>
                         <div class="input-dropdown">
                             <div class="input-members d-flex justify-content-between">
-                                <p>Дорослі</p>
+                                <p>{{ trans('base.adults')}}</p>
                                 <span>
                                     <button id="adults_minus" type="button">
                                         <i class="fas fa-minus fa-lg add-member-btn"></i>
@@ -203,7 +218,7 @@
                                 </span>
                             </div>
                             <div class="input-members d-flex justify-content-between">
-                                <p>Діти<br/><sup>5-12 років</sup></p>
+                                <p>{{ trans('base.children')}}<br/><sup>5-12 {{ trans('base.years')}}</sup></p>
                                 <span>
                                     <button id="children_minus"type="button">
                                         <i class="fas fa-minus fa-lg add-member-btn"></i>
@@ -214,14 +229,16 @@
                                     </button>
                                 </span>
                             </div>
-                            <p class="children-up-to-5"><sub>діти до 5 років - безкоштовно</sub></p>
+                            <p class="children-up-to-5"><sub>{{ trans('base.free_children')}}</sub></p>
                         </div>
                     </div>
-                    <div class="apart-left">
-                        <p class="text-uppercase">ЗАЛИШИЛОСЬ ВСЬОГО 3 НОМЕРИ</p>
-                    </div>
+                    @if($article->getAttributeTranslate('marketing'))
+                        <div class="apart-left">
+                            <p class="text-uppercase">{{ $article->getAttributeTranslate('marketing') }}</p>
+                        </div>
+                    @endif
                     <div class="apart-buy">
-                        <a class="btn btn-yellow text-uppercase" data-toggle="modal" data-target="#exampleModal">ЗАБРОНЮВАТИ</a>
+                        <a class="btn btn-yellow text-uppercase" data-toggle="modal" data-target="#exampleModal">{{ trans('base.reservation')}}</a>
                     </div>
                 </div>                   
             </div>
@@ -240,15 +257,15 @@
     <div class="container-fluid">
         <div class="row text-center px-md-5">
             <div class="col">
-                <h2 class="section-header-huge pt-4">Відгуки наших відвідувачів</h2>
-                <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                <h2 class="section-header-huge pt-4">{{ $categories_data['reviews']->getTranslate('title')}}</h2>
+                <div class="section-description">{!! $categories_data['reviews']->getTranslate('short_description') !!}</div>
             </div>
         </div>
         <div class="container-fluid px-xl-5">
             <div class="container-fluid line-1-ff8c00"></div>
             <div class="row px-xl-5 my-5">
                 <div class="col-xl-3 d-flex align-items-center justify-content-center">
-                    <p class="section-text-huge mobile-text-center">222 відгуки<br/>
+                    <p class="section-text-huge mobile-text-center">{{ count($children_reviews) }} {{ strstr( $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'відгуки' . ' ', ' ', true ) }}<br/>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -257,57 +274,65 @@
                     </p>
                 </div>
                 <div class="col-xl px-xl-5">
-                    <div class="row">
-                        <div class="col d-flex justify-content-xl-around">
-                            <p class="section-text-small mx-xl-0 mr-auto">чистота</p>
-                            <div class="div-stars">
-                                <i class="far fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+                    @if($revsettings->first()->getAttributeTranslate('is_cleanness'))
+                        <div class="row">
+                            <div class="col d-flex justify-content-xl-around">
+                                <p class="section-text-small mx-xl-0 mr-auto">{{ trans('base.cleanness')}}</p>
+                                <div class="div-stars">
+                                    <i class="far fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col d-flex justify-content-xl-around">
-                            <p class="section-text-small mx-xl-0 mr-auto">затишок</p>
-                            <div class="div-stars">
-                                <i class="far fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+                    @endif
+                    @if($revsettings->first()->getAttributeTranslate('is_сosiness'))
+                        <div class="row">
+                            <div class="col d-flex justify-content-xl-around">
+                                <p class="section-text-small mx-xl-0 mr-auto">{{ trans('base.сosiness')}}</p>
+                                <div class="div-stars">
+                                    <i class="far fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 </div>
                 <div class="col-xl px-xl-5">
-                    <div class="row">
-                        <div class="col d-flex justify-content-xl-around">
-                            <p class="section-text-small mx-xl-0 mr-auto">розташування</p>
-                            <div class="div-stars">
-                                <i class="far fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+                    @if($revsettings->first()->getAttributeTranslate('is_location'))
+                        <div class="row">
+                            <div class="col d-flex justify-content-xl-around">
+                                <p class="section-text-small mx-xl-0 mr-auto">{{ trans('base.location')}}</p>
+                                <div class="div-stars">
+                                    <i class="far fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col d-flex justify-content-xl-around">
-                            <p class="section-text-small mx-xl-0 mr-auto">смачна кухня</p>
-                            <div class="div-stars">
-                                <i class="far fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+                    @endif
+                    @if($revsettings->first()->getAttributeTranslate('is_food'))
+                        <div class="row">
+                            <div class="col d-flex justify-content-xl-around">
+                                <p class="section-text-small mx-xl-0 mr-auto">{{ trans('base.food')}}</p>
+                                <div class="div-stars">
+                                    <i class="far fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    @endif
+                </div>                
             </div>
             <div class="container-fluid line-1-ff8c00"></div>
         </div>
@@ -315,48 +340,36 @@
 
     <div class="container-fluid py-5">
         <div class="container-fluid position-relative">
-            <div class="feedback-slider">
-                <div class="d-flex justify-content-center">
-                    <div id="test" class="card feedback-card">
-                        <div class="card-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn... 
-                            <a href="#" class="color-ff8c00">Читати повністю</a></p>
+        <div class="feedback-slider">
+                    @foreach($children_reviews->take(5) as $review)
+                        <div class="d-flex justify-content-center">
+                            <div id="test" class="card feedback-card">
+                                <div class="card-body">
+                                {!! str_limit($review->getTranslate('description'), 400) !!}
+                                    @if(strlen($review->getTranslate('description')) > 400)                                            
+                                        <p><a href="#" class="color-ff8c00">{{ trans('base.more_detale') }}</a></p>
+                                    @endif    
+                                </div>
+                                <div class="card-footer">
+                                    @if($review->getAttributeTranslate('source'))
+                                        <i class="fab fa-{{lcfirst($review->getAttributeTranslate('source'))}}-square"></i>
+                                        <p class="name">{{ $review->getAttributeTranslate('name') }}
+                                            <small class="text-muted">({{ trans('base.review_from') }} {{ $review->getAttributeTranslate('source') }})</small>
+                                        </p>
+                                    @else
+                                        <p class="name">{{ $review->getAttributeTranslate('name') }}</p>
+                                    @endif
+                                    <p class="date">{{ $review->getAttributeTranslate('date_create_review') }}</p>
+                                </div>
+                                @if($review->getAttributeTranslate('profile_foto') )
+                                    <div id="profile-huge" class="profile-image" style="background: url('{{ asset( $review->getAttributeTranslate('profile_foto')) }}')"></div>
+                                @else
+                                    <div id="profile-huge" class="profile-image" style="background: url('{{ asset('img/frontend/profile.jpg') }}')" ></div>
+                                @endif
+                            </div>
                         </div>
-                        <div class="card-footer">
-                            <i class="fab fa-facebook-square"></i>
-                            <p class="name">Mark</p>
-                            <p class="date">20.02.2018</p>
-                        </div>
-                        <div id="profile-huge" class="profile-image" style="background: url(img/dpx_0259.jpg);"></div>
-                    </div>
+                    @endforeach
                 </div>
-                <div class="d-flex justify-content-center">
-                    <div class="card feedback-card">
-                        <div class="card-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        </div>
-                        <div class="card-footer">
-                            <i class="fab fa-facebook-square"></i>
-                            <p class="name">Mark</p>
-                            <p class="date">20.02.2018</p>
-                        </div>
-                        <div class="profile-image" style="background: url(img/dpx_0259.jpg);"></div>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <div class="card feedback-card">
-                        <div class="card-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                        </div>
-                        <div class="card-footer">
-                            <i class="fab fa-facebook-square"></i>
-                            <p class="name">Mark</p>
-                            <p class="date">20.02.2018</p>
-                        </div>
-                        <div class="profile-image" style="background: url(img/dpx_0259.jpg);"></div>
-                    </div>
-                </div>
-            </div>
             <div id="feedback-arrow-left">
                 <div class="div-arrows div-a-f">
                     <div class="arrow-left f-arrow-left">
@@ -375,190 +388,97 @@
             </div>
         </div>
         <div class="feedback-button">
-            <a href="#">Всі відгуки</a>
-            <a href="#">Залишити відгук</a>
+            <a href="#">{{ trans('base.all_reviews') }}</a>
+            <a data-toggle="modal" data-target="#exampleModal2">{{ trans('base.add_review') }}</a>
         </div>
     </div>
     
     <div class="container-fluid pb-5 back-f4f4f4">
         <div class="row text-center">
             <div class="col">
-                <h2 class="section-header-huge pb-5">Cхожі номери</h2>
+                <h2 class="section-header-huge pb-5">{{ trans('base.same_room') }}</h2>
             </div>
         </div>
         <div class="row justify-content-center no-gutters px-md-5 px-0">
-            <div class="col-xl-4 col-lg-6 p-2 mt-4">
-                <a href="#" class="a-card">
-                    <div class="apart-small-card shadow-hover">
-                        <div class="small-card-image" style="background-image: url(img/hotels/beardvir.jpg)"></div>
-                        <div class="row pt-3  px-md-4 px-3">
-                            <div class="col-8">
-                                <h5 class="small-card-header">напівлюкс із каміном</h5>
+        <?php $i = 0 ?>
+            @foreach($children_rooms->take(3) as $key => $room)
+                    <!-- Типова мала карточка номеру -->
+                    <div class="col-xl-4 col-lg-6 p-2 mt-4">
+                        <a href="{{ route('article_show', [$parent_hotel->subdomain, App::getLocale(), 'hotels', $room->article_parent->type, $room->id])}}" class="a-card">
+                            <div class="apart-small-card shadow-hover">
+                                <div class="small-card-image" style="background-image: url('{{ asset( $room->getAttributeTranslate('room_photo')) }}')"></div>
+                                <div class="row pt-3  px-md-4 px-3">
+                                    <div class="col-8">
+                                        <h5 class="small-card-header">{{ str_limit($room->getTranslate('title'), 20) }}</h5>
+                                    </div>
+                                    <!-- <div class="col-4 text-right">
+                                        <small class="alt-dates">з 05.10 по 08.10</small>
+                                    </div> -->
+                                </div>
+                                <div class="row pb-1  px-md-4 px-3">
+                                    <div class="col-8">
+                                        <small class="small-card-hotel">{{ $room->article_parent->getAttributeTranslate('type_build')}} {{ $room->article_parent->getTranslate('title')}}</small>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <p class="location-text"><i class="fas fa-map-marker-alt color-ff8c00"></i> {{ $room->article_parent->getAttributeTranslate('location')}}</p>
+                                    </div>
+                                </div>
+                                @if($room->getAttributeTranslate('discount_room'))
+                                <div class="apart-small-card-buy d-flex flex-column justify-content-center">
+                                    <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between">
+                                        {{trans('base.from')}} 
+                                        <span class="d-flex flex-column">
+                                            <span class="old-price-hotel-card custom-line-throught">{{ $room->getAttributeTranslate('base_price')}}</span>
+                                                <strong>
+                                                    {{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * $room->getAttributeTranslate('discount_room')) / 100)}}
+                                                </strong>
+                                            </span> 
+                                            {{trans('base.grn')}}
+                                    </p>
+                                </div>
+                            @else 
+                                <div class="apart-small-card-buy d-flex flex-column justify-content-center">
+                                    <p class="text-center apart-small-card-buy-hotel-p">{{trans('base.from')}} <strong>{{ $room->getAttributeTranslate('base_price')}}</strong> {{trans('base.grn')}}</p>
+                                </div>
+
+                            @endif
+                            <div class="apart-small-card-buy-hover apart-small-hover-hotel">
+                                <p class="d-flex justify-content-center align-items-center text-uppercase">
+                                    {{trans('base.reservation')}}
+                                </p>
+                                </div>
+                            @if($room->getAttributeTranslate('discount_room'))
+                                <div class="apart-small-discount-hotel">
+                                    <p class="text-center py-1 text-uppercase">{{ trans('base.discount')}} {{ $room->getAttributeTranslate('discount_room')}}%</p>
+                                </div>
+                            @endif
                             </div>
-                            <div class="col-4 text-right">
-                                <small class="alt-dates">з 05.10 по 08.10</small>
-                            </div>
-                        </div>
-                        <div class="row pb-1 px-md-4 px-3">
-                            <div class="col-8">
-                                <small class="small-card-hotel">Eлітний котедж ВЕЛИКА ВЕДМЕДИЦЯ</small>
-                            </div>
-                            <div class="col-4 text-right">
-                                <p class="location-text"><i class="fas fa-map-marker-alt color-ff8c00"></i> Яремче</p>
-                            </div>
-                        </div>
-                        <div class="apart-small-card-buy d-flex flex-column justify-content-center">
-                            <p class="text-center font-19 d-flex flex-column">100<sup class="pt-3"><sup>UAH за ніч</sup></sup></p>
-                        </div>
-                        <div class="apart-small-card-buy-hover"><p class="d-flex justify-content-center align-items-center">ЗАБРОНЮВАТИ</p></div>
-                        <div class="apart-small-discount-hotel">
-                            <p class="text-center py-1 text-uppercase">знижка 50%</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xl-4 col-lg-6 p-2 mt-4">
-                <a href="#" class="a-card">
-                    <div class="apart-small-card shadow-hover">
-                        <div class="small-card-image" style="background-image: url(img/hotels/beardvir.jpg)"></div>
-                        <div class="row pt-3  px-md-4 px-3">
-                            <div class="col-8">
-                                <h5 class="small-card-header">напівлюкс із каміном</h5>
-                            </div>
-                            <div class="col-4 text-right">
-                                <small class="alt-dates">з 05.10 по 08.10</small>
-                            </div>
-                        </div>
-                        <div class="row pb-1  px-md-4 px-3">
-                            <div class="col-8">
-                                <small class="small-card-hotel">Eлітний котедж ВЕЛИКА ВЕДМЕДИЦЯ</small>
-                            </div>
-                            <div class="col-4 text-right">
-                                <p class="location-text"><i class="fas fa-map-marker-alt color-ff8c00"></i> Яремче</p>
-                            </div>
-                        </div>
-                        <div class="apart-small-card-buy d-flex flex-column justify-content-center">
-                            <p class="text-center font-19 d-flex flex-column">100<sup class="pt-3"><sup>UAH за ніч</sup></sup></p>
-                        </div>
-                        <div class="apart-small-card-buy-hover"><p class="d-flex justify-content-center align-items-center">ЗАБРОНЮВАТИ</p></div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xl-4 col-lg-6 p-2 mt-4">
-                <a href="#" class="a-card">
-                    <div class="apart-small-card shadow-hover">
-                        <div class="small-card-image" style="background-image: url(img/hotels/beardvir.jpg)"></div>
-                        <div class="row pt-3  px-md-4 px-3">
-                            <div class="col-8">
-                                <h5 class="small-card-header">напівлюкс із каміном</h5>
-                            </div>
-                            <div class="col-4 text-right">
-                                <small class="alt-dates">з 05.10 по 08.10</small>
-                            </div>
-                        </div>
-                        <div class="row pb-1  px-md-4 px-3">
-                            <div class="col-8">
-                                <small class="small-card-hotel">Eлітний котедж ВЕЛИКА ВЕДМЕДИЦЯ</small>
-                            </div>
-                            <div class="col-4 text-right">
-                                <p class="location-text"><i class="fas fa-map-marker-alt color-ff8c00"></i> Яремче</p>
-                            </div>
-                        </div>
-                        <div class="apart-small-card-buy d-flex flex-column justify-content-center">
-                            <p class="text-center font-19 d-flex flex-column">100<sup class="pt-3"><sup>UAH за ніч</sup></sup></p>
-                        </div>
-                        <div class="apart-small-card-buy-hover"><p class="d-flex justify-content-center align-items-center">ЗАБРОНЮВАТИ</p></div>
-                        <div class="apart-small-discount-hotel">
-                            <p class="text-center py-1 text-uppercase">знижка 50%</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+                        </a>
+                    </div>               
+                   
+                    <?php $i++;
+                        
+                    ?>                  
+            @endforeach                       
+
         </div>
     </div>
-
     <div class="container-fluid p-0 back-0f0f0f">
         <div class="row no-gutters">
             <div class="col">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d386950.6511603643!2d-73.70231446529533!3d40.738882125234106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNueva+York!5e0!3m2!1ses-419!2sus!4v1445032011908" width="100%" height="400" frameborder="0" class="border-0" allowfullscreen></iframe>
+                <iframe src="{{ $parent_hotel->getAttributeTranslate('map') }}" width="100%" height="400" frameborder="0" class="border-0" allowfullscreen></iframe>
             </div>
         </div>
-    </div>
+    </div> 
    
-    <div class="container-fluid px-1 back-747474">
-        <form>
-            <div class="row justify-content-center no-gutters py-md-4 py-1">
-                <div class="col-lg-2 col-md-3 my-1">
-                    <div class="input-pattern">
-                        <input type="text" placeholder="Ім'я"/>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 my-1">
-                    <div class="input-pattern">
-                        <input type="tel" placeholder="Номер телефону"/>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 my-1">
-                    <div class="input-pattern">
-                        <a class="btn btn-yellow get-in-touch-btn text-uppercase" data-toggle="modal" data-target="#exampleModal">ЗВ'ЯЗАТИСЬ З НАМИ</a>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content no-rounds">
-                <div class="container-fluid px-0">
-                    <div class="row justify-content-center my-4 px-4">
-                        <div class="col text-center">
-                            <h5 class="section-header-huge pt-0 mb-0">підтвердження бронювання номеру</h5>
-                        </div>
-                    </div>
-                    <div class="h-line-thin"></div>
-                    <div class="row text-center">
-                        <div class="col">
-                            <h3 class="section-header-huge pt-5">напівлюкс із каміном</h3>
-                            <h6 class="section-header-small mb-4">Елітний котедж велика ведмедиця, яремче</h6>
-                        </div>
-                    </div>
-                    <div class="row px-md-5 px-4">
-                        <div class="col-7">
-                            <p class="text-muted"><i class="fa fa-male align-text-top text-orange"></i> х8: 5 дорослих та 3 дитини</p>
-                        </div>
-                        <div class="col-5 text-right">
-                            <p class="text-muted">з 20.08 по 22.08 <i class="fas fa-calendar-alt align-text-top text-orange"></i></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col text-center">
-                            <h2 class="section-header-huge pb-4">9000 UAH</h2>
-                        </div>
-                    </div>
-                    <div class="row text-center py-4 px-4 no-gutters back-f4f4f4">
-                        <div class="col-md-6 my-1">
-                            <div class="input-pattern">
-                                <input type="text" placeholder="Ім'я"/>
-                            </div>
-                        </div>
-                        <div class="col-md-6 my-1">
-                            <div class="input-pattern">
-                                <input type="text" placeholder="Телефон"/>
-                            </div>
-                        </div>
-                        <div class="col my-1">
-                            <div class="input-pattern">
-                                <input type="text" placeholder="Електронна скринька"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row  justify-content-center my-3">
-                        <div class="col-md-6 col-10">
-                            <button type="button" class="btn btn-yellow" data-dismiss="modal">Забронювати</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- callback -->
+        @include('frontend.sections.callback')
+    <!--  END callback -->
+    <!-- modal window -->
+        @include('frontend.sections.modal')
+    <!--  END modal window -->
+    <!-- modal modal_review -->
+        @include('frontend.sections.modal_review')
+    <!--  END modal modal_review -->
+    
 @endsection

@@ -51,7 +51,7 @@
                                     <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between">
                                         {{trans('base.from')}} 
                                         <span class="d-flex flex-column">
-                                            <span class="old-price-hotel-card">{{ $room->getAttributeTranslate('base_price')}}</span>
+                                            <span class="old-price-hotel-card custom-line-throught">{{ $room->getAttributeTranslate('base_price')}}</span>
                                                 <strong>
                                                     {{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * $room->getAttributeTranslate('discount_room')) / 100)}}
                                                 </strong>
@@ -91,28 +91,29 @@
 
         </div>
     </div>
-
-    <!-- Розділ фіч -->
-    <div class="container-fluid pb-5 back-f4f4f4">
-        <div class="row text-center">
-            <div class="col">
-                <h2 class="section-header-huge pb-5 text-uppercase">{{ $categories_data['advantages']->getTranslate('title') }}</h2>
+    @if(isset($children_advantages) AND $children_advantages)
+        <!-- Розділ фіч -->
+        <div class="container-fluid pb-5 back-f4f4f4">
+            <div class="row text-center">
+                <div class="col">
+                    <h2 class="section-header-huge pb-5 text-uppercase">{{ $categories_data['advantages']->getTranslate('title') }}</h2>
+                </div>
             </div>
+            
+            <div id="feature" class="row no-gutters text-center justify-content-center">
+                    <?php $j = 0 ?>
+                    @foreach($children_advantages->take(6) as $advantage)
+                        <div class="col-md-3 col-6 py-2 my-2 mb-5">
+                            {!! $advantage->getAttributeTranslate('icon') !!}
+                            <h5 class="feature-text">{!! $advantage->getTranslate('title') !!}</h5>
+                        </div>
+                        @if($j == 2)<div class="w-100 text-divider"></div>@endif
+                        <?php $j++ ?>
+                    @endforeach  
+                    
+                </div>
         </div>
-        
-        <div id="feature" class="row no-gutters text-center justify-content-center">
-                <?php $j = 0 ?>
-                @foreach($children_advantages->take(6) as $advantage)
-                    <div class="col-md-3 col-6 py-2 my-2 mb-5">
-                        {!! $advantage->getAttributeTranslate('icon') !!}
-                        <h5 class="feature-text">{!! $advantage->getTranslate('title') !!}</h5>
-                    </div>
-                    @if($j == 2)<div class="w-100 text-divider"></div>@endif
-                    <?php $j++ ?>
-                @endforeach  
-                
-            </div>
-    </div>
+    @endif    
     
       <!-- marketings -->
       @include('frontend.sections.marketings')
@@ -144,7 +145,10 @@
     </div>
    
     <!-- reviews_callback -->
-    @include('frontend.sections.reviews_callback')
+        @include('frontend.sections.reviews')
     <!--  END reviews_callback -->
+    <!-- callback -->
+        @include('frontend.sections.callback')
+    <!--  END callback -->
 
 @endsection

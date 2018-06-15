@@ -112,8 +112,11 @@
         @include('frontend.sections.marketings')
     <!--  END marketings -->
     <!-- reviews_callback -->
-        @include('frontend.sections.reviews_callback')
+        @include('frontend.sections.reviews')
     <!--  END reviews_callback -->
+    <!-- callback -->
+        @include('frontend.sections.callback')
+    <!--  END callback -->
 
    
 
