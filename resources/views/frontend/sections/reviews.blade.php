@@ -1,6 +1,6 @@
 @if(isset($reviews) AND count($reviews) !== 0 AND $categories_data['reviews']->active == 1)
 
-<div class="container-fluid pb-5 back-f4f4f4">
+<div class="container-fluid pb-5 back-f4f4f4" id='section-reviews'>
     <div class="row text-center">
         <div class="col">
             <h2 class="section-header-huge">{{ $categories_data['reviews']->getTranslate('title')}}</h2>
@@ -11,8 +11,8 @@
                         <div class="d-flex justify-content-center">
                             <div class="card feedback-card">
                                 <div class="card-body">
-                                {!! str_limit($review->getTranslate('description'), 400) !!}
-                                    @if(strlen($review->getTranslate('description')) > 400)                                            
+                                {!! str_limit($review->getTranslate('description'), 500) !!}
+                                    @if(strlen($review->getTranslate('description')) > 500)                                            
                                         <p><a href="#" class="color-ff8c00">{{ trans('base.more_detale') }}</a></p>
                                     @endif    
                                 </div>

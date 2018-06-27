@@ -96,7 +96,7 @@ $(function () {
   var selectedData = "";
   
   //Start form 
-  $(document).ready(function() {
+  $(document).ready(function() {      
       $('#div-datepicker').hover(function() {
           $('#datepicker').focus();
           unvisibleDatepicker = true;
@@ -190,12 +190,45 @@ $(function () {
       function check_input_guests() {
           var adults = $("#adults").val();
           var children = $("#children").val();
-  
+          setPriceAfterEnterGuests(adults, children);
           if (adults == "0" && children == "0") {
               $("#guests").text("Кількість гостей");
           } else {
               $("#guests").text(adults + " дорослих, " + children + " дітей");
+              //setPriceAfterEnterGuests(adults, children);
           }
+      }
+      /*Custom js*/
+      function setPriceAfterEnterGuests(adults, children){
+          //alert('re');
+          var sumQuantityGuests = (+adults) + (+children);
+          var baseQuantityGuests =  $('#base_guests').text();
+          var maxQuantityGuests =  $('#max_guests').text();
+          var surcharge = $('#surcharge').text();
+          var surcharge_children = $('#surcharge_children').text();
+          if(sumQuantityGuests > baseQuantityGuests || sumQuantityGuests == baseQuantityGuests){
+              var diff = baseQuantityGuests - (+adults);
+              var price = $('span.price').text();                       
+              var days = $('#days').text(); 
+              var result;
+              if(diff > 0){
+                  result = Math.abs(diff - (+children)) * surcharge_children;                  
+                  console.log('Різниця', result);
+              }else{
+                  result = (Math.abs(diff) * surcharge) + (children * surcharge_children);
+                  console.log('Різниця', result);
+              }              
+              $('p.color-black').text(days * (+(price) + result));
+              $('#result_price').text(1 * (+(price) + result));
+          }
+          console.log('Загальна кількість', sumQuantityGuests);
+          console.log('Дорослі', adults);
+          console.log('Діти', children);
+          console.log('Доплата за дорослого', surcharge);
+          console.log('Доплата за дитину', surcharge_children);
+          console.log('Дні', days);
+
+
       }
   });
   //end form
@@ -262,21 +295,60 @@ $(function () {
   $('#datepicker').datepicker({
       range: true,
       minDate: new Date(),
-      dateFormat: "dd.mm",
+      dateFormat: "dd.mm.yyyy",
       position: "bottom left",
       autoClose: true,
       onSelect: function() {
-          var temp = $("#datepicker").val();
+          var temp = $("#datepicker").val();          
           selectedData = temp;
   
-          if (temp.length == 5) {
+          if (temp.length == 10) {
               $("#datepicker").val($("#datepicker").val() + " - дата виїзду");
               selectedData += " - ";
+              
           } else {
-              unvisibleDatepicker = false;
-          }
+            unvisibleDatepicker = false;
+            var range_date = $("#datepicker").val();            
+            var dates = range_date.split("-");
+            var dateStart = dates[0];
+            var dateFinish = dates[1];
+            // if(!dateStart || !dateFinish){
+            //     alert('Введіть дати заїзду та виїзду');    
+            // }
+            var days = (daydiff(parseDate(dateFinish), parseDate(dateStart)));
+            var price = $('#result_price').text(); 
+            $('#days').text(days);           
+            $('p.color-black').text(days*price);
+            if(days == 1){
+                $('#quantity_days').text('UAH за 1 ніч');
+            }else{
+                $('#quantity_days').text('UAH за ' + days + ' ночі');
+            }            
+           }
       }
   });
+    /*Custom js*/
+    function getQuantityDays() {
+        alert('we');
+        var range_date = $("#datepicker").val();
+        console.log('кількість днів===>', range_date);
+        var dates = range_date.split("-");
+        var dateStart = dates[0];
+        var dateFinish = dates[1];
+        // if(!dateStart || !dateFinish){
+        //     alert('Введіть дати заїзду та виїзду');    
+        // }
+        var days = (daydiff(parseDate(dateFinish), parseDate(dateStart)));
+        console.log('кількість днів===>', days);
+        return days;
+    }
+    function parseDate(str) {
+        var mdy = str.split('.');    
+        return new Date(mdy[2], mdy[1]-1, mdy[0]);
+    }
+    function daydiff(second, first) {   
+        return (second-first)/(1000*60*60*24);
+    }
   $('#datepicker').data('datepicker');
   
   if ($('.input-pattern').offset().top + $('.input-pattern').height() + 268 > $(window).innerHeight() + $(window).scrollTop()) {

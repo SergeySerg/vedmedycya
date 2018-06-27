@@ -79,7 +79,7 @@
                         <a href="#section-hotels" class="text-white">{{ $categories_data['hotels']->getTranslate('title') ? $categories_data['hotels']->getTranslate('title') : 'готелі' }}</a><br>
                     @endif
                     @if(isset($reviews) AND count($reviews) !== 0 AND $categories_data['reviews']->active == 1)
-                        <a href="#section-reviews" class="text-white">{{ $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'відгуки' }}</a><br>
+                        <a href="#section-reviews" class="text-white">{{ strstr( $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'відгуки' . ' ', ' ', true ) }}</a><br>
                     @endif
                     @if(isset($contacts) AND count($contacts) !== 0 AND $categories_data['contacts']->active == 1)
                         <a class="text-white"  href="#section-footer">{{ $categories_data['contacts']->getTranslate('title') ? $categories_data['contacts']->getTranslate('title') : 'контакти' }}</a><br>
@@ -139,6 +139,7 @@
 <script defer src="{{ asset('/js/frontend/slick.min.js') }}"></script>
 <script defer src="{{ asset('/js/plugins/sweetalert.min.js') }}"></script>
 <script defer src="{{ asset('/js/frontend/main.js') }}"></script>
+<script defer src="{{ asset('/js/frontend/custom.js') }}"></script>
 
 
 {{-- /JS --}}

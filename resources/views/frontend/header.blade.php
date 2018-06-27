@@ -20,7 +20,7 @@
         </div>
         
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto align-items-center text-center mt-2 mt-xl-0" id="custom-navbar">
+            <ul class="navbar-nav mx-auto align-items-center text-center mt-2 mt-xl-0" id="custom-navbar-thin">
                 <div class="navbar-side-container text-left">
                     <span class="nav-link navbar-phone" href="#">
                         <div class="dropdown">
@@ -42,9 +42,15 @@
                         <a class="btn btn-yellow-custom-little py-1 mt-1" href="#">{{trans('base.reservation')}}</a>
                     </span>
                 </div>
-                <!-- .menu -->
-	            @include('frontend.menu')
-                <!-- END .menu -->
+                @if(!$subdomain)
+                    <!-- .menu -->
+                        @include('frontend.menu')
+                    <!-- END .menu -->
+                @else
+                    <!-- .menu -->
+                        @include('frontend.menu_for_subdomain')
+                    <!-- END .menu -->
+                @endif
                 <div class="navbar-side-container-2 text-right dropdown">
                 <a class="nav-link font-weight-bold"  @if(count($langs) > 1)href="/{{ App::getLocale()}}" @endif>
                         @if(count($langs) > 1)<i class="fas fa-chevron-down mr-2"></i>@endif

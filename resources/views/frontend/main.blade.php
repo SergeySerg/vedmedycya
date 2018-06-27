@@ -13,7 +13,7 @@
     <!-- mobile_messenger -->
         @include('frontend.sections.mobile_messengers')
     <!-- END mobile_messenger -->    
-    <div class="container-fluid px-sm-5">
+    <div class="container-fluid px-sm-5" id='section-hotels'>
         <div class="row text-center">
             <div class="col">
                 <h2 class="section-header-huge">{{ $main->first()->getTranslate('title') }}</h2>
@@ -49,7 +49,7 @@
                                 <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between">
                                     {{trans('base.from')}} 
                                     <span class="d-flex flex-column">
-                                        <span class="old-price-hotel-card">{{ $hotel->getAttributeTranslate('price')}}</span>
+                                        <span class="old-price-hotel-card custom-line-throught">{{ $hotel->getAttributeTranslate('price')}}</span>
                                             <strong>
                                                 {{$hotel->getAttributeTranslate('price') - (($hotel->getAttributeTranslate('price') * $hotel->getAttributeTranslate('discount')) / 100)}}
                                             </strong>
@@ -86,10 +86,10 @@
         </div>
     </div>    
     @if($main->first()->getAttributeTranslate('slogan'))
-        <div class="container-fluid">
+        <div class="container-fluid" id="section-slogan">
             <div class="row justify-content-center px-md-5 px-0 text-center">
                 <div class="col">
-                    <h2 class="section-header-huge section-number-include">{{ trans('base.under') }} <span id="giant-number">9821</span> {{ trans('base.guests') }}</h2>
+                    <h2 class="section-header-huge section-number-include">{{ trans('base.under') }} <span id="giant-number">9821</span> {{ trans('base.guest') }}</h2>
                     <div class="section-description text-lowercase">{!! $main->first()->getAttributeTranslate('slogan') !!}</div>
                 </div>
             </div>

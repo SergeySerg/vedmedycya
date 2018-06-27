@@ -165,7 +165,7 @@
             </div>
             {{--//TODO:order--}}
             <div class="col-md-4 text-md-right text-center">
-                <small id="people_max">{{ trans('base.price_for')}} <i class="fa fa-male align-text-top text-orange"></i> х {{ $article->getAttributeTranslate('base_count_ guests') }}, {{ trans('base.max_count_guests')}} <i class="fa fa-male align-text-top text-orange"></i> х{{ $article->getAttributeTranslate('max_count_guests') }}</small>
+                <small id="people_max">{{ trans('base.price_for')}} <i class="fa fa-male align-text-top text-orange"></i> х <span id='base_guests'>{{ $article->getAttributeTranslate('base_count_ guests') }}</span>, {{ trans('base.max_count_guests')}} <i class="fa fa-male align-text-top text-orange"></i> х<span id='max_guests'>{{ $article->getAttributeTranslate('max_count_guests') }}</span></small>
                 <div class="order-card mt-4">
                     <div class="d-flex justify-content-center margin-left-15">
                         <div class="apart-price-discount back-707070">
@@ -180,11 +180,15 @@
                                         {{ trans('base.grn')}} {{ trans('base.price_night')}}
                                     </sup>
                                 </span>
-                                {{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}
+                                <span class='price'>
+                                    {{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}
+                               </span>                            
                             </p>
                         @else
                             <p class="d-flex align-items-center justify-content-around flex-xl-row flex-md-column color-white py-xl-0 py-md-3 px-xl-3">
-                               {{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}
+                               <span class='price'>
+                                    {{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}
+                               </span>
                                <br>
                                 <sup>
                                     {{ trans('base.grn')}} {{ trans('base.price_night')}}
@@ -192,9 +196,17 @@
                             </p>
                         @endif
                         </div>
+                        {{--for math price--}}
+                            <div id='surcharge' style='display:none'>{{$article->getAttributeTranslate('surcharge') }}</div>
+                            <div id='surcharge_children' style='display:none'>{{$article->getAttributeTranslate('surcharge_children') }}</div>
+                            <div id='surcharge' style='display:none'>{{$article->getAttributeTranslate('surcharge') }}</div>
+                            <div id='days' style='display:none'>1</div>
+                            <div id='result_price' style='display:none'>{{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}</div>
+
+                        {{--/for math price--}}
                         <div class="apart-price back-white d-flex flex-column">
-                            <p class="color-black pt-2 mt-auto">9000</p>
-                            <p class="pt-0 mb-auto"><span class=".color-opacity-5 align-text-top"><sup>UAH за 4 ночі</sup></span></p>
+                            <p class="color-black pt-2 mt-auto">{{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}</p>
+                            <p class="pt-0 mb-auto"><span id='quantity_days' class=".color-opacity-5 align-text-top"><sup>UAH за 1 ніч</sup></span></p>
                         </div>
                     </div>
                     <div id="div-datepicker" class="input-pattern mt-1">

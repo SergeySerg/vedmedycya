@@ -4,7 +4,7 @@
     </li>
 @endif
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="#">{{trans('base.about_us')}}</a>
+        <a class="nav-link my-1 hover-underline" href="#section-slogan">{{trans('base.about_us')}}</a>
     </li>
 
 <li class="nav-item text-center my-xl-1">
