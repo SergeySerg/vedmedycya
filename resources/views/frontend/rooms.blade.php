@@ -206,7 +206,7 @@
                         {{--/for math price--}}
                         <div class="apart-price back-white d-flex flex-column">
                             <p class="color-black pt-2 mt-auto">{{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}</p>
-                            <p class="pt-0 mb-auto"><span id='quantity_days' class=".color-opacity-5 align-text-top"><sup>UAH за 1 ніч</sup></span></p>
+                            <p class="pt-0 mb-auto"><span id='quantity_days' class=".color-opacity-5 align-text-top"><sup>грн за 1 ніч</sup></span></p>
                         </div>
                     </div>
                     <div id="div-datepicker" class="input-pattern mt-1">

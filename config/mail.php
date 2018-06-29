@@ -54,7 +54,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' =>"webtestingstudio@gmail.com" , 'name' => "Project"],
+	'from' => ['address' =>"webtestingstudio@gmail.com" , 'name' => "Велика Ведмедиця"],
 
 	/*
 	|--------------------------------------------------------------------------

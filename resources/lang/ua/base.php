@@ -77,7 +77,11 @@ return [
 	"more_" => 'Детальніше',
 	"order" => 'Замовити',
 	"guest" => 'гостей',
-
+	"confirmation_reservation" => 'підтвердження бронювання номеру',
+	"adults" => 'дорослих',
+	"children" => 'дитини',
+	"from" => 'з',
+	"to" => 'по',
 
 
 	/* Script Contact*/

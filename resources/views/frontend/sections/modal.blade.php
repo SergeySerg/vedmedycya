@@ -4,52 +4,58 @@
                 <div class="container-fluid px-0">
                     <div class="row justify-content-center my-4 px-4">
                         <div class="col text-center">
-                            <h5 class="section-header-huge pt-0 mb-0">підтвердження бронювання номеру</h5>
+                            <h5 class="section-header-huge pt-0 mb-0">
+                                {{ trans('base.confirmation_reservation')}}
+                            </h5>
                         </div>
                     </div>
                     <div class="h-line-thin"></div>
                     <div class="row text-center">
                         <div class="col">
-                            <h3 class="section-header-huge pt-5">напівлюкс із каміном</h3>
-                            <h6 class="section-header-small mb-4">Елітний котедж велика ведмедиця, яремче</h6>
+                            <h3 class="section-header-huge pt-5">
+                                {{ $article->getTranslate('title') }}
+                            </h3>
+                            <h6 class="section-header-small mb-4">{{ $parent_hotel->getAttributeTranslate('type_build')}} {{ $parent_hotel->getTranslate('title')}}, {{ $parent_hotel->getAttributeTranslate('location')}}</h6>
                         </div>
                     </div>
                     <div class="row px-md-5 px-4">
                         <div class="col-7">
-                            <p class="text-muted"><i class="fa fa-male align-text-top text-orange"></i> х8: 5 дорослих та 3 дитини</p>
+                            <p class="text-muted"><i class="fa fa-male align-text-top text-orange"></i> х<span id='sum_guests'></span>: <span id='adults_modal'></span> {{trans('base.adults')}} <span id='children_modal'></span></p>
                         </div>
                         <div class="col-5 text-right">
-                            <p class="text-muted">з 20.08 по 22.08 <i class="fas fa-calendar-alt align-text-top text-orange"></i></p>
+                            <p class="text-muted">{{ trans('base.from')}} <span id='date_from'></span> {{ trans('base.to') }} <span id='date_to'></span> <i class="fas fa-calendar-alt align-text-top text-orange"></i></p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col text-center">
-                            <h2 class="section-header-huge pb-4">9000 UAH</h2>
+                            <h2 class="section-header-huge pb-4"><span id='sum_price'></span> {{ trans('base.grn')}}</h2>
                         </div>
                     </div>
                     <div class="row text-center py-4 px-4 no-gutters back-f4f4f4">
                         <div class="col-md-6 my-1">
                             <div class="input-pattern">
-                                <input type="text" placeholder="Ім'я"/>
+                                <input type="text" required="true" name='name' placeholder="{{ trans('base.name') }}"/>
                             </div>
                         </div>
                         <div class="col-md-6 my-1">
                             <div class="input-pattern">
-                                <input type="text" placeholder="Телефон"/>
+                                <input type="number"  name='phone' placeholder="{{ trans('base.phone') }}"/>
                             </div>
                         </div>
                         <div class="col my-1">
                             <div class="input-pattern">
-                                <input type="text" placeholder="Електронна скринька"/>
+                                <input type="email" required="true" name='email' placeholder="Email"/>
                             </div>
                         </div>
                     </div>
                     <div class="row  justify-content-center my-3">
                         <div class="col-md-6 col-10">
-                            <button type="button" class="btn btn-yellow" data-dismiss="modal">Забронювати</button>
+                            <button name='reserved' type="button" class="btn btn-yellow" data-dismiss="modal">{{ trans('base.reservation') }}</button>
                         </div>
-                    </div>
+                    </div>                    
                 </div>
             </div>
         </div>
     </div>
+    <input type="hidden" name='lang' value="{{ App::getLocale() }}"/>
+    <input type="hidden" name='csrf-token' value="{{csrf_token()}}"/>

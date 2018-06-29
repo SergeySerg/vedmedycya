@@ -106,6 +106,8 @@ Route::group(['domain' => '{subdomain}' . '.' . getSetting('domain'), 'middlewar
 	//Route::post('/{lang}/{type}', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи
 	Route::get('/{lang}/{type}/{link?}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain']);
 	Route::get('/{lang}/{type}/{link}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show']);
+	Route::post('/{lang}/reserved', ['uses' => 'Frontend\ArticleController@reserved','as' => 'reserved']);//Обработчик Обратной связи при заказе номера
+
 	//frontEndRoutes();
 });
 

@@ -185,6 +185,41 @@ class ArticleController extends Controller {
 			]);
 		}
 	}
+	public function reserved(Request $request, $lang)
+	{
+		//dd('reserved');
+		if ($request ->isMethod('post')){
+			/*get [] from request*/
+			$all = $request->json()->all();
+//dd($all);
+			/*make rules for validation*/
+			$rules = [
+				'name' => 'required|max:30',
+				'email' => 'email',
+				'phone' => 'required|max:15'
+			];
+
+			/*validation [] according to rules*/
+			$validator = Validator::make($all, $rules);
+
+			/*send error message after validation*/
+			if ($validator->fails()) {
+				return response()->json(array(
+					'success' => false,
+					'message' => $validator->messages()->first()
+				));
+			}
+			//Send item on admin email address
+			Mail::send('emails.reserved', $all, function($message){
+				$email = getSetting('config.email');
+				$message->to($email, 'Велика Ведмедиця')
+						->subject('Бронювання з сайту Велика Ведмедиця"');
+			});
+			return response()->json([
+				'success' => 'true'
+			]);
+		}
+	}
 	public function callback(Request $request, $lang)
 	{
 		//dd('callback');

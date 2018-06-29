@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{ asset('/css/frontend/slick-theme.css') }}">
     <link href="{{ asset('/css/frontend/datepicker.min.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="{{ asset('/css/frontend/style.css') }}">   
+    <link href="{{ asset('/css/plugins/sweetalert.css') }}" rel="stylesheet">
     <script defer src="{{ asset('/js/frontend/fontawesome-all.js') }}"></script>
 
 </head>

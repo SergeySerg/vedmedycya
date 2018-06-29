@@ -221,12 +221,12 @@ $(function () {
               $('p.color-black').text(days * (+(price) + result));
               $('#result_price').text(1 * (+(price) + result));
           }
-          console.log('Загальна кількість', sumQuantityGuests);
-          console.log('Дорослі', adults);
-          console.log('Діти', children);
-          console.log('Доплата за дорослого', surcharge);
-          console.log('Доплата за дитину', surcharge_children);
-          console.log('Дні', days);
+        //   console.log('Загальна кількість', sumQuantityGuests);
+        //   console.log('Дорослі', adults);
+        //   console.log('Діти', children);
+        //   console.log('Доплата за дорослого', surcharge);
+        //   console.log('Доплата за дитину', surcharge_children);
+        //   console.log('Дні', days);
 
 
       }
@@ -320,9 +320,9 @@ $(function () {
             $('#days').text(days);           
             $('p.color-black').text(days*price);
             if(days == 1){
-                $('#quantity_days').text('UAH за 1 ніч');
+                $('#quantity_days').text('грн за 1 ніч');
             }else{
-                $('#quantity_days').text('UAH за ' + days + ' ночі');
+                $('#quantity_days').text('грн за ' + days + ' ночі');
             }            
            }
       }
