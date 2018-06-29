@@ -215,8 +215,8 @@
                                             </div>
                                         </div>   
                                     </div> -->
-                                    <div class="col-md-4 col-6 px-1"><a href="#" class="btn btn-yellow-overline">{{ trans('base.more_')}}</a></div>
-                                    <div class="col-md-4 col-6 px-1"><a href="#" class="btn btn-yellow">{{ trans('base.order')}}</a></div>
+                                    <div class="col-md-4 col-6 px-1"><a href="{{ route('article_show', [$room->article_parent->subdomain, App::getLocale(), 'hotels', $room->article_parent->type, $room->id])}}" class="btn btn-yellow-overline">{{ trans('base.more_')}}</a></div>
+                                    <div class="col-md-4 col-6 px-1"><a href="{{ route('article_show', [$room->article_parent->subdomain, App::getLocale(), 'hotels', $room->article_parent->type, $room->id])}}" class="btn btn-yellow">{{ trans('base.order')}}</a></div>
                                 </div>
                             </div>
                         </div>
