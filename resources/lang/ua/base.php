@@ -80,8 +80,9 @@ return [
 	"confirmation_reservation" => 'підтвердження бронювання номеру',
 	"adults" => 'дорослих',
 	"children" => 'дитини',
-	"from" => 'з',
+	"from_" => 'з',
 	"to" => 'по',
+	"price_for_person" => 'вартість вказана для :person осіб',
 
 
 	/* Script Contact*/

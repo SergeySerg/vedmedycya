@@ -221,12 +221,12 @@ $(function () {
               $('p.color-black').text(days * (+(price) + result));
               $('#result_price').text(1 * (+(price) + result));
           }
-        //   console.log('Загальна кількість', sumQuantityGuests);
-        //   console.log('Дорослі', adults);
-        //   console.log('Діти', children);
-        //   console.log('Доплата за дорослого', surcharge);
-        //   console.log('Доплата за дитину', surcharge_children);
-        //   console.log('Дні', days);
+          console.log('Загальна кількість', sumQuantityGuests);
+          console.log('Дорослі', adults);
+          console.log('Діти', children);
+          console.log('Доплата за дорослого', surcharge);
+          console.log('Доплата за дитину', surcharge_children);
+          console.log('Дні', days);
 
 
       }

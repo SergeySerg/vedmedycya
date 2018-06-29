@@ -39,7 +39,7 @@
                                 @endif
                             </div>
                         </div>
-                        <a class="btn btn-yellow-custom-little py-1 mt-1" href="#">{{trans('base.reservation')}}</a>
+                        <a class="btn btn-yellow-custom-little py-1 mt-1" href="{{ (!$subdomain) ? route('article_index', [App::getLocale(), 'search']) : route('article_index_subdomain', [$subdomain, App::getLocale(), 'search'])}}">{{trans('base.reservation')}}</a>
                     </span>
                 </div>
                 @if(!$subdomain)

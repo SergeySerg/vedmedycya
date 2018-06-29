@@ -23,7 +23,7 @@
                             <p class="text-muted"><i class="fa fa-male align-text-top text-orange"></i> х<span id='sum_guests'></span>: <span id='adults_modal'></span> {{trans('base.adults')}} <span id='children_modal'></span></p>
                         </div>
                         <div class="col-5 text-right">
-                            <p class="text-muted">{{ trans('base.from')}} <span id='date_from'></span> {{ trans('base.to') }} <span id='date_to'></span> <i class="fas fa-calendar-alt align-text-top text-orange"></i></p>
+                            <p class="text-muted">{{ trans('base.from_')}} <span id='date_from'></span> {{ trans('base.to') }} <span id='date_to'></span> <i class="fas fa-calendar-alt align-text-top text-orange"></i></p>
                         </div>
                     </div>
                     <div class="row">

@@ -68,7 +68,7 @@ Route::group(['domain' => getSetting('domain'), 'prefix'=> getSetting('admin.pre
 /*Frontend group routes*/
 //Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
 Route::group(['domain' => getSetting('domain')], function() {
-	Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
+	Route::get('/{lang}/{type?}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
     // ...
 });
 Route::get('home', 'HomeController@index');//Для відображення результата після логування

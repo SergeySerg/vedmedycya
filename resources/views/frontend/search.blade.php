@@ -68,7 +68,7 @@
     <div class="container-fluid px-sm-5 pb-3">
         <div class="row text-center">
             <div class="col">
-                <h2 class="section-header-huge text-uppercase">{{ trans('base.search')}} {{ count($children_rooms) }} {{ trans('base.count_rooms')}}</h2>
+                <h2 class="section-header-huge text-uppercase">{{ trans('base.search')}} {{ count((!$subdomain) ? $rooms : $children_rooms) }} {{ trans('base.count_rooms')}}</h2>
                 <div class="section-description">
                     {!! $search->first()->getTranslate('short_description') !!}
                 </div>
@@ -78,7 +78,7 @@
     
     <div class="container-fluid pb-5">
         <div class="row justify-content-center pb-5">
-            @foreach($children_rooms as $room)
+            @foreach((!$subdomain) ? $rooms : $children_rooms as $room)
                 <!-- APARTMENT CARD START -->
                 <div class="col-md-11">
                     <div class="apart-card shadow-hover">
@@ -129,7 +129,7 @@
                                         <h3 class="apart-header pb-2">{{ str_limit($room->getTranslate('title'), 50) }}</h3>
                                         <small class="apart-hotel">{{ $room->article_parent->getAttributeTranslate('type_build')}} {{ $room->article_parent->getTranslate('title')}}</small>
                                     </div>
-                                    <div class="col-md-3 col-6 text-md-right"><p class="text-brown-param">{{ trans('base.includes')}}: <i class="fa fa-male align-text-top text-orange"></i> х{{ $room->article_parent->getAttributeTranslate('max_count_guests')}}</p></div>
+                                    <div class="col-md-3 col-6 text-md-right"><p class="text-brown-param">{{ trans('base.includes')}}: <i class="fa fa-male align-text-top text-orange"></i> х{{ $room->getAttributeTranslate('max_count_guests')}}</p></div>
                                     <div class="col-md-3 col-6 text-right"><p class="text-brown-param"><i class="fa fa-map-marker-alt align-text-top text-orange"></i> {{ $room->article_parent->getAttributeTranslate('location')}}</p></div>
                                 </div>
                                 <div class="row">
@@ -137,7 +137,9 @@
                                         <div class="apart-description pt-md-3">
                                             {!! $room->article_parent->getTranslate('short_description') !!}                                        
                                         </div>
-                                        <small class="apart-text-muted">*вартість вказана для двох осіб</small>
+                                        @if($room->getAttributeTranslate('base_count_ guests'))
+                                            <small class="apart-text-muted">*{{ trans('base.price_for_person', ['person' => $room->getAttributeTranslate('base_count_ guests')])}}</small>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="row icons-row mt-4">
@@ -200,7 +202,7 @@
                                     </div>
                                 </div>
                                 <div class="row mt-4 align-items-end no-gutters">
-                                    <div class="col-md-4">
+                                    <!-- <div class="col-md-4">
                                         <div class="row no-gutters justify-content-center mb-md-0 mb-3">
                                             <div class="col-md-12 col-6 text-center text-md-left align-self-center">
                                                 <p class="apart-old-total-price"><b class="custom-line-throught">12000 uah</b></p>
@@ -212,7 +214,7 @@
                                                 <small class="apart-hotel">з 24.05 по 26.05 (2 ночі)</small>
                                             </div>
                                         </div>   
-                                    </div>
+                                    </div> -->
                                     <div class="col-md-4 col-6 px-1"><a href="#" class="btn btn-yellow-overline">{{ trans('base.more_')}}</a></div>
                                     <div class="col-md-4 col-6 px-1"><a href="#" class="btn btn-yellow">{{ trans('base.order')}}</a></div>
                                 </div>
@@ -234,10 +236,10 @@
         </div>
         <div class="row justify-content-center no-gutters px-md-5 px-0 pb-3">
         <?php $i = 0 ?>
-            @foreach($children_rooms->random(3) as $room)
+            @foreach((!$subdomain) ? $rooms->random(3) : $children_rooms->random(3) as $room)
                     <!-- Типова мала карточка номеру -->
                     <div class="col-xl-4 col-lg-6 p-2 mt-4">
-                        <a href="{{ route('article_show', [$subdomain, App::getLocale(), 'hotels', $room->article_parent->type, $room->id])}}" class="a-card">
+                        <a href="{{ route('article_show', [(!$subdomain) ? $room->article_parent->subdomain : $subdomain, App::getLocale(), 'hotels', $room->article_parent->type, $room->id])}}" class="a-card">
                             <div class="apart-small-card shadow-hover">
                                 <div class="small-card-image" style="background-image: url('{{ asset( $room->getAttributeTranslate('room_photo')) }}')"></div>
                                 <div class="row pt-3  px-md-4 px-3">
