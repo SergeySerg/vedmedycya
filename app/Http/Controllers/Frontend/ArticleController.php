@@ -36,7 +36,7 @@ class ArticleController extends Controller {
 				$parent_hotel = Article::where('type', 'vedmegyi-dvir')->first();
 				break;
 				case 'yaremche':
-				$link = 'velyka-vedmedycya';
+				//$link = 'velyka-vedmedycya';
 				$parent_hotel = Article::where('type', 'velyka-vedmedycya')->first();
 				break;
 			}
