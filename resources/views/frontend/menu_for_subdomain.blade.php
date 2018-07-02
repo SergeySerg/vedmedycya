@@ -1,11 +1,9 @@
-@if(isset($main) AND count($main) !== 0 AND $categories_data['main']->active == 1)
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="{{ route('article_index', [App::getLocale()])}}">{{ $categories_data['main']->getTranslate('title') ? $categories_data['main']->getTranslate('title') : 'головна' }}</a>
+        <a class="nav-link my-1 hover-underline" href="{{ route('article_index_subdomain', [$subdomain, App::getLocale(), 'hotels', $link])}}">{{ trans('base.main') }}</a>
     </li>
-@endif
-@if(isset($reviews) AND count($reviews) !== 0 AND $categories_data['reviews']->active == 1)
+@if(isset($servicespaid) AND count($servicespaid) !== 0 AND $categories_data['servicespaid']->active == 1)
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="#section-reviews">{{ strstr( $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'відгуки' . ' ', ' ', true ) }}</a>
+        <a class="nav-link my-1 hover-underline" href="#section-reviews">{{ strstr( $categories_data['servicespaid']->getTranslate('title') ? $categories_data['servicespaid']->getTranslate('title') : 'послуги' . ' ', ' ', true ) }}</a>
     </li>
 @endif
 @if(isset($reviews) AND count($rooms) !== 0 AND $categories_data['rooms']->active == 1)

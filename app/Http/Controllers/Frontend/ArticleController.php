@@ -31,9 +31,11 @@ class ArticleController extends Controller {
 		//if($link){
 			switch($subdomain){
 				case 'bukovel':
+				$link = 'vedmegyi-dvir';
 				$parent_hotel = Article::where('type', $link)->first();
 				break;
 				case 'yaremche':
+				$link = 'vedmegyi-dvir';
 				$parent_hotel = Article::where('type', $link)->first();
 				break;
 			}
@@ -61,7 +63,7 @@ class ArticleController extends Controller {
 		
 		//dump($news);
 		//dd($video->category()->first()->active);
-		return view('frontend.' . $type)->with(compact('parent_hotel'));
+		return view('frontend.' . $type)->with(compact('parent_hotel', 'link'));
 
 	}
 
@@ -211,7 +213,7 @@ class ArticleController extends Controller {
 			Mail::send('emails.reserved', $all, function($message){
 				$email = getSetting('config.email');
 				$message->to($email, 'Велика Ведмедиця')
-						->subject('Бронювання з сайту Велика Ведмедиця"');
+						->subject('Бронювання з сайту Велика Ведмедиця');
 			});
 			return response()->json([
 				'success' => 'true'
@@ -227,9 +229,8 @@ class ArticleController extends Controller {
 
 			/*make rules for validation*/
 			$rules = [
-				'name' => 'required|max:50',
-				'email' => 'required|email',
-				'text' => 'required|max:600'
+				'callback_name' => 'required|max:50',
+				'callback_phone' => 'required|max:15'				
 			];
 
 			/*validation [] according to rules*/
@@ -246,7 +247,7 @@ class ArticleController extends Controller {
 			//Send item on admin email address
 			Mail::send('emails.callback', $all, function($message){
 				$email = getSetting('config.email');
-				$message->to($email, 'Globaltobacco')->subject('Заказ с сайта "Globaltobacco"');
+				$message->to($email, 'Велика Ведмедиця')->subject('Зворотній зв\'язок з сайту Велика Ведмедиця');
 			});
 			return response()->json([
 				'success' => 'true'

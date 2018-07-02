@@ -11,9 +11,9 @@
                         <div class="d-flex justify-content-center">
                             <div class="card feedback-card">
                                 <div class="card-body">
-                                {!! str_limit($review->getTranslate('description'), 500) !!}
-                                    @if(strlen($review->getTranslate('description')) > 500)                                            
-                                        <p><a href="#" class="color-ff8c00">{{ trans('base.more_detale') }}</a></p>
+                                {!! str_limit($review->getTranslate('description'), 400) !!}
+                                    @if(strlen($review->getTranslate('description')) > 400)                                            
+                                        <a href="#" class="color-ff8c00">{{ trans('base.more_detale') }}</a>
                                     @endif    
                                 </div>
                                 <div class="card-footer">

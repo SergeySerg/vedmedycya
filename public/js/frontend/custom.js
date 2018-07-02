@@ -85,6 +85,45 @@ $(function () {
     
     /**********END call-back**************/
     })
+
+    $('#submit-callback').click(function(e){
+        e.preventDefault();        
+        //e.preventDefault();
+        var data = $('form#callback').serialize();
+        var lang =  $("input[name='lang']").val();
+        var token = $("input[name='csrf-token']").val();
+        
+        console.log('Інфо',  data);
+        $.ajax({
+            url: '/' + lang + '/callback',
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            //processData: false,
+            //contentType: false,
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                if (data.success) {
+                    //alert('OK');
+                    swal(trans['base.success'], "", "success");
+                    //jQuery("#callback-order").trigger("reset");
+                    //$("#submit-send").attr('disabled', false);
+                }
+                else {
+                    swal(trans['base.error'], data.message, "error");
+                   // $("#submit-send").attr('disabled', false);
+                }
+            },
+            error: function (data) {
+                swal(trans['base.error']);
+                //$("#submit-send").attr('disabled', false);
+            }
+
+        });  
+    })   
+
     
    
 })

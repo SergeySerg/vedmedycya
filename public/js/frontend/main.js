@@ -221,12 +221,12 @@ $(function () {
               $('p.color-black').text(days * (+(price) + result));
               $('#result_price').text(1 * (+(price) + result));
           }
-          console.log('Загальна кількість', sumQuantityGuests);
-          console.log('Дорослі', adults);
-          console.log('Діти', children);
-          console.log('Доплата за дорослого', surcharge);
-          console.log('Доплата за дитину', surcharge_children);
-          console.log('Дні', days);
+        //   console.log('Загальна кількість', sumQuantityGuests);
+        //   console.log('Дорослі', adults);
+        //   console.log('Діти', children);
+        //   console.log('Доплата за дорослого', surcharge);
+        //   console.log('Доплата за дитину', surcharge_children);
+        //   console.log('Дні', days);
 
 
       }
@@ -327,21 +327,7 @@ $(function () {
            }
       }
   });
-    /*Custom js*/
-    function getQuantityDays() {
-        alert('we');
-        var range_date = $("#datepicker").val();
-        console.log('кількість днів===>', range_date);
-        var dates = range_date.split("-");
-        var dateStart = dates[0];
-        var dateFinish = dates[1];
-        // if(!dateStart || !dateFinish){
-        //     alert('Введіть дати заїзду та виїзду');    
-        // }
-        var days = (daydiff(parseDate(dateFinish), parseDate(dateStart)));
-        console.log('кількість днів===>', days);
-        return days;
-    }
+    /*Custom js*/    
     function parseDate(str) {
         var mdy = str.split('.');    
         return new Date(mdy[2], mdy[1]-1, mdy[0]);

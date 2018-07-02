@@ -57,7 +57,9 @@
                 </div>
                 <div class="col-lg-2 col-md-3 my-1">
                     <div class="input-pattern">
-                        <button type="submit" class="submit-button text-uppercase">{{ trans('base.check_price') }}</button>
+                        <a href='{{ route('article_index_subdomain', [$subdomain, App::getLocale(), 'search']) }}'>
+                            <input type="button" style="width: 100%; height: 100%;background-color: #ff8c00;border: none; cursor: pointer; color: #fff; transition: all 0.4s;"  onmouseover="this.style.backgroundColor='#ff6c00';" onmouseout="this.style.backgroundColor='#ff8c00';" class="submit-button text-uppercase" value="{{ trans('base.check_price') }}">
+                        </a>
                     </div>
                 </div>
             </div>

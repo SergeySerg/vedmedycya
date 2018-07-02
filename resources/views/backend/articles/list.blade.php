@@ -74,7 +74,7 @@
                                 OR $type == 'slides' 
                                 OR $type == 'advantages'
                                 )
-                                Приналежність до готелю                               
+                                Готель                               
                             @else
                                 <i class="icon-time bigger-110 hidden-phone"></i>
                                 {{ trans('backend.date_update') }}
@@ -190,7 +190,7 @@
     $( document ).ready(function() {
         $(function(){
             var oTable1 = $('#sample-table-2').dataTable( {
-                "aaSorting": [[5,'desc']],
+                "aaSorting": [[3,'asc']],
                 "aoColumns": [
                     { "bSortable": false },
                     null, null,null, null,null,

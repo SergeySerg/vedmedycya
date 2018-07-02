@@ -83,6 +83,7 @@ return [
 	"from_" => 'з',
 	"to" => 'по',
 	"price_for_person" => 'вартість вказана для :person осіб',
+	'main' => 'Головна',
 
 
 	/* Script Contact*/

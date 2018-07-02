@@ -21,19 +21,20 @@
                             @endif                    
                         @endforeach                   
                     @else
-                        @foreach($children_marketings as $marketing)                       
-                            <div class="pt-4">
-                            <div class="rest-image" style="background: url('{{ asset( $marketing->getAttributeTranslate('marketing_img')) }}')">
-                                    <div class="left-click"></div>
-                                    <div class="right-click"></div>
-                                </div>
-                                <div class="rest-details">
-                                    <h4 class="text-uppercase">{{ $marketing->getTranslate('title')}}</h4>
-                                    {!! $marketing->getTranslate('short_description') !!}                       
-                                </div>
-                            </div> 
-                        @endforeach 
-
+                        @if(isset($children_marketings) AND $children_marketings)
+                            @foreach($children_marketings as $marketing)                       
+                                <div class="pt-4">
+                                <div class="rest-image" style="background: url('{{ asset( $marketing->getAttributeTranslate('marketing_img')) }}')">
+                                        <div class="left-click"></div>
+                                        <div class="right-click"></div>
+                                    </div>
+                                    <div class="rest-details">
+                                        <h4 class="text-uppercase">{{ $marketing->getTranslate('title')}}</h4>
+                                        {!! $marketing->getTranslate('short_description') !!}                       
+                                    </div>
+                                </div> 
+                            @endforeach 
+                        @endif
                     @endif
                     
                 </div>

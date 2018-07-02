@@ -65,14 +65,6 @@ Route::group(['domain' => getSetting('domain'), 'prefix'=> getSetting('admin.pre
 
 });
 /*/Backend group routes*/
-/*Frontend group routes*/
-//Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
-Route::group(['domain' => getSetting('domain')], function() {
-	Route::get('/{lang}/{type?}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
-    // ...
-});
-Route::get('home', 'HomeController@index');//Для відображення результата після логування
-Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
 
 /*Auth group routes*/
 Route::controllers([
@@ -88,6 +80,18 @@ Route::get(getSetting('admin.prefix') . '/logout', array('as' => 'logout', 'uses
 Route::post('/forgot', array('as' => 'forgot', 'uses' => 'Auth\AuthController@postLogin'));*/
 
 /*/Auth group routes*/
+
+
+/*Frontend group routes*/
+//Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
+Route::group(['domain' => getSetting('domain')], function() {
+	Route::get('/{lang}/{type?}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
+    // ...
+	Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
+
+});
+Route::get('home', 'HomeController@index');//Для відображення результата після логування
+
 
 Route::get('/', 'Frontend\HomeController@index');//Перенаправлення на адресу з локалю
 
@@ -107,6 +111,7 @@ Route::group(['domain' => '{subdomain}' . '.' . getSetting('domain'), 'middlewar
 	Route::get('/{lang}/{type}/{link?}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain']);
 	Route::get('/{lang}/{type}/{link}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show']);
 	Route::post('/{lang}/reserved', ['uses' => 'Frontend\ArticleController@reserved','as' => 'reserved']);//Обработчик Обратной связи при заказе номера
+	Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи
 
 	//frontEndRoutes();
 });
