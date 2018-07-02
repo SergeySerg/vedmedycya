@@ -1,5 +1,5 @@
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="{{ route('article_index_subdomain', [$subdomain, App::getLocale(), 'hotels', $link])}}">{{ trans('base.main') }}</a>
+        <a class="nav-link my-1 hover-underline" href="{{ route('article_index_subdomain', [$subdomain, App::getLocale()])}}">{{ trans('base.main') }}</a>
     </li>
 @if(isset($servicespaid) AND count($servicespaid) !== 0 AND $categories_data['servicespaid']->active == 1)
     <li class="nav-item">

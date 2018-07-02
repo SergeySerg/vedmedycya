@@ -26,17 +26,18 @@ class ArticleController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index($subdomain, $lang, $type, $link=null)
+	public function index($subdomain, $lang, $type=null)
 	{	
+		//dd($type);
 		//if($link){
 			switch($subdomain){
 				case 'bukovel':
-				$link = 'vedmegyi-dvir';
-				$parent_hotel = Article::where('type', $link)->first();
+				//$link = 'vedmegyi-dvir';
+				$parent_hotel = Article::where('type', 'vedmegyi-dvir')->first();
 				break;
 				case 'yaremche':
-				$link = 'vedmegyi-dvir';
-				$parent_hotel = Article::where('type', $link)->first();
+				$link = 'velyka-vedmedycya';
+				$parent_hotel = Article::where('type', 'velyka-vedmedycya')->first();
 				break;
 			}
 		//}
@@ -63,7 +64,7 @@ class ArticleController extends Controller {
 		
 		//dump($news);
 		//dd($video->category()->first()->active);
-		return view('frontend.' . $type)->with(compact('parent_hotel', 'link'));
+		return view((!$type) ? 'frontend.hotels' : 'frontend.' . $type)->with(compact('parent_hotel'));
 
 	}
 

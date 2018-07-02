@@ -73,7 +73,7 @@ if (! function_exists('getIdApart')) {
                 if(!$id) return false;
                 //$id = $article->id;
             if($id){  
-                return '/' . $type .'/' . $id;
+                return $id;
             }
         }
         return false;
