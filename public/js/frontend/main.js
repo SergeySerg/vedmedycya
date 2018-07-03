@@ -42,6 +42,7 @@ $(function () {
   
   if ($(window).width() > 1199) {
       $('.slider-class-2').slick({
+          slidesToShow: 3,
           infinite: true,
           prevArrow: '#p-arrow',
           nextArrow: '#n-arrow',
@@ -64,6 +65,7 @@ $(function () {
       });
   } else {
       $('.slider-class-2').slick({
+          slidesToShow: 3,
           infinite: true,
           prevArrow: '#p-arrow',
           nextArrow: '#n-arrow',
@@ -82,12 +84,18 @@ $(function () {
       $(".slider-class-2").find(".slick-slide").css("padding", "0px");
   }
   
-  $(".apart-image-slider").slick({
-      infinite: true,
-      prevArrow: '#p-arrow',
-      nextArrow: '#n-arrow',
-      speed: 1000
+  $(".apart-image-slider").each(function() {
+      var nArrow = $(this).parent().find('.n-apart-arrow');
+      var pArrow = $(this).parent().find('.p-apart-arrow');
+  
+      $(this).slick({
+          infinite: true,
+          prevArrow: pArrow,
+          nextArrow: nArrow,
+          speed: 1000
+      });
   });
+  
   
   $(".apart-image").height($(".apart-image-slider").height());
   //END SLiders
@@ -96,7 +104,7 @@ $(function () {
   var selectedData = "";
   
   //Start form 
-  $(document).ready(function() {      
+  $(document).ready(function() {
       $('#div-datepicker').hover(function() {
           $('#datepicker').focus();
           unvisibleDatepicker = true;
@@ -195,7 +203,6 @@ $(function () {
               $("#guests").text("Кількість гостей");
           } else {
               $("#guests").text(adults + " дорослих, " + children + " дітей");
-              //setPriceAfterEnterGuests(adults, children);
           }
       }
       /*Custom js*/
@@ -208,27 +215,27 @@ $(function () {
           var surcharge_children = $('#surcharge_children').text();
           if(sumQuantityGuests > baseQuantityGuests || sumQuantityGuests == baseQuantityGuests){
               var diff = baseQuantityGuests - (+adults);
-              var price = $('span.price').text();                       
-              var days = $('#days').text(); 
+              var price = $('span.price').text();
+              var days = $('#days').text();
               var result;
               if(diff > 0){
-                  result = Math.abs(diff - (+children)) * surcharge_children;                  
+                  result = Math.abs(diff - (+children)) * surcharge_children;
                   console.log('Різниця', result);
               }else{
                   result = (Math.abs(diff) * surcharge) + (children * surcharge_children);
                   console.log('Різниця', result);
-              }              
+              }
               $('p.color-black').text(days * (+(price) + result));
               $('#result_price').text(1 * (+(price) + result));
           }
-        //   console.log('Загальна кількість', sumQuantityGuests);
-        //   console.log('Дорослі', adults);
-        //   console.log('Діти', children);
-        //   console.log('Доплата за дорослого', surcharge);
-        //   console.log('Доплата за дитину', surcharge_children);
-        //   console.log('Дні', days);
-
-
+          //   console.log('Загальна кількість', sumQuantityGuests);
+          //   console.log('Дорослі', adults);
+          //   console.log('Діти', children);
+          //   console.log('Доплата за дорослого', surcharge);
+          //   console.log('Доплата за дитину', surcharge_children);
+          //   console.log('Дні', days);
+  
+  
       }
   });
   //end form
@@ -281,15 +288,26 @@ $(function () {
   $(document).ready(function(){
       setBookingIcon();
   
-      $("#input-drop-location").click(function() {
-          $(this).removeClass("add-drop");
+      $(".input-location").click(function() {
+          $(this).parent().removeClass("add-drop");
       });
   
-      $(".input-pattern").hover(function() {
+      $(".input-pattern").mouseover(function() {
           $(this).find(".input-dropdown").addClass("add-drop");
-      }, function() {
+      });
+  
+      $(".input-pattern").mouseout(function() {
           $(this).find(".input-dropdown").removeClass("add-drop");
       });
+  
+      if ($('.raty').length) {
+          $('.raty').raty({
+              starOff: 'icon-star-empty',
+              starOn: 'icon-star-full',
+              starType: 'i',
+              hints: ['', '', '', '', '']
+          });
+      }
   });
   
   $('#datepicker').datepicker({
@@ -299,50 +317,52 @@ $(function () {
       position: "bottom left",
       autoClose: true,
       onSelect: function() {
-          var temp = $("#datepicker").val();          
+          var temp = $("#datepicker").val();
           selectedData = temp;
   
           if (temp.length == 10) {
               $("#datepicker").val($("#datepicker").val() + " - дата виїзду");
               selectedData += " - ";
-              
+  
           } else {
-            unvisibleDatepicker = false;
-            var range_date = $("#datepicker").val();            
-            var dates = range_date.split("-");
-            var dateStart = dates[0];
-            var dateFinish = dates[1];
-            // if(!dateStart || !dateFinish){
-            //     alert('Введіть дати заїзду та виїзду');    
-            // }
-            var days = (daydiff(parseDate(dateFinish), parseDate(dateStart)));
-            var price = $('#result_price').text(); 
-            $('#days').text(days);           
-            $('p.color-black').text(days*price);
-            if(days == 1){
-                $('#quantity_days').text('грн за 1 ніч');
-            }else{
-                $('#quantity_days').text('грн за ' + days + ' ночі');
-            }            
-           }
+              unvisibleDatepicker = false;
+              var range_date = $("#datepicker").val();
+              var dates = range_date.split("-");
+              var dateStart = dates[0];
+              var dateFinish = dates[1];
+              // if(!dateStart || !dateFinish){
+              //     alert('Введіть дати заїзду та виїзду');
+              // }
+              var days = (daydiff(parseDate(dateFinish), parseDate(dateStart)));
+              var price = $('#result_price').text();
+              $('#days').text(days);
+              $('p.color-black').text(days*price);
+              if(days == 1){
+                  $('#quantity_days').text('грн за 1 ніч');
+              }else{
+                  $('#quantity_days').text('грн за ' + days + ' ночі');
+              }
+          }
       }
   });
-    /*Custom js*/    
-    function parseDate(str) {
-        var mdy = str.split('.');    
-        return new Date(mdy[2], mdy[1]-1, mdy[0]);
-    }
-    function daydiff(second, first) {   
-        return (second-first)/(1000*60*60*24);
-    }
+  /*Custom js*/
+  function parseDate(str) {
+      var mdy = str.split('.');
+      return new Date(mdy[2], mdy[1]-1, mdy[0]);
+  }
+  function daydiff(second, first) {
+      return (second-first)/(1000*60*60*24);
+  }
   $('#datepicker').data('datepicker');
   
-  if ($('.input-pattern').offset().top + $('.input-pattern').height() + 268 > $(window).innerHeight() + $(window).scrollTop()) {
-      $('#datepicker').datepicker().data('datepicker').update({
-          position: "top left"
-      });
+  if (document.getElementById('datepicker')) {
+      if ($('.input-pattern').offset().top + $('.input-pattern').height() + 268 > $(window).innerHeight() + $(window).scrollTop()) {
+          $('#datepicker').datepicker().data('datepicker').update({
+              position: "top left"
+          });
   
-      $('.datepickers-container').css("top", $('.datepickers-container').offset().top + 24);
+          $('.datepickers-container').css("top", $('.datepickers-container').offset().top + 24);
+      }
   }
   
   $(".input-dropdown").each(function() {
@@ -372,21 +392,23 @@ $(function () {
           }
       });
   
-      $('#datepicker').datepicker().data('datepicker').update({
-          position: "bottom left"
-      });            
-  
-      if ($('.input-pattern').offset().top + $('.input-pattern').height() + 268 > $(window).innerHeight() + $(window).scrollTop()) {
-          $('.datepickers-container').css("top", 0);
-  
+      if (document.getElementById('datepicker')) {
           $('#datepicker').datepicker().data('datepicker').update({
-              position: "top left"
+              position: "bottom left"
           });            
   
-          $('.datepickers-container').css("top", $('.datepickers-container').offset().top + 24);
-      } else {
-          $('.datepickers-container').css("top", 0);
-      }
+          if ($('.input-pattern').offset().top + $('.input-pattern').height() + 268 > $(window).innerHeight() + $(window).scrollTop()) {
+              $('.datepickers-container').css("top", 0);
+  
+              $('#datepicker').datepicker().data('datepicker').update({
+                  position: "top left"
+              });            
+  
+              $('.datepickers-container').css("top", $('.datepickers-container').offset().top + 24);
+          } else {
+              $('.datepickers-container').css("top", 0);
+          }
+      }   
   
       if (document.getElementById('giant-number')) {
           if (isScrolledIntoView("#giant-number")) {
@@ -407,3 +429,4 @@ $(function () {
       var inputwidth = $('#div-datepicker').width() + "px";
       $('.datepicker').css("width", inputwidth);
   });
+  

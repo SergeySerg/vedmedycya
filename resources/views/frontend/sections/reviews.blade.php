@@ -1,9 +1,9 @@
 @if(isset($reviews) AND count($reviews) !== 0 AND $categories_data['reviews']->active == 1)
 
-<div class="container-fluid pb-5 back-f4f4f4" id='section-reviews'>
+<div class="container-fluid pb-5 back-f4f4f4">
     <div class="row text-center">
         <div class="col">
-            <h2 class="section-header-huge">{{ $categories_data['reviews']->getTranslate('title')}}</h2>
+            <h2 id="feedbackAnchor" class="section-header-huge">{{ $categories_data['reviews']->getTranslate('title')}}</h2>
             <div class="section-description">{!! $categories_data['reviews']->getTranslate('short_description') !!}</div>
             <div class="container-fluid position-relative">
                 <div class="feedback-slider">

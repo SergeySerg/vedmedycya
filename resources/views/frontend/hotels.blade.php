@@ -30,19 +30,19 @@
                         <a href="{{ route('article_show', [$parent_hotel->subdomain, App::getLocale(), 'hotels', $room->article_parent->type, $room->id])}}" class="a-card">
                             <div class="apart-small-card shadow-hover">
                                 <div class="small-card-image" style="background-image: url('{{ asset( $room->getAttributeTranslate('room_photo')) }}')"></div>
-                                <div class="row pt-3  px-md-4 px-3">
-                                    <div class="col-8">
-                                        <h5 class="small-card-header">{{ str_limit($room->getTranslate('title'), 20) }}</h5>
+                                <div class="row pt-3 mb-1 px-md-4 px-3">
+                                    <div class="col-7 d-flex align-items-end">
+                                        <h5 class="small-card-header m-0">{{ str_limit($room->getTranslate('title'), 20) }}</h5>
                                     </div>
                                     <!-- <div class="col-4 text-right">
-                                        <small class="alt-dates">з 05.10 по 08.10</small>
+                                        <p class="alt-dates m-0">з 05.10 по 08.10</p>
                                     </div> -->
                                 </div>
                                 <div class="row pb-1  px-md-4 px-3">
                                     <div class="col-8">
                                         <small class="small-card-hotel">{{ $room->article_parent->getAttributeTranslate('type_build')}} {{ $room->article_parent->getTranslate('title')}}</small>
                                     </div>
-                                    <div class="col-4 text-right">
+                                    <div class="col-5 text-right">
                                         <p class="location-text"><i class="fas fa-map-marker-alt color-ff8c00"></i> {{ $room->article_parent->getAttributeTranslate('location')}}</p>
                                     </div>
                                 </div>

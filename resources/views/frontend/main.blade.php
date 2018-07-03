@@ -16,7 +16,7 @@
     <div class="container-fluid px-sm-5" id='section-hotels'>
         <div class="row text-center">
             <div class="col">
-                <h2 class="section-header-huge">{{ $main->first()->getTranslate('title') }}</h2>
+                <h2 id="hotelsAnchor" class="section-header-huge">{{ $main->first()->getTranslate('title') }}</h2>
                 <h4 class="section-header-small">{{ $main->first()->getAttributeTranslate('location')}}</h4>
                 <div class="section-description">{!! $main->first()->getTranslate('description') !!}</div>
             </div>
@@ -86,10 +86,10 @@
         </div>
     </div>    
     @if($main->first()->getAttributeTranslate('slogan'))
-        <div class="container-fluid" id="section-slogan">
+        <div class="container-fluid">
             <div class="row justify-content-center px-md-5 px-0 text-center">
                 <div class="col">
-                    <h2 class="section-header-huge section-number-include">{{ trans('base.under') }} <span id="giant-number">9821</span> {{ trans('base.guest') }}</h2>
+                    <h2 id="aboutAnchor" class="section-header-huge section-number-include">{{ trans('base.under') }} <span id="giant-number">9821</span> {{ trans('base.guest') }}</h2>
                     <div class="section-description text-lowercase">{!! $main->first()->getAttributeTranslate('slogan') !!}</div>
                 </div>
             </div>

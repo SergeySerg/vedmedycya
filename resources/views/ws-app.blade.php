@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{{ asset('/css/frontend/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/frontend/slick-theme.css') }}">
     <link href="{{ asset('/css/frontend/datepicker.min.css') }}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{ asset('/css/frontend/style.css') }}">   
+    <link rel="stylesheet" href="{{ asset('/css/frontend/style.css') }}?ver={{ $version }}">   
     <link href="{{ asset('/css/plugins/sweetalert.css') }}" rel="stylesheet">
     <script defer src="{{ asset('/js/frontend/fontawesome-all.js') }}"></script>
 
@@ -139,8 +139,9 @@
 <!-- <script  src="{{ asset('/js/frontend/datepicker.en.js') }}"></script> -->
 <script defer src="{{ asset('/js/frontend/slick.min.js') }}"></script>
 <script defer src="{{ asset('/js/plugins/sweetalert.min.js') }}"></script>
-<script defer src="{{ asset('/js/frontend/main.js') }}"></script>
+<script defer src="{{ asset('/js/frontend/main.js') }}?ver={{ $version }}"></script>
 <script defer src="{{ asset('/js/frontend/custom.js') }}"></script>
+<script defer src="{{ asset('/js/frontend/jquery.raty.js') }}"></script>
 
 
 {{-- /JS --}}

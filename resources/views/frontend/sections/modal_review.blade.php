@@ -22,37 +22,28 @@
                     </div>
                     <div class="row my-2">
                         <div class="col px-5">
-                            <p class="section-text-small">чистота
-                            <i class="far fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            </p>
-                            <p class="section-text-small">затишок
-                            <i class="far fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            </p>
-                            <p class="section-text-small">розташування
-                            <i class="far fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            </p>
-                            <p class="section-text-small">смачна кухня
-                            <i class="far fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            </p>
+                            <div class="d-flex justify-content-between mb-2">
+                                <p class="section-text-small m-0 pt-2">чистота</p>
+                                <div class="raty pt-2 color-ff8c00"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <p class="section-text-small m-0 pt-2">затишок</p>
+                                <div class="raty pt-2 color-ff8c00"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <p class="section-text-small m-0 pt-2">розташування</p>
+                                <div class="raty pt-2 color-ff8c00"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <p class="section-text-small m-0 pt-2">смачна кухня</p>
+                                <div class="raty pt-2 color-ff8c00"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row text-center py-4 px-4 no-gutters back-f4f4f4">
+                        <input class="display-none" type="number" name="cleanliness" min="0" max="5" value="0">
+                        <input class="display-none" type="number" name="cosiness" min="0" max="5" value="0">
+                        <input class="display-none" type="number" name="location" min="0" max="5" value="0">
+                        <input class="display-none" type="number" name="deliciously" min="0" max="5" value="0">
+                    </div>                    <div class="row text-center py-4 px-4 no-gutters back-f4f4f4">
                         <div class="col my-1">
                             <textarea rows="3" placeholder="Опишіть ваші враження" class="impression-input" wrap="soft"></textarea>
                         </div>

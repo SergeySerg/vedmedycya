@@ -1,10 +1,10 @@
 @if(isset($hotels) AND count($hotels) !== 0 AND $categories_data['hotels']->active == 1)
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="#section-hotels">{{ $categories_data['hotels']->getTranslate('title') ? $categories_data['hotels']->getTranslate('title') : 'готелі' }}</a>
+        <a class="nav-link my-1 hover-underline" href="#hotelsAnchor">{{ $categories_data['hotels']->getTranslate('title') ? $categories_data['hotels']->getTranslate('title') : 'готелі' }}</a>
     </li>
 @endif
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="#section-slogan">{{trans('base.about_us')}}</a>
+        <a class="nav-link my-1 hover-underline" href="#aboutAnchor">{{trans('base.about_us')}}</a>
     </li>
 
 <li class="nav-item text-center my-xl-1">
@@ -12,12 +12,12 @@
 </li>
 @if(isset($reviews) AND count($reviews) !== 0 AND $categories_data['reviews']->active == 1)
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="#section-reviews">{{ strstr( $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'відгуки' . ' ', ' ', true ) }}</a>
+        <a class="nav-link my-1 hover-underline" href="#feedbackAnchor">{{ strstr( $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'відгуки' . ' ', ' ', true ) }}</a>
     </li>
 @endif
 @if(isset($contacts) AND count($contacts) !== 0 AND $categories_data['contacts']->active == 1)
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="#section-footer">{{ $categories_data['contacts']->getTranslate('title') ? $categories_data['contacts']->getTranslate('title') : 'контакти' }}</a>
+        <a class="nav-link my-1 hover-underline" href="#contactAnchor">{{ $categories_data['contacts']->getTranslate('title') ? $categories_data['contacts']->getTranslate('title') : 'контакти' }}</a>
     </li>
 @endif
 

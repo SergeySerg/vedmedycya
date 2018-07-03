@@ -28,7 +28,7 @@
                     </div>
                     <div class="row">
                         <div class="col text-center">
-                            <h2 class="section-header-huge pb-4"><span id='sum_price'></span> {{ trans('base.grn')}}</h2>
+                            <h2 class="section-header-huge pb-4 pt-2"><span id='sum_price'></span> {{ trans('base.grn')}}</h2>
                         </div>
                     </div>
                     <div class="row text-center py-4 px-4 no-gutters back-f4f4f4">
