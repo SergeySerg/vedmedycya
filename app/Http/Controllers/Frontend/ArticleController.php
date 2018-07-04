@@ -90,8 +90,13 @@ class ArticleController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($subdomain, $lang, $type, $link, $id)
+	public function show(Request $request, $subdomain, $lang, $type, $link, $id)
 	{
+		//if ($request ->isMethod('post')){
+			/*get [] from request*/
+			$all = $request->all();
+			dd($all);
+		//}
 		$parent_hotel = Article::with('article_children')->where('type', $link)->first();
 		$article = Article::where('id', $id)->first();
 		//dd($article);

@@ -431,7 +431,7 @@
                                     <div class="col-8">
                                         <small class="small-card-hotel">{{ $room->article_parent->getAttributeTranslate('type_build')}} {{ $room->article_parent->getTranslate('title')}}</small>
                                     </div>
-                                    <div class="col-5 text-right">
+                                    <div class="col-4 text-right">
                                         <p class="location-text"><i class="fas fa-map-marker-alt color-ff8c00"></i> {{ $room->article_parent->getAttributeTranslate('location')}}</p>
                                     </div>
                                 </div>

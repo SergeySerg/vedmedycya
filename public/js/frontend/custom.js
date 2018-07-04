@@ -1,12 +1,79 @@
-$(function () {
-    var adults, dateStart, dateFinish, children, sumPrice;
-    $('.apart-buy').click(function(e){
-        e.preventDefault();
+$(function () {    
+    var adults, dateStart, dateFinish, children, sumPrice, redirectPath;
+    /*get params for redirect to search page*/
+    $('a.redirect').click(function(e){        
+        var selectHotelName = $('#location').val();
         adults = $("#adults").val();
         range_date = $("#datepicker").val();
         dates = range_date.split("-");
         dateStart = dates[0];
         dateFinish = dates[1];
+        var token = $("input[name='csrf-token']").val();
+
+        
+        if(!dateStart || !dateFinish){
+            alert('Введіть дати заїзду та виїзду');   
+            return false; 
+        }
+        if(adults == 0 ){
+            alert('Введіть кількість гостей');
+            return false;     
+        }
+        children = $("#children").val();
+        data = {            
+            adults: adults,
+            children: children,
+            dateStart: dateStart,
+            dateFinish: dateFinish                 
+        }
+        data = JSON.stringify(data);
+        console.log('Дата', data);
+        // localStorage.setItem('dateStart', dateStart);
+        // localStorage.setItem('dateFinish', dateFinish);
+        // localStorage.setItem('adults', adults);
+        // localStorage.setItem('children', children);
+        $.ajax({
+            url: redirectPath,
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': token,               
+                // 'Access-Control-Allow-Origin': '*',
+                // 'Access-Control-Allow-Credentials': true,
+                
+            },
+            crossDomain: true,
+            // processData: false,
+            // contentType: false,
+            data: data,
+            dataType: "json"            
+
+        });  
+        if(!selectHotelName){
+            e.preventDefault();
+            alert('Введіть готель для перевірки цін');
+            return false;
+        }
+        
+        
+    })   
+    $('.input-location').click(function(){        
+        redirectPath = $(this).attr('data-redirect');  
+        $("a.redirect").prop('href', redirectPath);
+        console.log('Ссилка для переходу', redirectPath);      
+        //console.log('Шлях', redirectPath);    
+    }) 
+    /*/get params for redirect to search page*/
+
+   
+    $('.apart-buy').click(function(e){
+        e.preventDefault();
+        //getCount();
+        adults = $("#adults").val();
+        range_date = $("#datepicker").val();
+        dates = range_date.split("-");
+        dateStart = dates[0];
+        dateFinish = dates[1];
+        
         if(!dateStart || !dateFinish){
             alert('Введіть дати заїзду та виїзду');   
             return false; 
@@ -27,6 +94,7 @@ $(function () {
         $('#sum_guests').text((+children) + (+adults));
         $('#date_from').text(dateStart);
         $('#date_to').text(dateFinish);
+        //saveLocalStorage();
         console.log('Кількість дорослих - ', adults);
         console.log('Кількість дітей - ', children);       
     }) 
@@ -141,4 +209,28 @@ function parseDate(str) {
 }
 function daydiff(second, first) {   
     return (second-first)/(1000*60*60*24);
+}
+function getCount(){
+    adults = $("#adults").val();
+        range_date = $("#datepicker").val();
+        dates = range_date.split("-");
+        dateStart = dates[0];
+        dateFinish = dates[1];
+        
+        if(!dateStart || !dateFinish){
+            alert('Введіть дати заїзду та виїзду');   
+            return false; 
+        }
+        if(adults == 0 ){
+            alert('Введіть кількість гостей');
+            return false;     
+        }
+        children = $("#children").val();
+}
+function saveLocalStorage(){
+    localStorage.setItem('dateStart', dateStart);
+    localStorage.setItem('dateFinish', dateFinish);
+    localStorage.setItem('adults', adults);
+    localStorage.setItem('children', children);
+
 }

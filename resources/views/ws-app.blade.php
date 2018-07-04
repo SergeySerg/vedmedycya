@@ -111,6 +111,7 @@
                     @endforeach                    
                 @endif
             </div>
+            <input type="hidden" name='csrf-token' value="{{csrf_token()}}"/>
             <div class="col-md-7 order-md-1 mt-md-3 mt-5">
                 <p class="footer-text">
                     All right reserved © BigBear <?php echo date("Y");?><br>

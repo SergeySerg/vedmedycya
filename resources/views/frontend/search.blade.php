@@ -81,7 +81,7 @@
             @foreach((!$subdomain) ? $rooms : $children_rooms as $room)
                 <!-- APARTMENT CARD START -->
                 <div class="col-md-11">
-                    <div class="apart-card shadow-hover">
+                    <div class="apart-card shadow-hover mb-5">
                         <div class="row no-gutters">
                             <div class="col-lg-6">
                                 <div class="apart-image-slider">
