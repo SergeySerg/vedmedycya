@@ -256,11 +256,11 @@
                             <label class="control-label" for="form-field-select-1">{{ trans('backend.relation') }}</label>
                             <div class="controls">
                                 <select name="article_id" id="form-field-select-1">
-                                    <option value="">
+                                    <option value="">Brand Page
                                         @foreach($article_group as $article)
                                             @if($article->type == 'vedmegyi-dvir' OR $article->type == 'velyka-vedmedycya')
                                                 </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
-                                            @elseif($type == 'rooms')
+                                            @elseif($type == 'rooms' OR $type == 'reviews')
                                                 </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
                                             @endif                        
                                         @endforeach

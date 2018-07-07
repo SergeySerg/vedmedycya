@@ -89,6 +89,9 @@ return [
 	/* Script Contact*/
 	'success_send_contact' => 'Ваша заявка успішно відправлена!',
 	'error_send_contact' => 'Виникла помилка при відправці заявки!',
+	'success_add_review' => 'Ваш відгук успішно додано!',
+	'error_add_review' => 'Виникла помилка при додованні відгука!',
+
 	/* /Script Contact*/
 
 ];

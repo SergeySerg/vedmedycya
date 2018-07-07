@@ -28,7 +28,7 @@ class FrontendInit {
 		// Get current lang object from db
 		//$currentLang = Lang::where('lang', $request->lang)
 		//	->first();
-			//dd(request()->getHttpHost());
+			//dd($request->all());
 			//dd($request->domain);
 //dd($request->subdomain);
 		$subdomain = $request->subdomain;
@@ -94,7 +94,7 @@ class FrontendInit {
 					}
 					$child_articles = collect($child_articles)->sortByDesc('priority');
 					
-					
+					//dd($child_articles);
 					view()->share('children_' . $category->link, $child_articles);	
 
 				}	
@@ -110,14 +110,18 @@ class FrontendInit {
 //			}
 			//dd($category_item);
 			//share Article		
-				// if($category->link == 'revsettings'){
+				// if($category->link == 'reviews'){
 					
 				// 		dd($category_item);
 					
 				// }	
 			view()->share($category->link, $category_item);
 		}
-		//dd($children_rooms);
+		//session(['key' => 12]);
+		//dd($request->session()->get('test'));	
+		//$value = session('test');
+		//dd($value);
+		//dd($children_reviews);
 		//dd($category_item);
 		//Debugbar::info($category_item);
 		//dd($categories_data);

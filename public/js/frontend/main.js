@@ -301,12 +301,15 @@ $(function () {
       });
   
       if ($('.raty').length) {
-          $('.raty').raty({
+        $('.raty').each(function() {
+          $(this).raty({
               starOff: 'icon-star-empty',
               starOn: 'icon-star-full',
               starType: 'i',
-              hints: ['', '', '', '', '']
+              hints: ['', '', '', '', ''],
+              scoreName: $(this).attr("data-scorename")
           });
+        });
       }
   });
   

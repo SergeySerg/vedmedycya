@@ -87,8 +87,7 @@ Route::post('/forgot', array('as' => 'forgot', 'uses' => 'Auth\AuthController@po
 Route::group(['domain' => getSetting('domain')], function() {
 	Route::get('/{lang}/{type?}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
     // ...
-	Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
-
+	modal_handler();
 });
 Route::get('home', 'HomeController@index');//Для відображення результата після логування
 
@@ -111,16 +110,22 @@ Route::group(['domain' => '{subdomain}' . '.' . getSetting('domain'), 'middlewar
 	Route::get('/{lang}/{type?}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain']);
 	Route::get('/{lang}/{type}/{link}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show']);
 	Route::post('/{lang}/reserved', ['uses' => 'Frontend\ArticleController@reserved','as' => 'reserved']);//Обработчик Обратной связи при заказе номера
-	Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи
-
+	modal_handler();
 	//frontEndRoutes();
 });
+Route::post('saver', function () {
+    // Retrieve a piece of data from the session...
+    //$value = session('key');
 
+    // Specifying a default value...
+    //$value = session('key', 'default');	
+    // Store a piece of data in the session...
+    session(['test' => 'тут']);
+});
 /*Frontend group routes*/
-function frontEndRoutes(){
-	Route::post('/{lang}/{type}', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи
-	Route::get('/{lang}/{type?}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index']);
-	Route::get('/{lang}/{type}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show']);
+function modal_handler(){
+	Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
+	Route::post('/{lang}/add_review', ['uses' => 'Frontend\ArticleController@add_review','as' => 'add_review']);//Обработчик добавления отзыва
 }
 
 

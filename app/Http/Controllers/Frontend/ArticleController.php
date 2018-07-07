@@ -73,8 +73,9 @@ class ArticleController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function indexMain($lang, $type = 'main')
+	public function indexMain(Request $request,$lang, $type = 'main')
 	{	
+		//$request->attributes->add(['myAttribute' => 'myValue']);
 		//dd($type);		
 		// $main_slides = $this->showMainPage('slides');
 		// $main_marketings = $this->showMainPage('marketings');
@@ -94,14 +95,27 @@ class ArticleController extends Controller {
 	{
 		//if ($request ->isMethod('post')){
 			/*get [] from request*/
-			$all = $request->all();
-			dd($all);
+			//$value = session('key');
+		//dd($value);
 		//}
 		$parent_hotel = Article::with('article_children')->where('type', $link)->first();
 		$article = Article::where('id', $id)->first();
 		//dd($article);
 		return view('frontend.rooms')->with(compact('article', 'parent_hotel'));
 	}
+
+	public function showMainPage($type){
+		/*Select slide that check as show_main_page*/
+		$category_item = Category::with('articles')->select('id')->where('link', $type)->first();
+			Debugbar::info($category_item);
+		$main_item = $category_item->articles()->where('attributes->show_main_page', 1)->activeAndSortArticles()->get();
+			Debugbar::info($main_item);
+		return $main_item;
+		
+		 
+		
+	}
+
 
 	/**
 	 * Show the form for creating a new resource.
@@ -260,16 +274,198 @@ class ArticleController extends Controller {
 			]);
 		}
 	}
-	public function showMainPage($type){
-		/*Select slide that check as show_main_page*/
-		$category_item = Category::with('articles')->select('id')->where('link', $type)->first();
-			Debugbar::info($category_item);
-		$main_item = $category_item->articles()->where('attributes->show_main_page', 1)->activeAndSortArticles()->get();
-			Debugbar::info($main_item);
-		return $main_item;
-		
-		 
-		
-	}
+	public function add_review(Request $request, $lang)
+	{
+		//dd('add_review');
+		if ($request ->isMethod('post')){
+			/*get [] from request*/
+			$all = $request->all();
+			
+			/*make rules for validation*/
+			$rules = [
+				'name' => 'required|max:50',
+				//'callback_phone' => 'required|max:15'				
+			];
 
+			/*validation [] according to rules*/
+			$validator = Validator::make($all, $rules);
+
+			/*send error message after validation*/
+			if ($validator->fails()) {
+				return response()->json(array(
+					'success' => false,
+					'message' => $validator->messages()->first()
+				));
+			}			
+			//dd($all);
+			//$all = $this->prepareArticleData($all);
+			
+			$category = Category::where('link', 'reviews')->first();
+			
+			$article_id = $all['article_id'];
+			$all['date_create_review'] = date('Y-m-d');
+			unset($all['article_id']);
+			
+			$data = [
+				'category_id' => $category->id,
+				'article_id' => $article_id,
+				'title' =>  json_encode([config('app.locale') => $all['name']]),
+				'attributes' => json_encode($all)
+
+			];
+			//dd($data);
+			/*Fitch for secure*/
+			// $attributes = [];
+			// $fields = json_decode($category->fields);
+			// $attributes_fields = $fields->attributes;
+			// foreach($all as $key => $value){
+			// 	foreach($attributes_fields as $k => $attr){
+			// 		if($key == $k){						
+			// 			$attributes += [$k => $value];
+			// 		}
+			// 	}
+			// }			
+			//dd(json_encode($attributes));
+			
+			$review = Article::create($data);			
+			$data_to_mail = [
+				'review_id' => $review->id 	
+			];
+			
+			//dd($article->id);
+			//dd($all);
+			
+			//Send item on admin email address
+			Mail::send('emails.add_reviews', $data_to_mail, function($message){
+				$email = getSetting('config.email');
+				$message->to($email, 'Велика Ведмедиця')->subject('Новий відгук');
+			});
+			return response()->json([
+				'success' => 'true'
+			]);
+		}
+	}
+		/* Сreate array for multilanguage (example- (ua|ru|en)) */
+		private function prepareArticleData($all){
+			$langs = Lang::activelangs()->get();		
+			$all = $this->initValuesWithArray($all);
+			//Change format DATE
+			if (isset($all['date']))
+				$all['date'] = date('Y-m-d H:i:s',strtotime($all['date']));
+	
+			// Removing gaps at the beginning and end of each field
+			// foreach($all as $key => $value){
+			// 	$all[$key] = trim($value);
+			// }
+	
+			// Сreate array example (ua|ru|en)
+			foreach($langs as $lang){			
+					
+				//$all['test']+= [ $lang['lang'] => $all["title_{$lang['lang']}"] ];
+				$all['title'] +=  [ $lang['lang'] => $all["title_{$lang['lang']}"] ];
+				$all['short_description'] +=  [ $lang['lang'] => (isset($all["short_description_{$lang['lang']}"]) ? $all["short_description_{$lang['lang']}"] : '') ];
+				$all['description'] +=  [ $lang['lang'] => (isset($all["description_{$lang['lang']}"]) ? $all["description_{$lang['lang']}"] : '') ];
+				$all['meta_title'] +=  [ $lang['lang'] => (isset($all["meta_title_{$lang['lang']}"]) ? $all["meta_title_{$lang['lang']}"] : '') ];
+				$all['meta_description'] +=  [ $lang['lang'] => (isset($all["meta_description_{$lang['lang']}"]) ? $all["meta_description_{$lang['lang']}"] : '') ];
+				$all['meta_keywords'] +=  [ $lang['lang'] => (isset($all["meta_keywords_{$lang['lang']}"]) ? $all["meta_keywords_{$lang['lang']}"] : '') ];
+	
+	
+				/*Block for multilang with Delimiter*/
+				// $all['title'] .= $all["title_{$lang['lang']}"] .'@|;';
+				// $all['short_description'] .= (isset($all["short_description_{$lang['lang']}"]) ? $all["short_description_{$lang['lang']}"] : '') .'@|;';
+				// $all['description'] .= (isset($all["description_{$lang['lang']}"]) ? $all["description_{$lang['lang']}"] : '') .'@|;';
+				// $all['meta_title'] .= (isset($all["meta_title_{$lang['lang']}"]) ? $all["meta_title_{$lang['lang']}"] : '') .'@|;';
+				// $all['meta_description'] .= (isset($all["meta_description_{$lang['lang']}"]) ? $all["meta_description_{$lang['lang']}"] : '') .'@|;';
+				// $all['meta_keywords'] .= (isset($all["meta_keywords_{$lang['lang']}"]) ? $all["meta_keywords_{$lang['lang']}"] : '') .'@|;';
+	
+				//Delete var title_ua,title_ru,title_en
+				unset($all["title_{$lang['lang']}"]);
+				unset($all["short_description_{$lang['lang']}"]);
+				unset($all["description_{$lang['lang']}"]);
+				unset($all["meta_title_{$lang['lang']}"]);
+				unset($all["meta_description_{$lang['lang']}"]);
+				unset($all["meta_keywords_{$lang['lang']}"]);
+			}
+			$all = $this->transformToJson($all);
+			return $all;
+		}
+	
+		/* Сreate array for multilanguage (example- (ua|ru|en)) */
+		private function prepareAttributesData($all){
+			//dd($all);
+			$langs = Lang::activelangs()->get();
+			$first_lang = $langs->first()['lang'];		
+			foreach($all as $key => $value){
+				//dd($value);
+				 
+				if(stristr($key, '_' . $first_lang) !== FALSE){
+					
+					$key_without_lang = str_replace("_{$first_lang}", '', $key);
+					//dd($key_without_lang);
+					/*Block for multilang with Delimiter*/
+					// $all[$key_without_lang] = '';
+					// foreach($langs as $lang){
+					// 	$all[$key_without_lang] .= $all[$key_without_lang . "_{$lang['lang']}"] .'@|;';
+					// 	unset($all[$key_without_lang . "_{$lang['lang']}"]);
+					// }
+					/*/Block for multilang with Delimiter*/
+					$all[$key_without_lang] = [];				
+					
+					foreach($langs as $lang){
+						$all[$key_without_lang] +=  [ $lang['lang'] => $all[$key_without_lang . "_{$lang['lang']}"]];
+						//dd($key);
+						unset($all[$key_without_lang . "_{$lang['lang']}"]);				
+					}
+					$all[$key_without_lang] = json_encode($all[$key_without_lang]);;
+				}		
+				
+				
+					//dd($all[$key]['title']);
+				// if(is_array($all[$key] AND isset($all[$key]['title']) AND $all[$key]['title'])){
+				// 	dd($all[$key]['status']);
+				// 	$all[$key] = json_encode($all[$key]['title']);
+				// 	//dd($all);
+				// }
+				
+				
+				
+			}
+			//dd($all);
+			//dd($all);
+			return $all;
+		}
+		private function initValuesWithDelimiter($all){			
+			$all['title'] = '';
+			$all['short_description'] = '';
+			$all['description'] = '';
+			$all['meta_title'] = '';
+			$all['meta_description'] = '';
+			$all['meta_keywords'] ='';
+	
+			//Removing gaps at the beginning and end of each field
+			foreach($all as $key => $value){
+				$all[$key] = trim($value);
+			}
+			return $all;
+		}
+		private function initValuesWithArray($all){			
+			$all['title'] = [];
+			$all['short_description'] = [];
+			$all['description'] = [];
+			$all['meta_title'] = [];
+			$all['meta_description'] = [];
+			$all['meta_keywords'] = [];
+			return $all;
+		}
+		private function transformToJson($all){		
+			$all['title'] = json_encode($all['title']);
+			$all['short_description'] = json_encode($all['short_description']);
+			$all['description'] = json_encode($all['description']);
+			$all['meta_title'] = json_encode($all['meta_title']);
+			$all['meta_description'] = json_encode($all['meta_description']);
+			$all['meta_keywords'] = json_encode($all['meta_keywords']);		
+			return $all;
+		}
+		
+	
 }

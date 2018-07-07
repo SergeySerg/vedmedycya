@@ -111,6 +111,7 @@
                     @endforeach                    
                 @endif
             </div>
+            <input type="hidden" name='lang' value="{{ App::getLocale() }}"/>
             <input type="hidden" name='csrf-token' value="{{csrf_token()}}"/>
             <div class="col-md-7 order-md-1 mt-md-3 mt-5">
                 <p class="footer-text">
@@ -127,7 +128,9 @@
 <script>
 	var trans = {
 		'base.success': '{{ trans('base.success_send_contact') }}',
-		'base.error': '{{ trans('base.error_send_contact') }}',
+        'base.error': '{{ trans('base.error_send_contact') }}',
+        'base.success_add_review': '{{ trans('base.success_add_review') }}',
+        'base.error_add_review': '{{ trans('base.error_add_review') }}',
 	};
 </script>
 {{--/Файл переводов--}}
@@ -143,6 +146,7 @@
 <script defer src="{{ asset('/js/frontend/main.js') }}?ver={{ $version }}"></script>
 <script defer src="{{ asset('/js/frontend/custom.js') }}"></script>
 <script defer src="{{ asset('/js/frontend/jquery.raty.js') }}"></script>
+<script defer src="{{ asset('/js/frontend/scroll.js') }}"></script>
 
 
 {{-- /JS --}}

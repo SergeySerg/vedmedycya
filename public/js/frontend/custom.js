@@ -33,7 +33,7 @@ $(function () {
         // localStorage.setItem('adults', adults);
         // localStorage.setItem('children', children);
         $.ajax({
-            url: redirectPath,
+            url: 'saver',
             method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': token,               
@@ -41,7 +41,7 @@ $(function () {
                 // 'Access-Control-Allow-Credentials': true,
                 
             },
-            crossDomain: true,
+            //crossDomain: true,
             // processData: false,
             // contentType: false,
             data: data,
@@ -58,7 +58,7 @@ $(function () {
     })   
     $('.input-location').click(function(){        
         redirectPath = $(this).attr('data-redirect');  
-        $("a.redirect").prop('href', redirectPath);
+        $("a.redirect").prop('href', redirectPath + '?name=23');
         console.log('Ссилка для переходу', redirectPath);      
         //console.log('Шлях', redirectPath);    
     }) 
@@ -159,9 +159,8 @@ $(function () {
         //e.preventDefault();
         var data = $('form#callback').serialize();
         var lang =  $("input[name='lang']").val();
-        var token = $("input[name='csrf-token']").val();
-        
-        console.log('Інфо',  data);
+        var token = $("input[name='csrf-token']").val();      
+       
         $.ajax({
             url: '/' + lang + '/callback',
             method: 'POST',
@@ -190,7 +189,48 @@ $(function () {
             }
 
         });  
-    })   
+    }) 
+    /*Add review*/ 
+    $('#send_review').click(function(e){
+        e.preventDefault();        
+        //e.preventDefault();
+        var data = $('form#add_review').serialize();
+
+        console.log('дата відгуку', data);
+        var lang =  $("input[name='lang']").val();
+        var token = $("input[name='csrf-token']").val();      
+       
+        $.ajax({
+            url: '/' + lang + '/add_review',
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': token
+            },
+            //processData: false,
+            //contentType: false,
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                if (data.success) {
+                    //alert('OK');
+                    swal(trans['base.success_add_review'], "", "success");
+                    //jQuery("#callback-order").trigger("reset");
+                    //$("#submit-send").attr('disabled', false);
+                }
+                else {
+                    swal(trans['base.error_add_review'], data.message, "error");
+                   // $("#submit-send").attr('disabled', false);
+                }
+            },
+            error: function (data) {
+                swal(trans['base.error']);
+                //$("#submit-send").attr('disabled', false);
+            }
+
+        });  
+    }) 
+
+    /*/Add review*/ 
 
     
    

@@ -11,27 +11,29 @@
                         <div class="d-flex justify-content-center">
                             <div class="card feedback-card">
                                 <div class="card-body">
-                                {!! str_limit($review->getTranslate('description'), 400) !!}
-                                    @if(strlen($review->getTranslate('description')) > 400)                                            
-                                        <a href="#" class="color-ff8c00">{{ trans('base.more_detale') }}</a>
-                                    @endif    
-                                </div>
-                                <div class="card-footer">
-                                    @if($review->getAttributeTranslate('source'))
-                                        <i class="fab fa-{{lcfirst($review->getAttributeTranslate('source'))}}-square"></i>
-                                        <p class="name">{{ $review->getAttributeTranslate('name') }}
-                                            <small class="text-muted">({{ trans('base.review_from') }} {{ $review->getAttributeTranslate('source') }})</small>
-                                        </p>
+                                    <p>
+                                        {!! str_limit($review->getAttributeTranslate('review'), 400) !!}
+                                        @if(strlen($review->getAttributeTranslate('review')) > 400)                                            
+                                            <a href="#" class="color-ff8c00">{{ trans('base.more_detale') }}</a>
+                                        @endif 
+                                    </p>   
+                                    </div>
+                                    <div class="card-footer">
+                                        @if($review->getAttributeTranslate('source'))
+                                            <i class="fab fa-{{lcfirst($review->getAttributeTranslate('source'))}}-square"></i>
+                                            <p class="name">{{ $review->getAttributeTranslate('name') }}
+                                                <small class="text-muted">({{ trans('base.review_from') }} {{ $review->getAttributeTranslate('source') }})</small>
+                                            </p>
+                                        @else
+                                            <p class="name">{{ $review->getAttributeTranslate('name') }}</p>
+                                        @endif
+                                        <p class="date">{{ $review->getAttributeTranslate('date_create_review') }}</p>
+                                    </div>
+                                    @if($review->getAttributeTranslate('profile_foto') )
+                                        <div id="profile-huge" class="profile-image" style="background: url('{{ asset( $review->getAttributeTranslate('profile_foto')) }}')"></div>
                                     @else
-                                        <p class="name">{{ $review->getAttributeTranslate('name') }}</p>
+                                        <div id="profile-huge" class="profile-image" style="background: url('{{ asset('img/frontend/profile.jpg') }}')" ></div>
                                     @endif
-                                    <p class="date">{{ $review->getAttributeTranslate('date_create_review') }}</p>
-                                </div>
-                                @if($review->getAttributeTranslate('profile_foto') )
-                                    <div id="profile-huge" class="profile-image" style="background: url('{{ asset( $review->getAttributeTranslate('profile_foto')) }}')"></div>
-                                @else
-                                    <div id="profile-huge" class="profile-image" style="background: url('{{ asset('img/frontend/profile.jpg') }}')" ></div>
-                                @endif
                             </div>
                         </div>
                     @endforeach
@@ -55,7 +57,7 @@
             </div>
             <div class="feedback-button">
                 <a href="#">{{ trans('base.all_reviews') }}</a>
-                <a data-toggle="modal" data-target="#exampleModal2">{{ trans('base.add_review') }}</a>
+                <a href="#" data-toggle="modal" data-target="#exampleModal2">{{ trans('base.add_review') }}</a>
             </div>
         </div>
     </div>

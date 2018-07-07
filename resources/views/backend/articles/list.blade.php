@@ -102,6 +102,9 @@
                                 </td>
                                 <td>
                                     <a href="{{ $url }}/articles/{{$type}}/{{$admin_article->id}}">{!! $admin_article->getTranslate('title') !!}</a>
+                                    @if(!$admin_article->active AND $type == 'reviews')
+                                        <span class="label label-info arrowed-in-right arrowed">New</span>                                   
+                                    @endif                                    
                                 </td>
                                 <td  class="hidden-phone">{{ $admin_article->created_at }}</td>
                                 @if($type == 'marketings' 
@@ -116,7 +119,7 @@
 
                                     
                                     )
-                                    <td>@if($admin_article->article_parent) {{ $admin_article->article_parent->getTranslate('title') }}@endif</td>
+                                    <td>@if($admin_article->article_parent) {{ $admin_article->article_parent->getTranslate('title') }}@else Brand Page @endif</td>
                                 @else
                                     <td  class="hidden-phone">{{ $admin_article->updated_at }}</td>
                                 @endif                               
@@ -186,6 +189,7 @@
     </div><!--/.row-fluid-->
 </div>
 <div id="token" style="display: none">{{csrf_token()}}</div>
+
 <script>
     $( document ).ready(function() {
         $(function(){
@@ -199,6 +203,7 @@
         });
     })
 </script>
+
 @stop
 {{-- @if( (Auth::user()->name) == 'root' )
                     <div id="accordion2" class="accordion">

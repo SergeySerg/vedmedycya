@@ -65,7 +65,7 @@ class Article extends Translate {
         else{
             return [];
         }
-    }
+    }    
     public function scopeactiveAndSortArticles($query){
         $query->where ('active',1)
               ->orderBy('priority','desc');
