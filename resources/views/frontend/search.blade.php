@@ -135,7 +135,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="apart-description pt-md-3">
-                                            {!! $room->article_parent->getTranslate('short_description') !!}                                        
+                                            {!! $room->getTranslate('short_description') !!}                                        
                                         </div>
                                         @if($room->getAttributeTranslate('base_count_ guests'))
                                             <small class="apart-text-muted">*{{ trans('base.price_for_person', ['person' => $room->getAttributeTranslate('base_count_ guests')])}}</small>

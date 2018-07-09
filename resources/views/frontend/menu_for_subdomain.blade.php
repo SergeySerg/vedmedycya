@@ -1,14 +1,14 @@
     <li class="nav-item">
         <a class="nav-link my-1 hover-underline" href="{{ route('article_index_subdomain', [$subdomain, App::getLocale()])}}">{{ trans('base.main') }}</a>
     </li>
-@if(isset($servicespaid) AND count($servicespaid) !== 0 AND $categories_data['servicespaid']->active == 1)
+{{--@if(isset($servicespaid) AND count($servicespaid) !== 0 AND $categories_data['servicespaid']->active == 1)
     <li class="nav-item">
         <a class="nav-link my-1 hover-underline" href="#section-reviews">{{ strstr( $categories_data['servicespaid']->getTranslate('title') ? $categories_data['servicespaid']->getTranslate('title') : 'послуги' . ' ', ' ', true ) }}</a>
     </li>
-@endif
-@if(isset($reviews) AND count($rooms) !== 0 AND $categories_data['rooms']->active == 1)
+@endif--}}
+@if(isset($rooms) AND count($rooms) !== 0 AND $categories_data['rooms']->active == 1)
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="#">{{ $categories_data['rooms']->getTranslate('title') ? $categories_data['rooms']->getTranslate('title') : 'номери'}}</a>
+        <a class="nav-link my-1 hover-underline" href="{{ route('article_index_subdomain', [$subdomain, App::getLocale(), 'search']) }}">{{ $categories_data['rooms']->getTranslate('title') ? $categories_data['rooms']->getTranslate('title') : 'номери'}}</a>
     </li>
 @endif
 <li class="nav-item text-center my-xl-1">
@@ -16,16 +16,16 @@
 </li>
 @if(isset($reviews) AND count($reviews) !== 0 AND $categories_data['reviews']->active == 1)
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="#">{{ strstr( $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'відгуки' . ' ', ' ', true ) }}</a>
+        <a class="nav-link my-1 hover-underline" href="#feedbackAnchor">{{ strstr( $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'відгуки' . ' ', ' ', true ) }}</a>
     </li>
 @endif
-@if(isset($discounts) AND count($discounts) !== 0 AND $categories_data['discounts']->active == 1)
+{{--@if(isset($discounts) AND count($discounts) !== 0 AND $categories_data['discounts']->active == 1)
     <li class="nav-item">
         <a class="nav-link my-1 hover-underline" href="#">{{ $categories_data['discounts']->getTranslate('title') ? $categories_data['discounts']->getTranslate('title') : 'акції' }}</a>
     </li>
-@endif
+@endif--}}
 @if(isset($contacts) AND count($contacts) !== 0 AND $categories_data['contacts']->active == 1)
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="#">{{ $categories_data['contacts']->getTranslate('title') ? $categories_data['contacts']->getTranslate('title') : 'контакти' }}</a>
+        <a class="nav-link my-1 hover-underline" href="#contactAnchor">{{ $categories_data['contacts']->getTranslate('title') ? $categories_data['contacts']->getTranslate('title') : 'контакти' }}</a>
     </li>
 @endif

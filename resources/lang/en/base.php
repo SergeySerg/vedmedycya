@@ -36,5 +36,7 @@ return [
 	/* Script Contact*/
 	'success_send_contact' => 'Your application was successfully sent!',
 	'error_send_contact' => 'An error occurred while submitting the application!',
+	'success_add_review' => 'Ваш відгук успішно додано!',
+	'error_add_review' => 'Виникла помилка при додованні відгука!',
 	/* /Script Contact*/
 ];

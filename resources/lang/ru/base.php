@@ -38,6 +38,8 @@ return [
 	/* Script Contact*/
 	'success_send_contact' => 'Ваша заявка успешно отправлена!',
 	'error_send_contact' => 'Возникла ошибка при передачи заявки!',
+	'success_add_review' => 'Ваш відгук успішно додано!',
+	'error_add_review' => 'Виникла помилка при додованні відгука!',
 	/* /Script Contact*/
 
 ];

@@ -2383,3 +2383,7 @@ p.apart-old-total-price .custom-line-throught::after {
 .margin-top-0 {
     margin-top: 0px !important;
 }
+/*Custom css*/
+div#justify > .fa-plus:first-child {
+    display: none;
+}

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="{{ App::getLocale() }}">
 <head>
+<link rel="shortcut icon" href="{{ asset('/img/favicon/favicon.png') }}?1" type="image/x-icon">
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,8 +14,6 @@
 </title>
 <meta name="description" content="@if($categories_data[$type]->getTranslate('meta_description')){{ $categories_data[$type]->getTranslate('meta_description') }} @else МЕРЕЖА ГОТЕЛІВ 'ВЕЛИКА ВЕДМЕДИЦЯ' В ЯРЕМЧЕ ТА БУКОВЕЛІ@endif">
 <meta name="keywords" content="@if($categories_data[$type]->getTranslate('meta_keywords')){{ $categories_data[$type]->getTranslate('meta_keywords') }} @else Велика Ведмедиця @endif"> -->
-
-    <link rel="shortcut icon" href="{{ asset('/img/favicon/favicon.png') }}?1" type="image/x-icon">
 	<!-- <link rel="shortcut icon" href="{{ asset('/img/favicon/favicon.png') }}" >
 	<link rel="apple-touch-icon" href="{{ asset('/img/favicon/apple-touch-icon.png') }}">
 	<link rel="apple-touch-icon" sizes="72x72" href="{{ asset('img/favicon/apple-touch-icon-72x72.png') }}">

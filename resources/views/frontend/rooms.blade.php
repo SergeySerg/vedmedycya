@@ -108,6 +108,7 @@
                 <div id="justify" class="row text-orange text-center no-gutters d-flex">
                 {{--//TODO:write js func--}}
                     @if($article->getAttributeTranslate('breakfast') == 1)
+                        <i class="fa fa-plus mt-3"></i>
                         <div class="col-md-2 col-4">
                             <i class="bb-breakfast fa-3x mobile-text-center"></i><br>
                             <small class="mobile-text-center">{{ trans('base.breakfast')}}</small>
@@ -266,7 +267,7 @@
         </div>
     </div>
     
-    <div class="container-fluid">
+    <div id="feedbackAnchor" class="container-fluid">
         <div class="row text-center px-md-5">
             <div class="col">
                 <h2 class="section-header-huge pt-4">{{ $categories_data['reviews']->getTranslate('title')}}</h2>
@@ -403,7 +404,7 @@
         </div>
         <div class="feedback-button">
             <a href="#">{{ trans('base.all_reviews') }}</a>
-            <a data-toggle="modal" data-target="#exampleModal2">{{ trans('base.add_review') }}</a>
+            <a href="#" data-toggle="modal" data-target="#exampleModal2">{{ trans('base.add_review') }}</a>
         </div>
     </div>
     

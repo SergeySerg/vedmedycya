@@ -37,4 +37,6 @@ return [
 	/* Script Contact*/
 	'success_send_contact' => 'Twoja aplikacja została pomyślnie wysłana!',
 	'error_send_contact' => 'Podczas wysyłania aplikacji wystąpił błąd!',
+	'success_add_review' => 'Ваш відгук успішно додано!',
+	'error_add_review' => 'Виникла помилка при додованні відгука!',
 ];

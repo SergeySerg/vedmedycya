@@ -1,5 +1,8 @@
-$(function () {    
+$(function () {
     var adults, dateStart, dateFinish, children, sumPrice, redirectPath;
+    /*Add check*/
+    $('div.small-features div.col-md-4 p').prepend('<i class="fas fa-check text-orange"></i> ');  
+    
     /*get params for redirect to search page*/
     $('a.redirect').click(function(e){        
         var selectHotelName = $('#location').val();
