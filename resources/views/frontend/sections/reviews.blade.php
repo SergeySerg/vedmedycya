@@ -7,7 +7,7 @@
             <div class="section-description">{!! $categories_data['reviews']->getTranslate('short_description') !!}</div>
             <div class="container-fluid position-relative">
                 <div class="feedback-slider">
-                    @foreach((!$subdomain) ? $reviews->take(5) : $children_reviews->take(5) as $review)
+                    @foreach((!$subdomain) ? $main_reviews : $children_reviews->take(5) as $review)
                         <div class="d-flex justify-content-center">
                             <div class="card feedback-card">
                                 <div class="card-body">

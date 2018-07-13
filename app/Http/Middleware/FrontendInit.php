@@ -37,7 +37,7 @@ class FrontendInit {
 		if(is_null($request->type)){
 			$type = 'main';
 		}
-		// if (!$currentLang){
+		// if ( !$subdomain || !$currentLang || !$type ||$request->type){
 		// 	abort('404');
 		// }
 		$langs = Lang::activelangs()->get()/**/;
@@ -111,8 +111,8 @@ class FrontendInit {
 			//dd($category_item);
 			//share Article		
 				// if($category->link == 'reviews'){
-					
-				// 		dd($category_item);
+				// 	//dd(DB::table('articles')->where('attributes->show_main_page', 1)->get());
+				// 	dd($category_item->where('attributes->show_main_page', '1'));
 					
 				// }	
 			view()->share($category->link, $category_item);

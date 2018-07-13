@@ -85,7 +85,7 @@ Route::post('/forgot', array('as' => 'forgot', 'uses' => 'Auth\AuthController@po
 /*Frontend group routes*/
 //Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
 Route::group(['domain' => getSetting('domain')], function() {
-	Route::get('/{lang}/{type?}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
+	Route::get('/{lang}/{type?}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index'])->where('lang', 'ua|ru|en|pl');
     // ...
 	modal_handler();
 });
@@ -107,21 +107,13 @@ Route::group(['domain' => '{subdomain}' . '.' . getSetting('domain'), 'middlewar
 	//dd('rtyui1');
 	/*Callback group route*/
 	//Route::post('/{lang}/{type}', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи
-	Route::get('/{lang}/{type?}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain']);
-	Route::get('/{lang}/{type}/{link}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show']);
+	Route::get('/{lang}/{type?}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain'])->where('lang', 'ua|ru|en|pl');
+	Route::get('/{lang}/{type}/{link}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show'])->where('lang', 'ua|ru|en|pl');
 	Route::post('/{lang}/reserved', ['uses' => 'Frontend\ArticleController@reserved','as' => 'reserved']);//Обработчик Обратной связи при заказе номера
 	modal_handler();
 	//frontEndRoutes();
 });
-Route::post('saver', function () {
-    // Retrieve a piece of data from the session...
-    //$value = session('key');
 
-    // Specifying a default value...
-    //$value = session('key', 'default');	
-    // Store a piece of data in the session...
-    session(['test' => 'тут']);
-});
 /*Frontend group routes*/
 function modal_handler(){
 	Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара

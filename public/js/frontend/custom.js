@@ -275,5 +275,4 @@ function saveLocalStorage(){
     localStorage.setItem('dateFinish', dateFinish);
     localStorage.setItem('adults', adults);
     localStorage.setItem('children', children);
-
 }

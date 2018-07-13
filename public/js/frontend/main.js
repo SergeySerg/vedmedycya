@@ -105,13 +105,53 @@ $(function () {
   
   //Start form 
   $(document).ready(function() {
-      $('#div-datepicker').hover(function() {
-          $('#datepicker').focus();
-          unvisibleDatepicker = true;
-      }, function() {
-          $('#datepicker').blur();
-      });
-  
+      /*Custom js*/
+      var maxQuantityGuests =  $('#max_guests').text() || 8;
+      var diffMaxQuantityGuests = 0;      
+      var val = 0;     
+      
+        $("#adults_plus").click(function() { 
+            val = 1 + +$("#adults").val();
+            console.log('Val', val);
+            if (diffMaxQuantityGuests == maxQuantityGuests || maxQuantityGuests < val) { 
+                val = maxQuantityGuests;
+                if(maxQuantityGuests > 8) {
+                    val = 8;
+                }
+                alert('Максимальна кількість місць для цього номеру ' + maxQuantityGuests );
+                return false;
+            }
+            $("#adults").val(val);
+            check_input_guests();
+            diffMaxQuantityGuests++;
+        });
+        $("#children_plus").click(function() {           
+            //alert('children_plus');
+            val = 1 + +$("#children").val();            
+            if (val > 4){
+                alert('Максимально можлива кількість дітей - 4'); 
+                val = 4;  
+                return false; 
+            }
+            if (diffMaxQuantityGuests == maxQuantityGuests || maxQuantityGuests < val) {                
+                alert('Максимальна кількість місць для цього номеру ' + maxQuantityGuests );
+                return false;
+                
+            }
+            $("#children").val(val);
+                check_input_guests();
+                console.log('Різниця', diffMaxQuantityGuests);
+                diffMaxQuantityGuests++;
+            
+            });
+        /*/Custom js*/
+        $('#div-datepicker').hover(function() {
+            $('#datepicker').focus();
+            unvisibleDatepicker = true;
+        }, function() {
+            $('#datepicker').blur();
+        });
+      
       $('.datepicker').hover(function() {
           if (unvisibleDatepicker == true) {
               $('#datepicker').focus();
@@ -149,6 +189,7 @@ $(function () {
   
   
        var selectorbarheight = $('#selector-bar-id').height() + "px";
+       
       $('.overflow-hidden').css("height", selectorbarheight);
   
       var inputwidth = $('#div-datepicker').width() + "px";
@@ -157,17 +198,8 @@ $(function () {
       $('.input-location').click(function() {
           $("#location").val($(this).text());
       });
-  
-      $("#adults_plus").click(function() {
-          var val = 1 + +$("#adults").val();
-          if (val > 8) {
-              val = 8;
-          }
-          $("#adults").val(val);
-          check_input_guests();
-      });
-  
       $("#adults_minus").click(function() {
+        diffMaxQuantityGuests--;
           var val = -1 + +$("#adults").val();
           if (val < 0) {
               val = 0;
@@ -176,17 +208,8 @@ $(function () {
           $("#adults").val(val);
           check_input_guests();
       });
-  
-      $("#children_plus").click(function() {
-          var val = 1 + +$("#children").val();
-          if (val > 4) {
-              val = 4;
-          }
-          $("#children").val(val);
-          check_input_guests();
-      });
-  
       $("#children_minus").click(function() {
+        diffMaxQuantityGuests--;
           var val = -1 + +$("#children").val();
           if (val < 0) {
               val = 0;
@@ -206,11 +229,11 @@ $(function () {
           }
       }
       /*Custom js*/
+
       function setPriceAfterEnterGuests(adults, children){
           //alert('re');
           var sumQuantityGuests = (+adults) + (+children);
-          var baseQuantityGuests =  $('#base_guests').text();
-          var maxQuantityGuests =  $('#max_guests').text();
+          var baseQuantityGuests =  $('#base_guests').text();          
           var surcharge = $('#surcharge').text();
           var surcharge_children = $('#surcharge_children').text();
           if(sumQuantityGuests > baseQuantityGuests || sumQuantityGuests == baseQuantityGuests){

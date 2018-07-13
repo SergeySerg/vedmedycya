@@ -80,9 +80,10 @@ class ArticleController extends Controller {
 		// $main_slides = $this->showMainPage('slides');
 		// $main_marketings = $this->showMainPage('marketings');
 		// $main_advantages = $this->showMainPage('advantages');
-		//dd($main_marketings);
-		return view('frontend.' .  $type);
-		//->with(compact('main_slides', 'main_marketings', 'main_advantages'));
+		$main_reviews = $this->showMainPage('reviews');
+		//dd($main_reviews);
+		return view('frontend.' .  $type)
+			->with(compact('main_reviews'));
 			
 	}
 	/**

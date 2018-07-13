@@ -198,9 +198,8 @@
                         @endif
                         </div>
                         {{--for math price--}}
-                            <div id='surcharge' style='display:none'>{{$article->getAttributeTranslate('surcharge') }}</div>
-                            <div id='surcharge_children' style='display:none'>{{$article->getAttributeTranslate('surcharge_children') }}</div>
-                            <div id='surcharge' style='display:none'>{{$article->getAttributeTranslate('surcharge') }}</div>
+                            <div id='surcharge' style='display:none'>{{$article->article_parent->getAttributeTranslate('surcharge') }}</div>
+                            <div id='surcharge_children' style='display:none'>{{$article->article_parent->getAttributeTranslate('surcharge_children') }}</div>
                             <div id='days' style='display:none'>1</div>
                             <div id='result_price' style='display:none'>{{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}</div>
 

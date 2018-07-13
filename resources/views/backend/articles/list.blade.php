@@ -59,9 +59,18 @@
                             ID
                         </th>
                         <th class="center">{{ trans('backend.title') }}</th>
-                        <th class="center hidden-phone">
-                            <i class="icon-time bigger-110 hidden-phone"></i>
-                            {{ trans('backend.date_create') }}
+                        <th class="center">
+                            @if($type == 'marketings'                                
+                                OR $type == 'reviews'                                
+                                OR $type == 'slides'
+                                
+                            )
+                                Відображення на Brand Page                              
+                            @else
+                                <i class="icon-time bigger-110 hidden-phone"></i>
+                                {{ trans('backend.date_create') }}
+                            @endif     
+                            
                         </th>
                         <th class="center">
                             @if($type == 'marketings' 
@@ -106,7 +115,20 @@
                                         <span class="label label-info arrowed-in-right arrowed">New</span>                                   
                                     @endif                                    
                                 </td>
-                                <td  class="hidden-phone">{{ $admin_article->created_at }}</td>
+                                @if($type == 'marketings' 
+                                    OR $type == 'reviews'                                    
+                                    OR $type == 'slides'                                   
+                                    )                                
+                                    <td class="center">
+                                        @if($admin_article->getAttributeTranslate('show_main_page') == 1) 
+                                            <span class="badge badge-success"><i class="icon-ok bigger-120"></i></span> 
+                                        @else 
+                                            <span class="badge badge-important"><i class="icon-remove"></i></span>
+                                        @endif
+                                    </td>
+                                @else
+                                    <td  class="hidden-phone">{{ $admin_article->created_at }}</td>
+                                @endif 
                                 @if($type == 'marketings' 
                                     OR $type == 'rooms'
                                     OR $type == 'contacts'
@@ -116,7 +138,6 @@
                                     OR $type == 'discounts'
                                     OR $type == 'slides'
                                     OR $type == 'advantages'
-
                                     
                                     )
                                     <td>@if($admin_article->article_parent) {{ $admin_article->article_parent->getTranslate('title') }}@else Brand Page @endif</td>
