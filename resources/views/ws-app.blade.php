@@ -96,7 +96,8 @@
                             {{ $categories_data['hotels']->getTranslate('title') ? $categories_data['hotels']->getTranslate('title') : 'готелі' }}
                         </h6>
                         @foreach($hotels as $hotel)
-                            <a href="{{ getIdApart($hotel->type) ? route('article_show', [$hotel->subdomain, App::getLocale(), 'hotels', $hotel->type, getIdApart($hotel->type)]) : route('article_index_subdomain', [$hotel->subdomain, App::getLocale()])}}" class="text-white">{{ $hotel->getTranslate('title')}}</a><br>                            
+                            {{--<a href="{{ getIdApart($hotel->type) ? route('article_show', [$hotel->subdomain, App::getLocale(), 'hotels', $hotel->type, getIdApart($hotel->type)]) : route('article_index_subdomain', [$hotel->subdomain, App::getLocale()])}}" class="text-white">{{ $hotel->getTranslate('title')}}</a><br> --}}                           
+                        
                         @endforeach
                     </div>
                 @endif

@@ -79,3 +79,21 @@ if (! function_exists('getIdApart')) {
         return false;
     }
 }
+
+/*Function return id apartaments*/
+if (! function_exists('setLangToRedirect')) {
+    /**
+     * Format text.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    function setLangToRedirect($currentLang){        
+        if($currentLang === config('app.base_local')){            
+            return '';            
+        }else{
+            return $currentLang;
+        }
+        
+    }
+}

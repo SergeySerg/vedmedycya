@@ -260,7 +260,7 @@
                                         @foreach($article_group as $article)
                                             @if($article->type == 'vedmegyi-dvir' OR $article->type == 'velyka-vedmedycya')
                                                 </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
-                                            @elseif($type == 'rooms' OR $type == 'reviews')
+                                            @elseif($type == 'rooms' OR $type == 'reviews' OR $type == 'hotels')
                                                 </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
                                             @endif                        
                                         @endforeach

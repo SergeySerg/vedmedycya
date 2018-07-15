@@ -18,6 +18,8 @@
 	Route::get('/{lang?}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index'])->where('lang', 'ua|ru|en|pl');
 	Route::get('/{subtype}/{name}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain'])->where('subtype', 'отель|hotel');
 	Route::get('/{lang?}/{subtype}/{name}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain'])->where('subtype', 'отель|hotel');
+	Route::get('/{subtype}/{name}/{url}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show'])->where('lang', 'ua|ru|en|pl');
+	Route::get('/{lang?}/{subtype}/{name}/{url}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show'])->where('lang', 'ua|ru|en|pl');
 	Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
 	Route::post('/{lang}/add_review', ['uses' => 'Frontend\ArticleController@add_review','as' => 'add_review']);//Обработчик добавления отзыва
 	Route::get('/{lang}/{subtype}/{name}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show'])->where('lang', 'ua|ru|en|pl');
@@ -112,16 +114,16 @@ Route::post('/forgot', array('as' => 'forgot', 'uses' => 'Auth\AuthController@po
 /*Backend group routes*/
 
 /*Frontend group routes*/
-Route::group(['domain' => '{subdomain}' . '.' . getSetting('domain'), 'middleware' => 'frontend.init'], function(){
-	//dd('rtyui1');
-	/*Callback group route*/
-	Route::post('/{lang}/{type}', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи
-	Route::get('/{lang?}/{type?}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain'])->where('lang', 'ua|ru|en|pl');
-	Route::get('/{lang}/{type}/{link}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show'])->where('lang', 'ua|ru|en|pl');
-	Route::post('/{lang}/reserved', ['uses' => 'Frontend\ArticleController@reserved','as' => 'reserved']);//Обработчик Обратной связи при заказе номера
-	modal_handler();
-	//frontEndRoutes();
-});
+// Route::group(['domain' => '{subdomain}' . '.' . getSetting('domain'), 'middleware' => 'frontend.init'], function(){
+// 	//dd('rtyui1');
+// 	/*Callback group route*/
+// 	Route::post('/{lang}/{type}', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи
+// 	Route::get('/{lang?}/{type?}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain'])->where('lang', 'ua|ru|en|pl');
+// 	Route::get('/{lang}/{type}/{link}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show'])->where('lang', 'ua|ru|en|pl');
+// 	Route::post('/{lang}/reserved', ['uses' => 'Frontend\ArticleController@reserved','as' => 'reserved']);//Обработчик Обратной связи при заказе номера
+// 	modal_handler();
+// 	//frontEndRoutes();
+// });
 
 /*Frontend group routes*/
 function modal_handler(){

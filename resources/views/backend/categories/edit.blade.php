@@ -280,6 +280,12 @@
                                             <input type="text" name="title_{{$lang->lang}}" value='@if(isset($admin_category)){{ $admin_category->getTranslate('title', $lang->lang) }}@endif' id="form-field-3" placeholder="{{ trans('backend.title_category') }}" />
                                         </div>
                                     </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="form-field-33">URL</label>
+                                        <div class="controls">
+                                            <input type="text" name="url_{{$lang->lang}}" value='@if(isset($admin_category)){{ $admin_category->getTranslate('url', $lang->lang) }}@endif' id="form-field-33" placeholder="url" />
+                                        </div>
+                                    </div>
 
                                     <h4 class="header blue clearfix">{{ trans('backend.short_description_category') }}</h4>
                                     <div class="control-group">

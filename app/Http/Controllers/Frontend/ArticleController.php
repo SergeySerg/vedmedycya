@@ -94,7 +94,7 @@ class ArticleController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show(Request $request, $subdomain, $lang, $type, $link, $id)
+	public function show(Request $request, $lang, $type, $link, $id)
 	{
 		dd('show');
 		//if ($request ->isMethod('post')){

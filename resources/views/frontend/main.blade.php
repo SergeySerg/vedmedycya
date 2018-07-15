@@ -25,9 +25,10 @@
         <?php $i = 0 ?>
         @foreach($hotels as $key => $hotel)
         
-            <div class="col-xl-4 col-lg-6 p-2 mt-4">
-                <a data-id="{{ $hotel->id }}" href="{{ getIdApart($hotel->type) ? route('article_show', [$hotel->subdomain, App::getLocale(), 'hotels', $hotel->type, getIdApart($hotel->type)]) : route('article_index_subdomain', [$hotel->subdomain, App::getLocale()])}}" class="a-card">
-                    
+            <div class="col-xl-4 col-lg-6 p-2 mt-4">            
+                {{--<a data-id="{{ $hotel->id }}" href="{{ getIdApart($hotel->type) ? route('article_show', [$hotel->subdomain, App::getLocale(), 'hotels', $hotel->type, getIdApart($hotel->type)]) : route('article_index_subdomain', [$hotel->subdomain, App::getLocale()])}}" class="a-card">--}}
+                <a data-id="{{ $hotel->id }}" href="{{ $hotel->getAttributeTranslate('is_base_hotel') ? route('article_index_subdomain', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $hotel->getAttributeTranslate('url')]) : route('article_show', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $hotel->getAttributeTranslate('url'), $categories_data['rooms']->getTranslate('url'), $hotel->article_children->where('article_id', $hotel->id)->where('category_id', $categories_data['rooms']->id)->pluck('id')->first()])}}" class="a-card"> 
+
                     <div class="apart-small-card shadow-hover">
                         <div class="small-card-image" style="background-image: url('{{ asset( $hotel->getAttributeTranslate('hotel_photo')) }}')"></div>
                         <div class="row pt-3  px-md-4 px-3">
