@@ -10,6 +10,23 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+/*Frontend group routes*/
+//Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
+//Route::group(['domain' => getSetting('domain')], function() {
+	//Route::get('/', 'Frontend\HomeController@index');//Перенаправлення на адресу з локалю
+
+	Route::get('/{lang?}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index'])->where('lang', 'ua|ru|en|pl');
+	Route::get('/{subtype}/{name}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain'])->where('subtype', 'отель|hotel');
+	Route::get('/{lang?}/{subtype}/{name}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain'])->where('subtype', 'отель|hotel');
+	Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
+	Route::post('/{lang}/add_review', ['uses' => 'Frontend\ArticleController@add_review','as' => 'add_review']);//Обработчик добавления отзыва
+	Route::get('/{lang}/{subtype}/{name}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show'])->where('lang', 'ua|ru|en|pl');
+
+	// ...
+	//modal_handler();
+//});
+Route::get('home', 'HomeController@index');//Для відображення результата після логування
+
 Route::group(['domain' => getSetting('domain'), 'prefix'=> getSetting('admin.prefix'), 'middleware' => ['auth', 'backend.init']], function(){
 
 	//Routes for Articles (Backend)
@@ -82,17 +99,9 @@ Route::post('/forgot', array('as' => 'forgot', 'uses' => 'Auth\AuthController@po
 /*/Auth group routes*/
 
 
-/*Frontend group routes*/
-//Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
-Route::group(['domain' => getSetting('domain')], function() {
-	Route::get('/{lang}/{type?}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index'])->where('lang', 'ua|ru|en|pl');
-    // ...
-	modal_handler();
-});
-Route::get('home', 'HomeController@index');//Для відображення результата після логування
 
 
-Route::get('/', 'Frontend\HomeController@index');//Перенаправлення на адресу з локалю
+
 
 //Route::post('/update_rate', ['uses' => 'Frontend\ArticleController@update_rate','as' => 'update_rate']);//Обновление тарифа
 //Route::get('/update_rate_debug', ['uses' => 'Frontend\ArticleController@update_rate','as' => 'update_rate']);//Обновление тарифа
@@ -106,8 +115,8 @@ Route::get('/', 'Frontend\HomeController@index');//Перенаправленн�
 Route::group(['domain' => '{subdomain}' . '.' . getSetting('domain'), 'middleware' => 'frontend.init'], function(){
 	//dd('rtyui1');
 	/*Callback group route*/
-	//Route::post('/{lang}/{type}', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи
-	Route::get('/{lang}/{type?}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain'])->where('lang', 'ua|ru|en|pl');
+	Route::post('/{lang}/{type}', ['uses' => 'Frontend\ArticleController@contact','as' => 'contact']);//Обработчик Обратной связи
+	Route::get('/{lang?}/{type?}', ['uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain'])->where('lang', 'ua|ru|en|pl');
 	Route::get('/{lang}/{type}/{link}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show'])->where('lang', 'ua|ru|en|pl');
 	Route::post('/{lang}/reserved', ['uses' => 'Frontend\ArticleController@reserved','as' => 'reserved']);//Обработчик Обратной связи при заказе номера
 	modal_handler();

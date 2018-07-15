@@ -26,20 +26,21 @@ class ArticleController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index($subdomain, $lang, $type=null)
+	public function index($subtype=null, $name)
 	{	
-		//dd($type);
+		//dd('index');
+		//dd($name);
 		//if($link){
-			switch($subdomain){
-				case 'bukovel':
-				//$link = 'vedmegyi-dvir';
-				$parent_hotel = Article::where('type', 'vedmegyi-dvir')->first();
-				break;
-				case 'yaremche':
-				//$link = 'velyka-vedmedycya';
-				$parent_hotel = Article::where('type', 'velyka-vedmedycya')->first();
-				break;
-			}
+			// switch($subdomain){
+			// 	case 'bukovel':
+			// 	//$link = 'vedmegyi-dvir';
+			// 	$parent_hotel = Article::where('type', 'vedmegyi-dvir')->first();
+			// 	break;
+			// 	case 'yaremche':
+			// 	//$link = 'velyka-vedmedycya';
+			// 	$parent_hotel = Article::where('type', 'velyka-vedmedycya')->first();
+			// 	break;
+			// }
 		//}
 		
 		//dd($parent_hotel);
@@ -64,8 +65,8 @@ class ArticleController extends Controller {
 		
 		//dump($news);
 		//dd($video->category()->first()->active);
-		return view((!$type) ? 'frontend.hotels' : 'frontend.' . $type)->with(compact('parent_hotel'));
-
+		//return view((!$type) ? 'frontend.hotels' : 'frontend.' . $type)->with(compact('parent_hotel'));
+		return view('frontend.hotels')->with(compact('parent_hotel'));
 	}
 
 	/**
@@ -73,8 +74,9 @@ class ArticleController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function indexMain(Request $request,$lang, $type = 'main')
+	public function indexMain(Request $request, $lang = null, $type = 'main')
 	{	
+		//dd('indexMain');
 		//$request->attributes->add(['myAttribute' => 'myValue']);
 		//dd($type);		
 		// $main_slides = $this->showMainPage('slides');
@@ -94,6 +96,7 @@ class ArticleController extends Controller {
 	 */
 	public function show(Request $request, $subdomain, $lang, $type, $link, $id)
 	{
+		dd('show');
 		//if ($request ->isMethod('post')){
 			/*get [] from request*/
 			//$value = session('key');

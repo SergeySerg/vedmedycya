@@ -12,6 +12,7 @@ use App\Models\Lang;
 use League\Flysystem\Config;
 //use DB;
 use Debugbar;
+//use Config;
 
 
 class FrontendInit {
@@ -25,25 +26,34 @@ class FrontendInit {
 	 */
 	public function handle($request, Closure $next)
 	{
+		//dd('тут');
 		// Get current lang object from db
 		//$currentLang = Lang::where('lang', $request->lang)
 		//	->first();
 			//dd($request->all());
 			//dd($request->domain);
-//dd($request->subdomain);
+
+		if(is_null($request->lang)){
+		// 	$default_lang = Config::get('app.locale');
+		App::setLocale(config('app.locale'));
+		}else{
+		// Locale setting
+		App::setLocale($request->lang);
+		}
+
 		$subdomain = $request->subdomain;
 		//share type
 		$type = $request->type;
 		if(is_null($request->type)){
 			$type = 'main';
 		}
+		
 		// if ( !$subdomain || !$currentLang || !$type ||$request->type){
 		// 	abort('404');
 		// }
 		$langs = Lang::activelangs()->get()/**/;
 		
-		// Locale setting
-		App::setLocale($request->lang);
+		
 		$texts = new Text();
 		//get all Category
 		$categories = Category::with('articles')->activeCategories()->get();
@@ -129,6 +139,7 @@ class FrontendInit {
 
 
 		// Share to views global template variables
+		view()->share('default_lang', config('app.locale'));
 		view()->share('langs', $langs);
 		view()->share('type', $type);
 		view()->share('texts', $texts->init());

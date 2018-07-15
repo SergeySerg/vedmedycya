@@ -8,9 +8,10 @@
             <a id="mobile-lang-toggler" class="font-weight-bold" href="#">
             @if(count($langs) > 1)<i class="fas fa-chevron-down mr-2 text-uppercase"></i>@endif
                 {{ getCurentLang(App::getLocale()) }}
-            </a>
+            </a>    
+                 
             <div class="dropdown-content left-6-px">
-                    @foreach($langs as $key => $lang)												
+                    @foreach($langs as $key => $lang)                      											
 							<a class="toggler-a font-weight-bold text-uppercase" @if(App::getLocale() == $lang->lang) style="display: none" @endif href="{{str_replace(url(App::getLocale()), url($lang->lang), Request::url())}}">{{$lang->country}}</a>
 							{{--@if($key !== count($langs)-2)--}}	
 							{{--<div @if(App::getLocale() == $lang->lang) style="display: none" @endif class="h-line-bold marginy-4-px"></div>--}}
@@ -51,8 +52,8 @@
                         @include('frontend.menu_for_subdomain')
                     <!-- END .menu -->
                 @endif
-                <div class="navbar-side-container-2 text-right dropdown">
-                <a class="nav-link font-weight-bold"  @if(count($langs) > 1)href="/{{ App::getLocale()}}" @endif>
+                <div class="navbar-side-container-2 text-right dropdown">                
+                <a class="nav-link font-weight-bold"  @if(count($langs) > 1) href=@if(App::getLocale() === config('app.base_local')) "/" @else "/{{ App::getLocale()}}"" @endif @endif>
                         @if(count($langs) > 1)<i class="fas fa-chevron-down mr-2"></i>@endif
                         {{ getCurentLang(App::getLocale()) }}
                     </a>
@@ -60,7 +61,7 @@
                         <div class="dropdown-content">
                         <?php $p = 0 ?>					
                             @foreach($langs as $key => $lang)                                                                            
-                                <a id='lang' class="nav-link font-weight-bold padding-4-px text-uppercase" @if(App::getLocale() == $lang->lang) style="display: none" @endif href="{{str_replace(url(App::getLocale()), url($lang->lang), Request::url())}}">{{$lang->country}}</a>
+                                <a id='lang' class="nav-link font-weight-bold padding-4-px text-uppercase" @if(App::getLocale() == $lang->lang) style="display: none" @endif href="{{str_replace(url((App::getLocale() !== config('app.base_local')) ? App::getLocale() : ''), url(($lang->lang !== config('app.base_local')) ? $lang->lang : ''), Request::url())}}">{{$lang->country}}</a>
                                 @if($p < count($langs)-1)	
                                     <div @if(App::getLocale() == $lang->lang) style="display: none" @endif class="h-line-bold marginy-4-px"></div>
                                 @endif

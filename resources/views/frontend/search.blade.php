@@ -135,7 +135,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="apart-description pt-md-3">
-                                            {!! $room->getTranslate('short_description') !!}                                        
+                                            {!! str_limit($room->getTranslate('description') , 200) !!}                                       
                                         </div>
                                         @if($room->getAttributeTranslate('base_count_ guests'))
                                             <small class="apart-text-muted">*{{ trans('base.price_for_person', ['person' => $room->getAttributeTranslate('base_count_ guests')])}}</small>
@@ -202,7 +202,7 @@
                                     </div>
                                 </div>
                                 <div class="row mt-4 align-items-end no-gutters">
-                                    <!-- <div class="col-md-4">
+                                    <div class="col-md-4">
                                         <div class="row no-gutters justify-content-center mb-md-0 mb-3">
                                             <div class="col-md-12 col-6 text-center text-md-left align-self-center">
                                                 <p class="apart-old-total-price"><b class="custom-line-throught">12000 uah</b></p>
@@ -214,7 +214,7 @@
                                                 <small class="apart-hotel">з 24.05 по 26.05 (2 ночі)</small>
                                             </div>
                                         </div>   
-                                    </div> -->
+                                    </div> 
                                     <div class="col-md-4 col-6 px-1"><a href="{{ route('article_show', [$room->article_parent->subdomain, App::getLocale(), 'hotels', $room->article_parent->type, $room->id])}}" class="btn btn-yellow-overline">{{ trans('base.more_')}}</a></div>
                                     <div class="col-md-4 col-6 px-1"><a href="{{ route('article_show', [$room->article_parent->subdomain, App::getLocale(), 'hotels', $room->article_parent->type, $room->id])}}" class="btn btn-yellow">{{ trans('base.order')}}</a></div>
                                 </div>
