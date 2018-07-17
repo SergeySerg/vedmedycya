@@ -9,7 +9,7 @@
                             <i class="fas fa-map-marker-alt input-icon"></i>
                             <div id="input-drop-location" class="input-dropdown px-2">
                                 @foreach($hotels as $hotel)
-                                    <p data-redirect="{{ getIdApart($hotel->type) ? route('article_show', [$hotel->subdomain, App::getLocale(), 'hotels', $hotel->type, getIdApart($hotel->type)]) : route('article_index_subdomain', [$hotel->subdomain, App::getLocale(), 'search'])}}" class="input-location d-flex align-items-center click"><span>{{ $hotel->getTranslate('title')}}<br/><sub> @if($hotel->getAttributeTranslate('location')) ({{ $hotel->getAttributeTranslate('location') }}) @else  @endif</sub></span>
+                                    <p data-redirect="{{ $hotel->getAttributeTranslate('is_base_hotel') ? route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $hotel->getAttributeTranslate('url'), $categories_data['search']->getTranslate('url')]) : route('article_show', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $hotel->getAttributeTranslate('url'), $categories_data['rooms']->getTranslate('url'), $hotel->article_children->where('article_id', $hotel->id)->where('category_id', $categories_data['rooms']->id)->pluck('id')->first()])}}" class="input-location d-flex align-items-center click"><span>{{ $hotel->getTranslate('title')}}<br/><sub> @if($hotel->getAttributeTranslate('location')) ({{ $hotel->getAttributeTranslate('location') }}) @else  @endif</sub></span>
                                     </p>
                                 @endForeach
                             </div>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-lg-2 col-md-3 my-1">
                     <div class="input-pattern">
-                        <a @if(!$subdomain) class='redirect' @endif href='{{ route('article_index_subdomain', [$subdomain, App::getLocale(), 'search']) }}'>
+                        <a @if(!$subdomain) class='redirect' @endif href='{{ route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $subdomain, $categories_data['search']->getTranslate('url')]) }}'>
                             <input type="button" style="width: 100%; height: 100%;background-color: #ff8c00;border: none; cursor: pointer; color: #fff; transition: all 0.4s;"  onmouseover="this.style.backgroundColor='#ff6c00';" onmouseout="this.style.backgroundColor='#ff8c00';" class="submit-button text-uppercase" value="{{ trans('base.check_price') }}">
                         </a>
                     </div>

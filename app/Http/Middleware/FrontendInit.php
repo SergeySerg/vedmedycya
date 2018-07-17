@@ -40,14 +40,21 @@ class FrontendInit {
 		// Locale setting
 		App::setLocale($request->lang);
 		}
+		//dd(route('article_index', [$request->lang]));
 
-		$subdomain = $request->subdomain;
+		if(route('article_index', [$request->lang]) === $request->url()){
+			$subdomain = true;
+		}else{
+			$subdomain = false;
+		}
+		//$subdomain = $request->subdomain;
+		$name = $request->name;
+		$base_article = Article::where('attributes->url->' . App::getLocale(), $name )->first();
 		//share type
 		$type = $request->type;
 		if(is_null($request->type)){
 			$type = 'main';
-		}
-		
+		}		
 		// if ( !$subdomain || !$currentLang || !$type ||$request->type){
 		// 	abort('404');
 		// }
@@ -75,9 +82,9 @@ class FrontendInit {
 							
 				//dd($category_item);
 			//Children articles in request subdomain	
-			if($subdomain){				
+			if($name){				
 				//dd($category->id);
-				$subdomain_children_articles = Article::with('article_children')->where('subdomain', $subdomain)->activeAndSortArticles()->get()
+				$subdomain_children_articles = Article::with('article_children')->where('article_id', $base_article->article_id)->activeAndSortArticles()->get()
 				//dd($subdomain_children_articles);
 				->map(function ($subdomain_child_article) use ($category) {
 					//dd($category);
@@ -120,7 +127,8 @@ class FrontendInit {
 //			}
 			//dd($category_item);
 			//share Article		
-				// if($category->link == 'reviews'){
+				// if($category->link == 'search'){
+				// 	dd($category_item);
 				// 	//dd(DB::table('articles')->where('attributes->show_main_page', 1)->get());
 				// 	dd($category_item->where('attributes->show_main_page', '1'));
 					
@@ -145,7 +153,7 @@ class FrontendInit {
 		view()->share('texts', $texts->init());
 		view()->share('categories_data', $categories_data);
 		view()->share('version', config('app.version'));
-		view()->share('subdomain', $subdomain);
+		view()->share('subdomain', $name);
 		return $next($request);
 	}
 

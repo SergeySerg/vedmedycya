@@ -1,5 +1,5 @@
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="{{ route('article_index_subdomain', [$subdomain, App::getLocale()])}}">{{ trans('base.main') }}</a>
+        <a class="nav-link my-1 hover-underline" href="{{ route('article_index_subdomain', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $subdomain])}}">{{ trans('base.main') }}</a>
     </li>
 {{--@if(isset($servicespaid) AND count($servicespaid) !== 0 AND $categories_data['servicespaid']->active == 1)
     <li class="nav-item">
@@ -8,11 +8,11 @@
 @endif--}}
 @if(isset($rooms) AND count($rooms) !== 0 AND $categories_data['rooms']->active == 1)
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="{{ route('article_index_subdomain', [$subdomain, App::getLocale(), 'search']) }}">{{ $categories_data['rooms']->getTranslate('title') ? $categories_data['rooms']->getTranslate('title') : 'номери'}}</a>
+        <a class="nav-link my-1 hover-underline" href="{{ route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $subdomain, 'search']) }}">{{ $categories_data['rooms']->getTranslate('title') ? $categories_data['rooms']->getTranslate('title') : 'номери'}}</a>
     </li>
 @endif
 <li class="nav-item text-center my-xl-1">
-    <a id="desktop-logo" href="{{ route('article_index', [App::getLocale()])}}"><img class="img-fluid mx-center" src="{{ asset('/img/frontend/logo.png') }}" width="140px"></a>
+    <a id="desktop-logo" href="{{ route('article_index', [setLangToRedirect(App::getLocale())])}}"><img class="img-fluid mx-center" src="{{ asset('/img/frontend/logo.png') }}" width="140px"></a>
 </li>
 @if(isset($reviews) AND count($reviews) !== 0 AND $categories_data['reviews']->active == 1)
     <li class="nav-item">

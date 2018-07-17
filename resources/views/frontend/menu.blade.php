@@ -8,7 +8,7 @@
     </li>
 
 <li class="nav-item text-center my-xl-1">
-    <a id="desktop-logo" href="{{ route('article_index', [App::getLocale()])}}"><img class="img-fluid mx-center" src="{{ asset('/img/frontend/logo.png') }}" width="140px"></a>
+    <a id="desktop-logo" href="{{ route('article_index', [setLangToRedirect(App::getLocale())])}}"><img class="img-fluid mx-center" src="{{ asset('/img/frontend/logo.png') }}" width="140px"></a>
 </li>
 @if(isset($reviews) AND count($reviews) !== 0 AND $categories_data['reviews']->active == 1)
     <li class="nav-item">

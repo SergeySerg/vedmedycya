@@ -10,26 +10,23 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-/*Frontend group routes*/
-//Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
-//Route::group(['domain' => getSetting('domain')], function() {
-	//Route::get('/', 'Frontend\HomeController@index');//Перенаправлення на адресу з локалю
-
-	Route::get('/{lang?}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index'])->where('lang', 'ua|ru|en|pl');
-	Route::get('/{subtype}/{name}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain'])->where('subtype', 'отель|hotel');
-	Route::get('/{lang?}/{subtype}/{name}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain'])->where('subtype', 'отель|hotel');
-	Route::get('/{subtype}/{name}/{url}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show'])->where('lang', 'ua|ru|en|pl');
-	Route::get('/{lang?}/{subtype}/{name}/{url}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show'])->where('lang', 'ua|ru|en|pl');
-	Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
-	Route::post('/{lang}/add_review', ['uses' => 'Frontend\ArticleController@add_review','as' => 'add_review']);//Обработчик добавления отзыва
-	Route::get('/{lang}/{subtype}/{name}/{id}', ['uses' => 'Frontend\ArticleController@show', 'as' => 'article_show'])->where('lang', 'ua|ru|en|pl');
-
-	// ...
-	//modal_handler();
-//});
 Route::get('home', 'HomeController@index');//Для відображення результата після логування
 
-Route::group(['domain' => getSetting('domain'), 'prefix'=> getSetting('admin.prefix'), 'middleware' => ['auth', 'backend.init']], function(){
+/*Auth group routes*/
+Route::controllers([
+	/*'auth' => 'Auth\AuthController',*/
+	'password' => 'Auth\PasswordController',
+]);
+Route::get('/register', array('as' => 'signup', 'uses' => 'Auth\AuthController@getRegister'));
+Route::post('/register', array('as' => 'signup', 'uses' => 'Auth\AuthController@postRegister'));
+Route::get(getSetting('admin.prefix') . '/login', array('as' => 'login', 'uses' => 'Auth\AuthController@getLogin'));
+Route::post(getSetting('admin.prefix') . '/login', array('as' => 'login', 'uses' => 'Auth\AuthController@postLogin'));
+Route::get(getSetting('admin.prefix') . '/logout', array('as' => 'logout', 'uses' => 'Auth\AuthController@getLogout'));
+/*Route::get('/forgot', array('as' => 'forgot', 'uses' => 'Auth\AuthController@getLogin'));
+Route::post('/forgot', array('as' => 'forgot', 'uses' => 'Auth\AuthController@postLogin'));*/
+
+/*/Auth group routes*/
+Route::group(['prefix'=> getSetting('admin.prefix'), 'middleware' => ['auth', 'backend.init']], function(){
 
 	//Routes for Articles (Backend)
 	Route::get('/',['uses' => 'Backend\AdminDashboardController@index','as' => 'admin_dashboard']);
@@ -85,20 +82,29 @@ Route::group(['domain' => getSetting('domain'), 'prefix'=> getSetting('admin.pre
 });
 /*/Backend group routes*/
 
-/*Auth group routes*/
-Route::controllers([
-	/*'auth' => 'Auth\AuthController',*/
-	'password' => 'Auth\PasswordController',
-]);
-Route::get('/register', array('as' => 'signup', 'uses' => 'Auth\AuthController@getRegister'));
-Route::post('/register', array('as' => 'signup', 'uses' => 'Auth\AuthController@postRegister'));
-Route::get(getSetting('admin.prefix') . '/login', array('as' => 'login', 'uses' => 'Auth\AuthController@getLogin'));
-Route::post(getSetting('admin.prefix') . '/login', array('as' => 'login', 'uses' => 'Auth\AuthController@postLogin'));
-Route::get(getSetting('admin.prefix') . '/logout', array('as' => 'logout', 'uses' => 'Auth\AuthController@getLogout'));
-/*Route::get('/forgot', array('as' => 'forgot', 'uses' => 'Auth\AuthController@getLogin'));
-Route::post('/forgot', array('as' => 'forgot', 'uses' => 'Auth\AuthController@postLogin'));*/
 
-/*/Auth group routes*/
+/*Frontend group routes*/
+//Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
+//Route::group(['domain' => getSetting('domain')], function() {
+	//Route::get('/', 'Frontend\HomeController@index');//Перенаправлення на адресу з локалю
+
+	Route::get('{lang?}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index'])->where('lang', 'ua|ru|en|pl');
+	Route::get('/{subtype}/{name}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain']);
+	Route::get('/{lang?}/{subtype}/{name}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain'])->where('lang', 'ua|ru|en|pl');
+	Route::get('/{subtype}/{name}/{url}', ['middleware' => 'frontend.init','uses' => 'Frontend\ArticleController@renderUrl', 'as' => 'article_url']);
+	Route::get('/{lang?}/{subtype}/{name}/{url}', ['middleware' => 'frontend.init','uses' => 'Frontend\ArticleController@renderUrl', 'as' => 'article_url'])->where('lang', 'ua|ru|en|pl');
+	Route::get('/{subtype}/{name}/{url}/{id}', ['middleware' => 'frontend.init','uses' => 'Frontend\ArticleController@show', 'as' => 'article_show'])->where('lang', 'ua|ru|en|pl');
+	Route::get('/{lang?}/{subtype}/{name}/{url}/{id}', ['middleware' => 'frontend.init','uses' => 'Frontend\ArticleController@show', 'as' => 'article_show'])->where('lang', 'ua|ru|en|pl');
+
+
+
+	Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
+	Route::post('/{lang}/add_review', ['uses' => 'Frontend\ArticleController@add_review','as' => 'add_review']);//Обработчик добавления отзыва
+	Route::post('/{lang}/reserved', ['uses' => 'Frontend\ArticleController@reserved','as' => 'reserved']);//Обработчик Обратной связи при заказе номера
+
+	// ...
+	//modal_handler();
+//});
 
 
 

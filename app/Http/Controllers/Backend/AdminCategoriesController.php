@@ -86,6 +86,7 @@ class AdminCategoriesController extends Controller {
 			$this->validate($request, [
 				'title_'.$lang['lang'] => 'required|max:255',
 				'link' => "required|unique:categories",
+				'url_' . $lang['lang'] => 'required|max:255',
 				'img' => 'mimes:jpeg,jpg,png,bmp,gif|max:5000'
 			]);
 		}
@@ -199,7 +200,7 @@ class AdminCategoriesController extends Controller {
 			$this->validate($request, [
 				'title_' .$lang['lang'] => 'required|max:255',
 				'link' => "required",
-				'url_' . $lang['lang'] => 'required|max:255',
+				//'url_' . $lang['lang'] => 'required|unique:categories',
 				'img' => 'mimes:jpeg,jpg,png,bmp,gif|max:5000'
 			]);
 		}

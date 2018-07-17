@@ -3,7 +3,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
-        <a id="mobile-logo" class="mx-auto" href="{{ route('article_index', [App::getLocale()])}}"><img class="img-fluid" src="{{ asset('/img/frontend/logo.png') }}" width="100px"></a>
+        <a id="mobile-logo" class="mx-auto" href="{{ route('article_index', [setLangToRedirect(App::getLocale())])}}"><img class="img-fluid" src="{{ asset('/img/frontend/logo.png') }}" width="100px"></a>
         <div class="navbar-side-mobile text-right dropdown">
             <a id="mobile-lang-toggler" class="font-weight-bold" href="#">
             @if(count($langs) > 1)<i class="fas fa-chevron-down mr-2 text-uppercase"></i>@endif
@@ -40,7 +40,7 @@
                                 @endif
                             </div>
                         </div>
-                        <a class="btn btn-yellow-custom-little py-1 mt-1" href="{{ (!$subdomain) ? route('article_index', [App::getLocale(), 'search']) : route('article_index_subdomain', [$subdomain, App::getLocale(), 'search'])}}">{{trans('base.reservation')}}</a>
+                        <a class="btn btn-yellow-custom-little py-1 mt-1" href="#contactAnchor" {{--href="{{ (!$subdomain) ? route('article_index', [App::getLocale(), 'search']) : route('article_index_subdomain', [$subdomain, App::getLocale(), 'search'])}}"--}}>{{trans('base.reservation')}}</a>
                     </span>
                 </div>
                 @if(!$subdomain)

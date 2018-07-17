@@ -418,7 +418,7 @@
             @foreach($children_rooms->take(3) as $key => $room)
                     <!-- Типова мала карточка номеру -->
                     <div class="col-xl-4 col-lg-6 p-2 mt-4">
-                        <a href="{{ route('article_show', [$parent_hotel->subdomain, App::getLocale(), 'hotels', $room->article_parent->type, $room->id])}}" class="a-card">
+                        <a href="{{ route('article_show', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $room->article_parent->getAttributeTranslate('url'), $categories_data['rooms']->getTranslate('url'), $room->id])}}" class="a-card">
                             <div class="apart-small-card shadow-hover">
                                 <div class="small-card-image" style="background-image: url('{{ asset( $room->getAttributeTranslate('room_photo')) }}')"></div>
                                 <div class="row pt-3 mb-1 px-md-4 px-3">

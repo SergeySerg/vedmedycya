@@ -141,6 +141,7 @@ class AdminArticlesController extends Controller {
 		if (isset($all['attributes'])){
 			$all['attributes'] = json_encode($this->prepareAttributesData($all['attributes']));
 		}
+		
 //dd($all);
 		// Сreate array for multilanguage (example- (ua|ru|en))
 		$all = $this->prepareArticleData($all);
@@ -266,12 +267,14 @@ class AdminArticlesController extends Controller {
 		if (isset($all['attributes'])) {
 			$all= $this->saveImg($all, $article);
 		}
+		//dd($all['attributes']);
 		//Encode attributes from request
 		if (isset($all['attributes'])){
 			//dd($all);
 			$all['attributes'] = json_encode($this->prepareAttributesData($all['attributes']));
 			//$all['attributes'] = $this->prepareAttributesData($all['attributes']);
 		}
+		//dd($all['attributes']);
 //dd($all);
 		//Encode images from request
 		$all['imgs'] = json_encode($files);
@@ -384,7 +387,7 @@ class AdminArticlesController extends Controller {
 					//dd($key);
 					unset($all[$key_without_lang . "_{$lang['lang']}"]);				
 				}
-				$all[$key_without_lang] = json_encode($all[$key_without_lang]);;
+				//$all[$key_without_lang] = json_encode($all[$key_without_lang]);;
 			}		
 			
 			

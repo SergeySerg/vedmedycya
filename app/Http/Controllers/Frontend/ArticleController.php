@@ -14,6 +14,7 @@ use App\Models\Lang;
 use App\Models\Order;
 use App\Models\Text;
 use App;
+use DB;
 use Illuminate\Support\Facades\Response;
 //use Illuminate\Contracts\View\View;
 use Mail;
@@ -26,21 +27,12 @@ class ArticleController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index($subtype=null, $name)
+	public function index(Request $request)
 	{	
-		//dd('index');
-		//dd($name);
-		//if($link){
-			// switch($subdomain){
-			// 	case 'bukovel':
-			// 	//$link = 'vedmegyi-dvir';
-			// 	$parent_hotel = Article::where('type', 'vedmegyi-dvir')->first();
-			// 	break;
-			// 	case 'yaremche':
-			// 	//$link = 'velyka-vedmedycya';
-			// 	$parent_hotel = Article::where('type', 'velyka-vedmedycya')->first();
-			// 	break;
-			// }
+		//dd(App::getLocale());
+		//dd($request->name);
+			$parent_hotel = Article::where('attributes->url->' . App::getLocale(), $request->name )->first();
+			
 		//}
 		
 		//dd($parent_hotel);
@@ -65,8 +57,42 @@ class ArticleController extends Controller {
 		
 		//dump($news);
 		//dd($video->category()->first()->active);
-		//return view((!$type) ? 'frontend.hotels' : 'frontend.' . $type)->with(compact('parent_hotel'));
+		//return view((!$request->url) ? 'frontend.hotels' : 'frontend.' . $request->url)->with(compact('parent_hotel'));
 		return view('frontend.hotels')->with(compact('parent_hotel'));
+	}
+	public function renderUrl(Request $request)
+	{	
+		//dd($request->url);
+		
+			$parent_hotel = Article::where('attributes->url->' . App::getLocale(), $request->name )->first();
+			$type = Category::where('url->' . App::getLocale(), $request->url)->first();
+			//dd($type);
+		//}
+		
+		//dd($parent_hotel);
+		
+			// $hotels_articles = Category::where('link', $type)->first()->articles->where('subdomain', $subdomain);
+			// //dd($hotels_articles);
+			// //$article_group =  Article::where('category_id',$hotels_articles['parent_id'])->where('active', 1)->get();
+			// //dd($article_group);
+			// $test = Article::where('type', 'mark')->first();
+			// $tests = $hotels_articles->map(function ($hotel_article) {
+			// 	//dd($hotel_article);
+			// 	return $hotel_article->article_children()->where('category_id', 8)->get();
+			// });
+			//dd($tests->all());
+			// foreach($tests as $test){
+			// 	dd($test->first()->title);
+			// }
+			// $articles = $test->article_children()->where('category_id', 2);
+			// dd($articles);
+		
+		//dd(request()->subdomain);
+		
+		//dump($news);
+		//dd($video->category()->first()->active);
+		//return view((!$request->url) ? 'frontend.hotels' : 'frontend.' . $request->url)->with(compact('parent_hotel'));
+		return view('frontend.' . $type->link)->with(compact('parent_hotel'));
 	}
 
 	/**
@@ -94,16 +120,16 @@ class ArticleController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show(Request $request, $lang, $type, $link, $id)
+	public function show(Request $request)
 	{
-		dd('show');
+		//dd('show');
 		//if ($request ->isMethod('post')){
 			/*get [] from request*/
 			//$value = session('key');
 		//dd($value);
 		//}
-		$parent_hotel = Article::with('article_children')->where('type', $link)->first();
-		$article = Article::where('id', $id)->first();
+		$parent_hotel = Article::with('article_children')->where('attributes->url->' . App::getLocale(), $request->name )->first();
+		$article = Article::where('id', $request->id)->first();
 		//dd($article);
 		return view('frontend.rooms')->with(compact('article', 'parent_hotel'));
 	}

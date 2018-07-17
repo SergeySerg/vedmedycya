@@ -62,7 +62,7 @@ class Translate extends Model {
             // $pieces = explode("@|;", $attributes[$key]);
             // //dd($pieces);
             // if (count($pieces) == 1)
-            $fields = json_decode($attributes[$key], true);
+            $fields = $attributes[$key];
             //dd($fields);
             Debugbar::info($fields);
             if (is_string($fields) OR is_int($fields)){ 

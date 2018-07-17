@@ -59,12 +59,12 @@ $(function () {
         
         
     })   
-    // $('.input-location').click(function(){        
-    //     redirectPath = $(this).attr('data-redirect');  
-    //     $("a.redirect").prop('href', redirectPath + '?name=23');
-    //     console.log('Ссилка для переходу', redirectPath);      
-    //     //console.log('Шлях', redirectPath);    
-    // }) 
+    $('.input-location').click(function(){        
+        redirectPath = $(this).attr('data-redirect');  
+        $("a.redirect").prop('href', redirectPath);
+        console.log('Ссилка для переходу', redirectPath);      
+        //console.log('Шлях', redirectPath);    
+    }) 
     /*/get params for redirect to search page*/
 
    
