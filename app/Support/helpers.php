@@ -97,3 +97,4 @@ if (! function_exists('setLangToRedirect')) {
         
     }
 }
+

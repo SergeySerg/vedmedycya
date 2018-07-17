@@ -31,10 +31,10 @@ $(function () {
         }
         data = JSON.stringify(data);
         console.log('Дата', data);
-        // localStorage.setItem('dateStart', dateStart);
-        // localStorage.setItem('dateFinish', dateFinish);
-        // localStorage.setItem('adults', adults);
-        // localStorage.setItem('children', children);
+        localStorage.setItem('dateStart', dateStart);
+        localStorage.setItem('dateFinish', dateFinish);
+        localStorage.setItem('adults', adults);
+        localStorage.setItem('children', children);
         $.ajax({
             url: 'saver',
             method: 'POST',

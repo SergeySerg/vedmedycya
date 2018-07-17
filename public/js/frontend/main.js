@@ -106,6 +106,16 @@ $(function () {
   //Start form 
   $(document).ready(function() {
       /*Custom js*/
+      /*VAR from localStorage*/
+      var adultsFromStorage = localStorage.getItem('adults', adults);
+      var childrenFromStorage = localStorage.getItem('children', adults);
+      console.log('Local storage', adultsFromStorage)
+    //   if(adultsFromStorage || childrenFromStorage){
+    //     $("#adults").val(adultsFromStorage || 0); 
+    //     $("#children").val(childrenFromStorage || 0);  
+    //     $("#guests").text(adultsFromStorage + " дорослих, " + childrenFromStorage + " дітей");   
+    //   }
+      /*VAR from localStorage*/
       var maxQuantityGuests =  $('#max_guests').text() || 8;
       var diffMaxQuantityGuests = 0;      
       var val = 0;     

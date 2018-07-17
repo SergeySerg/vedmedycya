@@ -52,16 +52,18 @@
                         @include('frontend.menu_for_subdomain')
                     <!-- END .menu -->
                 @endif
+                                
                 <div class="navbar-side-container-2 text-right dropdown">                
-                <a class="nav-link font-weight-bold"  @if(count($langs) > 1) href=@if(App::getLocale() === config('app.base_local')) "/" @else "/{{ App::getLocale()}}"" @endif @endif>
+                <a class="nav-link font-weight-bold"  @if(count($langs) > 1) href=@if(App::getLocale() === config('app.locale')) "/" @else "/{{ App::getLocale()}}"" @endif @endif>
                         @if(count($langs) > 1)<i class="fas fa-chevron-down mr-2"></i>@endif
                         {{ getCurentLang(App::getLocale()) }}
                     </a>
                     @if(count($langs) > 1)
-                        <div class="dropdown-content">
+                        <div class="dropdown-content">                        
                         <?php $p = 0 ?>					
-                            @foreach($langs as $key => $lang)                                                                            
-                                <a id='lang' class="nav-link font-weight-bold padding-4-px text-uppercase" @if(App::getLocale() == $lang->lang) style="display: none" @endif href="{{str_replace(url((App::getLocale() !== config('app.base_local')) ? App::getLocale() : ''), url(($lang->lang !== config('app.base_local')) ? $lang->lang : ''), Request::url())}}">{{$lang->country}}</a>
+                            @foreach($langs as $key => $lang)
+                            {{--{{str_replace(url((App::getLocale() !== config('app.locale')) ? App::getLocale() : ''), url(($lang->lang !== config('app.locale')) ? $lang->lang : ''), Request::url())}}--}}                                                                            
+                                <a id='lang' class="nav-link font-weight-bold padding-4-px text-uppercase" @if(App::getLocale() == $lang->lang) style="display: none" @endif href="/@if($lang->lang !== 'ru'){{$lang->lang}}/@endif{{($subdomain) ? $category_for_subtype->getTranslate('url', $lang->lang) . '/' : '' }}{{($subdomain) ? $parent_hotel->getAttributeTranslate('url', $lang->lang). '/' : ''}}{{($url) ? $category_for_url->getTranslate('url', $lang->lang). '/' : ''}}{{($id) ? $id : '' }}">{{$lang->country}}</a>
                                 @if($p < count($langs)-1)	
                                     <div @if(App::getLocale() == $lang->lang) style="display: none" @endif class="h-line-bold marginy-4-px"></div>
                                 @endif

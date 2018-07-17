@@ -88,7 +88,7 @@ Route::group(['prefix'=> getSetting('admin.prefix'), 'middleware' => ['auth', 'b
 //Route::group(['domain' => getSetting('domain')], function() {
 	//Route::get('/', 'Frontend\HomeController@index');//Перенаправлення на адресу з локалю
 
-	Route::get('{lang?}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index'])->where('lang', 'ua|ru|en|pl');
+	Route::get('/{lang?}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index'])->where('lang', 'ua|ru|en|pl');
 	Route::get('/{subtype}/{name}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain']);
 	Route::get('/{lang?}/{subtype}/{name}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain'])->where('lang', 'ua|ru|en|pl');
 	Route::get('/{subtype}/{name}/{url}', ['middleware' => 'frontend.init','uses' => 'Frontend\ArticleController@renderUrl', 'as' => 'article_url']);

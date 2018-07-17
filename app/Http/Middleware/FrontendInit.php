@@ -135,10 +135,10 @@ class FrontendInit {
 				// }	
 			view()->share($category->link, $category_item);
 		}
-		//session(['key' => 12]);
-		//dd($request->session()->get('test'));	
-		//$value = session('test');
-		//dd($value);
+		$category_for_url = Category::where('url->' . App::getLocale(), $request->url)->first();
+		$category_for_subtype = Category::where('url->' . App::getLocale(), $request->subtype)->first();
+
+		//dd($category_for_subtype);
 		//dd($children_reviews);
 		//dd($category_item);
 		//Debugbar::info($category_item);
@@ -154,6 +154,12 @@ class FrontendInit {
 		view()->share('categories_data', $categories_data);
 		view()->share('version', config('app.version'));
 		view()->share('subdomain', $name);
+		view()->share('subtype', $request->subtype);
+		view()->share('url', $request->url);
+		view()->share('id', $request->id);
+		view()->share('category_for_url', $category_for_url);
+		view()->share('category_for_subtype', $category_for_subtype);
+		
 		return $next($request);
 	}
 
