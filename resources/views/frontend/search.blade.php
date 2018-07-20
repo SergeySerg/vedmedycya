@@ -78,10 +78,11 @@
     
     <div class="container-fluid pb-5">
         <div class="row justify-content-center pb-5">
-            @foreach((!$subdomain) ? $rooms : $children_rooms as $room)
+        <?php $r = 0 ?>
+            @foreach((!$subdomain) ? $rooms : $children_rooms as $key => $room)
                 <!-- APARTMENT CARD START -->
                 <div class="col-md-11">
-                    <div class="apart-card shadow-hover mb-5">
+                    <div data-id={{ $r }} class="apart-card shadow-hover mb-5">
                         <div class="row no-gutters">
                             <div class="col-lg-6">
                                 <div class="apart-image-slider">
@@ -126,8 +127,8 @@
                             <div class="col-lg-6 p-lg-4 p-3">
                                 <div class="row">
                                     <div class="col-md-6 mb-md-0 mb-3">
-                                        <h3 class="apart-header pb-2">{{ str_limit($room->getTranslate('title'), 50) }}</h3>
-                                        <small class="apart-hotel">{{ $room->article_parent->getAttributeTranslate('type_build')}} {{ $room->article_parent->getTranslate('title')}}</small>
+                                        <h3 data-id={{ $r }} class="apart-header pb-2">{{ str_limit($room->getTranslate('title'), 50) }}</h3>
+                                        <small data-id={{ $r }} class="apart-hotel">{{ $room->article_parent->getAttributeTranslate('type_build')}} {{ $room->article_parent->getTranslate('title')}}</small>
                                     </div>
                                     <div class="col-md-3 col-6 text-md-right"><p class="text-brown-param">{{ trans('base.includes')}}: <i class="fa fa-male align-text-top text-orange"></i> х{{ $room->getAttributeTranslate('max_count_guests')}}</p></div>
                                     <div class="col-md-3 col-6 text-right"><p class="text-brown-param"><i class="fa fa-map-marker-alt align-text-top text-orange"></i> {{ $room->article_parent->getAttributeTranslate('location')}}</p></div>
@@ -202,21 +203,27 @@
                                     </div>
                                 </div>
                                 <div class="row mt-4 align-items-end no-gutters">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 calc-price">
                                         <div class="row no-gutters justify-content-center mb-md-0 mb-3">
-                                            <div class="col-md-12 col-6 text-center text-md-left align-self-center">
-                                                <p class="apart-old-total-price"><b class="custom-line-throught">12000 uah</b></p>
-                                            </div>
+                                            @if($room->getAttributeTranslate('discount_room'))
+                                                <div class="col-md-12 col-6 text-center text-md-left align-self-center">
+                                                    <p class="apart-old-total-price"><b class="custom-line-throught"><span class='old-price-apart'>{{ $room->getAttributeTranslate('base_price')}}</span> {{ trans('base.grn')}}</b></p>
+                                                </div>
+                                                <div class='old_price' data-id={{ $key }}  style='display:none'>{{ $room->getAttributeTranslate('base_price')}}</div>
+
+                                            @endif                                            
+                                            <div class='result_price' data-id={{ $key }}  style='display:none'>{{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * $room->getAttributeTranslate('discount_room')) / 100)}}</div>
                                             <div class="col-md-12 col-6 align-self-center">
-                                                <h3 class="apart-total-price">9000 uah</h3>
-                                            </div>
+                                                <h3 data-id={{ $r }} class="apart-total-price">{{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * $room->getAttributeTranslate('discount_room')) / 100)}} {{ trans('base.grn')}}</h3>
+                                            </div>                                             
                                             <div class="col text-md-left text-center">
-                                                <small class="apart-hotel">з 24.05 по 26.05 (2 ночі)</small>
+                                                <small class="apart-hotel">{{ trans('base.from_')}} <span class='date_from'></span> {{ trans('base.to') }} <span class='date_to'></span> <span class='quantity_days_search'></span></small>
                                             </div>
                                         </div>   
                                     </div> 
+                                    <div class='days' style='display:none'>1</div>
                                     <div class="col-md-4 col-6 px-1"><a href="{{ route('article_show', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $room->article_parent->getAttributeTranslate('url'), $categories_data['rooms']->getTranslate('url'), $room->id])}}" class="btn btn-yellow-overline">{{ trans('base.more_')}}</a></div>
-                                    <div class="col-md-4 col-6 px-1"><a href="{{ route('article_show', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $room->article_parent->getAttributeTranslate('url'), $categories_data['rooms']->getTranslate('url'), $room->id])}}" class="btn btn-yellow">{{ trans('base.order')}}</a></div>
+                                    <div class="col-md-4 col-6 px-1"><a data-toggle="modal" data-id= {{ $r }} data-target="#exampleModal" class="btn btn-yellow reserved">{{ trans('base.order')}}</a></div>
                                 </div>
                             </div>
                         </div>
@@ -224,6 +231,7 @@
                 </div>
                 <!-- APARTMENT CARD END -->
                 <div></div>
+                <?php $r++ ?>
             @endforeach
         </div>
     </div>
@@ -299,7 +307,10 @@
         </div>
     </div>
 
-     <!-- callback -->
-     @include('frontend.sections.callback')
+    <!-- callback -->
+        @include('frontend.sections.callback')
     <!--  END callback -->
+    <!-- modal window -->
+        @include('frontend.sections.modal')
+    <!--  END modal window -->
 @endsection

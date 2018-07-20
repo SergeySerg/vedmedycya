@@ -11,8 +11,9 @@
             </a>    
                  
             <div class="dropdown-content left-6-px">
+            <?php $l = 0 ?>
                     @foreach($langs as $key => $lang)                      											
-							<a class="toggler-a font-weight-bold text-uppercase" @if(App::getLocale() == $lang->lang) style="display: none" @endif href="{{str_replace(url(App::getLocale()), url($lang->lang), Request::url())}}">{{$lang->country}}</a>
+							<a class="toggler-a font-weight-bold text-uppercase" @if(App::getLocale() == $lang->lang) style="display: none" @endif href="/@if($lang->lang !== 'ru'){{$lang->lang}}/@endif{{($subdomain) ? $category_for_subtype->getTranslate('url', $lang->lang) . '/' : '' }}{{($subdomain) ? $parent_hotel->getAttributeTranslate('url', $lang->lang). '/' : ''}}{{($url) ? $category_for_url->getTranslate('url', $lang->lang). '/' : ''}}{{($id) ? $id : '' }}">{{$lang->country}}</a>
 							{{--@if($key !== count($langs)-2)--}}	
 							{{--<div @if(App::getLocale() == $lang->lang) style="display: none" @endif class="h-line-bold marginy-4-px"></div>--}}
 							{{--@endif--}}	
@@ -60,14 +61,17 @@
                     </a>
                     @if(count($langs) > 1)
                         <div class="dropdown-content">                        
-                        <?php $p = 0 ?>					
+                        <?php $q = 0 ?>					
                             @foreach($langs as $key => $lang)
                             {{--{{str_replace(url((App::getLocale() !== config('app.locale')) ? App::getLocale() : ''), url(($lang->lang !== config('app.locale')) ? $lang->lang : ''), Request::url())}}--}}                                                                            
-                                <a id='lang' class="nav-link font-weight-bold padding-4-px text-uppercase" @if(App::getLocale() == $lang->lang) style="display: none" @endif href="/@if($lang->lang !== 'ru'){{$lang->lang}}/@endif{{($subdomain) ? $category_for_subtype->getTranslate('url', $lang->lang) . '/' : '' }}{{($subdomain) ? $parent_hotel->getAttributeTranslate('url', $lang->lang). '/' : ''}}{{($url) ? $category_for_url->getTranslate('url', $lang->lang). '/' : ''}}{{($id) ? $id : '' }}">{{$lang->country}}</a>
-                                @if($p < count($langs)-1)	
-                                    <div @if(App::getLocale() == $lang->lang) style="display: none" @endif class="h-line-bold marginy-4-px"></div>
-                                @endif
-                                <?php $p ++?>	
+                            @if(App::getLocale() !== $lang->lang)
+                                <a id='lang' class="nav-link font-weight-bold padding-4-px text-uppercase" href="/@if($lang->lang !== 'ru'){{$lang->lang}}/@endif{{($subdomain) ? $category_for_subtype->getTranslate('url', $lang->lang) . '/' : '' }}{{($subdomain) ? $parent_hotel->getAttributeTranslate('url', $lang->lang). '/' : ''}}{{($url) ? $category_for_url->getTranslate('url', $lang->lang). '/' : ''}}{{($id) ? $id : '' }}">{{$lang->country}}</a>
+                                <div class="@if($q == count($langs)-2 OR $q = 0) style="display:none" @endif h-line-bold marginy-4-px"></div>
+
+                                <?php $q++ ?>
+                            @endif                                	
+                               
+                 	
                             @endforeach 
 
 					@endif	

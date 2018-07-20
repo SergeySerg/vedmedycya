@@ -200,13 +200,13 @@
                         {{--for math price--}}
                             <div id='surcharge' style='display:none'>{{$article->article_parent->getAttributeTranslate('surcharge') }}</div>
                             <div id='surcharge_children' style='display:none'>{{$article->article_parent->getAttributeTranslate('surcharge_children') }}</div>
-                            <div id='days' style='display:none'>1</div>
-                            <div id='result_price' style='display:none'>{{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}</div>
+                            <div class='days' style='display:none'>1</div>
+                            <div class='result_price' style='display:none'>{{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}</div>
 
                         {{--/for math price--}}
                         <div class="apart-price back-white d-flex flex-column">
                             <p class="color-black pt-2 mt-auto">{{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}</p>
-                            <p class="pt-0 mb-auto"><span id='quantity_days' class=".color-opacity-5 align-text-top"><sup>грн за 1 ніч</sup></span></p>
+                            <p class="pt-0 mb-auto"><span class='quantity_days' class=".color-opacity-5 align-text-top"><sup>грн за 1 ніч</sup></span></p>
                         </div>
                     </div>
                     <div id="div-datepicker" class="input-pattern mt-1">

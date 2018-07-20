@@ -8,7 +8,7 @@
 @endif--}}
 @if(isset($rooms) AND count($rooms) !== 0 AND $categories_data['rooms']->active == 1)
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="{{ route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $subdomain, 'search']) }}">{{ $categories_data['rooms']->getTranslate('title') ? $categories_data['rooms']->getTranslate('title') : 'номери'}}</a>
+        <a class="nav-link my-1 hover-underline" href="{{ route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $subdomain, $categories_data['search']->getTranslate('url')]) }}">{{ $categories_data['rooms']->getTranslate('title') ? $categories_data['rooms']->getTranslate('title') : 'номери'}}</a>
     </li>
 @endif
 <li class="nav-item text-center my-xl-1">

@@ -12,10 +12,15 @@
                     <div class="h-line-thin"></div>
                     <div class="row text-center">
                         <div class="col">
-                            <h3 class="section-header-huge pt-5">
+                            <h3 id='room' class="section-header-huge pt-5">
+                            @if(isset($article))
                                 {{ $article->getTranslate('title') }}
+                            @endif    
                             </h3>
-                            <h6 class="section-header-small mb-4">{{ $parent_hotel->getAttributeTranslate('type_build')}} {{ $parent_hotel->getTranslate('title')}}, {{ $parent_hotel->getAttributeTranslate('location')}}</h6>
+                            <h6 id='hotel' class="section-header-small mb-4">
+                                @if(isset($article))
+                                    {{ $parent_hotel->getAttributeTranslate('type_build')}} {{ $parent_hotel->getTranslate('title')}}, {{ $parent_hotel->getAttributeTranslate('location')}}</h6>
+                                @endif
                         </div>
                     </div>
                     <div class="row px-md-5 px-4">
@@ -23,7 +28,7 @@
                             <p class="text-muted"><i class="fa fa-male align-text-top text-orange"></i> х<span id='sum_guests'></span>: <span id='adults_modal'></span> {{trans('base.adults')}} <span id='children_modal'></span></p>
                         </div>
                         <div class="col-5 text-right">
-                            <p class="text-muted">{{ trans('base.from_')}} <span id='date_from'></span> {{ trans('base.to') }} <span id='date_to'></span> <i class="fas fa-calendar-alt align-text-top text-orange"></i></p>
+                            <p class="text-muted">{{ trans('base.from_')}} <span class='date_from'></span> {{ trans('base.to') }} <span class='date_to'></span> <i class="fas fa-calendar-alt align-text-top text-orange"></i></p>
                         </div>
                     </div>
                     <div class="row">

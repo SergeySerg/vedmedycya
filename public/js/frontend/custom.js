@@ -2,7 +2,44 @@ $(function () {
     var adults, dateStart, dateFinish, children, sumPrice, redirectPath;
     /*Add check*/
     $('div.small-features div.col-md-4 p').prepend('<i class="fas fa-check text-orange"></i> ');  
-    
+    /* Reserved room in search page*/
+    $('.apart-card .reserved').click(function(){      
+       
+        iterId = $(this).attr('data-id');
+        console.log('ціна', iterId);
+        var roomName = $('.apart-header[data-id='+ iterId +']').text();
+        var hotelName = $('.apart-hotel[data-id='+ iterId +']').text();
+        sumPrice = $('.apart-total-price[data-id='+ iterId +']').text();
+        adults = $("#adults").val();
+        range_date = $("#datepicker").val();
+        dates = range_date.split("-");
+        dateStart = dates[0];
+        dateFinish = dates[1];
+        
+        if(!dateStart || !dateFinish){
+            alert('Введіть дати заїзду та виїзду');   
+            return false; 
+        }
+        if(adults == 0 ){
+            alert('Введіть кількість гостей');
+            return false;     
+        }
+        children = $("#children").val();        
+        $('#sum_price').text(sumPrice);    
+        $('#adults_modal').text(adults);
+        if(children != 0 && children == 1){
+            $('#children_modal').text('та ' + children + " дитина");
+        }else{
+            $('#children_modal').text('та ' + children + " дітей");    
+        }        
+        $('#sum_guests').text((+children) + (+adults));
+        $('.date_from').text(dateStart);
+        $('.date_to').text(dateFinish);
+        $('#room').text(roomName);
+        $('#hotel').text(hotelName);
+        console.log('елемент', sumPrice);	        
+    })
+    /* /Reserved room in search page*/
     /*get params for redirect to search page*/
     $('a.redirect').click(function(e){        
         var selectHotelName = $('#location').val();
@@ -95,8 +132,8 @@ $(function () {
             $('#children_modal').text('та ' + children + " дітей");    
         }        
         $('#sum_guests').text((+children) + (+adults));
-        $('#date_from').text(dateStart);
-        $('#date_to').text(dateFinish);
+        $('.date_from').text(dateStart);
+        $('.date_to').text(dateFinish);
         //saveLocalStorage();
         console.log('Кількість дорослих - ', adults);
         console.log('Кількість дітей - ', children);       
@@ -238,38 +275,39 @@ $(function () {
     
    
 })
-function getQuantityDays() {
-    var range_date = $("#datepicker").val();
-    var dates = range_date.split("-");
-    var dateStart = dates[0];
-    var dateFinish = dates[1];   
-    var days = (daydiff(parseDate(dateFinish), parseDate(dateStart)));
+// function getQuantityDays() {
+//     var range_date = $("#datepicker").val();
+//     var dates = range_date.split("-");
+//     var dateStart = dates[0];
+//     var dateFinish = dates[1];   
+//     var days = (daydiff(parseDate(dateFinish), parseDate(dateStart)));
 
-}
-function parseDate(str) {
-    var mdy = str.split('.');    
-    return new Date(mdy[2], mdy[1]-1, mdy[0]);
-}
-function daydiff(second, first) {   
-    return (second-first)/(1000*60*60*24);
-}
-function getCount(){
-    adults = $("#adults").val();
-        range_date = $("#datepicker").val();
-        dates = range_date.split("-");
-        dateStart = dates[0];
-        dateFinish = dates[1];
+// }
+// function parseDate(str) {
+//     console.log('Строка', str);
+//     var mdy = str.split('.');    
+//     return new Date(mdy[2], mdy[1]-1, mdy[0]);
+// }
+// function daydiff(second, first) {   
+//     return (second-first)/(1000*60*60*24);
+// }
+// function getCount(){
+//     adults = $("#adults").val();
+//         range_date = $("#datepicker").val();
+//         dates = range_date.split("-");
+//         dateStart = dates[0];
+//         dateFinish = dates[1];
         
-        if(!dateStart || !dateFinish){
-            alert('Введіть дати заїзду та виїзду');   
-            return false; 
-        }
-        if(adults == 0 ){
-            alert('Введіть кількість гостей');
-            return false;     
-        }
-        children = $("#children").val();
-}
+//         if(!dateStart || !dateFinish){
+//             alert('Введіть дати заїзду та виїзду');   
+//             return false; 
+//         }
+//         if(adults == 0 ){
+//             alert('Введіть кількість гостей');
+//             return false;     
+//         }
+//         children = $("#children").val();
+// }
 function saveLocalStorage(){
     localStorage.setItem('dateStart', dateStart);
     localStorage.setItem('dateFinish', dateFinish);
