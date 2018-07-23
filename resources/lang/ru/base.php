@@ -84,6 +84,9 @@ return [
 	"to" => 'по',
 	"price_for_person" => 'стоимость указана для :person чел.',
 	'main' => 'Главная',
+	'add_review_rest' => 'оставьте свой отзыв про отдых',
+	'impresion_description' => 'Опишите свои впечатления',
+	'send_review' => "Отправить отзыв",
 
 
 	/* Script Contact*/
@@ -91,6 +94,23 @@ return [
 	'error_send_contact' => 'Возникла ошибка при отправке заявки!',
 	'success_add_review' => 'Ваш отзыв успешно добавлен!',
 	'error_add_review' => 'Возникла ошибка при добавлении отзыва!',
+    'warn_max' => 'Максимальное количестко мест для этого номера',
+	"adults_one" => 'взрослый',
+	"adults_many" => 'взрослых',
+	'kids' => 'детей',
+	"warn_max_children" => 'Максимальное количество детей',
+	"date_arrived" => 'дата выезда',
+	"cost_one_day" => 'грн за 1 ночь',
+	"one_night" => 'ночь',
+	"many_night"  => 'ночей',
+	"more_night"  => 'ночи',
+	"date_comes_arrives"  => 'Введите дату заезда и дату отъезда',
+	"enter_count_guests"  => 'Введите количество гостей',
+	"enter_hotel" =>  "Введите отель для проверки цен",
+	'and' => "и",
+	'child' => "ребенок",
+	'pear' => "за",
+	
 
 	/* /Script Contact*/
 

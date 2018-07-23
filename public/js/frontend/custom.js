@@ -3,10 +3,10 @@ $(function () {
     /*Add check*/
     $('div.small-features div.col-md-4 p').prepend('<i class="fas fa-check text-orange"></i> ');  
     /* Reserved room in search page*/
-    $('.apart-card .reserved').click(function(){      
+    $('.apart-card .reserved').click(function(){    
        
         iterId = $(this).attr('data-id');
-        console.log('ціна', iterId);
+        //console.log('ціна', iterId);
         var roomName = $('.apart-header[data-id='+ iterId +']').text();
         var hotelName = $('.apart-hotel[data-id='+ iterId +']').text();
         sumPrice = $('.apart-total-price[data-id='+ iterId +']').text();
@@ -17,27 +17,27 @@ $(function () {
         dateFinish = dates[1];
         
         if(!dateStart || !dateFinish){
-            alert('Введіть дати заїзду та виїзду');   
+            alert(trans['base.date_comes_arrives']);   
             return false; 
         }
         if(adults == 0 ){
-            alert('Введіть кількість гостей');
+            alert(trans['base.enter_count_guests']);
             return false;     
         }
         children = $("#children").val();        
         $('#sum_price').text(sumPrice);    
         $('#adults_modal').text(adults);
         if(children != 0 && children == 1){
-            $('#children_modal').text('та ' + children + " дитина");
+            $('#children_modal').text(trans['base.and'] + ' ' + children + " " + trans['base.child']);
         }else{
-            $('#children_modal').text('та ' + children + " дітей");    
+            $('#children_modal').text(trans['base.and'] + ' ' + children + " "+ trans['base.kids']);    
         }        
-        $('#sum_guests').text((+children) + (+adults));
+        //$('#sum_guests').text((+children) + (+adults));
         $('.date_from').text(dateStart);
         $('.date_to').text(dateFinish);
         $('#room').text(roomName);
         $('#hotel').text(hotelName);
-        console.log('елемент', sumPrice);	        
+        //console.log('елемент', sumPrice);	        
     })
     /* /Reserved room in search page*/
     /*get params for redirect to search page*/
@@ -52,11 +52,11 @@ $(function () {
 
         
         if(!dateStart || !dateFinish){
-            alert('Введіть дати заїзду та виїзду');   
+            alert(trans['base.date_comes_arrives']);   
             return false; 
         }
         if(adults == 0 ){
-            alert('Введіть кількість гостей');
+            alert(trans['base.enter_count_guests']);
             return false;     
         }
         children = $("#children").val();
@@ -67,7 +67,7 @@ $(function () {
             dateFinish: dateFinish                 
         }
         data = JSON.stringify(data);
-        console.log('Дата', data);
+        //console.log('Дата', data);
         localStorage.setItem('dateStart', dateStart);
         localStorage.setItem('dateFinish', dateFinish);
         localStorage.setItem('adults', adults);
@@ -76,21 +76,15 @@ $(function () {
             url: 'saver',
             method: 'POST',
             headers: {
-                'X-CSRF-TOKEN': token,               
-                // 'Access-Control-Allow-Origin': '*',
-                // 'Access-Control-Allow-Credentials': true,
-                
-            },
-            //crossDomain: true,
-            // processData: false,
-            // contentType: false,
+                'X-CSRF-TOKEN': token              
+            },            
             data: data,
             dataType: "json"            
 
         });  
         if(!selectHotelName){
             e.preventDefault();
-            alert('Введіть готель для перевірки цін');
+            alert(trans['base.enter_hotel']);
             return false;
         }
         
@@ -99,7 +93,7 @@ $(function () {
     $('.input-location').click(function(){        
         redirectPath = $(this).attr('data-redirect');  
         $("a.redirect").prop('href', redirectPath);
-        console.log('Ссилка для переходу', redirectPath);      
+        //console.log('Ссилка для переходу', redirectPath);      
         //console.log('Шлях', redirectPath);    
     }) 
     /*/get params for redirect to search page*/
@@ -115,11 +109,11 @@ $(function () {
         dateFinish = dates[1];
         
         if(!dateStart || !dateFinish){
-            alert('Введіть дати заїзду та виїзду');   
+            alert(trans['base.date_comes_arrives']);   
             return false; 
         }
         if(adults == 0 ){
-            alert('Введіть кількість гостей');
+            alert(trans['base.enter_count_guests']);
             return false;     
         }
         children = $("#children").val();
@@ -127,16 +121,16 @@ $(function () {
         $('#sum_price').text(sumPrice);    
         $('#adults_modal').text(adults);
         if(children != 0 && children == 1){
-            $('#children_modal').text('та ' + children + " дитина");
+            $('#children_modal').text(trans['base.and'] + ' ' + children + " " + trans['base.child']);
         }else{
-            $('#children_modal').text('та ' + children + " дітей");    
+            $('#children_modal').text(trans['base.and'] + ' ' + children + " "+ trans['base.kids']);    
         }        
         $('#sum_guests').text((+children) + (+adults));
         $('.date_from').text(dateStart);
         $('.date_to').text(dateFinish);
         //saveLocalStorage();
-        console.log('Кількість дорослих - ', adults);
-        console.log('Кількість дітей - ', children);       
+        //console.log('Кількість дорослих - ', adults);
+        //console.log('Кількість дітей - ', children);       
     }) 
     $("button[name='reserved']").click(function(e){
         e.preventDefault();
@@ -161,7 +155,7 @@ $(function () {
             email: email       
         }
         data = JSON.stringify(data);
-        console.log('дата', data);
+        //console.log('дата', data);
         $.ajax({
             url: '/' + lang + '/reserved',
             method: 'POST',
@@ -174,8 +168,9 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 if (data.success) {
+                    window.location.replace(window.location.href + '?status=success');
                     //alert('OK');
-                    swal(trans['base.success'], "", "success");
+                    //swal(trans['base.success'], "", "success");
                     //jQuery("#callback-order").trigger("reset");
                     //$("#submit-send").attr('disabled', false);
                 }
@@ -236,7 +231,7 @@ $(function () {
         //e.preventDefault();
         var data = $('form#add_review').serialize();
 
-        console.log('дата відгуку', data);
+        //console.log('дата відгуку', data);
         var lang =  $("input[name='lang']").val();
         var token = $("input[name='csrf-token']").val();      
        

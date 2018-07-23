@@ -35,12 +35,12 @@
 
     <!--basic scripts-->
     <!--js-->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript" ></script>
 
 
     <!--fonts-->
 
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" type='text/css' />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300" type='text/css' />
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
     <!--ace styles-->

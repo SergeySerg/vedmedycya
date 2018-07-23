@@ -113,7 +113,7 @@ $(function () {
       var dateStartFromStorage = localStorage.getItem('dateStart');
       var dateFinishFromStorage = localStorage.getItem('dateFinish');
       var diffMaxQuantityGuests = 0;
-      console.log('Local storage', adultsFromStorage);
+      //console.log('Local storage', adultsFromStorage);
       if(dateStartFromStorage && dateFinishFromStorage){
         $("#datepicker").val(dateStartFromStorage + '-' + dateFinishFromStorage);
       }
@@ -121,27 +121,31 @@ $(function () {
       if(adultsFromStorage || childrenFromStorage){
         diffMaxQuantityGuests = +adultsFromStorage + +childrenFromStorage;  
         $("#adults").val(adultsFromStorage || 0); 
-        $("#children").val(childrenFromStorage || 0);  
-        $("#guests").text(adultsFromStorage + " дорослих, " + childrenFromStorage + " дітей");   
+        $("#children").val(childrenFromStorage || 0); 
+        if(adultsFromStorage !== 1) {
+            $("#guests").text(adultsFromStorage + ' ' + trans['base.adults_many'] + " , " + childrenFromStorage + " " + trans['base.kids']);   
+        }
+        $("#guests").text(adultsFromStorage + ' ' + trans['base.adults_one'] + " , " + childrenFromStorage + " " + trans['base.kids']);   
+
       }
       /*VAR from localStorage*/
       var maxQuantityGuests =  $('#max_guests').text() || 8;     
       //diffMaxQuantityGuests = 0;      
       var val = 0;  
-      console.log('Максимальна кількість', maxQuantityGuests);
-      console.log('Значення', val);
+      //console.log('Максимальна кількість', maxQuantityGuests);
+      //console.log('Значення', val);
         
       
         $("#adults_plus").click(function() { 
             val = 1 + +$("#adults").val();
-            console.log('Кількість дорослих', val);
-            console.log('maxQuantityGuestsдорослих', maxQuantityGuests);
+            //console.log('Кількість дорослих', val);
+            //console.log('maxQuantityGuestsдорослих', maxQuantityGuests);
             if (diffMaxQuantityGuests == maxQuantityGuests || maxQuantityGuests < val) { 
                 val = maxQuantityGuests;
                 if(maxQuantityGuests > 8) {
                     val = 8;
                 }
-                alert('Максимальна кількість місць для цього номеру ' + maxQuantityGuests );
+                alert(trans['base.warn_max'] + ' ' + maxQuantityGuests);
                 return false;
             }
             $("#adults").val(val);
@@ -149,23 +153,23 @@ $(function () {
             diffMaxQuantityGuests++;
         });
         $("#children_plus").click(function() {           
-            console.log('Кількість дітей', val);
+            //console.log('Кількість дітей', val);
             val = 1 + +$("#children").val();  
             //val = maxQuantityGuests;          
             if (val > 4){                
-                alert('Максимально можлива кількість дітей - 4'); 
+                alert(trans['base.warn_max_children'] + ' - 4'); 
                 val = 4;  
                 return false; 
             }
             console.log('diffMaxQuantityGuests ', diffMaxQuantityGuests);
             if (diffMaxQuantityGuests == maxQuantityGuests || maxQuantityGuests < val) {                
-                alert('Максимальна кількість місць для цього номеру ' + maxQuantityGuests );
+                alert(trans['base.warn_max'] + ' ' + maxQuantityGuests );
                 return false;
                 
             }
             $("#children").val(val);
                 check_input_guests();
-                console.log('Різниця фікс', diffMaxQuantityGuests);
+                //console.log('Різниця фікс', diffMaxQuantityGuests);
                 diffMaxQuantityGuests++;
             
             });
@@ -205,7 +209,7 @@ $(function () {
           }, function() {
             //alert(4);
               if (selectedData.length > 5 && selectedData.length < 10) {
-                  $("#datepicker").val(selectedData + "дата виїзду");
+                  $("#datepicker").val(selectedData + trans['base.date_arrived']);
               } else if(selectedData.length > 10) {
                   $("#datepicker").val(selectedData);
               } else {
@@ -251,13 +255,13 @@ $(function () {
       function check_input_guests() {
           var adults = $("#adults").val();
           var children = $("#children").val();
-          console.log('Кількість дорослих  на вході', adults);
-          console.log('Кількість дітей  на вході', children);
+          //console.log('Кількість дорослих  на вході', adults);
+          //console.log('Кількість дітей  на вході', children);
           setPriceAfterEnterGuests(adults, children);
           if (adults == "0" && children == "0") {
-              $("#guests").text("Кількість гостей");
+              $("#guests").text(trans['base.count_guestі']);
           } else {
-              $("#guests").text(adults + " дорослих, " + children + " дітей");
+              $("#guests").text(adults + " " + trans['base.adults_many'] + ", " + children + " " + trans['base.kids']);
           }
       }
       /*Custom js*/
@@ -265,7 +269,7 @@ $(function () {
       function setPriceAfterEnterGuests(adults, children){
           //alert('re');
           var sumQuantityGuests = (+adults) + (+children);
-          console.log('Cума гостей', sumQuantityGuests);
+          //console.log('Cума гостей', sumQuantityGuests);
           var baseQuantityGuests =  $('#base_guests').text();          
           var surcharge = $('#surcharge').text();
           var surcharge_children = $('#surcharge_children').text();
@@ -276,10 +280,10 @@ $(function () {
               var result;
               if(diff > 0){
                   result = Math.abs(diff - (+children)) * surcharge_children;
-                  console.log('Різниця', result);
+                  //console.log('Різниця', result);
               }else{
                   result = (Math.abs(diff) * surcharge) + (children * surcharge_children);
-                  console.log('Різниця', result);
+                  //console.log('Різниця', result);
               }
               $('p.color-black').text(days * (+(price) + result));
               $('.result_price').text(1 * (+(price) + result));
@@ -380,7 +384,7 @@ $(function () {
           selectedData = temp;
   
           if (temp.length == 10) {
-              $("#datepicker").val($("#datepicker").val() + " - дата виїзду");
+              $("#datepicker").val($("#datepicker").val() + " - " + trans['base.date_arrived']);
               selectedData += " - ";
   
           } else {
@@ -407,7 +411,7 @@ $(function () {
         /*For search page*/
         $('.calc-price').each(function(){
             //old_price_item = $(this).find('.old-price-apart').text();
-            console.log('Стара ціна', old_price_item);
+            //console.log('Стара ціна', old_price_item);
             price_item = $(this).find('.result_price').text();
             $(this).find('.apart-total-price').text(1*price_item*days);
             $(this).find('.old-price-apart').text(1*old_price_item*days);
@@ -419,16 +423,16 @@ $(function () {
         $('p.color-black').text(days*price);
         //$('.apart-total-price').text('');
         if(days == 1){        
-            $('.quantity_days').text('грн за 1 ніч');
-            $('.quantity_days_search').text('(1 ніч)');
+            $('.quantity_days').text(trans['base.cost_one_day']);
+            $('.quantity_days_search').text('(' + 1 + " " + trans['base.one_night'] + ')');
         }
         else if(days <= 4){
-            $('.quantity_days').text('грн за ' + days + ' ночі');
-            $('.quantity_days_search').text('(' + days + ' ночі)');
+            $('.quantity_days').text(trans['base.grn'] + ' ' + trans['base.pear'] + " " + days + ' ' + trans['base.more_night']);
+            $('.quantity_days_search').text('(' + days + ' ' + trans['base.more_night'] + ')');
         }
         else {
-            $('.quantity_days').text('грн за ' + days + ' ночей');
-            $('.quantity_days_search').text('(' + days + ' ночей)');
+            $('.quantity_days').text(trans['base.grn'] + ' ' + trans['base.pear'] + days + ' ' + trans['base.many_night']);
+            $('.quantity_days_search').text('(' + days + ' ' + trans['base.many_night'] + ')');
         }    
         
         $('.date_from').text(dateStart);
@@ -437,7 +441,7 @@ $(function () {
    
   }
   function parseDate(str) {
-    console.log('Строка', str);
+    //console.log('Строка', str);
       var mdy = str.split('.');
       return new Date(mdy[2], mdy[1]-1, mdy[0]);
   }

@@ -24,7 +24,15 @@
             </div>
         </div>
     </div>
-   
+    @if( Request::get('status'))
+        <div class="container-fluid px-sm-5 pb-3">
+            <div class="row py-4">
+                <div class="col text-center">
+                    <h3 class="section-header-huge pt-0" style="color: green">{{ trans('base.success_send_contact') }}</h3>
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="container-fluid px-sm-5 pb-3">
         <div class="row py-4">
             <div class="col text-center">

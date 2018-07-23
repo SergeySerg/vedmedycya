@@ -84,14 +84,33 @@ return [
 	"to" => 'по',
 	"price_for_person" => 'вартість вказана для :person осіб',
 	'main' => 'Головна',
-
+	'add_review_rest' => 'залиште свій відгук про відпочинок',
+	'impresion_description' => 'Опишіть ваші враження',
+	'send_review' => "Відправити відгук",
+	'kids' => "дітей",
 
 	/* Script Contact*/
 	'success_send_contact' => 'Ваша заявка успішно відправлена!',
 	'error_send_contact' => 'Виникла помилка при відправці заявки!',
 	'success_add_review' => 'Ваш відгук успішно додано!',
 	'error_add_review' => 'Виникла помилка при додованні відгука!',
-
+    'warn_max' => 'Максимальна кількість місць для цього номеру',
+	"adults_one" => 'дорослий',
+	"adults_many" => 'дорослих', 
+	'kids' => 'дітей', 
+	"warn_max_children" => 'Максимальна кількість дітей',
+	"date_arrived" => 'дата виїзду',
+	"cost_one_day" => 'грн за 1 ніч',
+	"one_night" => 'ніч',
+	"many_night"  => 'ночей',
+	"more_night"  => 'ночi',
+	"date_comes_arrives"  => 'Введіть дати заїзду та виїзду',
+	"enter_count_guests"  => 'Введіть кількість гостей',
+	"enter_hotel" =>  "Введіть готель для перевірки цін",
+	'and' => "та",
+	'child' => "дитина",
+	'pear' => "за",
+	
 	/* /Script Contact*/
 
 ];

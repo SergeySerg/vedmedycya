@@ -104,7 +104,7 @@
                             {{ $categories_data['hotels']->getTranslate('title') ? $categories_data['hotels']->getTranslate('title') : 'готелі' }}
                         </h6>
                         @foreach($hotels as $hotel)
-                            <a href="{{ $hotel->getAttributeTranslate('is_base_hotel') ? route('article_index_subdomain', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $hotel->getAttributeTranslate('url')]) : route('article_show', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $hotel->getAttributeTranslate('url'), $categories_data['rooms']->getTranslate('url'), $hotel->article_children->where('article_id', $hotel->id)->where('category_id', $categories_data['rooms']->id)->pluck('id')->first()])}}" class="text-white">{{ $hotel->getTranslate('title')}}</a><br>                          
+                            <a target="_blank"  href="{{ $hotel->getAttributeTranslate('is_base_hotel') ? route('article_index_subdomain', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $hotel->getAttributeTranslate('url')]) : route('article_show', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $hotel->getAttributeTranslate('url'), $categories_data['rooms']->getTranslate('url'), $hotel->article_children->where('article_id', $hotel->id)->where('category_id', $categories_data['rooms']->id)->pluck('id')->first()])}}" class="text-white">{{ $hotel->getTranslate('title')}}</a><br>                          
                         
                         @endforeach
                     </div>
@@ -137,16 +137,9 @@
         <!-- End Google Tag Manager (noscript) -->
     @endif
 <!-- END .footer -->
-{{--Файл переводов--}}
-<script>
-	var trans = {
-		'base.success': '{{ trans('base.success_send_contact') }}',
-        'base.error': '{{ trans('base.error_send_contact') }}',
-        'base.success_add_review': '{{ trans('base.success_add_review') }}',
-        'base.error_add_review': '{{ trans('base.error_add_review') }}',
-	};
-</script>
-{{--/Файл переводов--}}
+    <!-- file_translate -->
+        @include('frontend.sections.i18n')
+    <!--  END file_translate-->
 {{-- JS --}}
 <script defer src="{{ asset('/js/frontend/jquery-3.3.1.min.js') }}"></script>
 <script defer src="{{ asset('/js/frontend/popper.min.js') }}"></script>

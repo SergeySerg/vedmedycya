@@ -6,7 +6,7 @@
                     <div class="container-fluid px-0">
                         <div class="row justify-content-center my-4 px-4">
                             <div class="col text-center">
-                                <h5 class="section-header-huge pt-0 mb-0">залиште свій відгук про відпочинок!</h5>
+                                <h5 class="section-header-huge pt-0 mb-0">{{ trans('base.add_review_rest')}}!</h5>
                             </div>
                         </div>
                         <div class="row text-center py-4 px-4 no-gutters back-f4f4f4">
@@ -17,7 +17,7 @@
                             </div> -->
                             <div class="col-md-6 my-1">
                                 <div class="input-pattern">
-                                    <input type="text" name='name' placeholder="Ім'я"/>
+                                    <input type="text" name='name' placeholder="{{ trans('base.name')}}"/>
                                 </div>
                             </div>
                         </div>
@@ -93,13 +93,13 @@
                         </div>                    
                         <div class="row text-center py-4 px-4 no-gutters back-f4f4f4">
                             <div class="col my-1">
-                                <textarea rows="3" name='review' placeholder="Опишіть ваші враження" class="impression-input" wrap="soft"></textarea>
+                                <textarea rows="3" name='review' placeholder="{{ trans('base.impresion_description')}}" class="impression-input" wrap="soft"></textarea>
                             </div>
                         </div>
                         <input type='hidden' name='article_id' value='{{ $parent_hotel->id or ''}}'/>
                         <div class="row  justify-content-center my-3">
                             <div class="col-md-6 col-10">
-                                <button type="button" id='send_review' class="btn btn-yellow" data-dismiss="modal">Відправити відгук</button>
+                                <button type="button" id='send_review' class="btn btn-yellow" data-dismiss="modal">{{ trans('base.send_review')}}</button>
                             </div>
                         </div>
                     </div>

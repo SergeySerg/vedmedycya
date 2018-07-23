@@ -2,30 +2,35 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content no-rounds">
                 <div class="container-fluid px-0">
+                    <button type="button" class="close-custom" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                     <div class="row justify-content-center my-4 px-4">
                         <div class="col text-center">
-                            <h5 class="section-header-huge pt-0 mb-0">
+                            {{--<h5 class="section-header-huge pt-0 mb-0">
                                 {{ trans('base.confirmation_reservation')}}
+                            </h5>--}}
+                            <h5 id='room' class="section-header-huge pt-0 mb-0">
+                                @if(isset($article))
+                                    {{ $article->getTranslate('title') }}
+                                @endif    
                             </h5>
                         </div>
                     </div>
                     <div class="h-line-thin"></div>
                     <div class="row text-center">
                         <div class="col">
-                            <h3 id='room' class="section-header-huge pt-5">
-                            @if(isset($article))
-                                {{ $article->getTranslate('title') }}
-                            @endif    
-                            </h3>
-                            <h6 id='hotel' class="section-header-small mb-4">
+                            
+                            <h4 id='hotel' class="section-header-small mb-4">
                                 @if(isset($article))
-                                    {{ $parent_hotel->getAttributeTranslate('type_build')}} {{ $parent_hotel->getTranslate('title')}}, {{ $parent_hotel->getAttributeTranslate('location')}}</h6>
+                                    {{ $parent_hotel->getAttributeTranslate('type_build')}} {{ $parent_hotel->getTranslate('title')}}, {{ $parent_hotel->getAttributeTranslate('location')}}
                                 @endif
+                            </h4>
                         </div>
                     </div>
                     <div class="row px-md-5 px-4">
                         <div class="col-7">
-                            <p class="text-muted"><i class="fa fa-male align-text-top text-orange"></i> х<span id='sum_guests'></span>: <span id='adults_modal'></span> {{trans('base.adults')}} <span id='children_modal'></span></p>
+                            <p class="text-muted"><i class="fa fa-male align-text-top text-orange"></i> х{{-- х<span id='sum_guests'></span>: --}} <span id='adults_modal'></span> {{trans('base.adults')}} <span id='children_modal'></span></p>
                         </div>
                         <div class="col-5 text-right">
                             <p class="text-muted">{{ trans('base.from_')}} <span class='date_from'></span> {{ trans('base.to') }} <span class='date_to'></span> <i class="fas fa-calendar-alt align-text-top text-orange"></i></p>
