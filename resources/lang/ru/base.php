@@ -87,7 +87,10 @@ return [
 	'add_review_rest' => 'оставьте свой отзыв про отдых',
 	'impresion_description' => 'Опишите свои впечатления',
 	'send_review' => "Отправить отзыв",
-
+	'kids' => "детей",
+	"thanks" => 'спасибо',
+	"manager_call" => 'наш менеджер вскоре перезвонит вам',
+	'understand' => 'Понятно',
 
 	/* Script Contact*/
 	'success_send_contact' => 'Ваша заявка успешно отправлена!',

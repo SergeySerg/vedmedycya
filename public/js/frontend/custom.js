@@ -135,8 +135,8 @@ $(function () {
     $("button[name='reserved']").click(function(e){
         e.preventDefault();
         var data = {};
-        var roomName = $('div#exampleModal h3.section-header-huge').text();
-        var hotelName = $('div#exampleModal h6.section-header-small').text();
+        var roomName = $('#room').text();
+        var hotelName = $('#hotel').text();
         var name = $("input[name='name']").val();
         var phone = $("input[name='phone']").val();
         var email = $("input[name='email']").val();
@@ -168,6 +168,7 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 if (data.success) {
+                    //$('#exampleModal3').modal('toggle');
                     window.location.replace(window.location.href + '?status=success');
                     //alert('OK');
                     //swal(trans['base.success'], "", "success");
@@ -208,8 +209,11 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 if (data.success) {
-                    //alert('OK');
-                    swal(trans['base.success'], "", "success");
+                    //alert('OK');                   
+                    
+                    $('#exampleModal3').modal('toggle');
+                    setTimeout( function(){window.location.replace(window.location.href + '?status=callback')}, 1000);
+                    //swal(trans['base.success'], "", "success");
                     //jQuery("#callback-order").trigger("reset");
                     //$("#submit-send").attr('disabled', false);
                 }

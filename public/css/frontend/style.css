@@ -2391,6 +2391,25 @@ p.apart-old-total-price .custom-line-throught::after {
     border: none;
     cursor: pointer;
 }
+.times-gray {
+        color: #707070;
+    }
+    
+    .times-gray:hover {
+        color: #2e2e2e;
+    }
+    
+    @media screen and (min-width: 576px) {
+        .desktop-invisible {
+            display: none;
+        }
+    }
+    
+    @media screen and (max-width: 575px) {
+        .mobile-invisible {
+            display: none;
+        }
+    }
 /*Custom css*/
 div#justify > .fa-plus:first-child {
     display: none;

@@ -502,5 +502,6 @@
     <!-- modal modal_review -->
         @include('frontend.sections.modal_review')
     <!--  END modal modal_review -->
+      
     
 @endsection

@@ -88,7 +88,9 @@ return [
 	'impresion_description' => 'Опишіть ваші враження',
 	'send_review' => "Відправити відгук",
 	'kids' => "дітей",
-
+	"thanks" => 'дякуємо',
+	"manager_call" => 'наш менеджер невдовзі перетелефонує вам',
+	'understand' => 'Зрозуміло',
 	/* Script Contact*/
 	'success_send_contact' => 'Ваша заявка успішно відправлена!',
 	'error_send_contact' => 'Виникла помилка при відправці заявки!',

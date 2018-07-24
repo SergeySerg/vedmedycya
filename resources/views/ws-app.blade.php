@@ -129,7 +129,10 @@
             </div>
             </div>
         </div>
-    </footer>    
+    </footer>  
+    <!-- modal thanks -->
+    @include('frontend.sections.thanks')
+    <!--  END modal thanks -->  
     @if(getSetting('ip'))
         <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQCTRLS"
