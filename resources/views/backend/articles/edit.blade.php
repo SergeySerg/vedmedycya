@@ -258,10 +258,12 @@
                                 <select name="article_id" id="form-field-select-1">
                                     <option value="">Brand Page
                                         @foreach($article_group as $article)
-                                            @if($article->type == 'vedmegyi-dvir' OR $article->type == 'velyka-vedmedycya')
+                                            @if($article->getAttributeTranslate('is_base_hotel') == 1)
                                                 </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
-                                            @elseif($type == 'rooms' OR $type == 'reviews' OR $type == 'hotels')
+                                            @elseif($type == 'rooms' OR $type == 'reviews' OR $type == 'hotels' OR $type == 'seoarticles')
                                                 </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
+                                            {{--@else
+                                                </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}--}}
                                             @endif                        
                                         @endforeach
                                     </option>

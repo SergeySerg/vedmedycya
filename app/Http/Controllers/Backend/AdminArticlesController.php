@@ -82,6 +82,7 @@ class AdminArticlesController extends Controller {
 
 		//Get group attributes for article_parent
 		$article_group =  Article::where('category_id',$admin_category['parent_id'])->where('active', 1)->get();
+		//dd($article_group);
 		//list of base and attributes from Category
 		$fields = json_decode($admin_category->fields);
 
@@ -177,7 +178,7 @@ class AdminArticlesController extends Controller {
 
 		//Get group attributes for article_parent
 		$article_group =  Article::where('category_id',$admin_category['parent_id'])->where('active', 1)->get();
-
+		
 		//Decode base and attributes from categories DB
 		$fields = json_decode($admin_category->fields);
 

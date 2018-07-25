@@ -82,6 +82,7 @@
                                 OR $type == 'discounts'
                                 OR $type == 'slides' 
                                 OR $type == 'advantages'
+                                OR $type == 'seoarticles'
                                 )
                                 Готель                               
                             @else
@@ -138,6 +139,7 @@
                                     OR $type == 'discounts'
                                     OR $type == 'slides'
                                     OR $type == 'advantages'
+                                    OR $type == 'seoarticles'
                                     
                                     )
                                     <td>@if($admin_article->article_parent) {{ $admin_article->article_parent->getTranslate('title') }}@else Brand Page @endif</td>

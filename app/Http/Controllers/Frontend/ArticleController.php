@@ -134,7 +134,21 @@ class ArticleController extends Controller {
 		//dd($article);
 		return view('frontend.rooms')->with(compact('article', 'parent_hotel'));
 	}
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function showSeo(Request $request)
+	{
+		$seo_article = Article::where('attributes->url->' . App::getLocale(), $request->url )->first();
+		
+		//dd($seo_article);
+		return view('frontend.seo')->with(compact('seo_article'));
+	}
 
+	
 	public function showMainPage($type){
 		/*Select slide that check as show_main_page*/
 		$category_item = Category::with('articles')->select('id')->where('link', $type)->first();

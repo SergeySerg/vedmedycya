@@ -118,6 +118,12 @@
                         <div class="footer-icon-container"><a href="{{ $social_item->getAttributeTranslate('social_link') ? $social_item->getAttributeTranslate('social_link') : "#"}}" target="_blank" class="text-white">{!! $social_item->getAttributeTranslate('icon') ? $social_item->getAttributeTranslate('icon') : " " !!}</a></div>                        
                     @endforeach                    
                 @endif
+                {{--@if(isset($seoarticles) AND count($seoarticles)!== 0)
+                    @foreach($seoarticles as $seoarticle)
+                        <div class="footer-icon-container"><a href="{{ route('article_show_seo', [setLangToRedirect(App::getLocale()), $seoarticle->article_parent->getAttributeTranslate('url'), $seoarticle->getAttributeTranslate('url')]) }}">{{ $seoarticle->getTranslate('title')}}</a></div>
+                    @endforeach
+
+                @endif--}}
             </div>
             <input type="hidden" name='lang' value="{{ App::getLocale() }}"/>
             <input type="hidden" name='csrf-token' value="{{csrf_token()}}"/>
