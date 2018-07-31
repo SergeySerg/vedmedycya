@@ -48,10 +48,11 @@ $(function () {
         dates = range_date.split("-");
         dateStart = dates[0];
         dateFinish = dates[1];
-        var token = $("input[name='csrf-token']").val();
-
+        console.log('дата виїзду====>', dates);
+        console.log('дата заїзду', dateStart);
+        var token = $("input[name='csrf-token']").val();        
         
-        if(!dateStart || !dateFinish){
+        if(!dateStart && !dateFinish || dateFinish== " " ){
             alert(trans['base.date_comes_arrives']);   
             return false; 
         }
@@ -108,7 +109,7 @@ $(function () {
         dateStart = dates[0];
         dateFinish = dates[1];
         
-        if(!dateStart || !dateFinish){
+        if(!dateStart && !dateFinish || dateFinish== " " ){
             alert(trans['base.date_comes_arrives']);   
             return false; 
         }
@@ -209,10 +210,14 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 if (data.success) {
-                    //alert('OK');                   
-                    
-                    $('#exampleModal3').modal('toggle');
-                    setTimeout( function(){window.location.replace(window.location.href + '?status=callback')}, 1000);
+                    //alert('OK'); 
+                    if(!$.urlParam('status')){
+                        window.location.replace(window.location.href + '?status=callback');
+
+                    }else{
+                        window.location.replace(window.location.href);   
+                    }
+                    //$('#exampleModal3').modal('toggle');
                     //swal(trans['base.success'], "", "success");
                     //jQuery("#callback-order").trigger("reset");
                     //$("#submit-send").attr('disabled', false);
@@ -229,6 +234,13 @@ $(function () {
 
         });  
     }) 
+    /*Show popup after callback*/
+    if($.urlParam('status')){
+       $('#exampleModal3').modal('toggle');
+
+    }  
+
+    /*Show popup after callback*/
     /*Add review*/ 
     $('#send_review').click(function(e){
         e.preventDefault();        
@@ -312,4 +324,13 @@ function saveLocalStorage(){
     localStorage.setItem('dateFinish', dateFinish);
     localStorage.setItem('adults', adults);
     localStorage.setItem('children', children);
+}
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return decodeURI(results[1]) || 0;
+    }
 }
