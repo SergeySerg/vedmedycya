@@ -114,7 +114,7 @@
             <div class="col-md-6">
                 <h4 class="apart-page-section-header mb-3 mobile-text-center">{{ trans('base.free_services') }}</h4>
                 <div id="justify" class="row text-orange text-center no-gutters d-flex">
-                {{--//TODO:write js func--}}
+                
                     @if($article->getAttributeTranslate('breakfast') == 1)
                         <i class="fa fa-plus mt-3"></i>
                         <div class="col-md-2 col-4">
@@ -165,7 +165,7 @@
                         </div>
                     @endif    
                 </div>
-                <h4 class="apart-page-section-header mt-4 mobile-text-center">Опис</h4>
+                <h4 class="apart-page-section-header mt-4 mobile-text-center">{{ trans('base.description')}}</h4>
                 <div class="apart-page-sect-desc">{!! $article->getTranslate('description') !!}</div>
                 <h4 class="apart-page-section-header mt-4 mobile-text-center">{{ trans('base.complactation')}}</h4>
                 <div class="row small-features mb-5">
@@ -502,6 +502,10 @@
     <!-- modal modal_review -->
         @include('frontend.sections.modal_review')
     <!--  END modal modal_review -->
+    <!-- modal end_reservation -->
+        @include('frontend.sections.end_reservation')
+    <!--  END modal end_reservation -->
+      
       
     
 @endsection

@@ -5,9 +5,13 @@
     <!-- slider -->
         @include('frontend.sections.slider')
     <!-- slider -->  
-    <!-- form for find -->
-        @include('frontend.sections.form_find')
-    <!-- END form for find -->
+    <div id="selector-bar-id" class="selector-bar">
+        <div class="container-fluid px-1 main-form bottom-1-vh"> 
+            <!-- form for find -->
+                @include('frontend.sections.form_find')
+            <!-- END form for find -->
+        </div>
+    </div> 
     </div>
     <!-- mobile_messenger -->
         @include('frontend.sections.mobile_messengers')
@@ -133,7 +137,7 @@
                 <div class="col-lg-3 col-md-6 p-5 @if(!$service->getAttributeTranslate('icon'))back-f4f4f4 @endif">
                     <div class="vert-aligner-container">
                     <div class="vert-aligner">
-                            <h5>{{ $service->getTranslate('title')}}</h5>
+                            <h5 class="mb-4">{{ $service->getTranslate('title')}}</h5>
                             {!! $service->getAttributeTranslate('icon') !!}
                     </div> 
                     </div>

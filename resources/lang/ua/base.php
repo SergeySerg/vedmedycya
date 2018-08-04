@@ -91,6 +91,13 @@ return [
 	"thanks" => 'дякуємо',
 	"manager_call" => 'наш менеджер невдовзі перетелефонує вам',
 	'understand' => 'Зрозуміло',
+	'room_services' => 'Послуги номеру',
+	'hotel_services' => 'Послуги готелю',
+	'show_more' => 'Показати більше',
+	'pay_services' => 'За додаткову плату',
+	"description" => "Опис",
+	"show_video" => "Дивитись відео",
+
 	/* Script Contact*/
 	'success_send_contact' => 'Ваша заявка успішно відправлена!',
 	'error_send_contact' => 'Виникла помилка при відправці заявки!',

@@ -1,11 +1,11 @@
     <li class="nav-item">
         <a class="nav-link my-1 hover-underline" href="{{ route('article_index_subdomain', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $subdomain])}}">{{ trans('base.main') }}</a>
     </li>
-{{--@if(isset($servicespaid) AND count($servicespaid) !== 0 AND $categories_data['servicespaid']->active == 1)
+@if(isset($servicespaid) AND $categories_data['servicespaid']->active == 1)
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="#section-reviews">{{ strstr( $categories_data['servicespaid']->getTranslate('title') ? $categories_data['servicespaid']->getTranslate('title') : 'послуги' . ' ', ' ', true ) }}</a>
+        <a class="nav-link my-1 hover-underline" href="{{ route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $subdomain, $categories_data['servicespaid']->getTranslate('url')]) }}">{{ strstr( $categories_data['servicespaid']->getTranslate('title') ? $categories_data['servicespaid']->getTranslate('title') : 'услуги' . ' ', ' ', true ) }}</a>
     </li>
-@endif--}}
+@endif
 @if(isset($rooms) AND count($rooms) !== 0 AND $categories_data['rooms']->active == 1)
     <li class="nav-item">
         <a class="nav-link my-1 hover-underline" href="{{ route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $subdomain, $categories_data['search']->getTranslate('url')]) }}">{{ $categories_data['rooms']->getTranslate('title') ? $categories_data['rooms']->getTranslate('title') : 'номери'}}</a>

@@ -91,6 +91,12 @@ return [
 	"thanks" => 'спасибо',
 	"manager_call" => 'наш менеджер вскоре перезвонит вам',
 	'understand' => 'Понятно',
+	'room_services' => 'Услуги номера',
+	'hotel_services' => 'Услуги отеля',
+	'show_more' => 'Показать больше',
+	'pay_services' => 'За дополнительную плату',
+	"description" => "Описание",
+	"show_video" => "Смотреть видео",
 
 	/* Script Contact*/
 	'success_send_contact' => 'Ваша заявка успешно отправлена!',

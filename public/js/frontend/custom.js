@@ -169,7 +169,7 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 if (data.success) {
-                    //$('#exampleModal3').modal('toggle');
+                    //$('#exampleModal4').modal('toggle');
                     window.location.replace(window.location.href + '?status=success');
                     //alert('OK');
                     //swal(trans['base.success'], "", "success");
@@ -235,12 +235,19 @@ $(function () {
         });  
     }) 
     /*Show popup after callback*/
-    if($.urlParam('status')){
+    if($.urlParam('status') == 'callback'){
        $('#exampleModal3').modal('toggle');
 
     }  
 
     /*Show popup after callback*/
+    /*Show popup after reservation*/
+    if($.urlParam('status') == "success"){
+        $('#exampleModal4').modal('toggle');
+ 
+     }  
+ 
+     /*Show popup after reservation*/
     /*Add review*/ 
     $('#send_review').click(function(e){
         e.preventDefault();        
