@@ -10,7 +10,7 @@
                 </div>
             @endforeach
         </div>
-        <nav class="main-dots-2"></nav>
+        <nav class="main-dots-2 d-flex justify-content-center"></nav>
         <div id="p-arrow">
             <div class="arrow-left main-arrow-left">
                 <div></div>
@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    @if( Request::get('status'))
+   {{-- @if( Request::get('status'))
         <div class="container-fluid px-sm-5 pb-3">
             <div class="row py-4">
                 <div class="col text-center">
@@ -33,6 +33,7 @@
             </div>
         </div>
     @endif
+    --}}
     <div class="container-fluid px-sm-5 pb-3">
         <div class="row py-4">
             <div class="col text-center">
@@ -165,8 +166,8 @@
                         </div>
                     @endif    
                 </div>
-                <h4 class="apart-page-section-header mt-4 mobile-text-center">{{ trans('base.description')}}</h4>
-                <div class="apart-page-sect-desc">{!! $article->getTranslate('description') !!}</div>
+                <h4 class="apart-page-section-header mt-4">{{ trans('base.description')}}</h4>
+                <div class="apart-page-sect-desc text-equal-spacing">{!! $article->getTranslate('description') !!}</div>
                 <h4 class="apart-page-section-header mt-4 mobile-text-center">{{ trans('base.complactation')}}</h4>
                 <div class="row small-features mb-5">
                     {!! $article->getAttributeTranslate('equipment_room')!!}
@@ -185,9 +186,9 @@
                                         {{ $article->getAttributeTranslate('base_price')}}
                                     </span>
                                     <br>
-                                    <sup>
+                                    <span class="apart-price-additional-text">
                                         {{ trans('base.grn')}} {{ trans('base.price_night')}}
-                                    </sup>
+                                    </span>
                                 </span>
                                 <span class='price'>
                                     {{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}
@@ -199,9 +200,9 @@
                                     {{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}
                                </span>
                                <br>
-                                <sup>
+                               <span class="apart-price-additional-text">
                                     {{ trans('base.grn')}} {{ trans('base.price_night')}}
-                                </sup>
+                                </span>  
                             </p>
                         @endif
                         </div>
@@ -214,7 +215,7 @@
                         {{--/for math price--}}
                         <div class="apart-price back-white d-flex flex-column">
                             <p class="color-black pt-2 mt-auto">{{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}</p>
-                            <p class="pt-0 mb-auto"><span class='quantity_days' class=".color-opacity-5 align-text-top"><sup>грн за 1 ніч</sup></span></p>
+                            <p class="pt-0 mb-auto"><span class='quantity_days' class=".color-opacity-5 align-text-top apart-price-additional-text">{{ trans('base.grn')}} {{ trans('base.pear')}} 1 {{ trans('base.one_night')}}</span></p>
                         </div>
                     </div>
                     <div id="div-datepicker" class="input-pattern mt-1">
@@ -253,11 +254,11 @@
                         </div>
                     </div>
                     @if($article->getAttributeTranslate('marketing'))
-                        <div class="apart-left">
+                        <div class="apart-left mt-3">
                             <p class="text-uppercase">{{ $article->getAttributeTranslate('marketing') }}</p>
                         </div>
                     @endif
-                    <div class="apart-buy">
+                    <div class="apart-buy mt-3">
                         <a class="btn btn-yellow text-uppercase" data-toggle="modal" data-target="#exampleModal">{{ trans('base.reservation')}}</a>
                     </div>
                 </div>                   
@@ -285,7 +286,7 @@
             <div class="container-fluid line-1-ff8c00"></div>
             <div class="row px-xl-5 my-5">
                 <div class="col-xl-3 d-flex align-items-center justify-content-center">
-                    <p class="section-text-huge mobile-text-center">{{ count($children_reviews) }} {{ strstr( $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'відгуки' . ' ', ' ', true ) }}<br/>
+                    <p class="section-text-huge ipad-text-center">{{ count($children_reviews) }} {{ strstr( $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'відгуки' . ' ', ' ', true ) }}<br/>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>

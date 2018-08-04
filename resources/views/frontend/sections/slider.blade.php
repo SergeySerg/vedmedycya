@@ -20,7 +20,7 @@
         @endforeach
     @endif               
 </div>
-<nav class="main-dots"></nav>
+<nav class="main-dots d-flex justify-content-center"></nav>
     <div id="p-arrow">
         <div class="arrow-left main-arrow-left">
             <div></div>

@@ -162,6 +162,9 @@
 <script defer src="{{ asset('/js/frontend/custom.js') }}"></script>
 <script defer src="{{ asset('/js/frontend/jquery.raty.js') }}"></script>
 <script defer src="{{ asset('/js/frontend/scroll.js') }}"></script>
+{{--<script defer src="{{ asset('/js/frontend/countdown.js') }}"></script>
+<script defer src="{{ asset('/js/frontend/jquery.lazy.min.js') }}"></script>
+<script defer src="{{ asset('/js/frontend/wow.min.js') }}"></script>--}}
 
 
 {{-- /JS --}}

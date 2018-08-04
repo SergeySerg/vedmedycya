@@ -4,7 +4,7 @@ $(function () {
   
   //Sliders start
   $('.rest-slider').slick({
-      autoplay: true,
+      //autoplay: true,
       autoplaySpeed: 2000,
       infinite: true,
       fade: true,
@@ -12,6 +12,7 @@ $(function () {
       nextArrow: '.right-click',
       speed: 2000,
       dots: true,
+      adaptiveHeight: true,
       appendDots: $('.rest-dots'),
       dotsClass: 'custom-dots',
       customPaging: function (slider, i) {
@@ -378,6 +379,7 @@ $(function () {
       minDate: new Date(),
       dateFormat: "dd.mm.yyyy",
       position: "bottom left",
+      ignoreReadonly: true,
       autoClose: true,
       onSelect: function() {
           var temp = $("#datepicker").val();
@@ -449,8 +451,8 @@ $(function () {
       return (second-first)/(1000*60*60*24);
   }
   $('#datepicker').data('datepicker');
-  
-  if (document.getElementById('datepicker')) {
+
+if (document.getElementById('datepicker')) {
     if ($('.input-pattern').offset().top + $('.input-pattern').height() + $('.datepicker').height() > $(window).innerHeight() + $(window).scrollTop()) {
         $('.datepickers-container').css("top", 0);
 
@@ -470,7 +472,6 @@ if (document.getElementById('datepicker')) {
     });
 }
 
-  
 $(".input-dropdown").each(function() {
     $(this).css({
         top: 100 + "%"
@@ -484,7 +485,7 @@ $(".input-dropdown").each(function() {
 });
 
 var check = true;
-  
+
 $(window).scroll(function() {
     $(".input-dropdown").each(function() {
         $(this).css({
@@ -517,14 +518,31 @@ $(window).scroll(function() {
         }
     }
 });
-  
-  $(window).resize(function() {
-      setBookingIcon();
-  
-      var selectorbarheight = $('#selector-bar-id').height() + "px";
-      $('.overflow-hidden').css("height", selectorbarheight);
-  
-      var inputwidth = $('#div-datepicker').width() + "px";
-      $('.datepicker').css("width", inputwidth);
-  });
-  
+
+$(window).resize(function() {
+    setBookingIcon();
+
+    var selectorbarheight = $('#selector-bar-id').height() + "px";
+    $('.overflow-hidden').css("height", selectorbarheight);
+
+    var inputwidth = $('#div-datepicker').width() + "px";
+    $('.datepicker').css("width", inputwidth);  
+});
+
+var lastScrollTop = 0;
+// element should be replaced with the actual target element on which you have applied scroll, use window in case of no target element.
+window.addEventListener("scroll", function(){ // or window.addEventListener("scroll"....
+   var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+   if (st > lastScrollTop){
+        if (document.getElementById("breadcrumb")) {
+            console.log("scrolldown");
+            document.getElementById("breadcrumb").classList.add("hided");
+        }
+   } else {
+        if (document.getElementById("breadcrumb")) {
+            console.log("scrollup");
+            document.getElementById("breadcrumb").classList.remove("hided");
+        }
+   }
+   lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+}, false);

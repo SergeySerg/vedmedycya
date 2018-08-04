@@ -4,6 +4,9 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content no-rounds">
                     <div class="container-fluid px-0">
+                        <button type="button" class="close-custom" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                         <div class="row justify-content-center my-4 px-4">
                             <div class="col text-center">
                                 <h5 class="section-header-huge pt-0 mb-0">{{ trans('base.add_review_rest')}}!</h5>
@@ -20,6 +23,16 @@
                                     <input type="text" name='name' placeholder="{{ trans('base.name')}}"/>
                                 </div>
                             </div>
+                            <div class="col-md-6 my-1">
+                            <div class="input-pattern">
+                                <input disabled id="location" type="text" name="location" placeholder="{{ trans('base.hotel_city') }}" readonly="readonly" class="cursor-pointer"/>
+                                <div id="input-drop-location" class="input-dropdown px-2">
+                                    @foreach($hotels as $hotel)
+                                        <p class="input-location d-flex align-items-center text-left"><span>{{ $hotel->getTranslate('title')}}<br/><sub> ({{ $hotel->getAttributeTranslate('location') }})</sub></span></p>
+                                    @endForeach
+                                </div>
+                            </div>
+                        </div>
                         </div>
                         <div class="row my-2">
                             <div class="col px-5">

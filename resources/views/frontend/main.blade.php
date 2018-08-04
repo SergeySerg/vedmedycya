@@ -69,7 +69,7 @@
                             </div>
 
                         @endif
-                        <div class="apart-small-card-buy-hover apart-small-hover-hotel">
+                        <div class="apart-small-card-buy-hover apart-small-hover-hotel" style="left: 160px;">
                             <p class="d-flex justify-content-center align-items-center text-uppercase">
                                 {{trans('base.reservation')}}
                             </p>
