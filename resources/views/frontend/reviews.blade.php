@@ -12,7 +12,7 @@
         <div class="container-fluid px-xl-5">
             <div class="row px-xl-5 my-5">
                 <div class="col-xl-3 d-flex align-items-center justify-content-center">
-                    <p class="section-text-huge ipad-text-center">{{ $children_reviews->count() }} {{trans_choice('base.review', (!$subdomain) ? reviews$->count() : $children_reviews->count())) }}<br/>
+                    <p class="section-text-huge ipad-text-center">{{ $children_reviews->total() }} {{trans_choice('base.review', (!$subdomain) ? $reviews->total() : $children_reviews->total()) }}<br/>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
