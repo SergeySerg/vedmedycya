@@ -289,6 +289,15 @@ $(function () {
     }) 
 
     /*/Add review*/ 
+    /*Pagination*/
+    //  $('#more_reviews').click(function(e){
+    //     e.preventDefault();    
+    //     window.location.replace(window.location.href + '?page=2');    
+    //     //e.preventDefault();
+    //     //var data = $('form#add_review').serialize();
+    //  });
+    /*/Pagination*/
+
 
     
    

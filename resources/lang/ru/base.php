@@ -97,6 +97,17 @@ return [
 	'pay_services' => 'За дополнительную плату',
 	"description" => "Описание",
 	"show_video" => "Смотреть видео",
+	"review" => "отзыв|[2,Inf] отзывов",
+	"popular_rooms" => "Популярные номера",
+	"connect_socials" => "Присоединяйтесь к нам в социальных сетях",
+	"bus" => "Автобусом",
+	"car" => "Машиной",
+	"train" => "Поездом",
+	"aircraft" => "Самолетом",
+	"reception" => "Рецепция",
+	"reservation_department" => "Отдел бронирования номеров",
+	"restaurant" => "Ресторан",
+
 
 	/* Script Contact*/
 	'success_send_contact' => 'Ваша заявка успешно отправлена!',

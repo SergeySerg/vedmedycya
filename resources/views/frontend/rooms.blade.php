@@ -286,7 +286,7 @@
             <div class="container-fluid line-1-ff8c00"></div>
             <div class="row px-xl-5 my-5">
                 <div class="col-xl-3 d-flex align-items-center justify-content-center">
-                    <p class="section-text-huge ipad-text-center">{{ count($children_reviews) }} {{ strstr( $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'відгуки' . ' ', ' ', true ) }}<br/>
+                    <p class="section-text-huge ipad-text-center">{{ count($children_reviews) }} {{trans_choice('base.review', count($children_reviews)) }} <br/>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>

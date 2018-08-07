@@ -50,6 +50,7 @@ class FrontendInit {
 		//$subdomain = $request->subdomain;
 		$name = $request->name;
 		$base_article = Article::where('attributes->url->' . App::getLocale(), $name )->first();
+		//dd($base_article);
 		//share type
 		$type = $request->type;
 		if(is_null($request->type)){
@@ -100,21 +101,38 @@ class FrontendInit {
 				->reject(function($subdomain_child_article){
 					return count($subdomain_child_article) == 0;
 				});
+				
 				//dd($subdomain_children_articles);
 				if(count($subdomain_children_articles) != 0){
 					$child_articles = [];
-					foreach($subdomain_children_articles as $articles){
+					foreach($subdomain_children_articles as $articles){						
 						//dd($articles);
 						foreach($articles as $key => $article){
+							if($category->link == 'rooms'){
+								//dd($base_article);
+								$base_hotel = $article->where('article_id', $base_article->article_id)->where('attributes->is_base_hotel', 1)->first();
+								//dd($base_hotel);
+								view()->share('base_hotel', $base_hotel);
+							}
 							array_push($child_articles, $article);
 						}
 					}
 					$child_articles = collect($child_articles)->sortByDesc('priority');
-					
+					if($category->link == 'reviews'){
+						$child_articles = collect($child_articles)->sortByDesc('priority')->paginate( 2 );
+
+					}
 					//dd($child_articles);
 					view()->share('children_' . $category->link, $child_articles);	
 
-				}	
+				}
+				//share Article		
+				// if($category->link == 'hotels'){
+				// 	dd($category_item);
+				// 	//dd(DB::table('articles')->where('attributes->show_main_page', 1)->get());
+				// 	dd($category_item->where('attributes->show_main_page', '1'));
+					
+				// }	
 				//dd($collection);
 				
 				
@@ -127,7 +145,7 @@ class FrontendInit {
 //			}
 			//dd($category_item);
 			//share Article		
-				// if($category->link == 'search'){
+				// if($category->link == 'servicespaid'){
 				// 	dd($category_item);
 				// 	//dd(DB::table('articles')->where('attributes->show_main_page', 1)->get());
 				// 	dd($category_item->where('attributes->show_main_page', '1'));

@@ -232,6 +232,10 @@ $(function () {
   
       $('.input-location').click(function() {
           $("#location").val($(this).text());
+          /*Custom for send hotelId*/
+          $("input[name='article_id']").val($(this).data("id"));
+          /*Custom for send hotelId*/
+
       });
       $("#adults_minus").click(function() {
         diffMaxQuantityGuests--;

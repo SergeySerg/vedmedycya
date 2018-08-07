@@ -24,14 +24,14 @@
                                 </div>
                             </div>
                             <div class="col-md-6 my-1">
-                            <div class="input-pattern">
-                                <input disabled id="location" type="text" name="location" placeholder="{{ trans('base.hotel_city') }}" readonly="readonly" class="cursor-pointer"/>
-                                <div id="input-drop-location" class="input-dropdown px-2">
-                                    @foreach($hotels as $hotel)
-                                        <p class="input-location d-flex align-items-center text-left"><span>{{ $hotel->getTranslate('title')}}<br/><sub> ({{ $hotel->getAttributeTranslate('location') }})</sub></span></p>
-                                    @endForeach
+                                <div class="input-pattern">
+                                    <input disabled id="location" data type="text"  name="location" placeholder="{{ trans('base.hotel_city') }}" readonly="readonly" class="cursor-pointer"/>
+                                    <div id="input-drop-location" class="input-dropdown px-2">
+                                        @foreach($hotels as $hotel)
+                                            <p data-id="{{ $hotel->id }} " class="input-location d-flex align-items-center text-left"><span>{{ $hotel->getTranslate('title')}}<br/><sub> ({{ $hotel->getAttributeTranslate('location') }})</sub></span></p>
+                                        @endForeach
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                         </div>
                         <div class="row my-2">
@@ -109,7 +109,7 @@
                                 <textarea rows="3" name='review' placeholder="{{ trans('base.impresion_description')}}" class="impression-input" wrap="soft"></textarea>
                             </div>
                         </div>
-                        <input type='hidden' name='article_id' value='{{ $parent_hotel->id or ''}}'/>
+                        <input type='hidden' name='article_id' value=''/>
                         <div class="row  justify-content-center my-3">
                             <div class="col-md-6 col-10">
                                 <button type="button" id='send_review' class="btn btn-yellow" data-dismiss="modal">{{ trans('base.send_review')}}</button>

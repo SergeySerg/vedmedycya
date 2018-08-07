@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Response;
 use Mail;
 use Illuminate\Support\Facades\Validator;
 use Debugbar;
+use Illuminate\Pagination\Paginator;
 class ArticleController extends Controller {	
 
 	/**

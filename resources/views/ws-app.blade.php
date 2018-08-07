@@ -90,7 +90,7 @@
                         <a href="#section-reviews" class="text-white">{{ strstr( $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'відгуки' . ' ', ' ', true ) }}</a><br>
                     @endif
                     @if(isset($contacts) AND count($contacts) !== 0 AND $categories_data['contacts']->active == 1)
-                        <a class="text-white"  href="#section-footer">{{ $categories_data['contacts']->getTranslate('title') ? $categories_data['contacts']->getTranslate('title') : 'контакти' }}</a><br>
+                        <a class="text-white"  href="#section-footer">{{ $categories_data['contacts']->getTranslate('title') ? $categories_data['contacts']->getTranslate('title') : 'контакты' }}</a><br>
                     @endif
                     {{--<a href="#" class="text-white">Номери та ціни</a><br>
                     <a href="#" class="text-white">Акції</a><br>
@@ -162,9 +162,9 @@
 <script defer src="{{ asset('/js/frontend/custom.js') }}"></script>
 <script defer src="{{ asset('/js/frontend/jquery.raty.js') }}"></script>
 <script defer src="{{ asset('/js/frontend/scroll.js') }}"></script>
-<script defer src="{{ asset('/js/frontend/countdown.js') }}"></script>
+<!-- <script defer src="{{ asset('/js/frontend/countdown.js') }}"></script>
 <script defer src="{{ asset('/js/frontend/jquery.lazy.min.js') }}"></script>
-<script defer src="{{ asset('/js/frontend/wow.min.js') }}"></script>
+<script defer src="{{ asset('/js/frontend/wow.min.js') }}"></script>-->
 
 
 {{-- /JS --}}
