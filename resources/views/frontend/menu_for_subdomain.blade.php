@@ -19,11 +19,11 @@
         <a class="nav-link my-1 hover-underline" href="{{ route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $base_hotel->getAttributeTranslate('url'), $categories_data['reviews']->getTranslate('url')]) }}">{{ strstr( $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'отзывы' . ' ', ' ', true ) }}</a>
     </li>
 @endif
-{{--@if(isset($discounts) AND count($discounts) !== 0 AND $categories_data['discounts']->active == 1)
+@if(isset($discounts) AND $categories_data['discounts']->active == 1)
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="#">{{ $categories_data['discounts']->getTranslate('title') ? $categories_data['discounts']->getTranslate('title') : 'акції' }}</a>
+        <a class="nav-link my-1 hover-underline" href="{{ route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $base_hotel->getAttributeTranslate('url'), $categories_data['discounts']->getTranslate('url')]) }}">{{ $categories_data['discounts']->getTranslate('title') ? $categories_data['discounts']->getTranslate('title') : 'акции' }}</a>
     </li>
-@endif--}}
+@endif
 @if(isset($contacts) AND count($contacts) !== 0 AND $categories_data['contacts']->active == 1)
     <li class="nav-item">
         <a class="nav-link my-1 hover-underline" href="{{ route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $base_hotel->getAttributeTranslate('url'), $categories_data['contacts']->getTranslate('url')]) }}">{{ $categories_data['contacts']->getTranslate('title') ? $categories_data['contacts']->getTranslate('title') : 'контакты' }}</a>

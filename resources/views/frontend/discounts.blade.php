@@ -1,149 +1,84 @@
 @extends('ws-app')
 
 @section('content')
-<div id="main-view">
-        <div class="halfscreen-img d-flex align-items-center justify-content-center" style="background-image: url('{{ asset ($search->first()->getAttributeTranslate('img_search'))}}');">
-            <h1 class="pb-5 text-uppercase">
-                {{ $search->first()->getAttributeTranslate('slogan1') }}
-                <br class="text-divider"> 
-                {{ $search->first()->getAttributeTranslate('slogan2') }}
-            </h1>
-        </div>
-        <div class="main-form">
-            <div class="container-fluid px-1">
-                <div class="row no-gutters justify-content-center py-md-3 py-1 px-md-5">
-                    <div class="col-lg-2 col-md-3 my-1">
-                        <div id="div-datepicker" class="input-pattern">
-                            <i class="fas fa-calendar-alt input-icon"></i>
-                            <input type='text' data-language="{{ App::getLocale()}}" data-multiple-dates-separator=" - " class="datepicker-here cursor-pointer" id="datepicker" placeholder="Дата" readonly="readonly"/>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-3 my-1">
-                    <div class="input-pattern">
-                        <p id="guests" class="input-text">{{ trans('base.count_guestі')}}</p>
-                        <i class="fas fa-male input-icon"></i>
-                        <div class="input-dropdown">
-                            <div class="input-members d-flex justify-content-between">
-                                <p>{{ trans('base.adults')}}</p>
-                                <span>
-                                    <button id="adults_minus" type="button">
-                                        <i class="fas fa-minus fa-lg add-member-btn"></i>
-                                    </button>
-                                    <input id="adults" type="number" name="adults" min="0" value="0" readonly="readonly" />
-                                    <button id="adults_plus" type="button">
-                                        <i class="fas fa-plus fa-lg add-member-btn"></i>
-                                    </button>
-                                </span>
-                            </div>
-                            <div class="input-members d-flex justify-content-between">
-                                <p>{{ trans('base.children')}}<br/><sup>5-12 {{ trans('base.years')}}</sup></p>
-                                <span>
-                                    <button id="children_minus"type="button">
-                                        <i class="fas fa-minus fa-lg add-member-btn"></i>
-                                    </button>
-                                    <input id="children" type="number" name="children" min="0" value="0" readonly="readonly" />
-                                    <button id="children_plus" type="button">
-                                        <i class="fas fa-plus fa-lg add-member-btn"></i>
-                                    </button>
-                                </span>
-                            </div>
-                            <p class="children-up-to-5"><sub>{{ trans('base.free_children')}}</sub></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 my-1">
-                    <div class="input-pattern">
-                        <button type="submit" class="submit-button text-uppercase">{{ trans('base.check_price') }}</button>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </div>
-    </div>
-   
-    <!-- mobile_messenger -->
-    @include('frontend.sections.mobile_messengers')
-    <!-- END mobile_messenger -->
-    
-    <div class="container-fluid px-sm-5 pb-3">
-        <div class="row text-center">
-            <div class="col">
-                <h2 class="section-header-huge text-uppercase">{{ trans('base.search')}} {{ count((!$subdomain) ? $rooms : $children_rooms) }} {{ trans('base.count_rooms')}}</h2>
-                <div class="section-description">
-                    {!! $search->first()->getTranslate('short_description') !!}
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="container-fluid pb-5">
-        <div class="row justify-content-center pb-5">
-        <?php $r = 0 ?>
-            @foreach((!$subdomain) ? $rooms : $children_rooms as $key => $room)
-                <!-- APARTMENT CARD START -->
-                <div class="col-md-11">
-                    <div data-id={{ $r }} class="apart-card shadow-hover mb-5">
-                        <div class="row no-gutters">
-                            <div class="col-lg-6">
-                                <div class="apart-image-slider">
-                                @foreach($room->getImages() as $room_img)
-                                    <div class="apart-image" style="background-image:url('{{ asset( $room_img['full']) }}')"></div>
-                                @endforeach
-                                </div>
-                                <div class="div-arrows-apart-img-slider">
-                                    <div class="div-arrows p-apart-arrow">
-                                        <div class="arrow-left">
-                                            <div class="back-yellow"></div>
-                                            <div class="back-yellow"></div>
-                                        </div>
-                                    </div>
-                                    <div class="div-arrows n-apart-arrow">
-                                        <div class="arrow-right">
-                                            <div class="back-yellow"></div>
-                                            <div class="back-yellow"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bar-container">
-                                    @if($room->getAttributeTranslate('discount_room'))
-                                        <div class="price-bar">
-                                            <p class="apart-old-price custom-line-throught">{{ $room->getAttributeTranslate('base_price')}}</p>
-                                            <h4 class="apart-price-h">{{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * $room->getAttributeTranslate('discount_room')) / 100)}}</h4>
-                                            <small>{{ trans('base.grn')}} {{ trans('base.price_night')}}</small>
-                                        </div>
 
-                                        <div class="sale-bar">
-                                            <h5 class="sale-text">{{ trans('base.discount')}} {{ $room->getAttributeTranslate('discount_room')}}%</h5>
-                                        </div>
-                                    @else
-                                        <div class="price-bar">
-                                            
-                                            <h4 class="apart-price-h">{{ $room->getAttributeTranslate('base_price')}}</h4>
-                                            <small>{{ trans('base.grn')}} {{ trans('base.price_night')}}</small>
-                                        </div>                                       
-                                    @endif    
-                                </div>
-                            </div>
-                            <div class="col-lg-6 p-lg-4 p-3">
-                                <div class="row">
-                                    <div class="col-md-6 mb-md-0 mb-3">
-                                        <h3 data-id={{ $r }} class="apart-header pb-2">{{ str_limit($room->getTranslate('title'), 50) }}</h3>
-                                        <small data-id={{ $r }} class="apart-hotel">{{ $room->article_parent->getAttributeTranslate('type_build')}} {{ $room->article_parent->getTranslate('title')}}</small>
+    <div id="main-view">
+        <div class="fourthscreen-img d-flex align-items-center justify-content-center" style="background-image: url('{{ asset ($search->first()->getAttributeTranslate('img_search'))}}');">
+            <h1 class="pt-5 mt-5 text-uppercase">{{ $categories_data['discounts']->getTranslate('title') ? $categories_data['discounts']->getTranslate('title') : 'акции' }}</h1>
+        </div>
+    </div>
+     <!-- mobile_messenger -->
+     @include('frontend.sections.mobile_messengers')
+    <!-- END mobile_messenger --> 
+
+    <div class="container-fluid py-5">
+        <div class="row justify-content-center">
+        <?php $iter = 0 ?>
+            @foreach((!$subdomain) ? $rooms : $children_rooms as $key => $room)
+                @if($room->getAttributeTranslate('discount_room'))
+                    <div class="col-md-11">
+                        <div data-id={{ $iter }} class="apart-card shadow-hover mb-5">
+                            <div class="row no-gutters">
+                                <div class="col-xl-6">
+                                    <div class="apart-image-slider">
+                                        @foreach($room->getImages() as $room_img)
+                                            <div class="apart-image" style="background-image:url('{{ asset( $room_img['full']) }}')"></div>
+                                         @endforeach                                    
                                     </div>
-                                    <div class="col-md-3 col-6 text-md-right"><p class="text-brown-param">{{ trans('base.includes')}}: <i class="fa fa-male align-text-top text-orange"></i> х{{ $room->getAttributeTranslate('max_count_guests')}}</p></div>
-                                    <div class="col-md-3 col-6 text-right"><p class="text-brown-param"><i class="fa fa-map-marker-alt align-text-top text-orange"></i> {{ $room->article_parent->getAttributeTranslate('location')}}</p></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="apart-description pt-md-3">
-                                            {!! str_limit($room->getTranslate('description') , 200) !!}                                       
+                                    <div class="div-arrows-apart-img-slider">
+                                        <div class="div-arrows p-apart-arrow">
+                                            <div class="arrow-left">
+                                                <div class="back-yellow"></div>
+                                                <div class="back-yellow"></div>
+                                            </div>
                                         </div>
-                                        @if($room->getAttributeTranslate('base_count_ guests'))
-                                            <small class="apart-text-muted">*{{ trans('base.price_for_person', ['person' => $room->getAttributeTranslate('base_count_ guests')])}}</small>
-                                        @endif
+                                        <div class="div-arrows n-apart-arrow">
+                                            <div class="arrow-right">
+                                                <div class="back-yellow"></div>
+                                                <div class="back-yellow"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bar-container">
+                                        @if($room->getAttributeTranslate('discount_room'))
+                                            <div class="price-bar">
+                                                <p class="apart-old-price custom-line-throught">{{ $room->getAttributeTranslate('base_price')}}</p>
+                                                <h4 class="apart-price-h">{{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * $room->getAttributeTranslate('discount_room')) / 100)}}</h4>
+                                                <small>{{ trans('base.grn')}} {{ trans('base.price_night')}}</small>
+                                            </div>
+
+                                            <div class="sale-bar">
+                                                <h5 class="sale-text">{{ trans('base.discount')}} {{ $room->getAttributeTranslate('discount_room')}}%</h5>
+                                            </div>
+                                        @else
+                                            <div class="price-bar">
+                                                
+                                                <h4 class="apart-price-h">{{ $room->getAttributeTranslate('base_price')}}</h4>
+                                                <small>{{ trans('base.grn')}} {{ trans('base.price_night')}}</small>
+                                            </div>                                       
+                                        @endif    
                                     </div>
                                 </div>
-                                <div class="row icons-row mt-4">
+                                <div class="col-xl-6 p-xl-4 p-3">
+                                    <div class="row">
+                                        <div class="col-lg-6 mb-lg-0 mb-3">
+                                            <h3 data-id={{ $iter }} class="apart-header pb-2">{{ str_limit($room->getTranslate('title'), 50) }}</h3>
+                                            <small data-id={{ $iter }} class="apart-hotel">{{ $room->article_parent->getAttributeTranslate('type_build')}} {{ $room->article_parent->getTranslate('title')}}</small>
+                                        </div>
+                                        <div class="col-lg-3 col-6 text-lg-right"><p class="text-brown-param">Вміщає: <i class="fa fa-male align-text-top text-orange"></i> х8</p></div>
+                                        <div class="col-lg-3 col-6 text-right"><p class="text-brown-param"><i class="fa fa-map-marker-alt align-text-top text-orange"></i> Яремче</p></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="apart-description pt-lg-3">
+                                                {!! str_limit($room->getTranslate('description') , 200) !!}                                       
+                                            </div>
+                                            @if($room->getAttributeTranslate('base_count_ guests'))
+                                                <small class="apart-text-muted">*{{ trans('base.price_for_person', ['person' => $room->getAttributeTranslate('base_count_ guests')])}}</small>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="row icons-row mt-4">
                                     <div class="col">
                                         @if($room->getAttributeTranslate('hair_droom'))                                           
                                             <i class="bb-hair-dryer" data-toggle="{{ trans('base.hair_dryer')}}" data-placement="top" title="{{ trans('base.hair_dryer')}}"></i>
@@ -201,8 +136,8 @@
                                             <i class="bb-ski-dryer" data-toggle="{{ trans('base.bowl_ski_equipment')}}" data-placement="top" title="{{ trans('base.bowl_ski_equipment')}}"></i>
                                         @endif 
                                     </div>
-                                </div>
-                                <div class="row mt-4 align-items-end no-gutters">
+                                    </div>
+                                    <div class="row mt-4 align-items-end no-gutters">
                                     <div class="col-md-4 calc-price">
                                         <div class="row no-gutters justify-content-center mb-md-0 mb-3">
                                             @if($room->getAttributeTranslate('discount_room'))
@@ -214,7 +149,7 @@
                                             @endif                                            
                                             <div class='result_price' data-id={{ $key }}  style='display:none'>{{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * $room->getAttributeTranslate('discount_room')) / 100)}}</div>
                                             <div class="col-md-12 col-6 align-self-center">
-                                                <h3 data-id={{ $r }} class="apart-total-price">{{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * $room->getAttributeTranslate('discount_room')) / 100)}} {{ trans('base.grn')}}</h3>
+                                                <h3 data-id={{ $iter }} class="apart-total-price">{{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * $room->getAttributeTranslate('discount_room')) / 100)}} {{ trans('base.grn')}}</h3>
                                             </div>                                             
                                             <div class="col text-md-left text-center">
                                                 <small class="apart-hotel">{{ trans('base.from_')}} <span class='date_from'></span> {{ trans('base.to') }} <span class='date_to'></span> <span class='quantity_days_search'></span></small>
@@ -223,23 +158,65 @@
                                     </div> 
                                     <div class='days' style='display:none'>1</div>
                                     <div class="col-md-4 col-6 px-1"><a href="{{ route('article_show', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $room->article_parent->getAttributeTranslate('url'), $categories_data['rooms']->getTranslate('url'), $room->id])}}" class="btn btn-yellow-overline">{{ trans('base.more_')}}</a></div>
-                                    <div class="col-md-4 col-6 px-1"><a data-toggle="modal" data-id= {{ $r }} data-target="#exampleModal" class="btn btn-yellow reserved">{{ trans('base.order')}}</a></div>
+                                    <div class="col-md-4 col-6 px-1"><a data-toggle="modal" data-id= {{ $iter }} data-target="#exampleModal" class="btn btn-yellow reserved">{{ trans('base.order')}}</a></div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php $iter++ ?>
+                @endif
+            @endforeach
+        </div>
+    </div>
+
+    <div class="container-fluid pb-5">
+        <div class="row justify-content-center">
+            <div class="col-md-11 pb-5">
+                <div class="huge-discount-card shadow-hover">
+                    <div class="huge-discount-card-img" style="background-image: url(img/hotels/beardvir.jpg)"></div>
+                    <h2 class="section-header-huge text-center">бронюйте новий рік зі знижкою 15%</h2>
+                    <p class="countdown-p text-center m-0" data-time-left="Nov 18, 2018 00:00:00"><span class="days-left back-f4f4f4 p-2">00</span> : <span class="hours-left back-f4f4f4 p-2">00</span> : <span class="minutes-left back-f4f4f4 p-2">00</span> : <span class="seconds-left back-f4f4f4 p-2">00</span></p>
+                    <p class="text-center mt-1"><small>Днів, годин, хвилин та секунд до завершення акції</small></p>
+                    <p class="huge-discount-card-p text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <div class="container-fluid d-flex justify-content-center mb-3">
+                        <a href="#" class="btn btn-yellow px-4">обрати номер</a>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-4 order-xl-1 order-3 py-3">
+                            <div class="row d-flex pl-xl-4 pr-xl-0 mt-xl-4 px-3">
+                                <div class="col-1 d-flex align-items-center">
+                                    <i class="fas fa-phone color-ff8c00 m-xl-0 mx-auto"></i>
+                                </div>
+                                <div class="col-xl-11 col-10 d-flex flex-xl-row flex-column">
+                                    <p class="pl-xl-2 phone-discount-card m-0 text-xl-left text-center">+38 (096) 414 3851</p>
+                                    <p class="pl-xl-2 phone-discount-card m-0 text-xl-left text-center">+38 (096) 414 3851</p>
+                                </div>                      
+                            </div>
+                        </div>
+                        <div class="col-xl-4 order-xl-2 order-1 d-flex justify-content-center py-3">
+                            <p class="text-uppercase m-0 back-red d-flex justify-content-center align-items-center py-2 px-3">залишилось 3 номери</p>
+                        </div>
+                        <div class="col-xl-4 order-xl-3 order-2 py-3">
+                            <div class="row d-flex pl-xl-0 pl-xl-4 pr-xl-0 justify-content-xl-end mt-xl-4 px-3">
+                                <div class="col-1 d-flex align-items-center">
+                                    <i class="far fa-calendar-alt color-ff8c00 mr-xl-2 mx-auto d-xl-none"></i>
+                                </div>
+                                <div class="col-xl-11 col-10 p-0">
+                                    <p class="text-xl-right text-center pr-xl-5 m-0"><i class="far fa-calendar-alt color-ff8c00 mr-2 d-xl-inline d-none"></i>акція діє до 21.21.21</p>  
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- APARTMENT CARD END -->
-                <div></div>
-                <?php $r++ ?>
-            @endforeach
+            </div>
         </div>
     </div>
 
     <div class="container-fluid pb-5 back-f4f4f4">
         <div class="row text-center">
             <div class="col">
-                <h2 class="section-header-huge pb-5">{{ trans('base.free_room')}}</h2>
+                <h2 class="section-header-huge pb-5">{{ trans('base.popular_rooms') }}</h2>
             </div>
         </div>
         <div class="row justify-content-center no-gutters px-md-5 px-0 pb-3">
@@ -307,11 +284,13 @@
         </div>
     </div>
 
-    <!-- callback -->
-        @include('frontend.sections.callback')
-    <!--  END callback -->
+    <div class="container-fluid px-1 back-747474">
+        <!-- form for find -->
+        @include('frontend.sections.form_find')
+        <!-- END form for find -->
+    </div>
     <!-- modal window -->
-        @include('frontend.sections.modal')
+    @include('frontend.sections.modal')
     <!--  END modal window -->
     <!-- modal end_reservation -->
     @include('frontend.sections.end_reservation')
