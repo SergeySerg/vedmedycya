@@ -36,8 +36,19 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{
-		//dd('as');
-		return parent::render($request, $e);
+		 // 404 page when a model is not found
+		 if(!config('app.debug')){			
+
+			// custom error message
+			if ($e instanceof \ErrorException) {		
+				return redirect()->route('show_404', ['lang' => setLangToRedirect(($request->lang) ? $request->lang : config('app.locale'))]);
+			} else {
+				return parent::render($request, $e);
+			}
+		}
+    
+
+    return parent::render($request, $e);
 	}
 
 }

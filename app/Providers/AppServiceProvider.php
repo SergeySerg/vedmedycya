@@ -33,6 +33,10 @@ class AppServiceProvider extends ServiceProvider {
                     'pageName' => $pageName,
                 ]
             );
+		});
+		view()->composer('errors/404', function($view)
+        {
+            $view->with();
         });
 	}
 

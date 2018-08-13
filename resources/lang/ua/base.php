@@ -107,6 +107,8 @@ return [
 	"reception" => "Рецепція",
 	"reservation_department" => "Відділ бронювання номерів",
 	"restaurant" => "Ресторан",
+	"error_404" => "На жаль, сталась помилка",
+	"back" => "повернутись назад",
 
 
 	/* Script Contact*/

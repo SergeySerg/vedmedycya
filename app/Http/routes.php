@@ -14,6 +14,11 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+/* Page 404 */
+Route::get('/404', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@show404', 'as' => 'show_404'])->where('lang', 'ua|ru|en|pl');
+Route::get('/{lang?}/404', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@show404', 'as' => 'show_404'])->where('lang', 'ua|ru|en|pl');
+/* /Page 404 */
+
 Route::get('home', 'HomeController@index');//Для відображення результата після логування
 
 /*Auth group routes*/
@@ -98,14 +103,13 @@ Route::group(['prefix'=> getSetting('admin.prefix'), 'middleware' => ['auth', 'b
 	Route::get('/{subtype}/{name}/{url}', ['middleware' => 'frontend.init','uses' => 'Frontend\ArticleController@renderUrl', 'as' => 'article_url']);
 	Route::get('/{lang?}/{subtype}/{name}/{url}', ['middleware' => 'frontend.init','uses' => 'Frontend\ArticleController@renderUrl', 'as' => 'article_url'])->where('lang', 'ua|ru|en|pl');
 	Route::get('/{subtype}/{name}/{url}/{id}', ['middleware' => 'frontend.init','uses' => 'Frontend\ArticleController@show', 'as' => 'article_show'])->where('lang', 'ua|ru|en|pl');
-	Route::get('/{lang?}/{subtype}/{name}/{url}/{id}', ['middleware' => 'frontend.init','uses' => 'Frontend\ArticleController@show', 'as' => 'article_show'])->where('lang', 'ua|ru|en|pl');
+	Route::get('/{lang?}/{subtype}/{name}/{url}/{id}', ['middleware' => 'frontend.init','uses' => 'Frontend\ArticleController@show', 'as' => 'article_show'])->where('lang', 'ua|ru|en|pl')->where('id','.*');
 
-
-
+	/*Modal routes*/
 	Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
 	Route::post('/{lang}/add_review', ['uses' => 'Frontend\ArticleController@add_review','as' => 'add_review']);//Обработчик добавления отзыва
 	Route::post('/{lang}/reserved', ['uses' => 'Frontend\ArticleController@reserved','as' => 'reserved']);//Обработчик Обратной связи при заказе номера
-
+	/*/Modal routes*/
 	// ...
 	//modal_handler();
 //});

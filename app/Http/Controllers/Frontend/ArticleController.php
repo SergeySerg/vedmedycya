@@ -148,7 +148,15 @@ class ArticleController extends Controller {
 		//dd($seo_article);
 		return view('frontend.seo')->with(compact('seo_article'));
 	}
-
+	public function show404(Request $request)
+	{
+		//dd('$lang');
+		
+		//$seo_article = Article::where('attributes->url->' . App::getLocale(), $request->url )->first();
+		
+		//dd($seo_article);
+		return view('frontend.404');
+	}
 	
 	public function showMainPage($type){
 		/*Select slide that check as show_main_page*/
