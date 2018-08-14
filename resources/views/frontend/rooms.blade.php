@@ -286,12 +286,15 @@
             <div class="container-fluid line-1-ff8c00"></div>
             <div class="row px-xl-5 my-5">
                 <div class="col-xl-3 d-flex align-items-center justify-content-center">
-                    <p class="section-text-huge ipad-text-center">{{ count($children_reviews) }} {{trans_choice('base.review', count($children_reviews)) }} <br/>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
+                    <p class="section-text-huge ipad-text-center">{{ $children_reviews->total() }} {{trans_choice('base.review', (!$subdomain) ? $reviews->total() : $children_reviews->total()) }} <br/>
+                    @if($children_reviews_raty !== 0)
+                        @for ($i = 0; $i < $children_reviews_raty; $i++)
+                            <i class="fas fa-star"></i>
+                        @endfor
+                        @for ($i = 0; $i < 5 - $children_reviews_raty; $i++)
+                            <i class="far fa-star"></i>
+                        @endfor
+                    @endif
                     </p>
                 </div>
                 <div class="col-xl px-xl-5">
@@ -299,8 +302,8 @@
                         <div class="row">
                             <div class="col d-flex justify-content-xl-around">
                                 <p class="section-text-small mx-xl-0 mr-auto">{{ trans('base.cleanness')}}</p>
-                                <div class="div-stars">
-                                    <i class="far fa-star"></i>
+                                <div class="div-stars">                                    
+                                    <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -314,7 +317,7 @@
                             <div class="col d-flex justify-content-xl-around">
                                 <p class="section-text-small mx-xl-0 mr-auto">{{ trans('base.сosiness')}}</p>
                                 <div class="div-stars">
-                                    <i class="far fa-star"></i>
+                                    <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -330,7 +333,7 @@
                             <div class="col d-flex justify-content-xl-around">
                                 <p class="section-text-small mx-xl-0 mr-auto">{{ trans('base.location')}}</p>
                                 <div class="div-stars">
-                                    <i class="far fa-star"></i>
+                                    <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
@@ -344,11 +347,11 @@
                             <div class="col d-flex justify-content-xl-around">
                                 <p class="section-text-small mx-xl-0 mr-auto">{{ trans('base.food')}}</p>
                                 <div class="div-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
                                     <i class="far fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
                                 </div>
                             </div>
                         </div>

@@ -112,6 +112,7 @@ class FrontendInit {
 								//dd($base_article);
 								$base_hotel = $article->where('article_id', $base_article->article_id)->where('attributes->is_base_hotel', 1)->first();
 								//dd($base_hotel);
+								//Debugbar::info($base_hotel);
 								view()->share('base_hotel', $base_hotel);
 							}
 							array_push($child_articles, $article);
@@ -119,8 +120,10 @@ class FrontendInit {
 					}
 					$child_articles = collect($child_articles)->sortByDesc('priority');
 					if($category->link == 'reviews'){
+						view()->share('children_' . $category->link . '_raty', $this->counterReviews($child_articles));
+						//Debugbar::info();
 						$child_articles = collect($child_articles)->sortByDesc('priority')->paginate( 2 );
-
+						//dd($child_articles);
 					}
 					//dd($child_articles);
 					view()->share('children_' . $category->link, $child_articles);	
@@ -179,6 +182,31 @@ class FrontendInit {
 		view()->share('category_for_subtype', $category_for_subtype);
 		
 		return $next($request);
+	}
+	public function counterReviews($reviews){
+		$settings_reviews = Category::where('link', 'revsettings')->first()->articles->first();
+		$all_property_for_reviews = json_decode($settings_reviews->attributes, true);
+		//dd($all_property_for_reviews);
+		foreach ($all_property_for_reviews as $key => $item) {
+			//dd($item);
+			if($item != 1) {				
+				unset($all_property_for_reviews[$key]);
+			}
+		}
+		$rates = [];
+		foreach($reviews as $review){				
+			$all_attributes = json_decode($review->attributes, true);
+			foreach($all_property_for_reviews as $key => $item){
+				foreach($all_attributes as $k => $v){
+					if(strpos($key, $k) !== false && $v){										
+						array_push($rates, $v);						 
+					}					
+				}				
+			}
+		}
+		//Debugbar::info(collect($rates)->avg());
+		return $raty = round(collect($rates)->avg(), 0, PHP_ROUND_HALF_UP); 
+		//Debugbar::info($raty);			
 	}
 
 }

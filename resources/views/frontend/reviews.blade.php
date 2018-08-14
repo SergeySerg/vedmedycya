@@ -13,11 +13,14 @@
             <div class="row px-xl-5 my-5">
                 <div class="col-xl-3 d-flex align-items-center justify-content-center">
                     <p class="section-text-huge ipad-text-center">{{ $children_reviews->total() }} {{trans_choice('base.review', (!$subdomain) ? $reviews->total() : $children_reviews->total()) }}<br/>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
+                    @if($children_reviews_raty !== 0)
+                        @for ($i = 0; $i < $children_reviews_raty; $i++)
+                            <i class="fas fa-star color-ff8c00 font-12"></i>
+                        @endfor
+                        @for ($i = 0; $i < 5 - $children_reviews_raty; $i++)
+                            <i class="far fa-star color-ff8c00 font-12"></i>
+                        @endfor
+                    @endif
                     </p>
                 </div>
                 <div class="col-xl px-xl-5">
@@ -140,7 +143,7 @@
                                 {!! $review->getAttributeTranslate('answer_reviews') !!}                                    
                             </div>
                             <div class="card-footer pt-3">
-                                <p class="name bigbear-name-font m-sm-0 mb-0 mt-1">{{ $revsettings->first()->getAttributeTranslate('admin_name') }}</p>
+                                <p class="name bigbear-name-font m-sm-0 mb-0 mt-1">{{ $texts->get('admin_name') }}</p>
                                 <p class="date">{{ $review->getAttributeTranslate('date_answer_reviews') }}</p>
                             </div>
                         </div>

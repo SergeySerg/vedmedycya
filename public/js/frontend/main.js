@@ -413,10 +413,10 @@ $(function () {
         var days = (daydiff(parseDate(dateFinish), parseDate(dateStart)));
         var price = $('.result_price').text();
         //console.log('range_date', range_date);
-        var old_price_item = $('.old_price').text(); 
+        //var old_price_item = $('.old_price').text(); 
         /*For search page*/
         $('.calc-price').each(function(){
-            //old_price_item = $(this).find('.old-price-apart').text();
+            var old_price_item = $(this).find('.old-price-apart').text();
             //console.log('Стара ціна', old_price_item);
             price_item = $(this).find('.result_price').text();
             $(this).find('.apart-total-price').text(1*price_item*days);

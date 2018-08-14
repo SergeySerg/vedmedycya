@@ -64,7 +64,7 @@ class Translate extends Model {
             // if (count($pieces) == 1)
             $fields = $attributes[$key];
             //dd($fields);
-            Debugbar::info($fields);
+            //Debugbar::info($fields);
             if (is_string($fields) OR is_int($fields)){ 
                 //dd('asds');
                 $attributes[$key] = str_replace("'","", $attributes[$key]);           

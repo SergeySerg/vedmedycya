@@ -78,4 +78,5 @@ class Article extends Translate {
     public function getDateAttribute($date){
         return Carbon::createFromFormat('Y-m-d H:i:s',$date)->toDateString();
     }
+    
 }

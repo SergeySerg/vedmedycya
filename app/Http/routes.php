@@ -14,6 +14,15 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get('/_debugbar/assets/stylesheets', [
+    'as' => 'debugbar-css',
+    'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@css'
+]);
+
+Route::get('/_debugbar/assets/javascript', [
+    'as' => 'debugbar-js',
+    'uses' => '\Barryvdh\Debugbar\Controllers\AssetController@js'
+]);
 /* Page 404 */
 Route::get('/404', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@show404', 'as' => 'show_404'])->where('lang', 'ua|ru|en|pl');
 Route::get('/{lang?}/404', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@show404', 'as' => 'show_404'])->where('lang', 'ua|ru|en|pl');
