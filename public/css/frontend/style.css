@@ -2511,6 +2511,51 @@ p.apart-old-total-price .custom-line-throught::after {
     text-align: justify;
     text-justify: inter-word;
 }
+.btn-red-freedates {
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #D23A00;
+    border-radius: 0px;
+}
+ .btn-red-freedates:hover {
+    color: #fff;
+    background-color: #b93300;
+}
+.freedates-bar-text {
+    font-size: 1.2rem;
+}
+
+#freedates-bar {
+    padding: 15px !important;
+}
+#freedates-bar {
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    z-index: 100;
+    padding: 25px;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #D23A00;
+}
+ #close-button-container {
+    position: absolute;
+    right: 25px;
+    z-index: 15;
+}
+ #close-button {
+    cursor: pointer;
+    padding: 0;
+    font-size: 35px;
+    background: none;
+    border: none;
+    color: #fff;
+}
 /*Custom css*/
 div#justify > .fa-plus:first-child {
     display: none;

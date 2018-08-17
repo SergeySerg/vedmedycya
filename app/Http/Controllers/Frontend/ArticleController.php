@@ -63,10 +63,10 @@ class ArticleController extends Controller {
 	}
 	public function renderUrl(Request $request)
 	{	
-		//dd($request->url);
+		//dd($category);
 		
 			$parent_hotel = Article::where('attributes->url->' . App::getLocale(), $request->name )->first();
-			$type = Category::where('url->' . App::getLocale(), $request->url)->first();
+			$type = Category::where('url->' . App::getLocale(), ($request->url) ? $request->url : $request->category)->first();
 			//dd($type);
 		//}
 		

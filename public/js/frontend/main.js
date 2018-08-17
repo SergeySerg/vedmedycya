@@ -550,3 +550,6 @@ window.addEventListener("scroll", function(){ // or window.addEventListener("scr
    }
    lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
 }, false);
+function hideFreedatesBar() {
+    document.getElementById('freedates-bar').remove();
+} 

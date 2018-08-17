@@ -76,6 +76,8 @@
                                     href="
                                     @if(isset($seo_article))
                                         /@if($lang->lang !== 'ru'){{$lang->lang}}/@endif{{$seo_article->article_parent->getAttributeTranslate('url', $lang->lang)}}/{{ $seo_article->getAttributeTranslate('url', $lang->lang) }}
+                                    @elseif( \Route::current()->getName() == 'article_category')
+                                        /@if($lang->lang !== 'ru'){{$lang->lang}}/@endif{{ $categories_data['discounts']->getTranslate('url', $lang->lang) }}
                                     @else
                                         /@if($lang->lang !== 'ru'){{$lang->lang}}/@endif{{($subdomain) ? $category_for_subtype->getTranslate('url', $lang->lang) . '/' : '' }}{{($subdomain) ? $parent_hotel->getAttributeTranslate('url', $lang->lang). '/' : ''}}{{($url) ? $category_for_url->getTranslate('url', $lang->lang). '/' : ''}}{{($id) ? $id : '' }}
                                     @endif">

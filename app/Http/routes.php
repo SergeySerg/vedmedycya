@@ -105,6 +105,9 @@ Route::group(['prefix'=> getSetting('admin.prefix'), 'middleware' => ['auth', 'b
 //Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
 //Route::group(['domain' => getSetting('domain')], function() {	
 	Route::get('/{lang?}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index'])->where('lang', 'ua|ru|en|pl');
+	Route::get('/{category}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@renderUrl', 'as' => 'article_category'])->where('category', 'скидки|sales|znyzhky');
+	Route::get('/{lang?}/{category}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@renderUrl', 'as' => 'article_category'])->where('lang', 'ua|ru|en|pl')->where('category', 'скидки|sales|znyzhky');
+
 	Route::get('/{seo_direction}/{url}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@showSeo', 'as' => 'article_show_seo'])->where('seo_direction', 'буковель|bukovel|яремче|yaremche|карпаты|karpaty');
 	Route::get('/{lang?}/{seo_direction}/{url}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@showSeo', 'as' => 'article_show_seo'])->where('seo_direction', 'буковель|bukovel|яремче|yaremche|карпаты|karpaty')->where('lang', 'ua|ru|en|pl');
 	Route::get('/{subtype}/{name}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@index', 'as' => 'article_index_subdomain']);

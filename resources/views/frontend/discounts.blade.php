@@ -15,7 +15,7 @@
         <div class="row justify-content-center">
         <?php $iter = 0 ?>
             @foreach((!$subdomain) ? $rooms : $children_rooms as $key => $room)
-                @if($room->getAttributeTranslate('discount_room'))
+                @if($room->getAttributeTranslate('discount_room') OR $room->getAttributeTranslate('marketing_hot_sale') )
                     <div class="col-md-11">
                         <div data-id={{ $iter }} class="apart-card shadow-hover mb-5">
                             <div class="row no-gutters">
@@ -65,8 +65,8 @@
                                             <h3 data-id={{ $iter }} class="apart-header pb-2">{{ str_limit($room->getTranslate('title'), 50) }}</h3>
                                             <small data-id={{ $iter }} class="apart-hotel">{{ $room->article_parent->getAttributeTranslate('type_build')}} {{ $room->article_parent->getTranslate('title')}}</small>
                                         </div>
-                                        <div class="col-lg-3 col-6 text-lg-right"><p class="text-brown-param">Вміщає: <i class="fa fa-male align-text-top text-orange"></i> х8</p></div>
-                                        <div class="col-lg-3 col-6 text-right"><p class="text-brown-param"><i class="fa fa-map-marker-alt align-text-top text-orange"></i> Яремче</p></div>
+                                        <div class="col-lg-3 col-6 text-lg-right"><p class="text-brown-param">{{ trans('base.includes')}}: <i class="fa fa-male align-text-top text-orange"></i> х{{ $room->getAttributeTranslate('max_count_guests')}}</p></div>
+                                        <div class="col-lg-3 col-6 text-right"><p class="text-brown-param"><i class="fa fa-map-marker-alt align-text-top text-orange"></i> {{ $room->article_parent->getAttributeTranslate('location')}}</p></div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
@@ -138,7 +138,7 @@
                                     </div>
                                     </div>
                                     <div class="row mt-4 align-items-end no-gutters">
-                                    <div class="col-md-4 calc-price">
+                                    <div class="col-md-4 calc-price" @if($room->getAttributeTranslate('marketing_hot_sale'))style="display:none" @endif>
                                         <div class="row no-gutters justify-content-center mb-md-0 mb-3">
                                             @if($room->getAttributeTranslate('discount_room'))
                                                 <div class="col-md-12 col-6 text-center text-md-left align-self-center">
@@ -156,9 +156,15 @@
                                             </div>
                                         </div>   
                                     </div> 
+                                    
                                     <div class='days' style='display:none'>1</div>
-                                    <div class="col-md-4 col-6 px-1"><a href="{{ route('article_show', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $room->article_parent->getAttributeTranslate('url'), $categories_data['rooms']->getTranslate('url'), $room->id])}}" class="btn btn-yellow-overline">{{ trans('base.more_')}}</a></div>
-                                    <div class="col-md-4 col-6 px-1"><a data-toggle="modal" data-id= {{ $iter }} data-target="#exampleModal" class="btn btn-yellow reserved">{{ trans('base.order')}}</a></div>
+                                    @if($room->getAttributeTranslate('marketing_hot_sale'))
+                                        <div class="col-md-8 px-1"><a href="{{ route('article_show', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $room->article_parent->getAttributeTranslate('url'), $categories_data['rooms']->getTranslate('url'), $room->id])}}" class="btn btn-red-freedates">{{ $room->getAttributeTranslate('marketing_hot_sale')}}</a></div>
+                                        <div class="col-md-4 px-1"><a data-toggle="modal" data-id= {{ $iter }} data-target="#exampleModal" class="btn btn-yellow reserved">{{ trans('base.order')}}</a></div>
+                                    @else
+                                        <div class="col-md-4 col-6 px-1"><a href="{{ route('article_show', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $room->article_parent->getAttributeTranslate('url'), $categories_data['rooms']->getTranslate('url'), $room->id])}}" class="btn btn-yellow-overline">{{ trans('base.more_')}}</a></div>
+                                        <div class="col-md-4 col-6 px-1"><a data-toggle="modal" data-id= {{ $iter }} data-target="#exampleModal" class="btn btn-yellow reserved">{{ trans('base.order')}}</a></div>
+                                    @endif
                                 </div>
                                 </div>
                             </div>
@@ -170,7 +176,7 @@
         </div>
     </div>
 
-    <div class="container-fluid pb-5">
+    {{--<div class="container-fluid pb-5">
         <div class="row justify-content-center">
             <div class="col-md-11 pb-5">
                 <div class="huge-discount-card shadow-hover">
@@ -211,7 +217,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--}}
 
     <div class="container-fluid pb-5 back-f4f4f4">
         <div class="row text-center">

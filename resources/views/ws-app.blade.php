@@ -138,7 +138,12 @@
     </footer>  
     <!-- modal thanks -->
     @include('frontend.sections.thanks')
-    <!--  END modal thanks -->  
+    <!--  END modal thanks -->
+    @if(getSetting('hot_sale'))  
+        <!-- modal hot_sale -->
+        @include('frontend.sections.hot_sale')
+        <!--  END modal hot_sale --> 
+    @endif 
     @if(getSetting('ip'))
         <!-- Google Tag Manager (noscript) -->
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQCTRLS"
