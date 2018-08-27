@@ -416,8 +416,8 @@ $(function () {
         //var old_price_item = $('.old_price').text(); 
         /*For search page*/
         $('.calc-price').each(function(){
-            var old_price_item = $(this).find('.old-price-apart').text();
-            //console.log('Стара ціна', old_price_item);
+            var old_price_item = $(this).find('.old_price').text();
+            console.log('Стара ціна', old_price_item);
             price_item = $(this).find('.result_price').text();
             $(this).find('.apart-total-price').text(1*price_item*days);
             $(this).find('.old-price-apart').text(1*old_price_item*days);

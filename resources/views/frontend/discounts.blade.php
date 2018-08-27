@@ -175,50 +175,54 @@
             @endforeach
         </div>
     </div>
-
-    {{--<div class="container-fluid pb-5">
-        <div class="row justify-content-center">
-            <div class="col-md-11 pb-5">
-                <div class="huge-discount-card shadow-hover">
-                    <div class="huge-discount-card-img" style="background-image: url(img/hotels/beardvir.jpg)"></div>
-                    <h2 class="section-header-huge text-center">бронюйте новий рік зі знижкою 15%</h2>
-                    <p class="countdown-p text-center m-0" data-time-left="Nov 18, 2018 00:00:00"><span class="days-left back-f4f4f4 p-2">00</span> : <span class="hours-left back-f4f4f4 p-2">00</span> : <span class="minutes-left back-f4f4f4 p-2">00</span> : <span class="seconds-left back-f4f4f4 p-2">00</span></p>
-                    <p class="text-center mt-1"><small>Днів, годин, хвилин та секунд до завершення акції</small></p>
-                    <p class="huge-discount-card-p text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <div class="container-fluid d-flex justify-content-center mb-3">
-                        <a href="#" class="btn btn-yellow px-4">обрати номер</a>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-4 order-xl-1 order-3 py-3">
-                            <div class="row d-flex pl-xl-4 pr-xl-0 mt-xl-4 px-3">
-                                <div class="col-1 d-flex align-items-center">
-                                    <i class="fas fa-phone color-ff8c00 m-xl-0 mx-auto"></i>
-                                </div>
-                                <div class="col-xl-11 col-10 d-flex flex-xl-row flex-column">
-                                    <p class="pl-xl-2 phone-discount-card m-0 text-xl-left text-center">+38 (096) 414 3851</p>
-                                    <p class="pl-xl-2 phone-discount-card m-0 text-xl-left text-center">+38 (096) 414 3851</p>
-                                </div>                      
+        @foreach((!$subdomain) ? $discounts : $children_discounts as $discount)
+            <div class="container-fluid pb-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-11 pb-5">
+                        <div class="huge-discount-card shadow-hover">
+                            <div class="huge-discount-card-img" style="background-image: url('{{ asset ($discount->getAttributeTranslate('img_discount'))}}')"></div>
+                            <h2 class="section-header-huge text-center">{{ $discount->getTranslate('title')}}</h2>
+                            <p class="countdown-p text-center m-0" data-time-left="{{date('F j, Y',strtotime($discount->date)) }}"><span class="days-left back-f4f4f4 p-2">00</span> : <span class="hours-left back-f4f4f4 p-2">00</span> : <span class="minutes-left back-f4f4f4 p-2">00</span> : <span class="seconds-left back-f4f4f4 p-2">00</span></p>
+                            <p class="text-center mt-1"><small>{{ trans('base.sale_description')}}</small></p>
+                            <div class="huge-discount-card-p text-center">{!! $discount->getTranslate('description') !!}</div>
+                            <div class="container-fluid d-flex justify-content-center mb-3">
+                                <a href="@if($subdomain OR $discount->article_parent){{ route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $discount->article_parent->getAttributeTranslate('url'), $categories_data['search']->getTranslate('url') . '?discount=' . $discount->getAttributeTranslate('discount_room') ]) }}@else {{ route('article_category', [setLangToRedirect(App::getLocale()), $categories_data['search']->getTranslate('url') . '?discount=' . $discount->getAttributeTranslate('discount_room') ]) }} @endif" class="btn btn-yellow px-4">{{ trans('base.check_room') }}</a>
                             </div>
-                        </div>
-                        <div class="col-xl-4 order-xl-2 order-1 d-flex justify-content-center py-3">
-                            <p class="text-uppercase m-0 back-red d-flex justify-content-center align-items-center py-2 px-3">залишилось 3 номери</p>
-                        </div>
-                        <div class="col-xl-4 order-xl-3 order-2 py-3">
-                            <div class="row d-flex pl-xl-0 pl-xl-4 pr-xl-0 justify-content-xl-end mt-xl-4 px-3">
-                                <div class="col-1 d-flex align-items-center">
-                                    <i class="far fa-calendar-alt color-ff8c00 mr-xl-2 mx-auto d-xl-none"></i>
+                            <div class="row">
+                                <div class="col-xl-4 order-xl-1 order-3 py-3">
+                                    <div class="row d-flex pl-xl-4 pr-xl-0 mt-xl-4 px-3">
+                                        <div class="col-1 d-flex align-items-center">
+                                            <i class="fas fa-phone color-ff8c00 m-xl-0 mx-auto"></i>
+                                        </div>
+                                        <div class="col-xl-11 col-10 d-flex flex-xl-row flex-column">
+                                            <p class="pl-xl-2 phone-discount-card m-0 text-xl-left text-center">{{ $texts->get('tel_1') }}</p>
+                                            <p class="pl-xl-2 phone-discount-card m-0 text-xl-left text-center">{{ $texts->get('tel_2') }}</p>
+                                        </div>                      
+                                    </div>
                                 </div>
-                                <div class="col-xl-11 col-10 p-0">
-                                    <p class="text-xl-right text-center pr-xl-5 m-0"><i class="far fa-calendar-alt color-ff8c00 mr-2 d-xl-inline d-none"></i>акція діє до 21.21.21</p>  
+                                @if($discount->getAttributeTranslate('marketing_dush'))
+                                    <div class="col-xl-4 order-xl-2 order-1 d-flex justify-content-center py-3">
+                                        <p class="text-uppercase m-0 back-red d-flex justify-content-center align-items-center py-2 px-3">{{ $discount->getAttributeTranslate('marketing_dush')}}</p>
+                                    </div>
+                                @endif    
+                                <div class="col-xl-4 order-xl-3 order-2 py-3">
+                                    <div class="row d-flex pl-xl-0 pl-xl-4 pr-xl-0 justify-content-xl-end mt-xl-4 px-3">
+                                        <div class="col-1 d-flex align-items-center">
+                                            <i class="far fa-calendar-alt color-ff8c00 mr-xl-2 mx-auto d-xl-none"></i>
+                                        </div>
+                                        @if($discount->date)
+                                            <div class="col-xl-11 col-10 p-0">
+                                                <p class="text-xl-right text-center pr-xl-5 m-0"><i class="far fa-calendar-alt color-ff8c00 mr-2 d-xl-inline d-none"></i>{{ trans('base.sale_to')}} {{date('d.m.Y',strtotime($discount->date)) }}</p>  
+                                            </div>
+                                        @endif    
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>--}}
-
+        @endforeach
     <div class="container-fluid pb-5 back-f4f4f4">
         <div class="row text-center">
             <div class="col">

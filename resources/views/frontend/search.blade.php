@@ -105,15 +105,15 @@
                                     </div>
                                 </div>
                                 <div class="bar-container">
-                                    @if($room->getAttributeTranslate('discount_room'))
+                                    @if(Request::get('discount') OR $room->getAttributeTranslate('discount_room'))
                                         <div class="price-bar">
                                             <p class="apart-old-price custom-line-throught">{{ $room->getAttributeTranslate('base_price')}}</p>
-                                            <h4 class="apart-price-h">{{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * $room->getAttributeTranslate('discount_room')) / 100)}}</h4>
+                                            <h4 class="apart-price-h">{{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * ((Request::get('discount')) ? Request::get('discount') : $room->getAttributeTranslate('discount_room'))) / 100)}}</h4>
                                             <small>{{ trans('base.grn')}} {{ trans('base.price_night')}}</small>
                                         </div>
 
                                         <div class="sale-bar">
-                                            <h5 class="sale-text">{{ trans('base.discount')}} {{ $room->getAttributeTranslate('discount_room')}}%</h5>
+                                            <h5 class="sale-text">{{ trans('base.discount')}} {{ (Request::get('discount')) ? Request::get('discount') : $room->getAttributeTranslate('discount_room')}}%</h5>
                                         </div>
                                     @else
                                         <div class="price-bar">
@@ -205,16 +205,16 @@
                                 <div class="row mt-4 align-items-end no-gutters">
                                     <div class="col-md-4 calc-price">
                                         <div class="row no-gutters justify-content-center mb-md-0 mb-3">
-                                            @if($room->getAttributeTranslate('discount_room'))
+                                            @if(Request::get('discount') OR $room->getAttributeTranslate('discount_room'))
                                                 <div class="col-md-12 col-6 text-center text-md-left align-self-center">
                                                     <p class="apart-old-total-price"><b class="custom-line-throught"><span class='old-price-apart'>{{ $room->getAttributeTranslate('base_price')}}</span> {{ trans('base.grn')}}</b></p>
                                                 </div>
                                                 <div class='old_price' data-id={{ $key }}  style='display:none'>{{ $room->getAttributeTranslate('base_price')}}</div>
 
                                             @endif                                            
-                                            <div class='result_price' data-id={{ $key }}  style='display:none'>{{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * $room->getAttributeTranslate('discount_room')) / 100)}}</div>
+                                            <div class='result_price' data-id={{ $key }}  style='display:none'>{{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * ((Request::get('discount')) ? Request::get('discount') : $room->getAttributeTranslate('discount_room'))) / 100)}}</div>
                                             <div class="col-md-12 col-6 align-self-center">
-                                                <h3 data-id={{ $r }} class="apart-total-price">{{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * $room->getAttributeTranslate('discount_room')) / 100)}} {{ trans('base.grn')}}</h3>
+                                                <h3 data-id={{ $r }} class="apart-total-price">{{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * ((Request::get('discount')) ? Request::get('discount') : $room->getAttributeTranslate('discount_room')))  / 100)}} {{ trans('base.grn')}}</h3>
                                             </div>                                             
                                             <div class="col text-md-left text-center">
                                                 <small class="apart-hotel">{{ trans('base.from_')}} <span class='date_from'></span> {{ trans('base.to') }} <span class='date_to'></span> <span class='quantity_days_search'></span></small>
@@ -266,14 +266,14 @@
                                         <p class="location-text"><i class="fas fa-map-marker-alt color-ff8c00"></i> {{ $room->article_parent->getAttributeTranslate('location')}}</p>
                                     </div>
                                 </div>
-                                @if($room->getAttributeTranslate('discount_room'))
+                                @if(Request::get('discount') OR $room->getAttributeTranslate('discount_room'))
                                 <div class="apart-small-card-buy d-flex flex-column justify-content-center">
                                     <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between">
                                         {{trans('base.from')}} 
                                         <span class="d-flex flex-column">
                                             <span class="old-price-hotel-card custom-line-throught">{{ $room->getAttributeTranslate('base_price')}}</span>
                                                 <strong>
-                                                    {{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * $room->getAttributeTranslate('discount_room')) / 100)}}
+                                                    {{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * ((Request::get('discount')) ? Request::get('discount') : $room->getAttributeTranslate('discount_room'))) / 100)}}
                                                 </strong>
                                             </span> 
                                             {{trans('base.grn')}}
