@@ -12,14 +12,25 @@
         <div class="container-fluid px-xl-5">
             <div class="row px-xl-5 my-5">
                 <div class="col-xl-3 d-flex align-items-center justify-content-center">
-                    <p class="section-text-huge ipad-text-center">{{ $children_reviews->total() }} {{trans_choice('base.review', (!$subdomain) ? $reviews->total() : $children_reviews->total()) }}<br/>
-                    @if($children_reviews_raty !== 0)
-                        @for ($i = 0; $i < $children_reviews_raty; $i++)
-                            <i class="fas fa-star color-ff8c00 font-12"></i>
-                        @endfor
-                        @for ($i = 0; $i < 5 - $children_reviews_raty; $i++)
-                            <i class="far fa-star color-ff8c00 font-12"></i>
-                        @endfor
+                    <p class="section-text-huge ipad-text-center">{{ (!$subdomain) ? $reviews->total() : $children_reviews->total()}} {{trans_choice('base.review', (!$subdomain) ? $reviews->total() : $children_reviews->total()) }}<br/>
+                    @if(!$subdomain)
+                        @if($reviews_raty !== 0)
+                            @for ($i = 0; $i < $reviews_raty; $i++)
+                                <i class="fas fa-star color-ff8c00 font-12"></i>
+                            @endfor
+                            @for ($i = 0; $i < 5 - $reviews_raty; $i++)
+                                <i class="far fa-star color-ff8c00 font-12"></i>
+                            @endfor
+                        @endif
+                    @else
+                        @if($children_reviews_raty !== 0)
+                            @for ($i = 0; $i < $children_reviews_raty; $i++)
+                                <i class="fas fa-star color-ff8c00 font-12"></i>
+                            @endfor
+                            @for ($i = 0; $i < 5 - $children_reviews_raty; $i++)
+                                <i class="far fa-star color-ff8c00 font-12"></i>
+                            @endfor
+                        @endif
                     @endif
                     </p>
                 </div>
@@ -102,10 +113,11 @@
                     <div class="card feedback-card my-0">
                         <div class="card-body pb-1">
                             <p>
-                            {!! str_limit($review->getAttributeTranslate('review'), 400) !!}
+                            {!! $review->getAttributeTranslate('review') !!}
+                            {{-- {!! str_limit($review->getAttributeTranslate('review'), 400) !!}
                                 @if(strlen($review->getAttributeTranslate('review')) > 400)                                            
                                     <a href="#" class="color-ff8c00">{{ trans('base.more_detale') }}</a>
-                                @endif 
+                                @endif --}}
                             </p>
                         </div>
                         <div class="card-footer">
@@ -150,15 +162,17 @@
                     </div>
                 @endif
             </div>        
-        @endforeach    
-        {{ $children_reviews->render()}}  
-        <div class="container d-flex justify-content-center my-3">
+        @endforeach   
+        {{ (!$subdomain) ? $reviews->render() : $children_reviews->render()}} 
+         
+        <?php $q++ ?> 
+        {{-- Ссилка на всі відгуки<div class="container d-flex justify-content-center my-3">
                 <a class="feedback-button-a" id='more_reviews' data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Всі відгуки</a>
             </div>
-            <?php $q++ ?> 
+           
             <div class="collapse сontainer-fluid" id="collapseExample">
             
-        </div>
+        </div>--}}
     </div>
 
     <div class="container-fluid pb-5 back-f4f4f4">

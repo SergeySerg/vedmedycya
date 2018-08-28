@@ -122,7 +122,7 @@ class FrontendInit {
 					if($category->link == 'reviews'){
 						view()->share('children_' . $category->link . '_raty', $this->counterReviews($child_articles));
 						//Debugbar::info();
-						$child_articles = collect($child_articles)->sortByDesc('priority')->paginate( 2 );
+						$child_articles = collect($child_articles)->sortByDesc('priority')->paginate( 10 );
 						//dd($child_articles);
 					}
 					//dd($child_articles);
@@ -154,6 +154,12 @@ class FrontendInit {
 				// 	dd($category_item->where('attributes->show_main_page', '1'));
 					
 				// }	
+			if($category->link == 'reviews'){
+				view()->share($category->link . '_raty', $this->counterReviews($category_item));
+				Debugbar::info($this->counterReviews($category_item));
+				$category_item = collect($category_item)->sortByDesc('priority')->paginate( 10 );
+				//dd($child_articles);
+			}
 			view()->share($category->link, $category_item);
 		}
 		$category_for_url = Category::where('url->' . App::getLocale(), $request->url)->first();

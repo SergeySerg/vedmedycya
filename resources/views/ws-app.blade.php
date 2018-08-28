@@ -45,7 +45,7 @@
     @yield('content')
     <!-- content -->
 
-    <footer class="black-footer py-md-4 py-0" id='section-footer'>
+    <footer class="black-footer py-md-4 py-0" id='contactAnchor'>
         <div class="container-fluid">
             <div class="row justify-content-center pb-5">
                 <div class="col-md-5 pt-md-5 pt-3">

@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="feedback-button">
-                <a href="#">{{ trans('base.all_reviews') }}</a>
+                <a href="{{ route('article_category', [setLangToRedirect(App::getLocale()), $categories_data['reviews']->getTranslate('url')]) }}">{{ trans('base.all_reviews') }}</a>
                 <a href="#" data-toggle="modal" data-target="#exampleModal2">{{ trans('base.add_review') }}</a>
             </div>
         </div>

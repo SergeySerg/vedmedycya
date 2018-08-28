@@ -1,12 +1,12 @@
 @if(isset($hotels) AND count($hotels) !== 0 AND $categories_data['hotels']->active == 1)
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="#hotelsAnchor">{{ $categories_data['hotels']->getTranslate('title') ? $categories_data['hotels']->getTranslate('title') : 'Отели' }}</a>
+        <a class="nav-link my-1 hover-underline" href="@if(Route::currentRouteName() == 'article_index')#hotelsAnchor @else {{ route('article_index', [setLangToRedirect(App::getLocale()) . '#hotelsAnchor'])}} @endif">{{ $categories_data['hotels']->getTranslate('title') ? $categories_data['hotels']->getTranslate('title') : 'Отели' }}</a>
     </li>
 @endif
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="#aboutAnchor">{{trans('base.about_us')}}</a>
+        <a class="nav-link my-1 hover-underline" href="@if(Route::currentRouteName() == 'article_index')#aboutAnchor @else {{ route('article_index', [setLangToRedirect(App::getLocale()) . '#aboutAnchor'])}} @endif">{{trans('base.about_us')}}</a>
     </li>
-    @if(isset($discounts)  AND $categories_data['discounts']->active == 1)
+@if(isset($discounts)  AND $categories_data['discounts']->active == 1)
     <li class="nav-item">
         <a class="nav-link my-1 hover-underline" href="{{ route('article_category', [setLangToRedirect(App::getLocale()), $categories_data['discounts']->getTranslate('url')]) }}">{{ $categories_data['discounts']->getTranslate('title') ? $categories_data['discounts']->getTranslate('title') : 'Акции' }}</a>
     </li>
@@ -16,7 +16,7 @@
 </li>
 @if(isset($reviews) AND count($reviews) !== 0 AND $categories_data['reviews']->active == 1)
     <li class="nav-item">
-        <a class="nav-link my-1 hover-underline" href="#feedbackAnchor">{{ strstr( $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'отзывы' . ' ', ' ', true ) }}</a>
+        <a class="nav-link my-1 hover-underline" href="@if(Route::currentRouteName() == 'article_index')#feedbackAnchor @else {{ route('article_category', [setLangToRedirect(App::getLocale()), $categories_data['reviews']->getTranslate('url')]) }} @endif">{{ strstr( $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'отзывы' . ' ', ' ', true ) }}</a>
     </li>
 @endif
 @if(isset($contacts) AND count($contacts) !== 0 AND $categories_data['contacts']->active == 1)

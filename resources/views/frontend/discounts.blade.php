@@ -3,7 +3,7 @@
 @section('content')
 
     <div id="main-view">
-        <div class="fourthscreen-img d-flex align-items-center justify-content-center" style="background-image: url('{{ asset ($search->first()->getAttributeTranslate('img_search'))}}');">
+        <div class="fourthscreen-img d-flex align-items-center justify-content-center" style="background-image: url('{{ asset ('img/frontend/headers/discount.jpg')}}');">
             <h1 class="pt-5 mt-5 text-uppercase">{{ $categories_data['discounts']->getTranslate('title') ? $categories_data['discounts']->getTranslate('title') : 'акции' }}</h1>
         </div>
     </div>
@@ -175,7 +175,7 @@
             @endforeach
         </div>
     </div>
-        @foreach((!$subdomain) ? $discounts : $children_discounts as $discount)
+        @foreach((!$subdomain) ? $discounts : ((isset($children_discounts)) ? $discounts->where('article_id', 0)->merge($children_discounts) : $discounts->where('article_id', 0)) as $discount)
             <div class="container-fluid pb-5">
                 <div class="row justify-content-center">
                     <div class="col-md-11 pb-5">
@@ -186,7 +186,7 @@
                             <p class="text-center mt-1"><small>{{ trans('base.sale_description')}}</small></p>
                             <div class="huge-discount-card-p text-center">{!! $discount->getTranslate('description') !!}</div>
                             <div class="container-fluid d-flex justify-content-center mb-3">
-                                <a href="@if($subdomain OR $discount->article_parent){{ route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $discount->article_parent->getAttributeTranslate('url'), $categories_data['search']->getTranslate('url') . '?discount=' . $discount->getAttributeTranslate('discount_room') ]) }}@else {{ route('article_category', [setLangToRedirect(App::getLocale()), $categories_data['search']->getTranslate('url') . '?discount=' . $discount->getAttributeTranslate('discount_room') ]) }} @endif" class="btn btn-yellow px-4">{{ trans('base.check_room') }}</a>
+                                <a href="@if($subdomain OR $discount->article_parent){{ route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), ($discount->article_parent) ? $discount->article_parent->getAttributeTranslate('url') : $parent_hotel->getAttributeTranslate('url'), $categories_data['search']->getTranslate('url') . '?discount=' . $discount->getAttributeTranslate('discount_room') ]) }}@else {{ route('article_category', [setLangToRedirect(App::getLocale()), $categories_data['search']->getTranslate('url') . '?discount=' . $discount->getAttributeTranslate('discount_room') ]) }} @endif" class="btn btn-yellow px-4">{{ trans('base.check_room') }}</a>
                             </div>
                             <div class="row">
                                 <div class="col-xl-4 order-xl-1 order-3 py-3">

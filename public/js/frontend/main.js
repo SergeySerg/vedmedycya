@@ -113,8 +113,21 @@ $(function () {
       var childrenFromStorage = localStorage.getItem('children');
       var dateStartFromStorage = localStorage.getItem('dateStart');
       var dateFinishFromStorage = localStorage.getItem('dateFinish');
-      var diffMaxQuantityGuests = 0;
-      //console.log('Local storage', adultsFromStorage);
+      var diffMaxQuantityGuests = 0; 
+      var timeNow = (new Date()).getTime();
+      if(dateStartFromStorage || dateFinishFromStorage){
+          var dateStartFromStorageTs = getDateTimestamp(dateStartFromStorage); 
+          var dateFinishFromStorageTs = getDateTimestamp(dateFinishFromStorage); 
+          
+          
+        if(((timeNow - dateStartFromStorageTs) > 1000 * 60 * 60 * 24) || ((timeNow - dateStartFromStorageTs) > 1000 * 60 * 60 * 24)){
+            localStorage.removeItem('dateStart');
+            localStorage.removeItem('dateFinish');
+            dateStartFromStorage, dateFinishFromStorage = ''; 
+        }
+
+      }       
+      
       if(dateStartFromStorage && dateFinishFromStorage){
         $("#datepicker").val(dateStartFromStorage + '-' + dateFinishFromStorage);
       }
@@ -453,6 +466,11 @@ $(function () {
   }
   function daydiff(second, first) {
       return (second-first)/(1000*60*60*24);
+  }
+  function getDateTimestamp(date){
+    myDate=date.split(".");
+    var newDate=myDate[1]+"/"+myDate[0]+"/"+myDate[2];
+    return dateTs = new Date(newDate).getTime();
   }
   $('#datepicker').data('datepicker');
 

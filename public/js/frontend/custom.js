@@ -1,5 +1,24 @@
 $(function () {
     var adults, dateStart, dateFinish, children, sumPrice, redirectPath;
+    /*Chech show hotsale*/
+    (function () {
+
+        var lastclear = localStorage.getItem('lastclear'),
+            time_now  = (new Date()).getTime();
+      
+        // .getTime() returns milliseconds so 1000 * 60 * 60 * 24 = 24 days
+        if ((time_now - lastclear) > 1000 * 60 * 60 * 24) {
+      
+          localStorage.setItem('hotsate', true);
+      
+          localStorage.setItem('lastclear', time_now);
+        }
+      
+      })();
+    if(localStorage.getItem('hotsate') === 'false'){
+        $('#freedates-bar').hide();    
+    }
+    
     /*Add check*/
     $('div.small-features div.col-md-4 p').prepend('<i class="fas fa-check text-orange"></i> ');  
     /* Reserved room in search page*/
@@ -289,6 +308,15 @@ $(function () {
     }) 
 
     /*/Add review*/ 
+    /*Hide hotsale*/
+    $('.order-hotsale, #close-button-container').click(function(){
+        localStorage.setItem('hotsate', false); 
+        localStorage.setItem('lastclear', (new Date()).getTime());
+
+    })
+        
+    /*Hide hotsale*/
+
     /*Pagination*/
     //  $('#more_reviews').click(function(e){
     //     e.preventDefault();    

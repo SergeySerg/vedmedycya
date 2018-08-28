@@ -256,16 +256,21 @@
                             <label class="control-label" for="form-field-select-1">{{ trans('backend.relation') }}</label>
                             <div class="controls">
                                 <select name="article_id" id="form-field-select-1">
-                                    <option value="">Brand Page
-                                        @foreach($article_group as $article)
-                                            @if($article->getAttributeTranslate('is_base_hotel') == 1)
-                                                </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
-                                            @elseif($type == 'rooms' OR $type == 'reviews' OR $type == 'hotels' OR $type == 'seoarticles')
-                                                </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
-                                            {{--@else
-                                                </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}--}}
-                                            @endif                        
-                                        @endforeach
+                                    <option value="">
+                                    @if($type == 'discounts')
+                                        На всіх сторінках
+                                    @else
+                                        Brand Page
+                                    @endif
+                                    @foreach($article_group as $article)
+                                        @if($article->getAttributeTranslate('is_base_hotel') == 1)
+                                            </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
+                                        @elseif($type == 'rooms' OR $type == 'reviews' OR $type == 'hotels' OR $type == 'seoarticles')
+                                            </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
+                                        {{--@else
+                                            </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}--}}
+                                        @endif                        
+                                    @endforeach
                                     </option>
                                 </select>
                             </div>

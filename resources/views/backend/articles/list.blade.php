@@ -142,7 +142,13 @@
                                     OR $type == 'seoarticles'
                                     
                                     )
-                                    <td>@if($admin_article->article_parent) {{ $admin_article->article_parent->getTranslate('title') }}@else Brand Page @endif</td>
+                                    <td>@if($admin_article->article_parent) {{ $admin_article->article_parent->getTranslate('title') }}@else 
+                                    @if($type == 'discounts')
+                                        На всіх сторінках
+                                    @else
+                                        Brand Page
+                                    @endif
+                                    @endif</td>
                                 @else
                                     <td  class="hidden-phone">{{ $admin_article->updated_at }}</td>
                                 @endif                               
