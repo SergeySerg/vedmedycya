@@ -169,7 +169,15 @@ class ArticleController extends Controller {
 		 
 		
 	}
-
+	public function pumpkin(Request $request)
+	{
+		//dd('$lang');
+		
+		//$seo_article = Article::where('attributes->url->' . App::getLocale(), $request->url )->first();
+		
+		//dd($seo_article);
+		return view('pumpkin_party');
+	}
 
 	/**
 	 * Show the form for creating a new resource.
