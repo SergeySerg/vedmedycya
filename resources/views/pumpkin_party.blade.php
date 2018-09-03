@@ -427,10 +427,10 @@
                     <div class="col-lg-3 col-md-6 col-sm-8">
                         <form>
                             <div class="input-pattern mt-3">
-                                <input type="text" required name="callback_name" placeholder="{{ trans('base.name') }}"/>
+                                <input type="text" required name="callback_name" placeholder="Ім'я"/>
                             </div>
                             <div class="input-pattern mt-2">
-                                <input type="number" required name="callback_phone" placeholder="{{ trans('base.phone') }}"/>
+                                <input type="number" required name="callback_phone" placeholder="Номер телефону"/>
                             </div>
                             <div class="apart-left mt-3">
                                 <p class="text-uppercase">ЗАЛИШИЛОСЬ ВСЬОГО 3 НОМЕРИ</p>
