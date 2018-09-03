@@ -69,3 +69,7 @@
     text-align: center;
     background-color: #707070;
 }
+
+.pt-25 {
+    padding-top: 25vh;
+}

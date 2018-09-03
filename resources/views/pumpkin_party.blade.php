@@ -38,11 +38,11 @@
                     <div class="navbar-side-container text-left">
                         <span class="nav-link navbar-phone" href="#">
                             <div class="dropdown">
-                                +38 (097) 514 4702
+                                +38 (067) 716 2385
                                 <i class="fas fa-chevron-down ml-2"></i><br>
                                 <div class="dropdown-content">
-                                    <p>+38 (097) 514 4702</p>
-                                    <p>+38 (097) 514 4702</p>
+                                    <p>+38 (067) 716 2385</p>
+                                    <p>+38 (067) 716 2385</p>
                                     <div class="h-line-bold"></div>
                                     <small class="text-muted">написати в месенджер</small><br>
                                     <div class="mb-2"></div>
@@ -55,7 +55,7 @@
                         </span>
                     </div>
                     <li class="nav-item">
-                        <a class="nav-link my-1 hover-underline" href="#aboutAnchor">ПРо вечірку</a>
+                        <a class="nav-link my-1 hover-underline" href="#aboutAnchor">Про вечірку</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link my-1 hover-underline" href="#programAnchor">програма</a>
@@ -91,13 +91,13 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-5 text-md-right text-center align-self-center mb-md-0 mb-3">
-                                <h3 class="text-white text-thin mb-0">Від п'ятниці 21.09.18<br>До неділі 23.09.18</h3>
+                                <h3 class="text-white text-thin mb-0">Від п'ятниці 21.09.18</h3>
                             </div>
                             <div class="col-md-2">
                                 <a href="#orderAnchor" class="btn btn-yellow">Долучитися <br class="mobile-invisible">до веселощів!</a>
                             </div>
                             <div class="col-md-5 text-md-left text-center align-self-center mt-md-0 mt-3">
-                                <h3 class="text-white text-thin mb-0">Від п'ятниці 21.09.18<br>До неділі 23.09.18</h3>
+                                <h3 class="text-white text-thin mb-0">До неділі 23.09.18</h3>
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
             <div class="row text-center">
                 <div class="col">
                     <h2 class="section-header-huge text-uppercase">Що ми підготували для вас?</h2>
-                    <p class="section-description">У ціну усіх номерів включені безкоштовні сніданок, чай, кава та проживання дітей віком до 5 років (для номерів з місткістю від двох людей)</p>
+                    <p class="section-description">Включено у вартість: проживання +сніданки, СПА (теплий басейн, гаряча бочка, баня, джакузі на вулиці), вечірка (гарбузове меню, шоу-програма, розіграш призів, шведський стіл)</p>
                 </div>
             </div>
         </div>
@@ -124,53 +124,53 @@
         <div class="container-fluid px-0 back-f4f4f4">
             <div class="row no-gutters">
                 <div class="col-md-6">
-                    <div class="chess-image" style="background-image: url('{{ asset ('pumpkin_party/img/bass.jpg')}}')"></div>
+                    <div class="chess-image" style="background-image: url('{{ asset ('pumpkin_party/img/bass.jpg')}}');"></div>
                 </div>
                 <div class="col-md-6 align-self-center text-md-left text-center p-md-5 p-4">
                     <h3 class="checker-title px-md-4">
-                        WEEK-END В КАРПАТАХ
+                        ГОТЕЛЬ "ВЕДМЕЖИЙ ДВІР"
                     </h3>
                     <p class="section-description px-md-4 px-0 mb-0 pb-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                        Готель "Ведмежий Двір" дарує своїм гостям унікальну можливість провести незабутній вікенд у Карпатах. Ексклюзивне гарбузове меню від шеф-кухаря, запальна шоу-вечірка, танці, жива музика. 
                     </p>
                 </div>
             </div>
             <div class="row no-gutters">
                 <div class="col-md-6 order-md-2">
-                    <div class="chess-image" style="background-image: url('{{ asset ('pumpkin_party/img/prty.jpg')}}')"></div>
+                    <div class="chess-image" style="background-image: url('{{ asset ('pumpkin_party/img/prty.jpg')}}');"></div>
                 </div>
                 <div class="col-md-6 order-md-1 align-self-center text-md-right text-center p-md-5 p-4">
                     <h3 class="checker-title px-md-4">
-                        WEEK-END В КАРПАТАХ
+                        ВЕЧІРКА + ШОУ-ПРОГРАМА
                     </h3>
                     <p class="section-description px-md-4 px-0 mb-0 pb-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                         Жива музика, розіграш призів, шведський стіл «Скуштуй і засмакуй гарбузові страви». Гурт Жанна Романюк та Любомир Згурський. 
                     </p>
                 </div>
             </div>
             <div class="row no-gutters">
                 <div class="col-md-6">
-                    <div class="chess-image" style="background-image: url('{{ asset ('pumpkin_party/img/spa.jpg')}}')"></div>
+                    <div class="chess-image" style="background-image: url('{{ asset ('pumpkin_party/img/spa.jpg')}}');"></div>
                 </div>
                 <div class="col-md-6 align-self-center text-md-left text-center p-md-5 p-4">
                     <h3 class="checker-title px-md-4">
-                        WEEK-END В КАРПАТАХ
+                        СПА по ГУЦУЛЬСЬКИ
                     </h3>
                     <p class="section-description px-md-4 px-0 mb-0 pb-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                        Теплий басейн, гаряча бочка "ОФУРО", баня на дровах, джакузі на свіжому повітрі
                     </p>
                 </div>
             </div>
             <div class="row no-gutters">
                 <div class="col-md-6 order-md-2">
-                    <div class="chess-image" style="background-image: url('{{ asset ('pumpkin_party/img/food.jpg')}}')"></div>
+                    <div class="chess-image" style="background-image: url('{{ asset ('pumpkin_party/img/food.jpg')}}');"></div>
                 </div>
-                <div class="col-md-6 order-md-1 align-self-center text-md-right text-center p-md-5 p-4">
+                <div class="col-md-6 order-md-1 align-self-center text-md-right text-center p-md-5 p-4" id="dishesAnchor">
                     <h3 class="checker-title px-md-4">
-                        WEEK-END В КАРПАТАХ
+                        ГАРБУЗОВІ СМАКОЛИКИ
                     </h3>
                     <p class="section-description px-md-4 px-0 mb-0 pb-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                        Запіканка з гарбуза з горіхами та медом, овочеве різотто з гарбузом, запечена свинина з айвою та гарбузом, печеня з яловичини з гарбузом у пиві. Гарбузовий сирник
                     </p>
                 </div>
             </div>
@@ -188,7 +188,7 @@
             <div class="row text-center">
                 <div class="col">
                     <h2 class="section-header-huge text-uppercase">Графік вечірки</h2>
-                    <p class="section-description">У ціну усіх номерів включені безкоштовні сніданок, чай, кава та проживання дітей віком до 5 років (для номерів з місткістю від двох людей)</p>
+                    <p class="section-description">Включено у вартість: проживання +сніданки, СПА (теплий басейн, гаряча бочка, баня, джакузі на вулиці), вечірка (гарбузове меню, шоу-програма, розіграш призів, шведський стіл)</p>
                 </div>
             </div>
         </div>
@@ -201,29 +201,71 @@
                     </div>
                 </div>
             </div>
+
+
+
             <div class="row justify-content-center my-3">
                 <div class="col-md-1 col-2 px-0 text-right">
                     <i class="fas fa-circle dot-shadow"></i>
                 </div>
                 <div class="col-md-9 col-10">
-                    <h5 class="ml-md-3 text-brown"><span class="text-thin">12:00-14:00 – </span> вільний час: відпочинок на території готелю Ведмежий Двір (купання в басейні, прогулянка лісом, збір грибів, відпочинок біля ставка)
+                    <h5 class="ml-md-3 text-brown"><span class="text-thin">12:00 - 14:00 – </span> поселення </h5>
+                </div>
+            </div>
+
+            <div class="row justify-content-center my-3">
+                <div class="col-md-1 col-2 px-0 text-right">
+                    <i class="fas fa-circle dot-shadow"></i>
+                </div>
+                <div class="col-md-9 col-10">
+                    <h5 class="ml-md-3 text-brown"><span class="text-thin">14:00 – 17:30 – </span> вільний час, відпочинок на території готелю "Ведмежий Двір" (купання в басейні, прогулянка лісом, збір грибів, відпочинок біля ставка) </h5>
+                </div>
+            </div>
+
+
+
+            <div class="row justify-content-center my-3">
+                <div class="col-md-1 col-2 px-0 text-right">
+                    <i class="fas fa-circle dot-shadow"></i>
+                </div>
+                <div class="col-md-9 col-10">
+                    <h5 class="ml-md-3 text-brown"><span class="text-thin">17:30 - 24:00 – </span> гарбузова вечірка: жива музика, розіграш призів, шведський стіл «Скуштуй і засмакуй гарбузові страви»
                     </h5>
                 </div>
             </div>
+            
+
+            <div class="row justify-content-center my-5">
+                <div class="col-md-10">
+                    <div class="pumpkin-date text-md-left text-center">
+                        <h4 class="mb-0 ml-md-5">22.09.18 - субота</h4>
+                    </div>
+                </div>
+            </div>
+
+
             <div class="row justify-content-center my-3">
                 <div class="col-md-1 col-2 px-0 text-right">
                     <i class="fas fa-circle dot-shadow"></i>
                 </div>
                 <div class="col-md-9 col-10">
-                    <h5 class="ml-md-3 text-brown"><span class="text-thin">12:00-14:00 – </span> вільний час: відпочинок на території готелю Ведмежий Двір (купання в басейні, прогулянка лісом, збір грибів, відпочинок біля ставка)
-                    </h5>
+                    <h5 class="ml-md-3 text-brown"><span class="text-thin">9:00 - 12:00 – </span> сніданок </h5>
+                </div>
+            </div>
+
+            <div class="row justify-content-center my-3">
+                <div class="col-md-1 col-2 px-0 text-right">
+                    <i class="fas fa-circle dot-shadow"></i>
+                </div>
+                <div class="col-md-9 col-10">
+                    <h5 class="ml-md-3 text-brown"><span class="text-thin">13:00 - 17:00 – </span> спа-процедури: гаряча бочка, баня, джакузі на вулиці + теплий басейн</h5>
                 </div>
             </div>
             
             <div class="row justify-content-center my-5">
                 <div class="col-md-10">
                     <div class="pumpkin-date text-md-left text-center">
-                        <h4 class="mb-0 ml-md-5">21.09.18 - п'ятниця</h4>
+                        <h4 class="mb-0 ml-md-5">23.09.18 - неділя</h4>
                     </div>
                 </div>
             </div>
@@ -232,8 +274,7 @@
                     <i class="fas fa-circle dot-shadow"></i>
                 </div>
                 <div class="col-md-9 col-10">
-                    <h5 class="ml-md-3 text-brown"><span class="text-thin">12:00-14:00 – </span> вільний час: відпочинок на території готелю Ведмежий Двір (купання в басейні, прогулянка лісом, збір грибів, відпочинок біля ставка)
-                    </h5>
+                    <h5 class="ml-md-3 text-brown"><span class="text-thin">9:00 - 12:00 – </span> сніданок </h5>
                 </div>
             </div>
             <div class="row justify-content-center my-3">
@@ -241,36 +282,19 @@
                     <i class="fas fa-circle dot-shadow"></i>
                 </div>
                 <div class="col-md-9 col-10">
-                    <h5 class="ml-md-3 text-brown"><span class="text-thin">12:00-14:00 – </span> вільний час: відпочинок на території готелю Ведмежий Двір (купання в басейні, прогулянка лісом, збір грибів, відпочинок біля ставка)
-                    </h5>
+                    <h5 class="ml-md-3 text-brown"><span class="text-thin">12:00 – 16:00 – </span> відпочинок біля басейну, вільний час </h5>
                 </div>
             </div>
-            
-            <div class="row justify-content-center my-5">
-                <div class="col-md-10">
-                    <div class="pumpkin-date text-md-left text-center">
-                        <h4 class="mb-0 ml-md-5">21.09.18 - п'ятниця</h4>
-                    </div>
-                </div>
-            </div>
+
             <div class="row justify-content-center my-3">
                 <div class="col-md-1 col-2 px-0 text-right">
                     <i class="fas fa-circle dot-shadow"></i>
                 </div>
                 <div class="col-md-9 col-10">
-                    <h5 class="ml-md-3 text-brown"><span class="text-thin">12:00-14:00 – </span> вільний час: відпочинок на території готелю Ведмежий Двір (купання в басейні, прогулянка лісом, збір грибів, відпочинок біля ставка)
-                    </h5>
+                    <h5 class="ml-md-3 text-brown"><span class="text-thin">17:00 – </span> виїзд з готелю </h5>
                 </div>
             </div>
-            <div class="row justify-content-center my-3">
-                <div class="col-md-1 col-2 px-0 text-right">
-                    <i class="fas fa-circle dot-shadow"></i>
-                </div>
-                <div class="col-md-9 col-10">
-                    <h5 class="ml-md-3 text-brown"><span class="text-thin">12:00-14:00 – </span> вільний час: відпочинок на території готелю Ведмежий Двір (купання в басейні, прогулянка лісом, збір грибів, відпочинок біля ставка)
-                    </h5>
-                </div>
-            </div>
+
             
             <div class="row justify-content-center p-5">
                 <div class="col-md-4">
@@ -352,7 +376,7 @@
             <div class="row text-center">
                 <div class="col">
                     <h2 class="section-header-huge text-uppercase">Приєднуйся прямо зараз!</h2>
-                    <p class="section-description">У ціну усіх номерів включені безкоштовні сніданок, чай, кава та проживання дітей віком до 5 років (для номерів з місткістю від двох людей)</p>
+                    <p class="section-description">Включено у вартість: проживання +сніданки, СПА (теплий басейн, гаряча бочка, баня, джакузі на вулиці), вечірка (гарбузове меню, шоу-програма, розіграш призів, шведський стіл)</p>
                 </div>
             </div>
         </div>
@@ -363,26 +387,26 @@
                     <div class="pumpkin-price-card bg-white text-center px-5 m-0">
                         <p class="footer-text text-uppercase mt-3 mb-2">Актуальна ціна</p>
                         <div class="full-width-line"></div>
-                        <h2 class="section-header-huge pt-3 mb-0"><b>2500 UAH</b></h2>
-                        <small class="footer-text">за 3 дні веселолощів</small>
+                        <h2 class="section-header-huge pt-3 mb-0"><b>2800 UAH</b></h2>
+                        <small class="footer-text">для однієї особи</small>
                         <div class="full-width-line mt-3"></div>
                         <p class="footer-text text-uppercase mt-3 mb-2">ДІЙСНА ТІЛЬКИ ДО 7 ВЕРЕСНЯ!</p>
                     </div>
                 </div>
                 <div class="col-lg-4 align-self-center mb-3">
                     <div class="pumpkin-price-card text-center px-5 m-0">
-                        <p class="footer-text text-uppercase mt-3 mb-2">"КРАЩЕ ПІЗНО НІЖ НІКОЛИ"</p>
-                        <h2 class="section-header-huge pt-0 mb-0"><b>2800 UAH</b></h2>
+                        <p class="footer-text text-uppercase mt-3 mb-2">"ДІЙСНА З 8 ВЕРЕСНЯ"</p>
+                        <h2 class="section-header-huge pt-0 mb-0"><b>3200 UAH</b></h2>
                         <div class="full-width-line mt-3"></div>
-                        <p class="footer-text text-uppercase mt-3 mb-2">ДІЙСНА ТІЛЬКИ ДО 7 ВЕРЕСНЯ!</p>
+                        <p class="footer-text text-uppercase mt-3 mb-2">ДО 15 ВЕРЕСНЯ!</p>
                     </div>
                 </div>
                 <div class="col-lg-4 align-self-center mb-3">
                     <div class="pumpkin-price-card text-center px-5 m-0">
-                        <p class="footer-text text-uppercase mt-3 mb-2">"КРАЩЕ ПІЗНО НІЖ НІКОЛИ"</p>
-                        <h2 class="section-header-huge pt-0 mb-0"><b>2800 UAH</b></h2>
+                        <p class="footer-text text-uppercase mt-3 mb-2">"ДІЙСНА З 16 ВЕРЕСНЯ"</p>
+                        <h2 class="section-header-huge pt-0 mb-0"><b>3500 UAH</b></h2>
                         <div class="full-width-line mt-3"></div>
-                        <p class="footer-text text-uppercase mt-3 mb-2">ДІЙСНА ТІЛЬКИ ДО 7 ВЕРЕСНЯ!</p>
+                        <p class="footer-text text-uppercase mt-3 mb-2">+ У ДЕНЬ ВЕЧІРКИ!</p>
                     </div>
                 </div>
             </div>
