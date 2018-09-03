@@ -19,16 +19,21 @@ $(function () {
             dataType: "json",
             success: function (data) {
                 if (data.success) {
-                    //alert('23');                    
+                    //alert('OK'); 
+                    if(!$.urlParam('status')){
+                        window.location.replace(window.location.href + '?status=pumpkin');
+
+                    }else{
+                        window.location.replace(window.location.href);   
+                    }
                     //$('#exampleModal3').modal('toggle');
-                    swal(trans['base.success'], "", "success");
+                    //swal(trans['base.success'], "", "success");
                     //jQuery("#callback-order").trigger("reset");
                     //$("#submit-send").attr('disabled', false);
                 }
                 else {
-                    //alert('23');  
                     swal(trans['base.error'], data.message, "error");
-                // $("#submit-send").attr('disabled', false);
+                   // $("#submit-send").attr('disabled', false);
                 }
             },
             error: function (data) {
@@ -38,4 +43,9 @@ $(function () {
 
         });  
     }) 
+    /*Show popup after callback*/
+    if($.urlParam('status') == 'pumpkin'){
+       $('#exampleModal3').modal('toggle');
+
+    }  
 })
