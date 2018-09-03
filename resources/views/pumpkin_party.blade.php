@@ -538,6 +538,12 @@
             </div>
         </div>
     </footer> 
+    @if(getSetting('ip'))
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQCTRLS"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+    @endif
         <!-- END .footer -->
     <!-- file_translate -->
     @include('frontend.sections.i18n')
