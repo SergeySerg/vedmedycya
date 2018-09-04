@@ -5,7 +5,8 @@ $(function () {
         //e.preventDefault();
         var data = $('form#callback').serialize();
         var lang =  $("input[name='lang']").val();
-        var token = $("input[name='csrf-token']").val();      
+        var token = $("input[name='csrf-token']").val(); 
+        var locationData = window.location.href.split('#');     
     
         $.ajax({
             url: '/' + lang + '/callback',
@@ -21,7 +22,7 @@ $(function () {
                 if (data.success) {
                     //alert('OK'); 
                     if(!$.urlParam('status')){
-                        window.location.replace(window.location.href + '?status=pumpkin');
+                        window.location.replace(locationData[0] + '?status=pumpkin');
 
                     }else{
                         window.location.replace(window.location.href);   

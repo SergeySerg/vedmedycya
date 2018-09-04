@@ -154,6 +154,7 @@ $(function () {
     }) 
     $("button[name='reserved']").click(function(e){
         e.preventDefault();
+        var locationData = window.location.href.split('#');
         var data = {};
         var roomName = $('#room').text();
         var hotelName = $('#hotel').text();
@@ -189,7 +190,7 @@ $(function () {
             success: function (data) {
                 if (data.success) {
                     //$('#exampleModal4').modal('toggle');
-                    window.location.replace(window.location.href + '?status=success');
+                    window.location.replace(locationData[0] + '?status=success');
                     //alert('OK');
                     //swal(trans['base.success'], "", "success");
                     //jQuery("#callback-order").trigger("reset");
@@ -216,7 +217,8 @@ $(function () {
         var data = $('form#callback').serialize();
         var lang =  $("input[name='lang']").val();
         var token = $("input[name='csrf-token']").val();      
-       
+        var locationData = window.location.href.split('#');
+
         $.ajax({
             url: '/' + lang + '/callback',
             method: 'POST',
@@ -228,10 +230,11 @@ $(function () {
             data: data,
             dataType: "json",
             success: function (data) {
+                // console.log('Data ', data);
                 if (data.success) {
-                    //alert('OK'); 
+                    // alert('urlParam ' + urlParam); 
                     if(!$.urlParam('status')){
-                        window.location.replace(window.location.href + '?status=callback');
+                        window.location.replace(locationData[0] + '?status=callback');
 
                     }else{
                         window.location.replace(window.location.href);   
