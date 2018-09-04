@@ -32,7 +32,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
-            <a id="mobile-logo" class="mx-auto" href="#"><img class="img-fluid" src="img/logo.png" width="100px"></a>
+            <a id="mobile-logo" class="mx-auto" href="#"><img class="img-fluid" src="{{ asset('/img/frontend/logo.png') }}" width="100px"></a>
             <div class="navbar-side-mobile text-right dropdown">
                 <a id="mobile-lang-toggler" class="font-weight-bold text-uppercase" href="#"><i class="fas fa-chevron-down mr-2"></i>УКР</a>
                 <div class="dropdown-content left-6-px">
