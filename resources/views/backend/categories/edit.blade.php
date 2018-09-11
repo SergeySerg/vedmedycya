@@ -705,6 +705,7 @@
                                                             </option><option value="files">{{ trans('backend.files') }}
                                                             </option><option value="date-range-picker">Діапазон дат
                                                             </option><option value="date-picker">Дата
+                                                            </option><option value="select">Варіанти для вибору
                                                             </option>
                                                         </select>
                                                     </div>

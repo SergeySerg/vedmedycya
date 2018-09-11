@@ -272,7 +272,7 @@ class AdminCategoriesController extends Controller {
 		return response()->json([
 			"status" => 'success',
 			"message" => 'Успешно сохранено',
-			"redirect" => route('admin_dashboard')
+			//"redirect" => route('admin_dashboard')
 		]);
 	}
 

@@ -187,7 +187,7 @@ $(function(){
                 }
 
                 if(data.redirect){
-                    document.location = data.redirect;
+                     document.location = data.redirect;
                 }
                 if(data.status == 'fail'){
                     alert(data.message);

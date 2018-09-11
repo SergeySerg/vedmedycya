@@ -53,6 +53,20 @@
                                             <input type="text" id="form-field-2" name='attributes[{{ $key }}]'  value='{{ $attributes[$key]  or ''}}'/>
                                             </div>                                        
                                     </div>
+                                @elseif($attribute->type == 'select')
+                                <div class="control-group">
+                                    <label class="control-label" for="form-field-222">{{ $attribute->publick_name }}</label>
+                                        <div class="controls">
+                                            <select name="attributes[{{ $key }}]" id="form-field-select-222">
+                                                <option value="">
+                                                    </option><option value="facebook" @if(isset($attributes[$key]) AND $attributes[$key] == 'facebook') selected="selected" @endif>facebook
+                                                    </option><option value="instagram" @if(isset($attributes[$key]) AND $attributes[$key] == 'instagram') selected="selected" @endif>instagram
+                                                    </option><option value="google" @if(isset($attributes[$key]) AND $attributes[$key] == 'google') selected="selected" @endif>google
+
+                                                </option>
+                                            </select>                                            
+                                        </div>                                        
+                                </div>
                                 @elseif ($attribute->type == 'checkbox')
                                     <div class="control-group">
                                         <label class="control-label">{{ $attribute->publick_name }}</label>
