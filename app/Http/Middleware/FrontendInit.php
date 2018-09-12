@@ -49,6 +49,7 @@ class FrontendInit {
 		}
 		//$subdomain = $request->subdomain;
 		$name = $request->name;
+		//dd($name);
 		$base_article = Article::where('attributes->url->' . App::getLocale(), $name )->first();
 		//dd($base_article);
 		//share type

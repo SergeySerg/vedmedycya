@@ -146,59 +146,59 @@
                                 <div class="row icons-row mt-4">
                                     <div class="col">
                                         @if($room->getAttributeTranslate('hair_droom'))                                           
-                                            <i class="bb-hair-dryer" data-toggle="{{ trans('base.hair_dryer')}}" data-placement="top" title="{{ trans('base.hair_dryer')}}"></i>
+                                            <i class="bb-hair-dryer" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.hair_dryer')}}"></i>
                                         @endif
                                         @if($room->getAttributeTranslate('wifi') == 1)
-                                                <i class="bb-wifi-gray"  data-toggle="WIFI" data-placement="top" title="WIFI"></i>
+                                            <i class="bb-wifi-gray"  data-toggle="tooltip" data-placement="top" data-original-title="WIFI"></i>
                                         @endif
                                         @if($room->getAttributeTranslate('fireplace') == 1)
-                                                <i class="bb-fireplace" data-toggle="{{ trans('base.fireplace')}}" data-placement="top" title="{{ trans('base.fireplace')}}"></i>
+                                                <i class="bb-fireplace" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.fireplace')}}"></i>
                                         @endif
                                         @if($room->getAttributeTranslate('kitchen') == 1)
-                                                <i class="bb-kitchen" data-toggle="{{ trans('base.kitchen')}}" data-placement="top" title="{{ trans('base.kitchen')}}"></i>
+                                                <i class="bb-kitchen" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.kitchen')}}"></i>
                                         @endif
                                         @if($room->getAttributeTranslate('bathroom') == 1)
-                                            <i class="bb-shower" data-toggle="{{ trans('base.bathroom')}}" data-placement="top" title="{{ trans('base.bathroom')}}"></i>
+                                            <i class="bb-shower" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.bathroom')}}"></i>
                                         @endif
                                         @if($room->getAttributeTranslate('fridge') == 1)        
-                                            <i class="bb-refrigerator" data-toggle="{{ trans('base.fridge')}}" data-placement="top" title="{{ trans('base.fridge')}}"></i>
+                                            <i class="bb-refrigerator" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.fridge')}}"></i>
                                         @endif
                                         @if($room->getAttributeTranslate('safe') == 1)
-                                            <i class="bb-safe-box" data-toggle="{{ trans('base.safe')}}" data-placement="top" title="{{ trans('base.safe')}}"></i>
+                                            <i class="bb-safe-box" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.safe')}}"></i>
                                         @endif
                                         @if($room->getAttributeTranslate('kettle') == 1)
-                                            <i class="bb-electric-kettle" data-toggle="{{ trans('base.kettle')}}" data-placement="top" title="{{ trans('base.kettle')}}"></i>
+                                            <i class="bb-electric-kettle" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.kettle')}}"></i>
                                         @endif
                                         
                                         @if($room->getAttributeTranslate('tv') == 1)
-                                            <i class="bb-tv" data-toggle="TV" data-placement="top" title="TV"></i>
+                                            <i class="bb-tv" data-toggle="tooltip" data-placement="top" data-original-title="TV"></i>
                                         @endif
                                         @if($room->getAttributeTranslate('Jacuzzi') == 1)
-                                            <i class="bb-jacuzzi"  data-toggle="{{ trans('base.Jacuzzi')}}" data-placement="top" title="{{ trans('base.Jacuzzi')}}"></i>
+                                            <i class="bb-jacuzzi"  data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.Jacuzzi')}}"></i>
                                         @endif
                                         @if($room->getAttributeTranslate('breakfast') == 1)
                                             <i class="fa fa-plus m-1 text-orange"></i>
-                                            <i class="bb-breakfast" data-toggle="{{ trans('base.breakfast')}}" data-placement="top" title="{{ trans('base.breakfast')}}"></i>
+                                            <i class="bb-breakfast" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.breakfast')}}"></i>
                                         @endif
                                         @if($room->getAttributeTranslate('parking') == 1)
                                             <i class="fa fa-plus m-1 text-orange"></i>
-                                            <i class="bb-parking" data-toggle="{{ trans('base.parking')}}" data-placement="top" title="{{ trans('base.parking')}}"></i>
+                                            <i class="bb-parking" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.parking')}}"></i>
                                         @endif 
                                         @if($room->getAttributeTranslate('coffe') == 1)
                                             <i class="fa fa-plus m-1 text-orange"></i>
-                                            <i class="bb-teapot" data-toggle="{{ trans('base.coffe')}}" data-placement="top" title="{{ trans('base.coffe')}}"></i>
+                                            <i class="bb-teapot" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.coffe')}}"></i>
                                         @endif 
                                         @if($room->getAttributeTranslate('сhildren_room') == 1)
                                             <i class="fa fa-plus m-1 text-orange"></i>
-                                            <i class="bb-toy-bold" data-toggle="{{ trans('base.сhildren_room')}}" data-placement="top" title="{{ trans('base.сhildren_room')}}"></i>
+                                            <i class="bb-toy-bold" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.сhildren_room')}}"></i>
                                         @endif 
                                         @if($room->getAttributeTranslate('ski_storage_room') == 1)
                                             <i class="fa fa-plus m-1 text-orange"></i>
-                                            <i class="bb-ski-staff" data-toggle="{{ trans('base.ski_storage_room')}}" data-placement="top" title="{{ trans('base.ski_storage_room')}}"></i>
+                                            <i class="bb-ski-staff" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.ski_storage_room')}}"></i>
                                         @endif 
                                         @if($room->getAttributeTranslate('bowl_ski_equipment') == 1)
                                             <i class="fa fa-plus m-1 text-orange"></i>
-                                            <i class="bb-ski-dryer" data-toggle="{{ trans('base.bowl_ski_equipment')}}" data-placement="top" title="{{ trans('base.bowl_ski_equipment')}}"></i>
+                                            <i class="bb-ski-dryer" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.bowl_ski_equipment')}}"></i>
                                         @endif 
                                     </div>
                                 </div>
