@@ -179,6 +179,16 @@ class ArticleController extends Controller {
 		return view('pumpkin_party');
 	}
 
+	public function googleHtml(Request $request)
+	{
+		//dd('$lang');
+		
+		//$seo_article = Article::where('attributes->url->' . App::getLocale(), $request->url )->first();
+		
+		//dd($seo_article);
+		return view('google_html');
+	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *

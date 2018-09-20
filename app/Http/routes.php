@@ -121,11 +121,14 @@ Route::group(['prefix'=> getSetting('admin.prefix'), 'middleware' => ['auth', 'b
 	Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
 	Route::post('/{lang}/add_review', ['uses' => 'Frontend\ArticleController@add_review','as' => 'add_review']);//Обработчик добавления отзыва
 	Route::post('/{lang}/reserved', ['uses' => 'Frontend\ArticleController@reserved','as' => 'reserved']);//Обработчик Обратной связи при заказе номера
+	/*/Modal routes*/
 	/*Тимчасово*/
 	Route::get('/pumpkin', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@pumpkin', 'as' => 'pumpkin']);
-	/*/Modal routes*/
-	// ...
-	//modal_handler();
+	/*Render html page */
+	Route::get('/google2ab2a5819a08aedd.html', ['uses' => 'Frontend\ArticleController@googleHtml', 'as' => 'google_html']);
+
+	
+	
 //});
 
 
