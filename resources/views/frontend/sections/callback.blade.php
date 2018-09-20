@@ -12,6 +12,8 @@
                 </div>
             </div>
             <input type="hidden" name='lang' value="{{ App::getLocale() }}"/>
+            <input type="hidden" name='type' value="Велика Ведмедиця"/>
+
             <input type="hidden" name='csrf-token' value="{{csrf_token()}}"/>
 
             <div class="col-xl-2 col-md-3 my-1">
