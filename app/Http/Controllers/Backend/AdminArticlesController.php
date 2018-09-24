@@ -164,13 +164,18 @@ class AdminArticlesController extends Controller {
 	{		
 		//Создание папки соответсвующие id
 		Storage::makeDirectory('upload/articles/' . $id, '0777', true, true);
-
+		$category_room = Category::where('link', 'rooms')->first();
+		
 		$langs = Lang::activelangs()->get();
 		$admin_article = Article::where("id", $id)->first();
-
+		$parent_hotel = $admin_article->article_parent->article_parent;
+		$rooms_for_check_price = Article::where('article_id', $parent_hotel->id)->where('category_id', $category_room->id)->get();
+		
+		//dd($rooms_for_check_price);
+	
 		//Var article_id
 		$article_id = $admin_article['article_id'];
-
+//dd($admin_article);
 		//Decode attributes from articles DB
 		$attributes = json_decode($admin_article->attributes, true);
 	//dd($attributes);
@@ -194,7 +199,8 @@ class AdminArticlesController extends Controller {
 			'attributes_fields' => $attributes_fields,
 			'attributes' => $attributes,
 			'article_group' => $article_group,
-			'article_id' => $article_id
+			'article_id' => $article_id,
+			'rooms_for_check_price' => $rooms_for_check_price
 		]);
 	}
 
@@ -324,6 +330,10 @@ class AdminArticlesController extends Controller {
 		//Change format DATE
 		if (isset($all['date']))
 			$all['date'] = date('Y-m-d H:i:s',strtotime($all['date']));
+		if (isset($all['date_start']))
+			$all['date_start'] = date('Y-m-d H:i:s',strtotime($all['date_start']));
+		if (isset($all['date_finish']))
+			$all['date_finish'] = date('Y-m-d H:i:s',strtotime($all['date_finish']));
 
 		// Removing gaps at the beginning and end of each field
 		// foreach($all as $key => $value){

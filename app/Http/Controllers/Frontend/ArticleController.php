@@ -314,7 +314,7 @@ class ArticleController extends Controller {
 	}
 	public function callback(Request $request, $lang)
 	{
-		//dd('callback');
+		//dd($request->all());
 		if ($request ->isMethod('post')){
 			/*get [] from request*/
 			$all = $request->all();
@@ -337,9 +337,9 @@ class ArticleController extends Controller {
 			}
 
 			//Send item on admin email address
-			Mail::send('emails.callback', $all, function($message){
+			Mail::send('emails.callback', $all, function($message) use ($all){
 				$email = getSetting('config.email');
-				$message->to($email, 'Велика Ведмедиця')->subject('Зворотній зв\'язок з сайту Велика Ведмедиця');
+				$message->to($email, 'Велика Ведмедиця')->subject('Зворотній зв\'язок "' . $all['type'] . '"');
 			});
 			return response()->json([
 				'success' => 'true'

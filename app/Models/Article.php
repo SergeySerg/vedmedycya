@@ -22,8 +22,14 @@ class Article extends Translate {
         'files',
         'public',
         'active',
-        'date'
+        'date',
+        'date_start',
+        'date_finish',
+        'article_id_2'
     ];
+    //protected $dateFormat = 'Y-m-d H:i:s';
+    //protected $dates = ['created_at', 'updated_at', 'deleted_at', 'date', 'date_start', 'date_finish'];
+
 
     public function category(){
         return $this->belongsTo('App\Models\Category');
@@ -36,7 +42,14 @@ class Article extends Translate {
     public function article_children(){        
         return $this->hasMany('App\Models\Article', 'article_id');
     }
+    public function article_parent_price(){
+        return $this->belongsTo('App\Models\Article', 'article_id_2');
+    }
 
+    public function article_children_price(){        
+        return $this->belongsTo('App\Models\Article', 'article_id_2
+        ');
+    }
     /*public function getAttributes($key, $lang){
         if(isset($this->attributes)){
             $attributes = json_decode($this->attributes, true);

@@ -435,6 +435,7 @@
                             <div class="apart-left mt-3">
                                 <p class="text-uppercase">ЗАЛИШИЛОСЬ ВСЬОГО 3 НОМЕРИ</p>
                             </div>
+                            <input type="hidden" name='type' value="Гарбузова вечірка"/>
                             <input type="hidden" name='lang' value="{{ App::getLocale() }}"/>
                             <input type="hidden" name='csrf-token' value="{{csrf_token()}}"/>
 
@@ -527,7 +528,6 @@
 
                 @endif--}}
             </div>
-            <input type="hidden" name='type' value="Гарбузова вечірка"/>
             <input type="hidden" name='lang' value="ua"/>
             <input type="hidden" name='csrf-token' value="{{csrf_token()}}"/>
             <div class="col-md-7 order-md-1 mt-md-3 mt-5">

@@ -506,7 +506,7 @@
                         
                         <td valign="top" class="mcnTextContent" style="padding: 0px 18px 9px; text-align: left;">
                         
-                            <div style="text-align: center;">Зворотній звязок "{{ $type }}"<br>
+                            <div style="text-align: center;">Зворотній зв'язок "{{ $type }}"<br>
 &nbsp; &nbsp; &nbsp;</div>
 <div style="text-align: center; width: 220px;margin: auto;">
 <table class="tg">

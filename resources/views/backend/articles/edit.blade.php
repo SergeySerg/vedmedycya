@@ -279,12 +279,32 @@
                                     @foreach($article_group as $article)
                                         @if($article->getAttributeTranslate('is_base_hotel') == 1)
                                             </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
-                                        @elseif($type == 'rooms' OR $type == 'reviews' OR $type == 'hotels' OR $type == 'seoarticles')
-                                            </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
+                                        @elseif($type == 'rooms' OR $type == 'reviews' OR $type == 'hotels' OR $type == 'seoarticles' OR $type == 'prices')
+                                            </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }} @if($type == 'prices')/ {{  $article->article_parent->getTranslate('title')}} @endif
                                         {{--@else
                                             </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}--}}
                                         @endif                        
                                     @endforeach
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    @endif
+                    @if($admin_category->hasField('article_parent_2'))
+                        <div class="control-group">
+                            <label class="control-label" for="form-field-select-2">{{ trans('backend.relation') }} (связь к Номеру)</label>
+                            <div class="controls">
+                                <select name="article_id_2" id="form-field-select-2">
+                                    <option value="">
+                                    @if($type == 'discounts')
+                                        На всіх сторінках
+                                    @else
+                                        Brand Page
+                                    @endif
+                                    @foreach($rooms_for_check_price as $room)
+                                        </option><option value="{{ $room->id }}" @if($admin_article->article_id_2 == $room->id)) selected="selected" @endif>{{ $room->getTranslate('title') }}
+                                    @endforeach
+                                    
                                     </option>
                                 </select>
                             </div>
@@ -296,6 +316,30 @@
                         <div class="controls">
                                 <div class="row-fluid input-append">
                                     <input class="span2 date-picker" name="date" id="id-date-picker-1" type="text" data-date-format="dd-mm-yyyy" @if(isset($admin_article)) value='{{date('d-m-Y',strtotime($admin_article->date)) }}' @endif/>
+                                    <span class="add-on">
+                                        <i class="icon-calendar"></i>
+                                   </span>
+                                </div>
+                            </div>
+                    @endif
+                    @if($admin_category->hasField('date_start'))
+                        <div class="control-group">
+                            <label class="control-label" for="id-date-picker-2">Дата начала сезона</label>
+                        <div class="controls">
+                                <div class="row-fluid input-append">
+                                    <input class="span2 date-picker" name="date_start" id="id-date-picker-2" type="text" data-date-format="dd-mm-yyyy" @if(isset($admin_article)) value='{{date('d-m-Y',strtotime($admin_article->date_start)) }}' @endif/>
+                                    <span class="add-on">
+                                        <i class="icon-calendar"></i>
+                                   </span>
+                                </div>
+                            </div>
+                    @endif
+                    @if($admin_category->hasField('date_finish'))
+                        <div class="control-group">
+                            <label class="control-label" for="id-date-picker-3">Дата окончания сезона</label>
+                        <div class="controls">
+                                <div class="row-fluid input-append">
+                                    <input class="span2 date-picker" name="date_finish" id="id-date-picker-3" type="text" data-date-format="dd-mm-yyyy" @if(isset($admin_article)) value='{{date('d-m-Y',strtotime($admin_article->date_finish)) }}' @endif/>
                                     <span class="add-on">
                                         <i class="icon-calendar"></i>
                                    </span>

@@ -548,6 +548,32 @@
                                     <tr>
                                         <td class="center">
                                             <label>
+                                                <input type="checkbox" name="date_start" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            {{ trans('backend.date') }} начала сезона
+                                        </td>
+                                        <td>date_start</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">
+                                            <label>
+                                                <input type="checkbox" name="date_finish" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            {{ trans('backend.date') }} окончания сезона
+                                        </td>
+                                        <td>date_finish</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">
+                                            <label>
                                                 <input type="checkbox" name="priority" />
                                                 <span class="lbl"></span>
                                             </label>
@@ -583,6 +609,19 @@
                                             {{ trans('backend.relation') }}
                                         </td>
                                         <td>article_parent</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="center">
+                                            <label>
+                                                <input type="checkbox" name="article_parent_2" />
+                                                <span class="lbl"></span>
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            {{ trans('backend.relation') }} 2
+                                        </td>
+                                        <td>article_parent_2</td>
                                     </tr>
                                     <tr>
                                         <td class="center">
