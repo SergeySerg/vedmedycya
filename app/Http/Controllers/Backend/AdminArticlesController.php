@@ -75,8 +75,9 @@ class AdminArticlesController extends Controller {
 
 	/*Show the form for creating a new Article.*/
 
-	public function create($type)
+	public function create(Request $request, $type)
 	{
+		//dd('fag');
 		$langs = Lang::activelangs()->get();
 		$admin_category = Category::where("link","=","$type")->first();
 
@@ -88,6 +89,23 @@ class AdminArticlesController extends Controller {
 
 		//list of attributes from Category
 		$attributes_fields = $fields->attributes;
+		if ($request->ajax()){
+			/*get [] from request*/
+			$all = $request->all();
+			$article_parent_id = $all['id'];
+			$category_room = Category::where('link', 'rooms')->first();
+			$admin_article = Article::where("id", $article_parent_id)->first();
+			$parent_hotel = $admin_article->article_parent;
+			$rooms_for_list_price = Article::where('article_id', $parent_hotel->id)->where('category_id', $category_room->id)->get();
+			//dd($rooms_for_list_price);
+			return response()->json([
+			"status" => 'success',
+			"articles" => $rooms_for_list_price,
+			//"redirect" => URL::to('/adminorieT3/articles/' . $type)
+		]);
+
+	
+		}
 
 		return view('backend.articles.edit',[
 			'langs'=>$langs,
@@ -103,6 +121,7 @@ class AdminArticlesController extends Controller {
 
 	public function store(Request $request, $type)
 	{
+		//dd('store');
 		$langs = Lang::activelangs()->get();
 
 		//validation rules
@@ -160,7 +179,7 @@ class AdminArticlesController extends Controller {
 
 	/*Show the form for editing the Article. (@param  int  $id @return Response*/
 
-	public function edit($type, $id)
+	public function edit(Request $request, $type, $id)
 	{		
 		//Создание папки соответсвующие id
 		Storage::makeDirectory('upload/articles/' . $id, '0777', true, true);
@@ -170,6 +189,21 @@ class AdminArticlesController extends Controller {
 		$admin_article = Article::where("id", $id)->first();
 		$parent_hotel = $admin_article->article_parent->article_parent;
 		$rooms_for_check_price = Article::where('article_id', $parent_hotel->id)->where('category_id', $category_room->id)->get();
+		if ($request->ajax()){
+			/*get [] from request*/
+			$all = $request->all();
+			$article_parent_id = $all['id'];
+			//$category_room = Category::where('link', 'rooms')->first();
+			$admin_article = Article::where("id", $article_parent_id)->first();
+			$parent_hotel = $admin_article->article_parent;
+			$rooms_for_list_price = Article::where('article_id', $parent_hotel->id)->where('category_id', $category_room->id)->get();
+			//dd($rooms_for_list_price);
+			return response()->json([
+				"status" => 'success',
+				"articles" => $rooms_for_list_price,
+				//"redirect" => URL::to('/adminorieT3/articles/' . $type)
+			]);
+		}	
 		
 		//dd($rooms_for_check_price);
 	

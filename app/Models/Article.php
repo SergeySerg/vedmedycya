@@ -2,8 +2,10 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Debugbar;
 
 class Article extends Translate {
+    
     protected $fillable=[
         'category_id',
         'article_id',
@@ -30,7 +32,9 @@ class Article extends Translate {
     //protected $dateFormat = 'Y-m-d H:i:s';
     //protected $dates = ['created_at', 'updated_at', 'deleted_at', 'date', 'date_start', 'date_finish'];
 
-
+    // public function getAttributeTranslate($key, $current_lang = null){
+    //     parent::getAttributeTranslate($key, $current_lang = null);
+    // }
     public function category(){
         return $this->belongsTo('App\Models\Category');
     }
@@ -90,6 +94,52 @@ class Article extends Translate {
     //Change format of date
     public function getDateAttribute($date){
         return Carbon::createFromFormat('Y-m-d H:i:s',$date)->toDateString();
+    }
+    // get Price
+    public function getPrice($id, $parent_hotel_id, $date_start=null, $date_finish=null){
+        Debugbar::info($date_start);
+        Debugbar::info($date_finish);
+        Debugbar::info($id);
+        Debugbar::info($parent_hotel_id);
+        $article = $this;
+        if(!$date_start || !$date_finish){
+            $price = $this->getArticleBasePrice($id, $parent_hotel_id);
+            return $val = $price;
+        }else{
+            $seasons = $article::with('article_children')
+                ->where(function ($query) use ($date_start) {
+                    $query->where('date_start', '<=', $date_start);
+                    $query->where('date_finish', '>=', $date_start);
+                })
+                ->orWhere(function ($query) use ($date_finish) {
+                    $query->where('date_start', '<=', $date_finish);
+                    $query->where('date_finish', '>=', $date_finish);
+                })
+                ->orWhere(function ($query) use ($date_start, $date_finish) {
+                    $query->where('date_start', '>=', $date_finish);
+                    $query->where('date_finish', '<=', $date_finish);
+                })
+                ->activeAndSortArticles()
+                //->$this->article_children()
+                ->get();
+
+        }
+    }
+    private function getArticleBasePrice($id, $parent_hotel_id){
+        $article_price = $this::with('article_children')
+                ->where('article_id', $parent_hotel_id)
+                ->where('attributes->base_season', 1)
+                ->get()
+                ->map(function ($child_article) use ($id) {
+					return $child_article
+							->article_children()				
+							->where('article_id_2', $id)
+							->activeAndSortArticles()
+							->first();
+                });
+                Debugbar::info($article_price);    
+                return $article_price;
+
     }
     
 }

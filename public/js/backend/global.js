@@ -335,7 +335,63 @@ $(function(){
         //$('#image-upload').show();
     });
 /*show-hide image in category*/
-    init_wysiwyg();   
+    init_wysiwyg();  
+    
+/* get list articles for parent article */
+    $('select[data-name=article_parent]').on('change', function(){
+        $('select[name=article_id_2]').empty();
+ 
+        var data = {};
+        
+        id = $(this).val();
+        var token = $('#token').text();
+        console.log('ID=====>', id );
+        $.ajax({
+            url: '',
+            method: "GET",
+            headers: {
+                'X-CSRF-TOKEN': token              
+            }, 
+            processData: false,
+            contentType: false,
+            data: 'id=' + id,
+            dataType : "json",
+            success: function(data){
+                console.log('Server response: ', data);
+                if(data.status == 'success'){
+                    console.log(data.articles);
+                    $.each(data.articles, function(key, element) {
+                        $('select[name=article_id_2]').append($("<option></option>")
+                        .attr("value",element['id'])
+                        .text(JSON.parse(element['title']).ru));
+                    });
+                }
+
+                // if(data.redirect){
+                //      document.location = data.redirect;
+                // }
+                // if(data.status == 'fail'){
+                //     alert(data.message);
+                // }
+            },
+            error: function(data, type, details){
+                console.info('Server error: ', arguments);
+
+                var message = 'Ошибка сохранения:\n';
+                if(data.responseJSON){
+                    for(var key in data.responseJSON){
+                        message += data.responseJSON[key] + '\n';
+                    }
+                }else{
+                    message += details;
+                }
+
+                alert(message);
+            }
+        },"json");
+
+    })
+/* /get list articles for parent article */
 });
 
 function init_wysiwyg(){

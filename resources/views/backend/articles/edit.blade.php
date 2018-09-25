@@ -269,7 +269,7 @@
                         <div class="control-group">
                             <label class="control-label" for="form-field-select-1">{{ trans('backend.relation') }}</label>
                             <div class="controls">
-                                <select name="article_id" id="form-field-select-1">
+                                <select name="article_id" @if($admin_category->hasField('article_parent_2')) data-name= 'article_parent' @endif id="form-field-select-1">
                                     <option value="">
                                     @if($type == 'discounts')
                                         На всіх сторінках
@@ -279,7 +279,7 @@
                                     @foreach($article_group as $article)
                                         @if($article->getAttributeTranslate('is_base_hotel') == 1)
                                             </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}
-                                        @elseif($type == 'rooms' OR $type == 'reviews' OR $type == 'hotels' OR $type == 'seoarticles' OR $type == 'prices')
+                                        @elseif($type == 'rooms' OR $type == 'reviews' OR $type == 'hotels' OR $type == 'seoarticles' OR $type == 'prices' OR $type == 'seasons')
                                             </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }} @if($type == 'prices')/ {{  $article->article_parent->getTranslate('title')}} @endif
                                         {{--@else
                                             </option><option value="{{ $article->id }}" @if(isset($article_id) && ($article_id == $article->id)) selected="selected" @endif>{{ $article->getTranslate('title') }}--}}
@@ -296,15 +296,11 @@
                             <div class="controls">
                                 <select name="article_id_2" id="form-field-select-2">
                                     <option value="">
-                                    @if($type == 'discounts')
-                                        На всіх сторінках
-                                    @else
-                                        Brand Page
+                                    @if(isset($rooms_for_check_price))
+                                        @foreach($rooms_for_check_price as $room)
+                                            </option><option value="{{ $room->id }}" @if($admin_article->article_id_2 == $room->id)) selected="selected" @endif>{{ $room->getTranslate('title') }}
+                                        @endforeach
                                     @endif
-                                    @foreach($rooms_for_check_price as $room)
-                                        </option><option value="{{ $room->id }}" @if($admin_article->article_id_2 == $room->id)) selected="selected" @endif>{{ $room->getTranslate('title') }}
-                                    @endforeach
-                                    
                                     </option>
                                 </select>
                             </div>

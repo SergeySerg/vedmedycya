@@ -93,7 +93,7 @@ class Translate extends Model {
         //     $fields = fields['title'];  
         //     dd($fields);  
         // }       
-        Debugbar::info($fields);
+        //Debugbar::info($fields);
        //dd($fields); 
         foreach($fields as $key => $item){
 

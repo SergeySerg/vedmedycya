@@ -29,6 +29,7 @@
         <?php $i = 0 ?>
             @foreach($children_rooms->take(5) as $key => $room)
                 @if($room->getAttributeTranslate('show_hotel_page') AND $room->getAttributeTranslate('show_hotel_page') == 1)
+                {{ $room->getPrice($room->id, $room->article_parent->id) }}
                     <!-- Типова мала карточка номеру -->
                     <div class="col-xl-4 col-lg-6 p-2 mt-4">
                         <a href="{{ route('article_show', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $room->article_parent->getAttributeTranslate('url'), $categories_data['rooms']->getTranslate('url'), $room->id])}}" class="a-card">
@@ -55,7 +56,7 @@
                                     <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between">
                                         {{trans('base.from')}} 
                                         <span class="d-flex flex-column">
-                                            <span class="old-price-hotel-card custom-line-throught">{{ $room->getAttributeTranslate('base_price')}}</span>
+                                            <span class="old-price-hotel-card custom-line-throught">{{--{{ $room->getAttributeTranslate('base_price')}}--}}{{ $room->getPrice($room->id, $room->article_parent->id) }}</span>
                                                 <strong>
                                                     {{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * $room->getAttributeTranslate('discount_room')) / 100)}}
                                                 </strong>

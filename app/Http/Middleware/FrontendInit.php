@@ -26,6 +26,8 @@ class FrontendInit {
 	 */
 	public function handle($request, Closure $next)
 	{
+
+		
 		//dd('тут');
 		// Get current lang object from db
 		//$currentLang = Lang::where('lang', $request->lang)
@@ -157,7 +159,7 @@ class FrontendInit {
 				// }	
 			if($category->link == 'reviews'){
 				view()->share($category->link . '_raty', $this->counterReviews($category_item));
-				Debugbar::info($this->counterReviews($category_item));
+				//Debugbar::info($this->counterReviews($category_item));
 				$category_item = collect($category_item)->sortByDesc('priority')->paginate( 10 );
 				//dd($child_articles);
 			}
