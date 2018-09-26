@@ -23,7 +23,10 @@ class EncryptCookies
      *
      * @var array
      */
-    protected $except = [];
+    protected $except = [
+        'dateStart',
+        'dateFinish'
+    ];
 
     /**
      * Create a new CookieGuard instance.

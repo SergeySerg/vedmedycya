@@ -78,7 +78,7 @@ class Translate extends Model {
             // if (!$current_lang) {
             //     $current_lang = App::getLocale();
             // }     
-            
+            //dd($this->getTranslateValue($fields, $current_lang));
             return $this->getTranslateValue($fields, $current_lang);
             //$field = $this->getLangsParts($langs, $pieces, $current_lang);
             //dd($field);

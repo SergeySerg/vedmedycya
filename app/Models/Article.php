@@ -3,6 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Debugbar;
+use Cookie;
 
 class Article extends Translate {
     
@@ -32,9 +33,10 @@ class Article extends Translate {
     //protected $dateFormat = 'Y-m-d H:i:s';
     //protected $dates = ['created_at', 'updated_at', 'deleted_at', 'date', 'date_start', 'date_finish'];
 
-    // public function getAttributeTranslate($key, $current_lang = null){
-    //     parent::getAttributeTranslate($key, $current_lang = null);
-    // }
+    public function getAttributeTranslate($key, $current_lang = null){
+        
+        return parent::getAttributeTranslate($key, $current_lang = null);
+    }
     public function category(){
         return $this->belongsTo('App\Models\Category');
     }
@@ -96,15 +98,18 @@ class Article extends Translate {
         return Carbon::createFromFormat('Y-m-d H:i:s',$date)->toDateString();
     }
     // get Price
-    public function getPrice($id, $parent_hotel_id, $date_start=null, $date_finish=null){
-        Debugbar::info($date_start);
-        Debugbar::info($date_finish);
+    public function getPrice($id, $parent_hotel_id){
         Debugbar::info($id);
         Debugbar::info($parent_hotel_id);
         $article = $this;
+        $date_start = Cookie::get('dateStart');
+        $date_finish = Cookie::get('dateFinish');
+        Debugbar::info($date_start);
+        Debugbar::info($date_finish);
         if(!$date_start || !$date_finish){
-            $price = $this->getArticleBasePrice($id, $parent_hotel_id);
-            return $val = $price;
+            //dd($this->getAttributeTranslate('base_price'));
+            return $price = $this->getArticleBasePrice($id, $parent_hotel_id);
+            //return $val = $price->getAttributeTranslate('base_price');
         }else{
             $seasons = $article::with('article_children')
                 ->where(function ($query) use ($date_start) {
@@ -136,7 +141,8 @@ class Article extends Translate {
 							->where('article_id_2', $id)
 							->activeAndSortArticles()
 							->first();
-                });
+                })
+                ->first();
                 Debugbar::info($article_price);    
                 return $article_price;
 
