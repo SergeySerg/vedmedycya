@@ -55,9 +55,9 @@
                                     <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between">
                                         {{trans('base.from')}} 
                                         <span class="d-flex flex-column">
-                                            <span class="old-price-hotel-card custom-line-throught">{{--{{ $room->getPrice($room->id, $room->article_parent->id)->getAttributeTranslate('base_price')}}--}}{{ $room->getPrice($room->id, $room->article_parent->id)->getAttributeTranslate('base_price')}}</span>
+                                            <span class="old-price-hotel-card custom-line-throught">{{--{{ $room->getPrice($room->id, $room->article_parent->id)->getAttributeTranslate('base_price')}}--}}{{ $room->getPrice($room->id, $room->article_parent->id)['base_price']}}</span>
                                                 <strong>
-                                                    {{$room->getPrice($room->id, $room->article_parent->id)->getAttributeTranslate('base_price') - (($room->getPrice($room->id, $room->article_parent->id)->getAttributeTranslate('base_price') * $room->getAttributeTranslate('discount_room')) / 100)}}
+                                                    {{$room->getPrice($room->id, $room->article_parent->id)['base_price'] - (($room->getPrice($room->id, $room->article_parent->id)['base_price'] * $room->getAttributeTranslate('discount_room')) / 100)}}
                                                 </strong>
                                             </span> 
                                             {{trans('base.grn')}}
@@ -65,7 +65,7 @@
                                 </div>
                             @else 
                                 <div class="apart-small-card-buy d-flex flex-column justify-content-center">
-                                    <p class="text-center apart-small-card-buy-hotel-p">{{trans('base.from')}} <strong>{{ $room->getPrice($room->id, $room->article_parent->id)->getAttributeTranslate('base_price')}}</strong> {{trans('base.grn')}}</p>
+                                    <p class="text-center apart-small-card-buy-hotel-p">{{trans('base.from')}} <strong>{{ $room->getPrice($room->id, $room->article_parent->id)['base_price']}}</strong> {{trans('base.grn')}}</p>
                                 </div>
 
                             @endif
