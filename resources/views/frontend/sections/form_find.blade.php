@@ -56,7 +56,7 @@
         </div>
         <div class="col-lg-2 col-md-3 my-1">
             <div class="input-pattern">
-                <a @if(!$subdomain) class='redirect' @endif href='{{ route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $subdomain, $categories_data['search']->getTranslate('url')]) }}'>
+                <a @if(!$subdomain) class='redirect' @else class='get_prices' @endif href='{{ route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $subdomain, $categories_data['search']->getTranslate('url')]) }}'>
                     <input type="button" style="width: 100%; height: 100%;background-color: #ff8c00;border: none; cursor: pointer; color: #fff; transition: all 0.4s;"  onmouseover="this.style.backgroundColor='#ff6c00';" onmouseout="this.style.backgroundColor='#ff8c00';" class="submit-button text-uppercase" value="{{ trans('base.check_price') }}">
                 </a>
             </div>

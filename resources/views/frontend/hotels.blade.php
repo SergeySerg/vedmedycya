@@ -30,6 +30,7 @@
             @foreach($children_rooms->take(5) as $key => $room)
                 @if($room->getAttributeTranslate('show_hotel_page') AND $room->getAttributeTranslate('show_hotel_page') == 1)
                 <!-- Типова мала карточка номеру -->
+                <?php $base_price = $room->getPrice($room->id, $room->article_parent->id)['base_price'] ?>
                     <div class="col-xl-4 col-lg-6 p-2 mt-4">
                         <a href="{{ route('article_show', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $room->article_parent->getAttributeTranslate('url'), $categories_data['rooms']->getTranslate('url'), $room->id])}}" class="a-card">
                             <div class="apart-small-card shadow-hover">
@@ -55,9 +56,9 @@
                                     <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between">
                                         {{trans('base.from')}} 
                                         <span class="d-flex flex-column">
-                                            <span class="old-price-hotel-card custom-line-throught">{{--{{ $room->getPrice($room->id, $room->article_parent->id)->getAttributeTranslate('base_price')}}--}}{{ $room->getPrice($room->id, $room->article_parent->id)['base_price']}}</span>
+                                            <span class="old-price-hotel-card custom-line-throught">{{--{{ $room->getPrice($room->id, $room->article_parent->id)->getAttributeTranslate('base_price')}}--}}{{ $base_price }}</span>
                                                 <strong>
-                                                    {{$room->getPrice($room->id, $room->article_parent->id)['base_price'] - (($room->getPrice($room->id, $room->article_parent->id)['base_price'] * $room->getAttributeTranslate('discount_room')) / 100)}}
+                                                    {{$base_price - (($base_price * $room->getAttributeTranslate('discount_room')) / 100)}}
                                                 </strong>
                                             </span> 
                                             {{trans('base.grn')}}
@@ -65,7 +66,7 @@
                                 </div>
                             @else 
                                 <div class="apart-small-card-buy d-flex flex-column justify-content-center">
-                                    <p class="text-center apart-small-card-buy-hotel-p">{{trans('base.from')}} <strong>{{ $room->getPrice($room->id, $room->article_parent->id)['base_price']}}</strong> {{trans('base.grn')}}</p>
+                                    <p class="text-center apart-small-card-buy-hotel-p">{{trans('base.from')}} <strong>{{ $base_price }}</strong> {{trans('base.grn')}}</p>
                                 </div>
 
                             @endif

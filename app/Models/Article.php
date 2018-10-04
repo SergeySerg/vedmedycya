@@ -104,22 +104,22 @@ class Article extends Translate {
     }
     // get Price
     public function getPrice($id, $parent_hotel_id){
-        // $id = 156;
-        // $parent_hotel_id = 18;
         Debugbar::info('id====>' . $id);
         Debugbar::info('parent_hotel_id====>' . $parent_hotel_id);
         $article = $this;
-        $date_start = Cookie::get('dateStart');
-        $date_finish = Cookie::get('dateFinish');
+        $date_start = trim(session()->get('date_start'));
+        $date_finish = trim(session()->get('date_finish'));
+        //dd($date_finish);
         Debugbar::info($date_start);
         Debugbar::info($date_finish);
         $days = $this->getCountDays($date_finish, $date_start);
         $base_article_price = $this->getArticleBasePrice($id, $parent_hotel_id);
-        if(!isset($date_start) || !isset($date_finish)){
+        if(empty($date_start) && $date_start  || empty($date_finish)){
             //dd($this->getAttributeTranslate('base_price'));
             return $base_article_price;
             //return $val = $price->getAttributeTranslate('base_price');
         }else{
+            //dd('qw');
             $date_start = date("Y-m-d 00:00:00", strtotime($date_start));
             $date_finish = date("Y-m-d 00:00:00", strtotime($date_finish));
             //dd($newDate);
@@ -145,10 +145,11 @@ class Article extends Translate {
                 ->activeAndSortForDateArticles()
                 ->get()
                 ->toArray();
+                //dd($seasons);
             /* if dont search seasons */
             if(count($seasons) == 0){
                 foreach($base_article_price as $key => $value){
-                    $base_article_price[$key] = $value * $days;
+                    $base_article_price[$key] = $value;
                 }
                 return $base_article_price;
             } 
@@ -158,22 +159,33 @@ class Article extends Translate {
         }
     }
     private function getArticleBasePrice($id, $parent_hotel_id){
-        $article_price = $this::with('article_children')
+        $base_season = $this::with('article_children')
                 ->where('article_id', $parent_hotel_id)
                 ->where('attributes->base_season', 1)
-                ->get()
-                ->map(function ($child_article) use ($id) {
-					return $child_article
-							->article_children()				
-							->where('article_id_2', $id)
-							->activeAndSortArticles()
-							->first();
-                })
-                ->first()
-                ->toArray();
-                //Debugbar::info($article_price); 
-                $attributes_price = json_decode($article_price['attributes'], true);  
-                return $attributes_price;
+                ->get();
+
+        $article_price = $base_season->map(function ($child_article) use ($id) {
+			return $child_article
+                ->article_children()				
+                ->where('article_id_2', $id)
+                ->activeAndSortArticles()
+                ->first();
+        })
+        ->first();
+        if($article_price){
+            $attributes_price = json_decode($article_price->toArray()['attributes'], true);  
+            return $attributes_price;
+        }else{
+            return [
+                "base_price" => 0,
+                'surchange' => 0,
+                'solo_settle' => 0,
+                'surchange_children' => 0
+
+            ];
+        }
+        //->toArray();
+        
 
     }
     private function getCountDays($date_finish, $date_start){
@@ -214,7 +226,7 @@ class Article extends Translate {
         $result_price_arr = [];
         
         //Array with day price for property
-        
+        //dd($price_array);
         foreach($price_array as $day => $price_item){
             foreach($price_item as $key => $price){
                 //dd($price[$key]);
@@ -222,13 +234,15 @@ class Article extends Translate {
                 //dd($result_price_arr);     
             }
         }
-
+//dd($result_price_arr);
         $result = [];
         foreach($result_price_arr as $key => $v){
-            $result[$key] = round(array_sum($v), 0, PHP_ROUND_HALF_UP);
+            $result[$key] = round(array_sum($v)/$days, 0, PHP_ROUND_HALF_UP);
         }
 
         Debugbar::info('==========================');
+        //dd($result_price_arr);
+        //dd($result);
         Debugbar::info($result);
         Debugbar::info('==========================');
         

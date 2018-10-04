@@ -121,12 +121,29 @@ Route::group(['prefix'=> getSetting('admin.prefix'), 'middleware' => ['auth', 'b
 	Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
 	Route::post('/{lang}/add_review', ['uses' => 'Frontend\ArticleController@add_review','as' => 'add_review']);//Обработчик добавления отзыва
 	Route::post('/{lang}/reserved', ['uses' => 'Frontend\ArticleController@reserved','as' => 'reserved']);//Обработчик Обратной связи при заказе номера
+	Route::post('/get_prices', ['uses' => 'Frontend\ArticleController@get_prices','as' => 'get_prices']);//Обработчик цени номера
+
 	/*/Modal routes*/
 	/*Тимчасово*/
 	Route::get('/pumpkin', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@pumpkin', 'as' => 'pumpkin']);
 	/*Render html page */
 	Route::get('/google2ab2a5819a08aedd.html', ['uses' => 'Frontend\ArticleController@googleHtml', 'as' => 'google_html']);
+	Route::post('set_dates', function () {
+		if (Request::ajax()){
+			$dates = (Request::all());
+			//$date_start = Input::get('dateStart');
+			session([
+				'date_start' => $dates['dateStart'],
+				'date_finish' => $dates['dateFinish']
 
+				]);
+				return response()->json([
+					"status" => 'success'
+				]);
+
+		}
+		//return true;
+	});
 	
 	
 //});

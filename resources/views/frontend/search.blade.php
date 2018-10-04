@@ -53,7 +53,7 @@
                 </div>
                 <div class="col-lg-2 col-md-3 my-1">
                     <div class="input-pattern">
-                        <button type="submit" class="submit-button text-uppercase">{{ trans('base.check_price') }}</button>
+                        <button type="submit" class="search submit-button text-uppercase">{{ trans('base.check_price') }}</button>
                     </div>
                 </div>
                 </div>
@@ -81,6 +81,7 @@
         <?php $r = 0 ?>
             @foreach((!$subdomain) ? $rooms : $children_rooms as $key => $room)
                 <!-- APARTMENT CARD START -->
+                <?php $base_price = $room->getPrice($room->id, $room->article_parent->id)['base_price'] ?>
                 <div class="col-md-11">
                     <div data-id={{ $r }} class="apart-card shadow-hover mb-5">
                         <div class="row no-gutters">
@@ -107,8 +108,8 @@
                                 <div class="bar-container">
                                     @if(Request::get('discount') OR $room->getAttributeTranslate('discount_room'))
                                         <div class="price-bar">
-                                            <p class="apart-old-price custom-line-throught">{{ $room->getAttributeTranslate('base_price')}}</p>
-                                            <h4 class="apart-price-h">{{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * ((Request::get('discount')) ? Request::get('discount') : $room->getAttributeTranslate('discount_room'))) / 100)}}</h4>
+                                            <p  data-attribute-id={{ $r}} class="apart-old-price custom-line-throught">{{ $base_price}}</p>
+                                            <h4  data-attribute-id={{ $r}} class="apart-price-h">{{$base_price - (($base_price * ((Request::get('discount')) ? Request::get('discount') : $room->getAttributeTranslate('discount_room'))) / 100)}}</h4>
                                             <small>{{ trans('base.grn')}} {{ trans('base.price_night')}}</small>
                                         </div>
 
@@ -118,7 +119,7 @@
                                     @else
                                         <div class="price-bar">
                                             
-                                            <h4 class="apart-price-h">{{ $room->getAttributeTranslate('base_price')}}</h4>
+                                            <h4 data-attribute-id={{ $r}} class="apart-price-h">{{ $base_price}}</h4>
                                             <small>{{ trans('base.grn')}} {{ trans('base.price_night')}}</small>
                                         </div>                                       
                                     @endif    
@@ -207,21 +208,28 @@
                                         <div class="row no-gutters justify-content-center mb-md-0 mb-3">
                                             @if(Request::get('discount') OR $room->getAttributeTranslate('discount_room'))
                                                 <div class="col-md-12 col-6 text-center text-md-left align-self-center">
-                                                    <p class="apart-old-total-price"><b class="custom-line-throught"><span class='old-price-apart'>{{ $room->getAttributeTranslate('base_price')}}</span> {{ trans('base.grn')}}</b></p>
+                                                    <p class="apart-old-total-price"><b class="custom-line-throught"><span data-attribute-id={{ $r }} class='old-price-apart'>{{ $base_price}}</span> {{ trans('base.grn')}}</b></p>
                                                 </div>
-                                                <div class='old_price' data-id={{ $key }}  style='display:none'>{{ $room->getAttributeTranslate('base_price')}}</div>
+                                                <div class='old_price' data-attribute-id={{ $r }} data-id={{ $key }}  style='display:none'>{{ $base_price}}</div>
 
                                             @endif                                            
-                                            <div class='result_price' data-id={{ $key }}  style='display:none'>{{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * ((Request::get('discount')) ? Request::get('discount') : $room->getAttributeTranslate('discount_room'))) / 100)}}</div>
+                                            <div class='result_price' data-attribute-id={{ $r }} data-id={{ $key }}  style='display:none'>{{$base_price - (($base_price * ((Request::get('discount')) ? Request::get('discount') : $room->getAttributeTranslate('discount_room'))) / 100)}}</div>
                                             <div class="col-md-12 col-6 align-self-center">
-                                                <h3 data-id={{ $r }} class="apart-total-price">{{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * ((Request::get('discount')) ? Request::get('discount') : $room->getAttributeTranslate('discount_room')))  / 100)}} {{ trans('base.grn')}}</h3>
+                                                <h3 data-id={{ $r }} class="apart-total-price">{{$base_price - (($base_price * ((Request::get('discount')) ? Request::get('discount') : $room->getAttributeTranslate('discount_room')))  / 100)}} {{ trans('base.grn')}}</h3>
                                             </div>                                             
                                             <div class="col text-md-left text-center">
                                                 <small class="apart-hotel">{{ trans('base.from_')}} <span class='date_from'></span> {{ trans('base.to') }} <span class='date_to'></span> <span class='quantity_days_search'></span></small>
                                             </div>
-                                        </div>   
+                                        </div> 
+                                        <div data-attribute-id={{ $r }} id='discount' style='display:none'>{{ $room->getAttributeTranslate('discount_room')}}</div>
+                                        <div class='room_id' style='display:none'>{{ $room->id }}</div>
+                                    <div class='parent_id' style='display:none'>{{ $room->article_parent->id }}</div>
+  
                                     </div> 
                                     <div class='days' style='display:none'>1</div>
+                                    <input type="hidden" name='csrf-token' value="{{csrf_token()}}"/>
+
+
                                     <div class="col-md-4 col-6 px-1"><a href="{{ route('article_show', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $room->article_parent->getAttributeTranslate('url'), $categories_data['rooms']->getTranslate('url'), $room->id])}}" class="btn btn-yellow-overline">{{ trans('base.more_')}}</a></div>
                                     <div class="col-md-4 col-6 px-1"><a data-toggle="modal" data-id= {{ $r }} data-target="#exampleModal" class="btn btn-yellow reserved">{{ trans('base.order')}}</a></div>
                                 </div>
@@ -246,6 +254,7 @@
         <?php $i = 0 ?>
             @foreach((!$subdomain) ? $rooms->random(3) : $children_rooms->random(3) as $room)
                     <!-- Типова мала карточка номеру -->
+                    <?php $base_price = $room->getPrice($room->id, $room->article_parent->id)['base_price'] ?>
                     <div class="col-xl-4 col-lg-6 p-2 mt-4">
                         <a href="{{ route('article_show', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $room->article_parent->getAttributeTranslate('url'), $categories_data['rooms']->getTranslate('url'), $room->id])}}" class="a-card">
                             <div class="apart-small-card shadow-hover">
@@ -271,9 +280,9 @@
                                     <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between">
                                         {{trans('base.from')}} 
                                         <span class="d-flex flex-column">
-                                            <span class="old-price-hotel-card custom-line-throught">{{ $room->getAttributeTranslate('base_price')}}</span>
+                                            <span class="old-price-hotel-card custom-line-throught">{{ $base_price}}</span>
                                                 <strong>
-                                                    {{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * ((Request::get('discount')) ? Request::get('discount') : $room->getAttributeTranslate('discount_room'))) / 100)}}
+                                                    {{$base_price - (($base_price * ((Request::get('discount')) ? Request::get('discount') : $room->getAttributeTranslate('discount_room'))) / 100)}}
                                                 </strong>
                                             </span> 
                                             {{trans('base.grn')}}
@@ -281,7 +290,7 @@
                                 </div>
                             @else 
                                 <div class="apart-small-card-buy d-flex flex-column justify-content-center">
-                                    <p class="text-center apart-small-card-buy-hotel-p">{{trans('base.from')}} <strong>{{ $room->getAttributeTranslate('base_price')}}</strong> {{trans('base.grn')}}</p>
+                                    <p class="text-center apart-small-card-buy-hotel-p">{{trans('base.from')}} <strong>{{ $base_price }}</strong> {{trans('base.grn')}}</p>
                                 </div>
 
                             @endif

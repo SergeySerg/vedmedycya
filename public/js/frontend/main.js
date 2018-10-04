@@ -108,25 +108,25 @@ $(function () {
   $(document).ready(function() {
       /*Custom js*/
       /*VAR from localStorage*/
-      var dateStartFromStorage, dateFinishFromStorage;
-      var adultsFromStorage = localStorage.getItem('adults');
-      var childrenFromStorage = localStorage.getItem('children');
-      var dateStartFromStorage = localStorage.getItem('dateStart');
-      var dateFinishFromStorage = localStorage.getItem('dateFinish');
-      var diffMaxQuantityGuests = 0; 
-      var timeNow = (new Date()).getTime();
-      if(dateStartFromStorage || dateFinishFromStorage){
-          var dateStartFromStorageTs = getDateTimestamp(dateStartFromStorage); 
-          var dateFinishFromStorageTs = getDateTimestamp(dateFinishFromStorage); 
-          
-          
-        if(((timeNow - dateStartFromStorageTs) > 1000 * 60 * 60 * 24) || ((timeNow - dateStartFromStorageTs) > 1000 * 60 * 60 * 24)){
-            localStorage.removeItem('dateStart');
-            localStorage.removeItem('dateFinish');
-            dateStartFromStorage, dateFinishFromStorage = ''; 
-        }
+        var dateStartFromStorage, dateFinishFromStorage;
+        var adultsFromStorage = localStorage.getItem('adults');
+        var childrenFromStorage = localStorage.getItem('children');
+        var dateStartFromStorage = localStorage.getItem('dateStart');
+        var dateFinishFromStorage = localStorage.getItem('dateFinish');
+        var diffMaxQuantityGuests = 0; 
+        var timeNow = (new Date()).getTime();
+        if(dateStartFromStorage || dateFinishFromStorage){
+            var dateStartFromStorageTs = getDateTimestamp(dateStartFromStorage); 
+            var dateFinishFromStorageTs = getDateTimestamp(dateFinishFromStorage); 
+            
+            
+            if(((timeNow - dateStartFromStorageTs) > 1000 * 60 * 60 * 24) || ((timeNow - dateStartFromStorageTs) > 1000 * 60 * 60 * 24)){
+                localStorage.removeItem('dateStart');
+                localStorage.removeItem('dateFinish');
+                dateStartFromStorage, dateFinishFromStorage = ''; 
+            }
 
-      }       
+        }       
       
       if(dateStartFromStorage && dateFinishFromStorage){
         $("#datepicker").val(dateStartFromStorage + '-' + dateFinishFromStorage);
@@ -270,51 +270,51 @@ $(function () {
           check_input_guests();
       });
   
-      function check_input_guests() {
-          var adults = $("#adults").val();
-          var children = $("#children").val();
-          //console.log('Кількість дорослих  на вході', adults);
-          //console.log('Кількість дітей  на вході', children);
-          setPriceAfterEnterGuests(adults, children);
-          if (adults == "0" && children == "0") {
-              $("#guests").text(trans['base.count_guestі']);
-          } else {
-              $("#guests").text(adults + " " + trans['base.adults_many'] + ", " + children + " " + trans['base.kids']);
-          }
-      }
-      /*Custom js*/
+    //   function check_input_guests() {
+    //       var adults = $("#adults").val();
+    //       var children = $("#children").val();
+    //       //console.log('Кількість дорослих  на вході', adults);
+    //       //console.log('Кількість дітей  на вході', children);
+    //       setPriceAfterEnterGuests(adults, children);
+    //       if (adults == "0" && children == "0") {
+    //           $("#guests").text(trans['base.count_guestі']);
+    //       } else {
+    //           $("#guests").text(adults + " " + trans['base.adults_many'] + ", " + children + " " + trans['base.kids']);
+    //       }
+    //   }
+    //   /*Custom js*/
 
-      function setPriceAfterEnterGuests(adults, children){
-          //alert('re');
-          var sumQuantityGuests = (+adults) + (+children);
-          //console.log('Cума гостей', sumQuantityGuests);
-          var baseQuantityGuests =  $('#base_guests').text();          
-          var surcharge = $('#surcharge').text();
-          var surcharge_children = $('#surcharge_children').text();
-          if(sumQuantityGuests > baseQuantityGuests || sumQuantityGuests == baseQuantityGuests){
-              var diff = baseQuantityGuests - (+adults);
-              var price = $('span.price').text();
-              var days = $('.days').text();
-              var result;
-              if(diff > 0){
-                  result = Math.abs(diff - (+children)) * surcharge_children;
-                  //console.log('Різниця', result);
-              }else{
-                  result = (Math.abs(diff) * surcharge) + (children * surcharge_children);
-                  //console.log('Різниця', result);
-              }
-              $('p.color-black').text(days * (+(price) + result));
-              $('.result_price').text(1 * (+(price) + result));
-          }
-          //   console.log('Загальна кількість', sumQuantityGuests);
-          //   console.log('Дорослі', adults);
-          //   console.log('Діти', children);
-          //   console.log('Доплата за дорослого', surcharge);
-          //   console.log('Доплата за дитину', surcharge_children);
-          //   console.log('Дні', days);
+    //   function setPriceAfterEnterGuests(adults, children){
+    //       //alert('re');
+    //       var sumQuantityGuests = (+adults) + (+children);
+    //       //console.log('Cума гостей', sumQuantityGuests);
+    //       var baseQuantityGuests =  $('#base_guests').text();          
+    //       var surcharge = $('#surcharge').text();
+    //       var surcharge_children = $('#surcharge_children').text();
+    //       if(sumQuantityGuests > baseQuantityGuests || sumQuantityGuests == baseQuantityGuests){
+    //           var diff = baseQuantityGuests - (+adults);
+    //           var price = $('span.price').text();
+    //           var days = $('.days').text();
+    //           var result;
+    //           if(diff > 0){
+    //               result = Math.abs(diff - (+children)) * surcharge_children;
+    //               //console.log('Різниця', result);
+    //           }else{
+    //               result = (Math.abs(diff) * surcharge) + (children * surcharge_children);
+    //               //console.log('Різниця', result);
+    //           }
+    //           $('p.color-black').text(days * (+(price) + result));
+    //           $('.result_price').text(1 * (+(price) + result));
+    //       }
+    //       //   console.log('Загальна кількість', sumQuantityGuests);
+    //       //   console.log('Дорослі', adults);
+    //       //   console.log('Діти', children);
+    //       //   console.log('Доплата за дорослого', surcharge);
+    //       //   console.log('Доплата за дитину', surcharge_children);
+    //       //   console.log('Дні', days);
   
   
-      }
+    //   }
   });
   //end form
   
@@ -365,7 +365,6 @@ $(function () {
   
   $(document).ready(function(){
       setBookingIcon();
-  
       $(".input-location").click(function() {
           $(this).parent().removeClass("add-drop");
       });
@@ -407,12 +406,122 @@ $(function () {
               selectedData += " - ";
   
           } else {
+            TODO:
               unvisibleDatepicker = false;
               getDaysIntervalAndCalc();
-              
-          }
-      }
+              getPrices();
+            }
+        } 
   });
+  /* get prices */
+  $('.search').on('click', function(){
+    var token = $("input[name='csrf-token']").val();
+        var range_date = $("#datepicker").val();
+        if(range_date){
+            var dates = range_date.split("-");
+            var dateStart = dates[0];
+            var dateFinish = dates[1];
+            var days = (daydiff(parseDate(dateFinish), parseDate(dateStart)));
+            var price = $('.result_price').text();
+            data = {            
+                dateStart: dateStart,
+                dateFinish: dateFinish                 
+            }
+            //console.log('range_date', price);
+            //var old_price_item = $('.old_price').text(); 
+            /*For search page*/
+            $('.calc-price').each(function(item, value){
+                //console.log('iter', item);
+                var token = $("input[name='csrf-token']").val();
+                var dataToController = {
+                    room_id: $(this).find('.room_id').text(),
+                    parent_id: $(this).find('.parent_id').text()
+                }
+                console.log('_______', dataToController);
+                $.ajax({
+                    url: '/set_dates',
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': token              
+                    },            
+                    data: data,
+                    dataType: "json",
+                    success: function (data) {
+                        console.info('/set_dates data', data);
+                        if(data.status === 'success'){
+                            
+                            console.log('_______', dataToController);
+                            $.ajax({
+                                url: '/get_prices',
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': token
+                                },
+                                data: dataToController,
+                                dataType: "json",
+                                success: function (data) {
+                                    console.info('/get_prices', data);
+                                    var result = data.data;
+                                    if (data.success) {
+                                        var discountPrice = $('div#discount[data-attribute-id="' + item + '"]').text();
+                                        var days = (daydiff(parseDate(dateFinish), parseDate(dateStart)));
+                                        console.log('Дні',days);
+                                        console.log('Знижка',discountPrice);
+                                        
+                                        var priceFinish = result.base_price*days;
+                                        console.log('Кінцева ціна',discountPrice);
+                                        if(!discountPrice){
+                                            $('.apart-total-price[data-id="' + item + '"]').text(priceFinish);
+
+                                        }else{
+                                            $('.apart-total-price[data-id="' + item + '"]').text((result.base_price - (result.base_price*discountPrice)/100)*days);
+                                        }
+                                        $('.old-price-apart[data-attribute-id="' + item + '"]').text(priceFinish);
+                                        $('.apart-price-h[data-attribute-id="' + item + '"]').text(result.base_price - (result.base_price*discountPrice)/100);
+                                        $('.apart-old-price[data-attribute-id="' + item + '"]').text(result.base_price);
+
+                                        $('[data-class=discount_price]').text(result.base_price - (result.base_price*discountPrice)/100);
+
+                                        // var discountPrice = $('#discount').text();
+                                        //$(this).find('.apart-total-price').text('result.base_price');
+                                        //price_item = $(this).find('.result_price').text();
+                                        //var i = $('.apart-total-price').attr('data-id', item).text(result.base_price*days);
+                                       
+                                        //$(this).find('.old-price-apart').text(1*old_price_item*days);
+                                        // $('[data-class=discount_price]').text(result.base_price - (result.base_price*discountPrice)/100);
+                                        // $('#surcharge').text(result.surchange);
+                                        // $('#surcharge_children').text(result.surchange_children);
+                                        // check_input_guests();
+                                    }
+                                    // else {
+                                    //     alert('Error get Prices 1');
+                                                                            
+                                    // }
+                                },
+                                error: function (data) {
+                                    console.log('/get_prices', data.message);
+                                    alert('Error get Prices 2');
+                                }
+                
+                            }); 
+                        }
+                    },
+                    error: function (data) {
+                        alert('Error get Prices 3');
+                    }          
+
+                })
+                // var old_price_item = $(this).find('.old_price').text();
+                // console.log('Стара ціна', old_price_item);
+                // price_item = $(this).find('.result_price').text();
+                // $(this).find('.apart-total-price').text(1*price_item*days);
+                // $(this).find('.old-price-apart').text(1*old_price_item*days);
+        
+            }) 
+        }
+         
+})
+/*/get prices */
   /*Custom js*/
   function getDaysIntervalAndCalc(){
     var range_date = $("#datepicker").val();
@@ -420,9 +529,8 @@ $(function () {
         var dates = range_date.split("-");
         var dateStart = dates[0];
         var dateFinish = dates[1];
-        // if(!dateStart || !dateFinish){
-        //     alert('Введіть дати заїзду та виїзду');
-        // }
+        localStorage.setItem('dateStart', dateStart);
+        localStorage.setItem('dateFinish', dateFinish);
         var days = (daydiff(parseDate(dateFinish), parseDate(dateStart)));
         var price = $('.result_price').text();
         //console.log('range_date', range_date);
@@ -430,7 +538,7 @@ $(function () {
         /*For search page*/
         $('.calc-price').each(function(){
             var old_price_item = $(this).find('.old_price').text();
-            console.log('Стара ціна', old_price_item);
+            //console.log('Стара ціна', old_price_item);
             price_item = $(this).find('.result_price').text();
             $(this).find('.apart-total-price').text(1*price_item*days);
             $(this).find('.old-price-apart').text(1*old_price_item*days);
@@ -450,7 +558,7 @@ $(function () {
             $('.quantity_days_search').text('(' + days + ' ' + trans['base.more_night'] + ')');
         }
         else {
-            $('.quantity_days').text(trans['base.grn'] + ' ' + trans['base.pear'] + days + ' ' + trans['base.many_night']);
+            $('.quantity_days').text(trans['base.grn'] + ' ' + trans['base.pear'] + " " + days + ' ' + trans['base.many_night']);
             $('.quantity_days_search').text('(' + days + ' ' + trans['base.many_night'] + ')');
         }    
         
@@ -571,3 +679,123 @@ window.addEventListener("scroll", function(){ // or window.addEventListener("scr
 function hideFreedatesBar() {
     document.getElementById('freedates-bar').remove();
 } 
+function check_input_guests() {
+    console.log('check_input_guests');
+    var adults = $("#adults").val();
+    var children = $("#children").val();
+    //console.log('Кількість дорослих  на вході', adults);
+    //console.log('Кількість дітей  на вході', children);
+    setPriceAfterEnterGuests(adults, children);
+    if (adults == "0" && children == "0") {
+        $("#guests").text(trans['base.count_guestі']);
+    } else {
+        $("#guests").text(adults + " " + trans['base.adults_many'] + ", " + children + " " + trans['base.kids']);
+    }
+}
+/*Custom js*/
+
+function setPriceAfterEnterGuests(adults, children){
+    console.log('setPriceAfterEnterGuests');
+    //alert('re');
+    var sumQuantityGuests = (+adults) + (+children);
+    //console.log('Cума гостей', sumQuantityGuests);
+    var baseQuantityGuests =  $('#base_guests').text();          
+    var surcharge = $('#surcharge').text();
+    console.log('surcharge',surcharge);
+    var surcharge_children = $('#surcharge_children').text();
+    console.log('surcharge_children',surcharge_children);
+    if(sumQuantityGuests > baseQuantityGuests || sumQuantityGuests == baseQuantityGuests){
+        var diff = baseQuantityGuests - (+adults);
+        var price = $('span.price').text();
+        console.log('цена');
+        var days = $('.days').text();
+        var result;
+        if(diff > 0){
+            result = Math.abs(diff - (+children)) * surcharge_children;
+            //console.log('Різниця', result);
+        }else{
+            result = (Math.abs(diff) * surcharge) + (children * surcharge_children);
+            //console.log('Різниця', result);
+        }
+        $('p.color-black').text(days * (+(price) + result));
+        $('.result_price').text(1 * (+(price) + result));
+    }
+    //   console.log('Загальна кількість', sumQuantityGuests);
+    //   console.log('Дорослі', adults);
+    //   console.log('Діти', children);
+    //   console.log('Доплата за дорослого', surcharge);
+    //   console.log('Доплата за дитину', surcharge_children);
+    //   console.log('Дні', days);
+
+
+}
+function getPrices(){
+    var range_date = $("#datepicker").val();
+            if(range_date){
+                var dates = range_date.split("-");
+                var dateStart = dates[0];
+                var dateFinish = dates[1];
+                // localStorage.setItem('dateStart', dateStart);
+                // localStorage.setItem('dateFinish', dateFinish);
+                data = {            
+                    dateStart: dateStart,
+                    dateFinish: dateFinish                 
+                }
+                var token = $("input[name='csrf-token']").val();
+                $.ajax({
+                    url: '/set_dates',
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': token              
+                    },            
+                    data: data,
+                    dataType: "json",
+                    success: function (data) {
+                        console.info('/set_dates data', data);
+                        if(data.status === 'success'){
+                            data = {
+                                room_id: $('#room_id').text(),
+                                parent_id: $('#parent_id').text()
+                            }
+                            $.ajax({
+                                url: '/get_prices',
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': token
+                                },
+                                data: data,
+                                dataType: "json",
+                                success: function (data) {
+                                    console.info('/get_prices', data);
+                                    var result = data.data;
+                                    if (data.success) {
+                                        var days = (daydiff(parseDate(dateFinish), parseDate(dateStart)));
+                                        var discountPrice = $('#discount').text();
+                                        $('[data-class=base_price]').text(result.base_price);
+                                        $('[data-class=discount_price]').text(result.base_price - (result.base_price*discountPrice)/100);
+                                        $('#surcharge').text(result.surchange);
+                                        $('#surcharge_children').text(result.surchange_children);
+                                        $('p.color-black').text(days*result.base_price);
+                                        check_input_guests();
+                                    }
+                                    // else {
+                                    //     alert('Error get Prices 1');
+                                                                            
+                                    // }
+                                },
+                                error: function (data) {
+                                    console.log('/get_prices', data.message);
+                                    alert('Error get Prices 2');
+                                }
+                
+                            }); 
+                        }
+                    },
+                    error: function (data) {
+                        alert('Error get Prices 3');
+                    }          
+
+                })
+            }
+}
+

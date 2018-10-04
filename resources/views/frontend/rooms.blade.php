@@ -182,22 +182,22 @@
                         @if($article->getAttributeTranslate('discount_room'))
                             <p class="d-flex align-items-center justify-content-around flex-xl-row flex-md-column color-white py-xl-0 py-md-3 px-xl-3">
                                 <span class="new-price-apart">
-                                    <span class="custom-line-throught">
-                                        {{ $article->getAttributeTranslate('base_price')}}
+                                    <span data-class= 'base_price' class="custom-line-throught">
+                                        {{ $base_price}}
                                     </span>
                                     <br>
                                     <span class="apart-price-additional-text">
                                         {{ trans('base.grn')}} {{ trans('base.price_night')}}
                                     </span>
                                 </span>
-                                <span class='price'>
-                                    {{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}
+                                <span data-class='discount_price' class='price'>
+                                    {{$base_price - (($base_price * $article->getAttributeTranslate('discount_room')) / 100)}}
                                </span>                            
                             </p>
                         @else
                             <p class="d-flex align-items-center justify-content-around flex-xl-row flex-md-column color-white py-xl-0 py-md-3 px-xl-3">
-                               <span class='price'>
-                                    {{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}
+                               <span data-class='discount_price' class='price'>
+                                    {{$base_price - (($base_price * $article->getAttributeTranslate('discount_room')) / 100)}}
                                </span>
                                <br>
                                <span class="apart-price-additional-text">
@@ -207,14 +207,17 @@
                         @endif
                         </div>
                         {{--for math price--}}
-                            <div id='surcharge' style='display:none'>{{$article->article_parent->getAttributeTranslate('surcharge') }}</div>
-                            <div id='surcharge_children' style='display:none'>{{$article->article_parent->getAttributeTranslate('surcharge_children') }}</div>
+                            <div id='surcharge' style='display:none'>{{ $surchange }}</div>
+                            <div id='surcharge_children' style='display:none'>{{ $surchange_children }}</div>
+                            <div id='discount' style='display:none'>{{ $article->getAttributeTranslate('discount_room')}}</div>
+                            <div id='room_id' style='display:none'>{{ $article->id }}</div>
+                            <div id='parent_id' style='display:none'>{{ $article->article_parent->id }}</div>
                             <div class='days' style='display:none'>1</div>
-                            <div class='result_price' style='display:none'>{{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}</div>
+                            <div class='result_price' style='display:none'>{{$base_price - (($base_price * $article->getAttributeTranslate('discount_room')) / 100)}}</div>
 
                         {{--/for math price--}}
                         <div class="apart-price back-white d-flex flex-column">
-                            <p class="color-black pt-2 mt-auto">{{$article->getAttributeTranslate('base_price') - (($article->getAttributeTranslate('base_price') * $article->getAttributeTranslate('discount_room')) / 100)}}</p>
+                            <p class="color-black pt-2 mt-auto">{{$base_price - (($base_price * $article->getAttributeTranslate('discount_room')) / 100)}}</p>
                             <p class="pt-0 mb-auto"><span class='quantity_days' class=".color-opacity-5 align-text-top apart-price-additional-text">{{ trans('base.grn')}} {{ trans('base.pear')}} 1 {{ trans('base.one_night')}}</span></p>
                         </div>
                     </div>
@@ -429,6 +432,8 @@
         <?php $i = 0 ?>
             @foreach($children_rooms->take(3) as $key => $room)
                     <!-- Типова мала карточка номеру -->
+                    <?php $base_price = $room->getPrice($room->id, $room->article_parent->id)['base_price'] ?>
+
                     <div class="col-xl-4 col-lg-6 p-2 mt-4">
                         <a href="{{ route('article_show', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $room->article_parent->getAttributeTranslate('url'), $categories_data['rooms']->getTranslate('url'), $room->id])}}" class="a-card">
                             <div class="apart-small-card shadow-hover">
@@ -454,9 +459,9 @@
                                     <p class="text-center apart-small-card-buy-hotel-p d-flex align-items-center justify-content-between">
                                         {{trans('base.from')}} 
                                         <span class="d-flex flex-column">
-                                            <span class="old-price-hotel-card custom-line-throught">{{ $room->getAttributeTranslate('base_price')}}</span>
+                                            <span class="old-price-hotel-card custom-line-throught">{{ $base_price }}</span>
                                                 <strong>
-                                                    {{$room->getAttributeTranslate('base_price') - (($room->getAttributeTranslate('base_price') * $room->getAttributeTranslate('discount_room')) / 100)}}
+                                                    {{$base_price  - (($base_price  * $room->getAttributeTranslate('discount_room')) / 100)}}
                                                 </strong>
                                             </span> 
                                             {{trans('base.grn')}}
@@ -464,7 +469,7 @@
                                 </div>
                             @else 
                                 <div class="apart-small-card-buy d-flex flex-column justify-content-center">
-                                    <p class="text-center apart-small-card-buy-hotel-p">{{trans('base.from')}} <strong>{{ $room->getAttributeTranslate('base_price')}}</strong> {{trans('base.grn')}}</p>
+                                    <p class="text-center apart-small-card-buy-hotel-p">{{trans('base.from')}} <strong>{{ $base_price }}</strong> {{trans('base.grn')}}</p>
                                 </div>
 
                             @endif

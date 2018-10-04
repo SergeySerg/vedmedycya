@@ -188,7 +188,10 @@ class AdminArticlesController extends Controller {
 		$langs = Lang::activelangs()->get();
 		$admin_article = Article::where("id", $id)->first();
 		$parent_hotel = $admin_article->article_parent->article_parent;
-		$rooms_for_check_price = Article::where('article_id', $parent_hotel->id)->where('category_id', $category_room->id)->get();
+		if(isset($parent_hotel)){
+			$rooms_for_check_price = Article::where('article_id', $parent_hotel->id)->where('category_id', $category_room->id)->get();
+		};
+		//dd($rooms_for_check_price);
 		if ($request->ajax()){
 			/*get [] from request*/
 			$all = $request->all();
@@ -234,7 +237,7 @@ class AdminArticlesController extends Controller {
 			'attributes' => $attributes,
 			'article_group' => $article_group,
 			'article_id' => $article_id,
-			'rooms_for_check_price' => $rooms_for_check_price
+			'rooms_for_check_price' => (isset($rooms_for_check_price)) ? $rooms_for_check_price : []
 		]);
 	}
 

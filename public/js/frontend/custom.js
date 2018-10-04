@@ -1,4 +1,7 @@
 $(function () {
+    // setCookie('dateStart', (localStorage.getItem(dateStart)) ? localStorage.getItem(dateStart) : '');
+    // setCookie('dateFinish', (localStorage.getItem(dateFinish)) ? localStorage.getItem(dateFinish) : '');
+
     var adults, dateStart, dateFinish, children, sumPrice, redirectPath;
     /*Chech show hotsale*/
     (function () {
@@ -88,24 +91,30 @@ $(function () {
         }
         data = JSON.stringify(data);
         //console.log('Дата', data);
-        localStorage.setItem('dateStart', dateStart);
-        localStorage.setItem('dateFinish', dateFinish);
+        // localStorage.setItem('dateStart', dateStart);
+        // localStorage.setItem('dateFinish', dateFinish);
         localStorage.setItem('adults', adults);
         localStorage.setItem('children', children);
         /* save var in cookies */
-        setCookie('dateStart', dateStart);
-        setCookie('dateFinish', dateFinish);
+        // deleteCookie('dateStart');
+        // deleteCookie('dateFinish');
+        
+        // setCookie('dateStart', dateStart);
+        // setCookie('dateFinish', dateFinish);
 
-        $.ajax({
-            url: 'saver',
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': token              
-            },            
-            data: data,
-            dataType: "json"            
 
-        });  
+        
+
+        // $.ajax({
+        //     url: 'get_dates',
+        //     method: 'POST',
+        //     headers: {
+        //         'X-CSRF-TOKEN': token              
+        //     },            
+        //     data: data,
+        //     dataType: "json"            
+
+        // });  
         if(!selectHotelName){
             e.preventDefault();
             alert(trans['base.enter_hotel']);
@@ -323,8 +332,8 @@ $(function () {
     })
         
     /*Hide hotsale*/
-
-    /*Pagination*/
+    
+/*Pagination*/
     //  $('#more_reviews').click(function(e){
     //     e.preventDefault();    
     //     window.location.replace(window.location.href + '?page=2');    
@@ -385,31 +394,4 @@ $.urlParam = function(name){
        return decodeURI(results[1]) || 0;
     }
 }
-function setCookie(name, value, options) {
-    options = options || {};
-  
-    var expires = options.expires;
-  
-    if (typeof expires == "number" && expires) {
-      var d = new Date();
-      d.setTime(d.getTime() + expires * 1000);
-      expires = options.expires = d;
-    }
-    if (expires && expires.toUTCString) {
-      options.expires = expires.toUTCString();
-    }
-  
-    value = encodeURIComponent(value);
-  
-    var updatedCookie = name + "=" + value;
-  
-    for (var propName in options) {
-      updatedCookie += "; " + propName;
-      var propValue = options[propName];
-      if (propValue !== true) {
-        updatedCookie += "=" + propValue;
-      }
-    }
-  
-    document.cookie = updatedCookie;
-  }
+

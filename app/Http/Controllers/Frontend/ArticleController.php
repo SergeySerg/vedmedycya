@@ -130,10 +130,25 @@ class ArticleController extends Controller {
 			//$value = session('key');
 		//dd($value);
 		//}
+		
 		$parent_hotel = Article::with('article_children')->where('attributes->url->' . App::getLocale(), $request->name )->first();
 		$article = Article::where('id', $request->id)->first();
-		//dd($article);
-		return view('frontend.rooms')->with(compact('article', 'parent_hotel'));
+		$article_price = $article->getPrice($article->id, $article->article_parent->id);
+		$surchange = $article_price['surchange'];
+		$base_price = $article_price['base_price'];
+		$solo_settle = $article_price['solo_settle'];
+		$surchange_children = $article_price['surchange_children'];
+		return view('frontend.rooms')
+			->with(compact
+					(
+						'article', 
+						'parent_hotel', 
+						'surchange', 
+						'solo_settle',
+						'surchange_children',
+						'base_price'
+					)
+			);
 	}
 	/**
 	 * Display the specified resource.
@@ -414,6 +429,38 @@ class ArticleController extends Controller {
 			});
 			return response()->json([
 				'success' => 'true'
+			]);
+		}
+	}
+	public function get_prices(Request $request)
+	{
+		//dd('get_prices');
+		if ($request ->isMethod('post')){
+			/*get [] from request*/
+			$all = $request->all();
+
+			/*make rules for validation*/
+			$rules = [
+				'room_id' => 'required|max:4',
+				'parent_id' => 'required|max:4'				
+			];
+
+			/*validation [] according to rules*/
+			$validator = Validator::make($all, $rules);
+
+			/*send error message after validation*/
+			if ($validator->fails()) {
+				return response()->json(array(
+					'success' => false,
+					'message' => $validator->messages()->first()
+				));
+			}
+			$article = Article::where('id', $all['room_id'])->first();
+			$article_price = $article->getPrice($all['room_id'], $all['parent_id']);
+			//dd($article_price);
+			return response()->json([
+				'success' => 'true',
+				'data' => $article_price
 			]);
 		}
 	}
