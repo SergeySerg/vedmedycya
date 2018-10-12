@@ -22,15 +22,58 @@ class AdminArticlesController extends Controller {
 
 	/* List articles - Display a listing of the Articles */
 
-	public function index($type){			
+	public function index(Request $request, $type){			
 		$admin_category = Category::where("link",$type)->first();
 		$admin_category_parent = $admin_category->category_parent()->first();
 		$admin_category_children = $admin_category->category_children()->get();
-		$admin_articles = $admin_category->articles;
-		// $article = Article::where('attributes->price', '100')
-		// ->first();
-		//$parent_articles = $admin_category->article_parent()->first();
+		//$admin_articles = $admin_category->articles;
+		$admin_articles = Article::with('article_parent')->with('article_parent_price')->where('category_id', $admin_category->id)->get();
 		//dd($admin_articles);
+		$hotels = Category::where('link', "hotels")->first()->articles()->get();
+		
+		//dd($hotels);
+		if ($request->ajax()){
+			/*get [] from request*/
+			$all = $request->all();
+			//dd($all);
+			$article_parent_id = $all['id'];
+			if($article_parent_id){
+				session([
+					'hotel_id' => $article_parent_id,
+				]);
+				$articles = $admin_articles->filter(function($admin_article) use ($article_parent_id){
+					//dd($admin_article);
+
+					if($admin_article->article_parent_price()->first() !== null  && $admin_article->article_parent_price()->first()->article_parent()->first()){
+						$admin_article['parent_hotel'] = $admin_article->article_parent()->first()->article_parent()->first()->title;
+						$admin_article = $admin_article->article_parent()->first()->article_parent()->first()->id == $article_parent_id;
+					}else{
+						$admin_article['parent_hotel'] = $admin_article->article_parent()->first()->title;
+						$admin_article = $admin_article->article_parent()->first()->id == $article_parent_id;
+					}
+					return $admin_article;
+				});
+
+			}else{
+				$articles = $admin_articles->map(function($admin_article){
+					if($admin_article->article_parent()->first() && $admin_article->article_parent()->first()->article_parent()->first()){
+						//dd($admin_article);
+						$admin_article['parent_hotel'] = $admin_article->article_parent()->first()->article_parent()->first()->title;
+					}
+
+					return $admin_article;
+				});
+
+				session()->flush();
+			}
+			//dd($articles);
+			
+			return response()->json([
+				"status" => 'success',
+				"articles" => $articles,
+				'type' => $type
+			]);
+		}
 		return view('backend.articles.list')
 			->with(
 				compact(
@@ -38,7 +81,9 @@ class AdminArticlesController extends Controller {
 				'admin_articles',
 				'type',
 				'admin_category_children',
-				'admin_category_parent')
+				'admin_category_parent',
+				'hotels'
+				)
 			);
 
 	}
@@ -346,6 +391,12 @@ class AdminArticlesController extends Controller {
 	{
 		$article = Article::where('id', '=', $id)->first();
 		if($article AND $article->delete()){
+			if($article->article_children()) {
+				$article->article_children()->delete();
+			}
+			// delete related   
+			//;
+			//$article->article_children_price()->delete();
 			Storage::deleteDirectory('upload/articles/' . $id);
 			return response()->json([
 				"status" => 'success',

@@ -19,6 +19,16 @@
                     </a>
                     @endif
                 </h3>
+                <label class="control-label" for="form-field-select-2">Фильтр отелей</label>
+                <select data-name='hotel_list' name="article_id_2" id="form-field-select-2">
+                    <option value=""> Все отели
+                    @if(isset($hotels))
+                        @foreach($hotels as $hotel)
+                            </option><option value="{{ $hotel->id }}" @if(Session::get('hotel_id') == $hotel->id)) selected="selected" @endIf> {{ $hotel->getTranslate('title') }} 
+                        @endforeach
+                    @endif
+                    </option>
+                </select>
 
                 <div class="table-header">
                     {{ trans('backend.list_category') }} {{$admin_category->getTranslate('title')}}
@@ -50,86 +60,172 @@
 
                     <tbody>
                         @foreach($admin_articles as $admin_article)
-                            <tr>
-                                <td class="center">
-                                    <label>
-                                        <span class="lbl">{{ $admin_article->id }}</span>
-                                    </label>
-                                </td>
-                                <td>
-                                    @if($admin_article->article_parent) 
-                                        {{ $admin_article->article_parent->getTranslate('title') }}
-                                    @endif    
-                                
-                                <td  class="center">
-                                    @if($admin_article->article_parent) 
-                                        {{ $admin_article->article_parent->article_parent->getTranslate('title') }}
-                                    @endif  
-                                </td>
-                                <td class="center">
-                                    @if($admin_article->article_parent_price) 
-                                        {{ $admin_article->article_parent_price->getTranslate('title')}}
-                                    @endif                                 
-                                </td>
-                                <td  class="center">{{ $admin_article->getAttributeTranslate('base_price') }}</td>
-                                <td  class="center">{{ $admin_article->getAttributeTranslate('surchange') }}</td>
-                                <td  class="center">{{ $admin_article->getAttributeTranslate('surchange_children') }}</td>
-                                <td  class="center">{{ $admin_article->getAttributeTranslate('solo_settle') }}</td>
-                                <td class="center">
-                                    @if($admin_article->active)
-                                        <span class="badge badge-success"><i class="icon-ok bigger-120"></i></span>
-                                    @else
-                                        <span class="badge badge-important"><i class="icon-remove"></i></span>
-                                    @endif
-                                </td>
-                                <td class="td-actions">
-                                    <div class="hidden-phone visible-desktop action-buttons">
-                                        <a class="green" href="{{ $url }}/articles/{{$type}}/{{$admin_article->id}}">
-                                            <i class="icon-pencil bigger-130"></i>
-                                        </a>
-                                        @if(!$admin_article->article_parent->getAttributeTranslate('base_season'))
-                                            <a href='{{ $url }}/articles/{{$type}}/{{$admin_article->id}}' data-id='{{$admin_article->id}}' class='resource-delete'>
-                                                <i class="icon-trash bigger-130"></i>
-                                            </a>
+                            @if(Session::get('hotel_id') && isset($admin_article) && isset($admin_article->article_parent))
+                                @if($admin_article->article_parent->article_parent->id == Session::get('hotel_id'))
+                                    <tr>
+                                        <td class="center">
+                                            <label>
+                                                <span class="lbl">{{ $admin_article->id }}</span>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            @if($admin_article->article_parent) 
+                                                {{ $admin_article->article_parent->getTranslate('title') }}
+                                            @endif    
+                                        
+                                        <td  class="center">
+                                            @if($admin_article->article_parent) 
+                                                {{ $admin_article->article_parent->article_parent->getTranslate('title') }}
+                                            @endif  
+                                        </td>
+                                        <td class="center">
+                                            @if($admin_article->article_parent_price) 
+                                                {{ $admin_article->article_parent_price->getTranslate('title')}}
+                                            @endif                                 
+                                        </td>
+                                        <td  class="center">{{ $admin_article->getAttributeTranslate('base_price') }}</td>
+                                        <td  class="center">{{ $admin_article->getAttributeTranslate('surchange') }}</td>
+                                        <td  class="center">{{ $admin_article->getAttributeTranslate('surchange_children') }}</td>
+                                        <td  class="center">{{ $admin_article->getAttributeTranslate('solo_settle') }}</td>
+                                        <td class="center">
+                                            @if($admin_article->active)
+                                                <span class="badge badge-success"><i class="icon-ok bigger-120"></i></span>
+                                            @else
+                                                <span class="badge badge-important"><i class="icon-remove"></i></span>
+                                            @endif
+                                        </td>
+                                        <td class="td-actions">
+                                            <div class="hidden-phone visible-desktop action-buttons">
+                                                <a class="green" href="{{ $url }}/articles/{{$type}}/{{$admin_article->id}}">
+                                                    <i class="icon-pencil bigger-130"></i>
+                                                </a>
+                                                @if(!$admin_article->article_parent->getAttributeTranslate('base_season'))
+                                                    <a href='{{ $url }}/articles/{{$type}}/{{$admin_article->id}}' data-id='{{$admin_article->id}}' class='resource-delete'>
+                                                        <i class="icon-trash bigger-130"></i>
+                                                    </a>
+                                                @endif    
+                                            </div>
+
+                                            <div class="hidden-desktop visible-phone">
+                                                <div class="inline position-relative">
+                                                    <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-caret-down icon-only bigger-120"></i>
+                                                    </button>
+
+                                                    <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
+                                                        <li>
+                                                            <a href="{{ $url }}/articles/{{$type}}/{{$admin_article->id}}" class="tooltip-info" data-rel="tooltip" title="View">
+                                                                <span class="blue">
+                                                                    <i class="icon-zoom-in bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="{{ $url }}/articles/{{$type}}/{{$admin_article->id}}" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                                <span class="green">
+                                                                    <i class="icon-edit bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        @if(!$admin_article->getAttributeTranslate('base_season'))
+                                                            <li>
+                                                                <a href='{{ $url }}/articles/{{$type}}/{{$admin_article->id}}' data-id='{{$admin_article->id}}' class='resource-delete' class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                    <span class="red">
+                                                                        <i class="icon-trash bigger-120"></i>
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                        @endif    
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @else
+                                <tr>
+                                    <td class="center">
+                                        <label>
+                                            <span class="lbl">{{ $admin_article->id }}</span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        @if($admin_article->article_parent) 
+                                            {{ $admin_article->article_parent->getTranslate('title') }}
                                         @endif    
-                                    </div>
+                                    
+                                    <td  class="center">
+                                        @if($admin_article->article_parent) 
+                                            {{ $admin_article->article_parent->article_parent->getTranslate('title') }}
+                                        @endif  
+                                    </td>
+                                    <td class="center">
+                                        @if($admin_article->article_parent_price) 
+                                            {{ $admin_article->article_parent_price->getTranslate('title')}}
+                                        @endif                                 
+                                    </td>
+                                    <td  class="center">{{ $admin_article->getAttributeTranslate('base_price') }}</td>
+                                    <td  class="center">{{ $admin_article->getAttributeTranslate('surchange') }}</td>
+                                    <td  class="center">{{ $admin_article->getAttributeTranslate('surchange_children') }}</td>
+                                    <td  class="center">{{ $admin_article->getAttributeTranslate('solo_settle') }}</td>
+                                    <td class="center">
+                                        @if($admin_article->active)
+                                            <span class="badge badge-success"><i class="icon-ok bigger-120"></i></span>
+                                        @else
+                                            <span class="badge badge-important"><i class="icon-remove"></i></span>
+                                        @endif
+                                    </td>
+                                    <td class="td-actions">
+                                        <div class="hidden-phone visible-desktop action-buttons">
+                                            <a class="green" href="{{ $url }}/articles/{{$type}}/{{$admin_article->id}}">
+                                                <i class="icon-pencil bigger-130"></i>
+                                            </a>
+                                            @if(!$admin_article->article_parent->getAttributeTranslate('base_season'))
+                                                <a href='{{ $url }}/articles/{{$type}}/{{$admin_article->id}}' data-id='{{$admin_article->id}}' class='resource-delete'>
+                                                    <i class="icon-trash bigger-130"></i>
+                                                </a>
+                                            @endif
+                                        </div>
 
-                                    <div class="hidden-desktop visible-phone">
-                                        <div class="inline position-relative">
-                                            <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                                <i class="icon-caret-down icon-only bigger-120"></i>
-                                            </button>
+                                        <div class="hidden-desktop visible-phone">
+                                            <div class="inline position-relative">
+                                                <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+                                                    <i class="icon-caret-down icon-only bigger-120"></i>
+                                                </button>
 
-                                            <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                                <li>
-                                                    <a href="{{ $url }}/articles/{{$type}}/{{$admin_article->id}}" class="tooltip-info" data-rel="tooltip" title="View">
-                                                        <span class="blue">
-                                                            <i class="icon-zoom-in bigger-120"></i>
-                                                        </span>
-                                                    </a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="{{ $url }}/articles/{{$type}}/{{$admin_article->id}}" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                        <span class="green">
-                                                            <i class="icon-edit bigger-120"></i>
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                                @if(!$admin_article->getAttributeTranslate('base_season'))
+                                                <ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
                                                     <li>
-                                                        <a href='{{ $url }}/articles/{{$type}}/{{$admin_article->id}}' data-id='{{$admin_article->id}}' class='resource-delete' class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                            <span class="red">
-                                                                <i class="icon-trash bigger-120"></i>
+                                                        <a href="{{ $url }}/articles/{{$type}}/{{$admin_article->id}}" class="tooltip-info" data-rel="tooltip" title="View">
+                                                            <span class="blue">
+                                                                <i class="icon-zoom-in bigger-120"></i>
                                                             </span>
                                                         </a>
                                                     </li>
-                                                @endif    
-                                            </ul>
+
+                                                    <li>
+                                                        <a href="{{ $url }}/articles/{{$type}}/{{$admin_article->id}}" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                                            <span class="green">
+                                                                <i class="icon-edit bigger-120"></i>
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                    @if(!$admin_article->getAttributeTranslate('base_season'))
+                                                        <li>
+                                                            <a href='{{ $url }}/articles/{{$type}}/{{$admin_article->id}}' data-id='{{$admin_article->id}}' class='resource-delete' class="tooltip-error" data-rel="tooltip" title="Delete">
+                                                                <span class="red">
+                                                                    <i class="icon-trash bigger-120"></i>
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    @endif    
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            @endif
+
                          @endforeach
                     </tbody>
                 </table>
