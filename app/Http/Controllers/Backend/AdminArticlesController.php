@@ -232,8 +232,10 @@ class AdminArticlesController extends Controller {
 		
 		$langs = Lang::activelangs()->get();
 		$admin_article = Article::where("id", $id)->first();
-		$parent_hotel = $admin_article->article_parent->article_parent;
-		if(isset($parent_hotel)){
+		if(isset($admin_article->article_parent) && isset($admin_article->article_parent->article_parent)){
+			$parent_hotel = $admin_article->article_parent->article_parent;
+			//dd($parent_hotel);
+			//if(isset($parent_hotel)){
 			$rooms_for_check_price = Article::where('article_id', $parent_hotel->id)->where('category_id', $category_room->id)->get();
 		};
 		//dd($rooms_for_check_price);
