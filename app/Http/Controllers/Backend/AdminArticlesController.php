@@ -234,11 +234,10 @@ class AdminArticlesController extends Controller {
 		$admin_article = Article::where("id", $id)->first();
 		if(isset($admin_article->article_parent) && isset($admin_article->article_parent->article_parent)){
 			$parent_hotel = $admin_article->article_parent->article_parent;
-			//dd($parent_hotel);
 			//if(isset($parent_hotel)){
 			$rooms_for_check_price = Article::where('article_id', $parent_hotel->id)->where('category_id', $category_room->id)->get();
 		};
-		//dd($rooms_for_check_price);
+		//dd($admin_article );
 		if ($request->ajax()){
 			/*get [] from request*/
 			$all = $request->all();
@@ -277,8 +276,8 @@ class AdminArticlesController extends Controller {
 		return view('backend.articles.edit',[
 			'admin_article'=>$admin_article,
 			'admin_category' => $admin_category,
-			'type'=>$type,
-			'langs'=>$langs,
+			'type'=> $type,
+			'langs'=> $langs,
 			'action_method' => 'put',
 			'attributes_fields' => $attributes_fields,
 			'attributes' => $attributes,

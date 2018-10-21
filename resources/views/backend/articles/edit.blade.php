@@ -490,7 +490,7 @@
                                                     @elseif ($attribute->type == 'textarea' )
                                                         <h4 class="header blue clearfix">{{ $attribute->publick_name }}</h4>
                                                         <div class="control-group">
-                                                        <textarea name='attributes[{{ $key }}_{{$lang->lang}}]' class="span12" id="form-field-{{ $key }}" placeholder="Текст">@if(isset($admin_article)){{ $admin_article->getAttributeTranslate($key, $lang->lang) }}@endif</textarea>
+                                                        <textarea name='attributes[{{ $key }}_{{$lang->lang}}]' class="span12" id="form-field-{{ $key }}" placeholder="Текст">@if(isset($admin_article)){{ $admin_article->getAttributeTranslate($key, $lang->lang) }}@endif </textarea>
                                                         </div>
                                                     @elseif ($attribute->type == 'textarea-no-wysiwyg' )
                                                         <h4 class="header blue clearfix">{{ $attribute->publick_name }}</h4>

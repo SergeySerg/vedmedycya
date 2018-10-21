@@ -174,10 +174,10 @@ Route::group(['prefix'=> getSetting('admin.prefix'), 'middleware' => ['auth', 'b
 // });
 
 /*Frontend group routes*/
-function modal_handler(){
-	Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
-	Route::post('/{lang}/add_review', ['uses' => 'Frontend\ArticleController@add_review','as' => 'add_review']);//Обработчик добавления отзыва
-}
+// function modal_handler(){
+// 	Route::post('/{lang}/callback', ['uses' => 'Frontend\ArticleController@callback','as' => 'callback']);//Обработчик Обратной связи при заказе товара
+// 	Route::post('/{lang}/add_review', ['uses' => 'Frontend\ArticleController@add_review','as' => 'add_review']);//Обработчик добавления отзыва
+// }
 
 
 

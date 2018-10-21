@@ -34,10 +34,10 @@ class Article extends Translate {
     //protected $dateFormat = 'Y-m-d H:i:s';
     //protected $dates = ['created_at', 'updated_at', 'deleted_at', 'date', 'date_start', 'date_finish'];
 
-    public function getAttributeTranslate($key, $current_lang = null){
+    // public function getAttributeTranslate($key, $current_lang = null){
         
-        return parent::getAttributeTranslate($key, $current_lang = null);
-    }
+    //     return parent::getAttributeTranslate($key, $current_lang = null);
+    // }
     public function category(){
         return $this->belongsTo('App\Models\Category');
     }
