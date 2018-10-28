@@ -19,9 +19,9 @@
                     </a>
                     @endif
                 </h3>
-                <label class="control-label" for="form-field-select-2">Фильтр отелей</label>
+                <label class="control-label" for="form-field-select-2">Фільтр готелів</label>
                 <select data-name='hotel_list' name="article_id_2" id="form-field-select-2">
-                    <option value=""> Все отели
+                    <option value=""> Всі готелі
                     @if(isset($hotels))
                         @foreach($hotels as $hotel)
                             </option><option value="{{ $hotel->id }}" @if(Session::get('hotel_id') == $hotel->id)) selected="selected" @endIf> {{ $hotel->getTranslate('title') }} 
@@ -46,12 +46,12 @@
                             ID
                         </th>
                         <th class="center">Сезон</th>
-                        <th class="center">Отель</th>
+                        <th class="center">Готель</th>
                         <th class="center">Номер</th>
-                        <th class="center">Цена номера</th>
-                        <th class="center">Цена за дополнительное место(за взрослого)</th>
-                        <th class="center">Цена за дополнительное место (за ребенка)</th>
-                        <th class="center">Одномесное поселение</th>
+                        <th class="center">Ціна за номер</th>
+                        <th class="center">Ціна за додаткове місце(за дорослого)</th>
+                        <th class="center">Ціна за додаткове місце(за дитину)</th>
+                        <th class="center">Одномісне поселення</th>
                         <th class="center">Статус</th>
                         <!-- <th>{{ trans('backend.priority') }}</th> -->
                         <th></th>

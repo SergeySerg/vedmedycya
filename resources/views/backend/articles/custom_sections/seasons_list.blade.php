@@ -20,9 +20,9 @@
                     @endif
                     
                 </h3>
-                <label class="control-label" for="form-field-select-2">Фильтр отелей</label>
+                <label class="control-label" for="form-field-select-2">Фільтр готелів</label>
                 <select data-name='hotel_list' name="article_id_2" id="form-field-select-2">
-                    <option value=""> Все отели
+                    <option value=""> Всі готелі
                     @if(isset($hotels))
                         @foreach($hotels as $hotel)
                             </option><option value="{{ $hotel->id }}" @if(Session::get('hotel_id') == $hotel->id)) selected="selected" @endIf> {{ $hotel->getTranslate('title') }} 
@@ -44,8 +44,8 @@
                     <button type="button" class="close" data-dismiss="alert">
                         <i class="icon-remove"></i>
                     </button>
-                    <strong>Внимание!</strong>
-                        Базовый сезон удалить невозможно
+                    <strong>Увага!</strong>
+                        Базовий сезон видалити неможливо
                     <br>
                 </div>
                 <table id="sample-table-2" class="table table-striped table-bordered table-hover" >
@@ -58,15 +58,15 @@
                         <th class="center">{{ trans('backend.title') }}</th>
                         <th class="center">
                             <i class="icon-time bigger-110"></i>
-                            Начало сезона
+                            Початок сезону
                         </th>
                         <th class="center">
                             <i class="icon-time bigger-110"></i>
-                            Конец сезона
+                            Кінец сезону
                         </th>
                         <th class="center">
                             <i class="icon-time bigger-110"></i>
-                            Год
+                            Рік
                         </th>
                         <th class="center">{{ trans('backend.status') }}</th>
                         <!-- <th>{{ trans('backend.priority') }}</th> -->
