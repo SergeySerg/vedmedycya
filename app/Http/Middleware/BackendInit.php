@@ -23,6 +23,7 @@ class BackendInit {
 
 	public function handle($request, Closure $next)
 	{
+		App::setLocale('ua');
 		$admin_categories_all = Category::all();
 		$admin_categories = Category::where('parent_id',0)
 			->orderBy('priority','desc')
