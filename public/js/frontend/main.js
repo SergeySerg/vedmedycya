@@ -768,6 +768,7 @@ function getPrices(){
                                 success: function (data) {
                                     console.info('/get_prices', data);
                                     var result = data.data;
+
                                     if (data.success) {
                                         var days = (daydiff(parseDate(dateFinish), parseDate(dateStart)));
                                         var discountPrice = $('#discount').text();
@@ -775,7 +776,14 @@ function getPrices(){
                                         $('[data-class=discount_price]').text(result.base_price - (result.base_price*discountPrice)/100);
                                         $('#surcharge').text(result.surchange);
                                         $('#surcharge_children').text(result.surchange_children);
+                                        //TODO::fix 28.10.2018
                                         $('p.color-black').text(days*result.base_price);
+                                        if(!discountPrice){
+                                            $('p.color-black').text(days*result.base_price);
+
+                                        }else{
+                                            $('p.color-black').text((result.base_price - (result.base_price*discountPrice)/100)*days);
+                                        }
                                         check_input_guests();
                                     }
                                     // else {
