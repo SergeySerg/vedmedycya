@@ -104,75 +104,76 @@
             </div>
         </div>
         <div class="container pb-4">        
-        <?php $q = 0 ?>
-        
-         @foreach((!$subdomain) ? $reviews : $children_reviews as $review)
-
-            <div class="d-flex flex-column py-3">
-                <div class="d-flex justify-content-center pb-3">
-                    <div class="card feedback-card my-0">
-                        <div class="card-body pb-1">
-                            <p>
-                            {!! $review->getAttributeTranslate('review') !!}
-                            {{-- {!! str_limit($review->getAttributeTranslate('review'), 400) !!}
-                                @if(strlen($review->getAttributeTranslate('review')) > 400)                                            
-                                    <a href="#" class="color-ff8c00">{{ trans('base.more_detale') }}</a>
-                                @endif --}}
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="row">
-                                <div class="order-lg-1 col-lg-6 col-12 d-flex flex-column justify-content-end">
-                                    {{--<div>
-                                        <p class="text-lg-right m-0 font-12 font-10">Дата проживання:<span class="d-lg-inline d-none"><br/></span> 20.02.2018 - 25.02.2018</p>
-                                    </div>--}}
-                                    <div class="align-self-lg-end align-self-center">
-                                        <!-- calc raty -->
-                                            @include('frontend.sections.calc')                                            
-                                        <!--  calc raty -->                                      
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-12 d-flex align-items-end p-0">
-                                    <div class="d-flex align-items-center container-fluid pr-1">
-                                        <i class="fab fa-facebook-square m-0"></i>
-                                        <p class="name px-1 m-0">{{ $review->getAttributeTranslate('name') }}</p>
-                                        <p class="date px-1 m-0 mt-1 ml-lg-0 ml-auto">{{ $review->getAttributeTranslate('date_create_review') }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @if($review->getAttributeTranslate('profile_foto'))
-                            <div id="profile-huge" class="profile-image" style="background: url('{{ asset( $review->getAttributeTranslate('profile_foto')) }}')"></div>
-                        @else
-                            <div id="profile-huge" class="profile-image" style="background: url('{{ asset('img/frontend/profile.jpg') }}')" ></div>
-                        @endif
-                    </div>
-                </div>
-                    @if($review->getAttributeTranslate('answer_reviews'))
-                    <div class="d-flex justify-content-center">
-                        <div class="card feedback-card px-0 my-0 width-not-full margin-left-166px margin-top-0">
-                            <div class="card-body pb-1">                                    
-                                {!! $review->getAttributeTranslate('answer_reviews') !!}                                    
-                            </div>
-                            <div class="card-footer pt-3">
-                                <p class="name bigbear-name-font m-sm-0 mb-0 mt-1">{{ $texts->get('admin_name') }}</p>
-                                <p class="date">{{ $review->getAttributeTranslate('date_answer_reviews') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-            </div>        
-        @endforeach   
-        {{ (!$subdomain) ? $reviews->render() : $children_reviews->render()}} 
-         
-        <?php $q++ ?> 
-        {{-- Ссилка на всі відгуки<div class="container d-flex justify-content-center my-3">
-                <a class="feedback-button-a" id='more_reviews' data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Всі відгуки</a>
-            </div>
-           
-            <div class="collapse сontainer-fluid" id="collapseExample">
+            <?php $q = 0 ?>
             
-        </div>--}}
+            @foreach((!$subdomain) ? $reviews : $children_reviews as $review)
+
+                <div class="d-flex flex-column py-3">
+                    <div class="d-flex justify-content-center pb-3">
+                        <div class="card feedback-card my-0">
+                            <div class="card-body pb-1">
+                                <p>
+                                {!! $review->getAttributeTranslate('review') !!}
+                                {{-- {!! str_limit($review->getAttributeTranslate('review'), 400) !!}
+                                    @if(strlen($review->getAttributeTranslate('review')) > 400)                                            
+                                        <a href="#" class="color-ff8c00">{{ trans('base.more_detale') }}</a>
+                                    @endif --}}
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="order-lg-1 col-lg-6 col-12 d-flex flex-column justify-content-end">
+                                        {{--<div>
+                                            <p class="text-lg-right m-0 font-12 font-10">Дата проживання:<span class="d-lg-inline d-none"><br/></span> 20.02.2018 - 25.02.2018</p>
+                                        </div>--}}
+                                        <div class="align-self-lg-end align-self-center">
+                                            <!-- calc raty -->
+                                                @include('frontend.sections.calc')                                            
+                                            <!--  calc raty -->                                      
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-12 d-flex align-items-end p-0">
+                                        <div class="d-flex align-items-center container-fluid pr-1">
+                                            <i class="fab fa-facebook-square m-0"></i>
+                                            <p class="name px-1 m-0">{{ $review->getAttributeTranslate('name') }}</p>
+                                            <p class="date px-1 m-0 mt-1 ml-lg-0 ml-auto">{{ $review->getAttributeTranslate('date_create_review') }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @if($review->getAttributeTranslate('profile_foto'))
+                                <div id="profile-huge" class="profile-image" style="background: url('{{ asset( $review->getAttributeTranslate('profile_foto')) }}')"></div>
+                            @else
+                                <div id="profile-huge" class="profile-image" style="background: url('{{ asset('img/frontend/profile.jpg') }}')" ></div>
+                            @endif
+                        </div>
+                    </div>
+                        @if($review->getAttributeTranslate('answer_reviews'))
+                        <div class="d-flex justify-content-center">
+                            <div class="card feedback-card px-0 my-0 width-not-full margin-left-166px margin-top-0">
+                                <div class="card-body pb-1">                                    
+                                    {!! $review->getAttributeTranslate('answer_reviews') !!}                                    
+                                </div>
+                                <div class="card-footer pt-3">
+                                    <p class="name bigbear-name-font m-sm-0 mb-0 mt-1">{{ $texts->get('admin_name') }}</p>
+                                    <p class="date">{{ $review->getAttributeTranslate('date_answer_reviews') }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                </div>        
+            @endforeach   
+            {{ (!$subdomain) ? $reviews->render() : $children_reviews->render()}} 
+            
+            <?php $q++ ?> 
+            {{-- Ссилка на всі відгуки<div class="container d-flex justify-content-center my-3">
+                    <a class="feedback-button-a" id='more_reviews' data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Всі відгуки</a>
+                </div>
+            
+                <div class="collapse сontainer-fluid" id="collapseExample">
+                
+            </div>--}}
+        </div>
     </div>
 
     <div class="container-fluid pb-5 back-f4f4f4">

@@ -554,7 +554,7 @@
                                         </td>
 
                                         <td>
-                                            {{ trans('backend.date') }} начала сезона
+                                            {{ trans('backend.date') }} початку сезону
                                         </td>
                                         <td>date_start</td>
                                     </tr>
@@ -567,7 +567,7 @@
                                         </td>
 
                                         <td>
-                                            {{ trans('backend.date') }} окончания сезона
+                                            {{ trans('backend.date') }} дата завершення сезону
                                         </td>
                                         <td>date_finish</td>
                                     </tr>
