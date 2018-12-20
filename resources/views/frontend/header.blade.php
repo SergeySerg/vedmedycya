@@ -33,11 +33,14 @@
                 <div class="navbar-side-container text-left">
                     <span class="nav-link navbar-phone" href="#">
                         <div class="dropdown">
-                            {{ $texts->get('tel_1') }}
+                            <span class=“ringo-phone-dev”></span>
+                            <span class=“ringo-phone-prod”>{{ $texts->get('tel_1') }}</span>
                             <i class="fas fa-chevron-down ml-2"></i><br>
                             <div class="dropdown-content">
-                                {{ $texts->get('tel_1') }}
-                                {{ $texts->get('tel_2') }}                                
+                                <span class=“ringo-phone-prod”>
+                                    {{ $texts->get('tel_1') }}
+                                    {{ $texts->get('tel_2') }}
+                                </span>
                                 <div class="h-line-bold"></div>
                                 @if(isset($messengers) AND count($messengers) !== 0 AND $categories_data['messengers']->active == 1)
                                     <small class="text-muted">{{trans('base.write_in_messenger')}}</small><br>

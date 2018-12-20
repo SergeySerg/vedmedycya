@@ -2,6 +2,14 @@ $(function () {
     // setCookie('dateStart', (localStorage.getItem(dateStart)) ? localStorage.getItem(dateStart) : '');
     // setCookie('dateFinish', (localStorage.getItem(dateFinish)) ? localStorage.getItem(dateFinish) : '');
 
+    //For IP
+    var callCenterId = $("input[name='call_center_id']").val();
+    if(callCenterId){
+        window.call_center_id = callCenterId;
+    }else{
+        window.call_center_id = 0;
+    }
+    console.log('id for IP', window.call_center_id);
     var adults, dateStart, dateFinish, children, sumPrice, redirectPath;
     /*Chech show hotsale*/
     (function () {

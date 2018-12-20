@@ -13,6 +13,7 @@ use League\Flysystem\Config;
 //use DB;
 use Debugbar;
 //use Config;
+use Input;
 
 
 class FrontendInit {
@@ -26,8 +27,9 @@ class FrontendInit {
 	 */
 	public function handle($request, Closure $next)
 	{
-
-		
+	    if(!empty($request->callcenterid) AND $request->callcenterid == 288){
+            return response()->json([ "schema" => "34440" ]);
+        }
 		//dd('тут');
 		// Get current lang object from db
 		//$currentLang = Lang::where('lang', $request->lang)

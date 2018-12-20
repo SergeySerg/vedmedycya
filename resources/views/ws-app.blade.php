@@ -13,7 +13,7 @@
 	@endif
 </title>
 <meta name="description" content="@if($categories_data[$type]->getTranslate('meta_description')){{ $categories_data[$type]->getTranslate('meta_description') }} @else МЕРЕЖА ГОТЕЛІВ 'ВЕЛИКА ВЕДМЕДИЦЯ' В ЯРЕМЧЕ ТА БУКОВЕЛІ@endif">
-<meta name="keywords" content="@if($categories_data[$type]->getTranslate('meta_keywords')){{ $categories_data[$type]->getTranslate('meta_keywords') }} @else Велика Ведмедиця @endif"> -->
+<meta name="keywords" content="@if($categories_data[$type]->getTranslate('meta_keywords')){{ $categories_data[$type]->getTranslate('meta_keywords') }} @else Велика Ведмедиця @endif">
 	<!-- <link rel="shortcut icon" href="{{ asset('/img/favicon/favicon.png') }}" >
 	<link rel="apple-touch-icon" href="{{ asset('/img/favicon/apple-touch-icon.png') }}">
 	<link rel="apple-touch-icon" sizes="72x72" href="{{ asset('img/favicon/apple-touch-icon-72x72.png') }}">
@@ -27,13 +27,9 @@
     <link rel="stylesheet" href="{{ asset('/css/frontend/style.css') }}?ver={{ $version }}">   
     <link href="{{ asset('/css/plugins/sweetalert.css') }}" rel="stylesheet">
     <script defer src="{{ asset('/js/frontend/fontawesome-all.js') }}"></script>
-    @if(getSetting('ip'))
+    @if(getSetting('google_script'))
         <!-- Google Tag Manager -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-MQCTRLS');</script>
+            {!! getSetting('google_script')  !!}
         <!-- End Google Tag Manager -->
     @endif
 </head>
@@ -63,8 +59,8 @@
                         </div>
                         <div class="col-md-9 col-8">
                             <p class="text-white phones-included">
-                                <a href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_1'))}}"  class="text-white">{{ $texts->get('tel_1') }}</a><br>
-                                <a href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_2'))}}" class="text-white">{{ $texts->get('tel_2') }}</a><br>
+                                <span href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_1'))}}"  class="text-white"><span class=“ringo-phone-prod”>{{ $texts->get('tel_1') }}</span></a><br>
+                                <a href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_2'))}}" class="text-white"><span class=“ringo-phone-prod”>{{ $texts->get('tel_2') }}</span></a><br>
                                 @if(isset($messengers) AND count($messengers) !== 0 AND $categories_data['messengers']->active == 1)
                                     @foreach($messengers as $messenger)    
                                         <a href="{{ $messenger->getAttributeTranslate('messenger_link') ? $messenger->getAttributeTranslate('messenger_link') : "#"}}">
@@ -125,6 +121,7 @@
 
                 @endif--}}
             </div>
+            <input type="hidden" name='call_center_id' value="{{ $id }}"/>
             <input type="hidden" name='lang' value="{{ App::getLocale() }}"/>
             <input type="hidden" name='csrf-token' value="{{csrf_token()}}"/>
             <div class="col-md-7 order-md-1 mt-md-3 mt-5">
@@ -144,10 +141,10 @@
         @include('frontend.sections.hot_sale')
         <!--  END modal hot_sale --> 
     @endif 
-    @if(getSetting('ip'))
+
+    @if(getSetting('google_script_noscript'))
         <!-- Google Tag Manager (noscript) -->
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQCTRLS"
-        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        {!! getSetting('google_script_noscript')  !!}
         <!-- End Google Tag Manager (noscript) -->
     @endif
 <!-- END .footer -->
