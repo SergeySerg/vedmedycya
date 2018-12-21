@@ -1,7 +1,7 @@
 <div class="slider-class">
     
     @if(!$subdomain)
-        @foreach($slides as $slide)
+        <!-- @foreach($slides as $slide)
             @if($slide->getAttributeTranslate('show_main_page') == 1)
                 <div class="fullscreen-img d-flex align-items-center justify-content-center" style="background-image: url('{{ asset( $slide->getAttributeTranslate('slide_img')) }}')">
                     <h1 class="text-uppercase">                   
@@ -9,7 +9,84 @@
                     </h1>                
                 </div>
             @endif
-        @endforeach 
+        @endforeach  -->
+
+        <div class="fullscreen-img d-flex align-items-center justify-content-center">
+            <h1 class="text-uppercase">                   
+                SKI - апартаменты<br>
+                подъемник №2
+            </h1>                
+            <picture>
+                <source
+                    media="(min-width: 900px)"
+                    srcset="{{ asset('/img/274_big.jpg') }}"
+                    sizes="100vw">
+                <source
+                    media="(min-width: 600px)"
+                    srcset="{{ asset('/img/274_medium.jpg') }}"
+                    sizes="100vw">
+                <img
+                    data-lazy="{{ asset('/img/274_small.jpg') }}" alt="The Oslo Opera House">
+            </picture>
+        </div>
+        <div class="fullscreen-img d-flex align-items-center justify-content-center">
+            <h1 class="text-uppercase">                   
+                в кругу близких людей
+            </h1>                
+            <picture>
+                <source
+                    media="(min-width: 900px)"
+                    srcset="{{ asset('/img/275_big.jpg') }}"
+                    sizes="100vw">
+                <source
+                    media="(min-width: 600px)"
+                    srcset="{{ asset('/img/275_medium.jpg') }}"
+                    sizes="100vw">
+                <img
+                    data-lazy="{{ asset('/img/275_small.jpg') }}" alt="The Oslo Opera House">
+            </picture>
+        </div>
+        <div class="fullscreen-img d-flex align-items-center justify-content-center">
+            <h1 class="text-uppercase">   
+            </h1>                
+            <picture>
+                <source
+                    media="(min-width: 900px)"
+                    srcset="{{ asset('/img/276_big.jpg') }}"
+                    sizes="100vw">
+                <source
+                    media="(min-width: 600px)"
+                    srcset="{{ asset('/img/276_medium.jpg') }}"
+                    sizes="100vw">
+                <img
+                    data-lazy="{{ asset('/img/276_small.jpg') }}" alt="The Oslo Opera House">
+            </picture>
+        </div>
+        <div class="fullscreen-img d-flex align-items-center justify-content-center">
+            <h1 class="text-uppercase">   
+                собственный коттедж<br>
+                на время отпуска               
+            </h1>                
+            <picture>
+                <source
+                    media="(min-width: 900px)"
+                    srcset="{{ asset('/img/277_big.jpg') }}"
+                    sizes="100vw">
+                <source
+                    media="(min-width: 600px)"
+                    srcset="{{ asset('/img/277_medium.jpg') }}"
+                    sizes="100vw">
+                <img
+                    data-lazy="{{ asset('/img/277_small.jpg') }}" alt="The Oslo Opera House">
+            </picture>
+        </div>
+        <!-- <div class="fullscreen-img d-flex align-items-center justify-content-center">
+            <img src="{{ asset('/img/test_small.jpg') }}" srcset="{{ asset('/img/test_big.jpg') }} 2x">
+        </div>
+        <div class="fullscreen-img d-flex align-items-center justify-content-center">
+            <img src="{{ asset('/img/test_big.jpg') }}" srcset="{{ asset('/img/test_medium.jpg') }} 900w, {{ asset('/img/test_small.jpg') }} 600w">
+        </div> -->
+
     @else 
         @foreach($children_slides as $slide)        
             <div class="fullscreen-img d-flex align-items-center justify-content-center" style="background-image: url('{{ asset( $slide->getAttributeTranslate('slide_img')) }}')">
