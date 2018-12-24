@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="{{ asset('/css/frontend/style.css') }}?ver={{ $version }}">   
     <link href="{{ asset('/css/plugins/sweetalert.css') }}" rel="stylesheet">
     <script defer src="{{ asset('/js/frontend/fontawesome-all.js') }}"></script>
-    @if(getSetting('google_script'))
+    @if(getSetting('google_script') AND getSetting('ip'))
         <!-- Google Tag Manager -->
             {!! getSetting('google_script')  !!}
         <!-- End Google Tag Manager -->
@@ -145,7 +145,7 @@
         <!--  END modal hot_sale --> 
     @endif 
 
-    @if(getSetting('google_script_noscript'))
+    @if(getSetting('google_script_noscript') AND getSetting('ip'))
         <!-- Google Tag Manager (noscript) -->
         {!! getSetting('google_script_noscript')  !!}
         <!-- End Google Tag Manager (noscript) -->
