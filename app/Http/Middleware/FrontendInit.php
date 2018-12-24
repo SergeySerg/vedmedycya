@@ -27,8 +27,13 @@ class FrontendInit {
 	 */
 	public function handle($request, Closure $next)
 	{
-	    if(!empty($request->callcenterid) AND $request->callcenterid == 288){
-            return response()->json([ "schema" => "34440" ]);
+	    // For ringostat script
+        if(!empty($request->callcenterid) AND $request->callcenterid == 288){
+            //echo ($request->callcenterid);
+            return response()->json([ "schema" => "34419" ]);
+        }
+        if(isset($request->callcenterid) AND $request->callcenterid == 0){
+            return response()->json([ "schema" => "32561" ]);
         }
 		//dd('тут');
 		// Get current lang object from db

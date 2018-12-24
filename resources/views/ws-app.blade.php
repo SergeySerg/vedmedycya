@@ -121,7 +121,10 @@
 
                 @endif--}}
             </div>
-            <input type="hidden" name='call_center_id' value="{{ $id }}"/>
+                <script>
+                    var id = '{{ $id }}';
+                    window.call_center_id = +id;
+                </script>
             <input type="hidden" name='lang' value="{{ App::getLocale() }}"/>
             <input type="hidden" name='csrf-token' value="{{csrf_token()}}"/>
             <div class="col-md-7 order-md-1 mt-md-3 mt-5">
