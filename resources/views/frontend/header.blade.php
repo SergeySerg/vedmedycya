@@ -32,8 +32,9 @@
             <ul class="navbar-nav mx-auto align-items-center text-center mt-2 mt-xl-0" id="custom-navbar-thin">
                 <div class="navbar-side-container text-left">
                     <span class="nav-link navbar-phone" href="#">
+                        <span class=“ringo-phone-dev”>1234567890</span>
                         <div class="dropdown">
-                            <span class=“ringo-phone-dev”></span>
+                            <span class=“ringo-phone-dev”>1234567890</span>
                             <span class=“ringo-phone-prod”>{{ $texts->get('tel_1') }}</span>
                             <i class="fas fa-chevron-down ml-2"></i><br>
                             <div class="dropdown-content">
