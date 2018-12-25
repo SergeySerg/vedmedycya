@@ -5,9 +5,16 @@
         <div class="slider-class-2">
             @foreach($article->getImages() as $room_img)
 
-                <div class="fullscreen-img-2 d-flex justify-content-center" style="background-image:url('{{ asset( $room_img['full']) }}')">
+                <!-- <div class="fullscreen-img-2 d-flex justify-content-center" style="background-image:url('{{ asset( $room_img['full']) }}')">
                     <h5 class="apart-photo-title text-center">{{ $article->getAttributeTranslate('title_img')}}</h5>
+                </div> -->
+                <div class="fullscreen-img d-flex align-items-center justify-content-center">
+                    <h5 class="apart-photo-title text-center">{{ $article->getAttributeTranslate('title_img')}}</h5>
+                    <picture>
+                        <img data-lazy="{{ asset( $room_img['full']) }}">
+                    </picture>
                 </div>
+
             @endforeach
         </div>
         <nav class="main-dots-2 d-flex justify-content-center"></nav>

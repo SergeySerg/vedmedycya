@@ -86,11 +86,21 @@
 
     @else 
         @foreach($children_slides as $slide)        
-            <div class="fullscreen-img d-flex align-items-center justify-content-center" style="background-image: url('{{ asset( $slide->getAttributeTranslate('slide_img')) }}')">
+            <!-- <div class="fullscreen-img d-flex align-items-center justify-content-center" style="background-image: url('{{ asset( $slide->getAttributeTranslate('slide_img')) }}')">
                 <h1 class="text-uppercase">
                 {!! str_limit($slide->getTranslate('short_description'), 100) !!}
                 </h1>                
+            </div> -->
+
+            <div class="fullscreen-img d-flex align-items-center justify-content-center">
+                <h1 class="text-uppercase">                   
+                    {!! str_limit($slide->getTranslate('short_description'), 100) !!}
+                </h1>
+                <picture>
+                    <img data-lazy="{{ asset( $slide->getAttributeTranslate('slide_img')) }}">
+                </picture>
             </div>
+
         @endforeach
     @endif               
 </div>
