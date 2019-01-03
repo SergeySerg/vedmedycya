@@ -1,7 +1,7 @@
 <form>
     <div class="row justify-content-center no-gutters py-md-3 py-1">
         @if(!$subdomain)        
-            <div class="col-lg-2 col-md-3 col-6 my-1">
+            <div class="col-lg-2 col-md-3 col-12 my-1">
                 <div id="pattern-location" class="input-pattern">
                     <input disabled id="location" type="text" name="location" placeholder="{{ trans('base.hotel_city') }}" readonly="readonly" class="cursor-pointer"/>
                     <i class="fas fa-map-marker-alt input-icon"></i>
@@ -15,7 +15,7 @@
             </div>
         @endif
         
-        <div class="col-lg-2 col-md-3 @if(!$subdomain) col-6 @endif my-1">
+        <div class="col-lg-2 col-md-3 @if(!$subdomain) col-12 @endif my-1">
             <div id="div-datepicker" class="input-pattern">
                 <i class="fas fa-calendar-alt input-icon"></i>
                 <input type='text' data-language="{{ App::getLocale() }}" data-multiple-dates-separator=" - " class="datepicker-here cursor-pointer" id="datepicker" placeholder="{{ trans('base.date')}}" readonly="readonly"/>
