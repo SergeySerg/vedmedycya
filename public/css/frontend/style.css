@@ -287,9 +287,6 @@ body, footer {
         display: none;
     }
 
-    #p-arrow {display: none !important;}
-    #n-arrow {display: none !important;}
-
     .ipad-text-center {text-align: center;}
 
     .apart-image-slider {
@@ -298,6 +295,10 @@ body, footer {
 }
 
 @media screen and (max-width: 768px) {
+
+    #p-arrow {display: none !important;}
+    #n-arrow {display: none !important;}
+
     .apart-image {
         height: calc(100vw/1.8) !important;
     }
