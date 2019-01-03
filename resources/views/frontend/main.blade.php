@@ -6,14 +6,14 @@
     <!-- slider -->
         @include('frontend.sections.slider')
     <!-- END slider -->   
-    <div id="selector-bar-id" class="selector-bar">
-        <div class="container-fluid px-1 main-form bottom-1-vh"> 
-            <!-- form for find -->
-                @include('frontend.sections.form_find')
-            <!-- END form for find -->
-        </div>
-    </div>   
-</div>    
+</div>  
+<div id="selector-bar-id" class="selector-bar">
+    <div class="container-fluid px-1 main-form bottom-1-vh"> 
+        <!-- form for find -->
+            @include('frontend.sections.form_find')
+        <!-- END form for find -->
+    </div>
+</div>   
     <!-- mobile_messenger -->
         @include('frontend.sections.mobile_messengers')
     <!-- END mobile_messenger -->    

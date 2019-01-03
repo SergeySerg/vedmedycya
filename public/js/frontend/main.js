@@ -242,6 +242,7 @@ $(function () {
   
       var inputwidth = $('#div-datepicker').width() + "px";
       $('.datepicker').css("width", inputwidth);
+      $('.datepicker').css("z-index", 999999);
   
       $('.input-location').click(function() {
           $("#location").val($(this).text());

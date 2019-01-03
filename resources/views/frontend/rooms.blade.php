@@ -5,9 +5,16 @@
         <div class="slider-class-2">
             @foreach($article->getImages() as $room_img)
 
-                <div class="fullscreen-img-2 d-flex justify-content-center" style="background-image:url('{{ asset( $room_img['full']) }}')">
+                <!-- <div class="fullscreen-img-2 d-flex justify-content-center" style="background-image:url('{{ asset( $room_img['full']) }}')">
                     <h5 class="apart-photo-title text-center">{{ $article->getAttributeTranslate('title_img')}}</h5>
+                </div> -->
+                <div class="fullscreen-img d-flex align-items-center justify-content-center lazy_slider_text">
+                    <h5 class="apart-photo-title text-center">{{ $article->getAttributeTranslate('title_img')}}</h5>
+                    <picture>
+                        <img data-lazy="{{ asset( $room_img['full']) }}">
+                    </picture>
                 </div>
+
             @endforeach
         </div>
         <nav class="main-dots-2 d-flex justify-content-center"></nav>
@@ -117,49 +124,49 @@
                 <div id="justify" class="row text-orange text-center no-gutters d-flex">
                 
                     @if($article->getAttributeTranslate('breakfast') == 1)
-                        <i class="fa fa-plus mt-3"></i>
+                        <!-- <i class="fa fa-plus mt-3"></i> -->
                         <div class="col-md-2 col-4">
                             <i class="bb-breakfast fa-3x mobile-text-center"></i><br>
                             <small class="mobile-text-center">{{ trans('base.breakfast')}}</small>
                         </div>
                     @endif
                     @if($article->getAttributeTranslate('parking') == 1)
-                        <i class="fa fa-plus mt-3"></i>
+                        <!-- <i class="fa fa-plus mt-3"></i> -->
                         <div class="col-md-2 col-4">
                             <i class="bb-parking fa-3x mobile-text-center"></i><br>
                             <small class="mobile-text-center">{{ trans('base.parking')}}</small>
                         </div>
                     @endif 
                     @if($article->getAttributeTranslate('coffe') == 1)
-                        <i class="fa fa-plus mt-3"></i>
+                        <!-- <i class="fa fa-plus mt-3"></i> -->
                         <div class="col-md-2 col-4">
                             <i class="bb-teapot fa-3x mobile-text-center"></i><br>
                             <small class="mobile-text-center">{{ trans('base.coffe')}}</small>
                         </div>
                     @endif 
                     @if($article->getAttributeTranslate('сhildren_room') == 1)
-                        <i class="fa fa-plus mt-3"></i>
+                        <!-- <i class="fa fa-plus mt-3"></i> -->
                         <div class="col-md-2 col-4">
                             <i class="bb-toy-bold fa-3x mobile-text-center"></i><br>
                             <small class="mobile-text-center">{{ trans('base.сhildren_room')}}</small>
                         </div>
                     @endif 
                     @if($article->getAttributeTranslate('ski_storage_room') == 1)
-                        <i class="fa fa-plus mt-3"></i>
+                        <!-- <i class="fa fa-plus mt-3"></i> -->
                         <div class="col-md-2 col-4">
                             <i class="bb-ski-staff fa-3x mobile-text-center"></i><br>
                             <small class="mobile-text-center">{{ trans('base.ski_storage_room')}}</small>
                         </div>
                     @endif 
                     @if($article->getAttributeTranslate('bowl_ski_equipment') == 1)
-                        <i class="fa fa-plus mt-3"></i>
+                        <!-- <i class="fa fa-plus mt-3"></i> -->
                         <div class="col-md-2 col-4">
                             <i class="bb-ski-dryer fa-3x mobile-text-center"></i><br>
                             <small class="mobile-text-center">{{ trans('base.bowl_ski_equipment')}}</small>
                         </div>
                     @endif 
                     @if($article->getAttributeTranslate('wifi') == 1)
-                        <i class="fa fa-plus mt-3"></i>
+                        <!-- <i class="fa fa-plus mt-3"></i> -->
                         <div class="col-md-2 col-4">
                             <i class="bb-wifi-orange fa-3x mobile-text-center"></i><br>
                             <small class="mobile-text-center">WIFI</small>
