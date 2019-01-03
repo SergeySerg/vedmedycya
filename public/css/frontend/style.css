@@ -2577,6 +2577,9 @@ div#justify > .fa-plus:first-child {
 }
 
 /* Raund mix */
+.input-dropdown{
+    z-index: 999999;
+}
 .fullscreen-img.lazy_slider_text h1,
 .halfscreen-img.lazy_slider_text h1,
 .fourthscreen-img.lazy_slider_text {
