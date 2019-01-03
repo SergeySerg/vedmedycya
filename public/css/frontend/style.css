@@ -2577,6 +2577,23 @@ div#justify > .fa-plus:first-child {
 }
 
 /* Raund mix */
+.navbar-toggler[aria-expanded="false"] span.navbar-toggler-icon{
+    display: inline-block;
+}
+.navbar-toggler[aria-expanded="true"] span.navbar-toggler-icon{
+    display: none;
+}
+.navbar-toggler[aria-expanded="false"] span.navbar-toggler-icon_close{
+    display: none;
+}
+.navbar-toggler[aria-expanded="true"] span.navbar-toggler-icon_close{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+
 .input-dropdown{
     z-index: 999999;
 }

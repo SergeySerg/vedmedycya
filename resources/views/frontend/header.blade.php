@@ -2,6 +2,7 @@
     <nav class="navbar navbar-expand-xl navbar-light navbar-shadowed fixed-top navbar-white">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon_close">&#10006;</span>
         </button>
         <a id="mobile-logo" class="mx-auto" href="{{ route('article_index', [setLangToRedirect(App::getLocale())])}}"><img class="img-fluid" src="{{ asset('/img/frontend/logo.png') }}" width="100px"></a>
         <div class="navbar-side-mobile text-right dropdown">
