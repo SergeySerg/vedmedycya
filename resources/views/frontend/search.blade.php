@@ -85,10 +85,13 @@
                 <div class="col-md-11">
                     <div data-id={{ $r }} class="apart-card shadow-hover mb-5">
                         <div class="row no-gutters">
-                            <div class="col-lg-6">
+                            <div class="col-xl-6 col-lg-12">
                                 <div class="apart-image-slider">
                                 @foreach($room->getImages() as $room_img)
-                                    <div class="apart-image" style="background-image:url('{{ asset( $room_img['full']) }}')"></div>
+                                    <!-- <div class="apart-image" style="background-image:url('{{ asset( $room_img['full']) }}')"></div> -->
+                                    <picture>
+                                        <img data-lazy="{{ asset( $room_img['full']) }}">
+                                    </picture>
                                 @endforeach
                                 </div>
                                 <div class="div-arrows-apart-img-slider">
@@ -125,7 +128,7 @@
                                     @endif    
                                 </div>
                             </div>
-                            <div class="col-lg-6 p-lg-4 p-3">
+                            <div class="col-xl-6 col-lg-12 p-lg-4 p-3">
                                 <div class="row">
                                     <div class="col-md-6 mb-md-0 mb-3">
                                         <h3 data-id={{ $r }} class="apart-header pb-2">{{ str_limit($room->getTranslate('title'), 50) }}</h3>
@@ -178,27 +181,27 @@
                                             <i class="bb-jacuzzi"  data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.Jacuzzi')}}"></i>
                                         @endif
                                         @if($room->getAttributeTranslate('breakfast') == 1)
-                                            <i class="fa fa-plus m-1 text-orange"></i>
+                                            <!-- <i class="fa fa-plus m-1 text-orange"></i> -->
                                             <i class="bb-breakfast" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.breakfast')}}"></i>
                                         @endif
                                         @if($room->getAttributeTranslate('parking') == 1)
-                                            <i class="fa fa-plus m-1 text-orange"></i>
+                                            <!-- <i class="fa fa-plus m-1 text-orange"></i> -->
                                             <i class="bb-parking" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.parking')}}"></i>
                                         @endif 
                                         @if($room->getAttributeTranslate('coffe') == 1)
-                                            <i class="fa fa-plus m-1 text-orange"></i>
+                                            <!-- <i class="fa fa-plus m-1 text-orange"></i> -->
                                             <i class="bb-teapot" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.coffe')}}"></i>
                                         @endif 
                                         @if($room->getAttributeTranslate('сhildren_room') == 1)
-                                            <i class="fa fa-plus m-1 text-orange"></i>
+                                            <!-- <i class="fa fa-plus m-1 text-orange"></i> -->
                                             <i class="bb-toy-bold" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.сhildren_room')}}"></i>
                                         @endif 
                                         @if($room->getAttributeTranslate('ski_storage_room') == 1)
-                                            <i class="fa fa-plus m-1 text-orange"></i>
+                                            <!-- <i class="fa fa-plus m-1 text-orange"></i> -->
                                             <i class="bb-ski-staff" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.ski_storage_room')}}"></i>
                                         @endif 
                                         @if($room->getAttributeTranslate('bowl_ski_equipment') == 1)
-                                            <i class="fa fa-plus m-1 text-orange"></i>
+                                            <!-- <i class="fa fa-plus m-1 text-orange"></i> -->
                                             <i class="bb-ski-dryer" data-toggle="tooltip" data-placement="top" data-original-title="{{ trans('base.bowl_ski_equipment')}}"></i>
                                         @endif 
                                     </div>
