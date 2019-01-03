@@ -275,9 +275,9 @@ body, footer {
         margin-right: calc(80% - 50px) !important;
     }
 
-    .main-dots-2 {
+    /* .main-dots-2 {
         bottom: 54px !important;
-    }
+    } */
 
     .huge-404 {
         font-size: 150px !important;
@@ -897,7 +897,7 @@ body, footer {
 
 .main-dots-2 {
     position: absolute;
-    bottom: 25px;
+    bottom: 0;
     width: 100%;
 }
 
@@ -2599,6 +2599,9 @@ div#justify > .fa-plus:first-child {
     height: inherit;
 }
 @media screen and (max-width: 1199px) {
+    .main-dots-2 {
+        bottom: 40px;
+    }
     .main-slider-apart{
         height: auto;
         margin-top: 60px;
