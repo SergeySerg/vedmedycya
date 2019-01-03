@@ -124,49 +124,49 @@
                 <div id="justify" class="row text-orange text-center no-gutters d-flex">
                 
                     @if($article->getAttributeTranslate('breakfast') == 1)
-                        <i class="fa fa-plus mt-3"></i>
+                        <!-- <i class="fa fa-plus mt-3"></i> -->
                         <div class="col-md-2 col-4">
                             <i class="bb-breakfast fa-3x mobile-text-center"></i><br>
                             <small class="mobile-text-center">{{ trans('base.breakfast')}}</small>
                         </div>
                     @endif
                     @if($article->getAttributeTranslate('parking') == 1)
-                        <i class="fa fa-plus mt-3"></i>
+                        <!-- <i class="fa fa-plus mt-3"></i> -->
                         <div class="col-md-2 col-4">
                             <i class="bb-parking fa-3x mobile-text-center"></i><br>
                             <small class="mobile-text-center">{{ trans('base.parking')}}</small>
                         </div>
                     @endif 
                     @if($article->getAttributeTranslate('coffe') == 1)
-                        <i class="fa fa-plus mt-3"></i>
+                        <!-- <i class="fa fa-plus mt-3"></i> -->
                         <div class="col-md-2 col-4">
                             <i class="bb-teapot fa-3x mobile-text-center"></i><br>
                             <small class="mobile-text-center">{{ trans('base.coffe')}}</small>
                         </div>
                     @endif 
                     @if($article->getAttributeTranslate('сhildren_room') == 1)
-                        <i class="fa fa-plus mt-3"></i>
+                        <!-- <i class="fa fa-plus mt-3"></i> -->
                         <div class="col-md-2 col-4">
                             <i class="bb-toy-bold fa-3x mobile-text-center"></i><br>
                             <small class="mobile-text-center">{{ trans('base.сhildren_room')}}</small>
                         </div>
                     @endif 
                     @if($article->getAttributeTranslate('ski_storage_room') == 1)
-                        <i class="fa fa-plus mt-3"></i>
+                        <!-- <i class="fa fa-plus mt-3"></i> -->
                         <div class="col-md-2 col-4">
                             <i class="bb-ski-staff fa-3x mobile-text-center"></i><br>
                             <small class="mobile-text-center">{{ trans('base.ski_storage_room')}}</small>
                         </div>
                     @endif 
                     @if($article->getAttributeTranslate('bowl_ski_equipment') == 1)
-                        <i class="fa fa-plus mt-3"></i>
+                        <!-- <i class="fa fa-plus mt-3"></i> -->
                         <div class="col-md-2 col-4">
                             <i class="bb-ski-dryer fa-3x mobile-text-center"></i><br>
                             <small class="mobile-text-center">{{ trans('base.bowl_ski_equipment')}}</small>
                         </div>
                     @endif 
                     @if($article->getAttributeTranslate('wifi') == 1)
-                        <i class="fa fa-plus mt-3"></i>
+                        <!-- <i class="fa fa-plus mt-3"></i> -->
                         <div class="col-md-2 col-4">
                             <i class="bb-wifi-orange fa-3x mobile-text-center"></i><br>
                             <small class="mobile-text-center">WIFI</small>
