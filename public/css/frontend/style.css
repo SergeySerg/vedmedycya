@@ -473,8 +473,6 @@ body, footer {
 .fullscreen-img h1,
 .halfscreen-img h1,
 .fourthscreen-img {
-    position: absolute;
-    top: 40%;
     color: white;
     font-weight: 900;
     text-align: center;
@@ -2578,6 +2576,12 @@ div#justify > .fa-plus:first-child {
 }
 
 /* Raund mix */
+.fullscreen-img.lazy_slider_text h1,
+.halfscreen-img.lazy_slider_text h1,
+.fourthscreen-img.lazy_slider_text {
+    position: absolute;
+    top: 40%;
+}
 .main-slider-apart {
     position: relative;
     margin-top: 90px;

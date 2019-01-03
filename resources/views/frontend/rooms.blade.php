@@ -8,7 +8,7 @@
                 <!-- <div class="fullscreen-img-2 d-flex justify-content-center" style="background-image:url('{{ asset( $room_img['full']) }}')">
                     <h5 class="apart-photo-title text-center">{{ $article->getAttributeTranslate('title_img')}}</h5>
                 </div> -->
-                <div class="fullscreen-img d-flex align-items-center justify-content-center">
+                <div class="fullscreen-img d-flex align-items-center justify-content-center lazy_slider_text">
                     <h5 class="apart-photo-title text-center">{{ $article->getAttributeTranslate('title_img')}}</h5>
                     <picture>
                         <img data-lazy="{{ asset( $room_img['full']) }}">
