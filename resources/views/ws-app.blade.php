@@ -70,7 +70,7 @@
                                     @endforeach
                                 @endif
                                 <br>
-                                {{ $texts->get('email') }}<br>
+                                <a href="mailto:{{ $texts->get('email') }}">{{ $texts->get('email') }}</a><br>
                                 {{ $texts->get('address') }}
                             </p>
                         </div>

@@ -65,7 +65,7 @@
                         </p>
                         <p class="contacts-text mb-5">
                             <i class="fas fa-envelope text-orange mr-1"></i>
-                            {{ $children_contacts->first()->getAttributeTranslate('email') }}<br>
+                            <a href="mailto:{{ $children_contacts->first()->getAttributeTranslate('email') }}">{{ $children_contacts->first()->getAttributeTranslate('email') }}</a><br>
                             {{--<span class="ml-4">info@vedmedycya.com.ua</span>--}}
                         </p>
                         <h5 class="feature-text-brown mb-4 text-center text-md-left">{{ trans('base.reservation_department') }}</h5>
@@ -76,7 +76,8 @@
                         </p>
                         <p class="contacts-text mb-5">
                             <i class="fas fa-envelope text-orange mr-2"></i>
-                            {{ $children_contacts->first()->getAttributeTranslate('email') }}
+                            <a href="mailto:{{ $children_contacts->first()->getAttributeTranslate('email') }}">{{ $children_contacts->first()->getAttributeTranslate('email') }}</a><br>
+                            
                         </p>
                     </div>
                     <div class="col-md-5 mt-4">
