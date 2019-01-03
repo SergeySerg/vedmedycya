@@ -43,27 +43,11 @@ class FrontendInit {
              }
          }
 
-//        if(!empty($request->lastpage) AND $request->lastpage == 288){
-//            $pieces = explode("/", $request->lastpage);
-//            dd($pieces[count($pieces)-1]);
-//            //echo ($request->callcenterid);
-//            return response()->json([ "schema" => "34419" ]);
-//        }
-//        if(isset($request->lastpage) AND $request->lastpage == 0){
-//            $pieces = explode("/", $request->lastpage);
-//            dd($pieces[count($pieces)-1]);
-//            dd($pieces);
-//
-//            return response()->json([ "schema" => "32561" ]);
-//        }
-		
-
-		if(is_null($request->lang)){
-		// 	$default_lang = Config::get('app.locale');
-		App::setLocale(config('app.locale'));
+        if(is_null($request->lang)){
+		    App::setLocale(config('app.locale'));
 		}else{
 		// Locale setting
-		App::setLocale($request->lang);
+		    App::setLocale($request->lang);
 		}
 		//dd(route('article_index', [$request->lang]));
 
