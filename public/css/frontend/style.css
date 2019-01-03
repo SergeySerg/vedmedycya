@@ -6,11 +6,13 @@ body, footer {
 .slick-initialized .slick-slide{
     position: relative;
 }
-.slick-slide picture{
+.slick-slide picture,
+.apart-image-slider picture{
     width: 100%;
     overflow: hidden;
 }
-.slick-slide picture img{
+.slick-slide picture img,
+.apart-image-slider picture img{
     width: 100%;
     /* height: 100vh; */
 }
@@ -2638,8 +2640,9 @@ div#justify > .fa-plus:first-child {
     .selector-bar {
         bottom: 0;
     }
-    .main-dots{
-        display: none !important;
+    #main-slider .main-dots{
+        /* display: none !important; */
+        bottom: 0 !important;
     }
     .selector-bar {
         position: relative;
@@ -2653,6 +2656,7 @@ div#justify > .fa-plus:first-child {
     }
     #main-slider{
         margin-top: 66px;
+        position: relative;
     }
     .fullscreen-img {
         height: auto !important;
