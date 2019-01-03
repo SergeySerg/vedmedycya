@@ -28,19 +28,35 @@ class FrontendInit {
 	public function handle($request, Closure $next)
 	{
 	    // For ringostat script
-        if(!empty($request->callcenterid) AND $request->callcenterid == 288){
-            //echo ($request->callcenterid);
-            return response()->json([ "schema" => "34419" ]);
-        }
-        if(isset($request->callcenterid) AND $request->callcenterid == 0){
-            return response()->json([ "schema" => "32561" ]);
-        }
-		//dd('тут');
-		// Get current lang object from db
-		//$currentLang = Lang::where('lang', $request->lang)
-		//	->first();
-			//dd($request->all());
-			//dd($request->domain);
+         if(isset($request->lastpage)){
+             $pieces = explode("/", $request->lastpage);
+             $id = (int) $pieces[count($pieces)-1];
+             if($id == 288){
+                 $article = Article::where('id', '288')->first();
+                 $id_schema = $article->getAttributeTranslate('id_schema');
+
+                 return response()->json([ "schema" => $id_schema ]);
+                }
+             else{
+                 return response()->json([ "schema" => getSetting('default_schema') ]);
+
+             }
+         }
+
+//        if(!empty($request->lastpage) AND $request->lastpage == 288){
+//            $pieces = explode("/", $request->lastpage);
+//            dd($pieces[count($pieces)-1]);
+//            //echo ($request->callcenterid);
+//            return response()->json([ "schema" => "34419" ]);
+//        }
+//        if(isset($request->lastpage) AND $request->lastpage == 0){
+//            $pieces = explode("/", $request->lastpage);
+//            dd($pieces[count($pieces)-1]);
+//            dd($pieces);
+//
+//            return response()->json([ "schema" => "32561" ]);
+//        }
+		
 
 		if(is_null($request->lang)){
 		// 	$default_lang = Config::get('app.locale');

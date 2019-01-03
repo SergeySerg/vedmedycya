@@ -60,8 +60,8 @@
                         <h5 class="feature-text-brown mb-4 text-center text-md-left">{{ trans('base.reception') }}</h5>
                         <p class="contacts-text">
                             <i class="fas fa-phone text-orange mr-1"></i>
-                            {{ $children_contacts->first()->getAttributeTranslate(' reception_tel1') }}<br>
-                            <span class="ml-4">{{ $children_contacts->first()->getAttributeTranslate(' reception_tel2') }}</span>
+                            <span class="ringo-phone-prod">{{ $children_contacts->first()->getAttributeTranslate(' reception_tel1') }}</span><br>
+                            <span class="ml-4 ringo-phone-prod">{{ $children_contacts->first()->getAttributeTranslate(' reception_tel2') }}</span>
                         </p>
                         <p class="contacts-text mb-5">
                             <i class="fas fa-envelope text-orange mr-1"></i>
@@ -71,8 +71,8 @@
                         <h5 class="feature-text-brown mb-4 text-center text-md-left">{{ trans('base.reservation_department') }}</h5>
                         <p class="contacts-text">
                             <i class="fas fa-phone text-orange mr-1"></i>
-                            {{ $children_contacts->first()->getAttributeTranslate('reservation_tel1') }}<br>
-                            <span class="ml-4">{{ $children_contacts->first()->getAttributeTranslate('reservation_tel2') }}</span>
+                            <span class="ringo-phone-prod">{{ $children_contacts->first()->getAttributeTranslate('reservation_tel1') }}</span><br>
+                            <span class="ml-4 ringo-phone-prod">{{ $children_contacts->first()->getAttributeTranslate('reservation_tel2') }}</span>
                         </p>
                         <p class="contacts-text mb-5">
                             <i class="fas fa-envelope text-orange mr-2"></i>
@@ -83,7 +83,9 @@
                         <h5 class="feature-text-brown mb-4 text-center text-md-left">{{ trans('base.restaurant') }}</h5>
                         <p class="contacts-text mb-5">
                             <i class="fas fa-phone text-orange mr-2"></i>
-                            {{ $children_contacts->first()->getAttributeTranslate('restaurant_tel1') }}
+                            <span class="ringo-phone-prod">
+                                {{ $children_contacts->first()->getAttributeTranslate('restaurant_tel1') }}
+                            </span>
                         </p>
                         <h5 class="feature-text-brown mb-4 text-center text-md-left">{{ trans('base.address') }}</h5>
                         <p class="contacts-text mb-5">

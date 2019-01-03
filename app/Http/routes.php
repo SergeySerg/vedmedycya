@@ -103,7 +103,7 @@ Route::group(['prefix'=> getSetting('admin.prefix'), 'middleware' => ['auth', 'b
 
 /*Frontend group routes*/
 //Route::get('/{lang}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index']);
-//Route::group(['domain' => getSetting('domain')], function() {	
+//Route::group(['domain' => getSetting('domain')], function() {
 	Route::get('/{lang?}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@indexMain', 'as' => 'article_index'])->where('lang', 'ua|ru|en|pl');
 	Route::get('/{category}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@renderUrl', 'as' => 'article_category'])->where('category', 'скидки|sales|znyzhky|поиск|poshuk|search|vidhuky|reviews|отзывы');
 	Route::get('/{lang?}/{category}', ['middleware' => 'frontend.init', 'uses' => 'Frontend\ArticleController@renderUrl', 'as' => 'article_category'])->where('lang', 'ua|ru|en|pl')->where('category', 'скидки|sales|znyzhky|поиск|poshuk|search|vidhuky|reviews|отзывы');
@@ -122,6 +122,8 @@ Route::group(['prefix'=> getSetting('admin.prefix'), 'middleware' => ['auth', 'b
 	Route::post('/{lang}/add_review', ['uses' => 'Frontend\ArticleController@add_review','as' => 'add_review']);//Обработчик добавления отзыва
 	Route::post('/{lang}/reserved', ['uses' => 'Frontend\ArticleController@reserved','as' => 'reserved']);//Обработчик Обратной связи при заказе номера
 	Route::post('/get_prices', ['uses' => 'Frontend\ArticleController@get_prices','as' => 'get_prices']);//Обработчик цени номера
+
+
 
 	/*/Modal routes*/
 	/*Тимчасово*/
