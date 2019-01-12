@@ -291,9 +291,9 @@ body, footer {
 
     .ipad-text-center {text-align: center;}
 
-    .apart-image-slider {
+    /* .apart-image-slider {
         height: calc(100vw/1.8) !important;
-    }
+    } */
 }
 
 @media screen and (max-width: 768px) {
@@ -2663,6 +2663,11 @@ div#justify > .fa-plus:first-child {
     }
     .fullscreen-img.lazy_slider_text h1, .halfscreen-img.lazy_slider_text h1, .fourthscreen-img.lazy_slider_text {
         top: 55%;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .apart-image-slider {
+        margin-bottom: -6px;
     }
 }
 @media screen and (max-width: 768px) {
