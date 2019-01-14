@@ -41,6 +41,11 @@
         </div>
     @endif
     --}}
+
+    <!-- mobile_messenger -->
+        @include('frontend.sections.mobile_messengers')
+    <!-- END mobile_messenger -->    
+
     <div class="container-fluid px-sm-5 pb-3">
         <div class="row py-4">
             <div class="col text-center">

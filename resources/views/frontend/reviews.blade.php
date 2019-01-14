@@ -7,7 +7,11 @@
             <h1 class="pt-5 mt-5 text-uppercase header-feedback-font">{!! $revsettings->first()->getTranslate('short_description') !!}</h1>
         </div>
     </div>
-    
+
+    <!-- mobile_messenger -->
+        @include('frontend.sections.mobile_messengers')
+    <!-- END mobile_messenger -->    
+
     <div class="container-fluid">
         <div class="container-fluid px-xl-5">
             <div class="row px-xl-5 my-5">
