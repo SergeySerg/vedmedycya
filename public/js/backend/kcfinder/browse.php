@@ -11,7 +11,8 @@
   *   @license http://www.opensource.org/licenses/lgpl-2.1.php LGPLv2
   *      @link http://kcfinder.sunhater.com
   */
-//print_r($_SESSION);
+echo '<pre>';
+//print_r($_COOKIE);echo '</pre>';exit;
 require "core/autoload.php";
 $browser = new browser();
 $browser->action();
