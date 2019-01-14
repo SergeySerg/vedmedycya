@@ -2579,6 +2579,19 @@ div#justify > .fa-plus:first-child {
 }
 
 /* Raund mix */
+.rest-details_r{
+    position: relative;
+}
+.rest-image_r{
+    position: relative;
+    height: auto;
+    min-height: 504px;
+    padding-top: 0;
+}
+.left-click,
+.right-click{
+    top: 0;
+}
 .navbar-toggler[aria-expanded="false"] span.navbar-toggler-icon{
     display: inline-block;
 }

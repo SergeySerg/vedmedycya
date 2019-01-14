@@ -4,10 +4,11 @@ $(function () {
   
   //Sliders start
   $('.rest-slider').slick({
-      //autoplay: true,
+      autoplay: true,
+      lazyLoad: 'ondemand',
       autoplaySpeed: 2000,
       infinite: true,
-      fade: true,
+    //   fade: true,
       prevArrow: '.left-click',
       nextArrow: '.right-click',
       speed: 2000,
