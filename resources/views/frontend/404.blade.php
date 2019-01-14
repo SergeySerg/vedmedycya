@@ -1,14 +1,12 @@
 @extends('ws-app')
 
 @section('content')
-<div id="main-slider">
-        <div class="slider-class">
-            <div class="fullscreen-img d-flex flex-column align-items-center justify-content-md-center justify-content-start mt-md-0 mt-5" style="background-image: url(' {{ asset('img/frontend/headers/404.jpg') }} ');">
-                <h1 class="huge-404 m-md-0 mb-0 mt-5">404</h1>
-                <p>{{ trans('base.error_404')}} :(</p>
-                <div class="input-pattern my-4">
-                    <a class="btn btn-yellow get-in-touch-btn text-uppercase px-5 py-4 d-flex align-items-center"  href="{{ route('article_index', [setLangToRedirect(App::getLocale())])}}" >{{ trans('base.back')}}</a>
-                </div>
+<div class="page-404">
+        <div class="fullscreen-img d-flex flex-column align-items-center justify-content-md-center justify-content-start mt-md-0 mt-5" style="background-image: url(' {{ asset('img/frontend/headers/404.jpg') }} ');">
+            <h1 class="huge-404 m-md-0 mb-0 mt-5">404</h1>
+            <p>{{ trans('base.error_404')}} :(</p>
+            <div class="input-pattern my-4">
+                <a class="btn btn-yellow get-in-touch-btn text-uppercase px-5 py-4 d-flex align-items-center"  href="{{ route('article_index', [setLangToRedirect(App::getLocale())])}}" >{{ trans('base.back')}}</a>
             </div>
         </div>
         <div id="selector-bar-id">
