@@ -9,11 +9,14 @@
                         @foreach($marketings as $marketing)                        
                             @if($marketing->getAttributeTranslate('show_main_page') AND $marketing->getAttributeTranslate('show_main_page') == 1)
                                 <div class="pt-4">
-                                <div class="rest-image" style="background: url('{{ asset( $marketing->getAttributeTranslate('marketing_img')) }}')">
+                                    <div class="rest-image rest-image_r">
+                                        <picture>
+                                            <img data-lazy="{{ asset( $marketing->getAttributeTranslate('marketing_img')) }}">
+                                        </picture>
                                         <div class="left-click"></div>
                                         <div class="right-click"></div>
                                     </div>
-                                    <div class="rest-details">
+                                    <div class="rest-details rest-details_r">
                                         <h4 class="text-uppercase">{{ $marketing->getTranslate('title')}}</h4>
                                         {!! $marketing->getTranslate('short_description') !!}                       
                                     </div>
@@ -24,11 +27,14 @@
                         @if(isset($children_marketings) AND $children_marketings)
                             @foreach($children_marketings as $marketing)                       
                                 <div class="pt-4">
-                                <div class="rest-image" style="background: url('{{ asset( $marketing->getAttributeTranslate('marketing_img')) }}')">
+                                    <div class="rest-image rest-image_r">
+                                        <picture>
+                                            <img data-lazy="{{ asset( $marketing->getAttributeTranslate('marketing_img')) }}">
+                                        </picture>
                                         <div class="left-click"></div>
                                         <div class="right-click"></div>
                                     </div>
-                                    <div class="rest-details">
+                                    <div class="rest-details rest-details_r">
                                         <h4 class="text-uppercase">{{ $marketing->getTranslate('title')}}</h4>
                                         {!! $marketing->getTranslate('short_description') !!}                       
                                     </div>

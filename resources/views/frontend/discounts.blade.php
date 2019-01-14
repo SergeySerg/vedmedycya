@@ -22,7 +22,11 @@
                                 <div class="col-xl-6">
                                     <div class="apart-image-slider">
                                         @foreach($room->getImages() as $room_img)
-                                            <div class="apart-image" style="background-image:url('{{ asset( $room_img['full']) }}')"></div>
+                                            <!-- <div class="apart-image" style="background-image:url('{{ asset( $room_img['full']) }}')"></div> -->
+                                            <picture>
+                                                <img data-lazy="{{ asset( $room_img['full']) }}">
+                                            </picture>
+
                                          @endforeach                                    
                                     </div>
                                     <div class="div-arrows-apart-img-slider">

@@ -30,9 +30,17 @@
                                         <p class="date">{{ $review->getAttributeTranslate('date_create_review') }}</p>
                                     </div>
                                     @if($review->getAttributeTranslate('profile_foto') )
-                                        <div id="profile-huge" class="profile-image" style="background: url('{{ asset( $review->getAttributeTranslate('profile_foto')) }}')"></div>
+                                        <div id="profile-huge" class="profile-image">
+                                            <picture>
+                                                <img data-lazy="{{ asset( $review->getAttributeTranslate('profile_foto')) }}">
+                                            </picture>
+                                        </div>
                                     @else
-                                        <div id="profile-huge" class="profile-image" style="background: url('{{ asset('img/frontend/profile.jpg') }}')" ></div>
+                                        <div id="profile-huge" class="profile-image">
+                                            <picture>
+                                                <img data-lazy="{{ asset('img/frontend/profile.jpg') }}">
+                                            </picture>
+                                        </div>
                                     @endif
                             </div>
                         </div>
