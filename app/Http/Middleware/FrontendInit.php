@@ -86,7 +86,7 @@ class FrontendInit {
 			$category_item = $category
 				->articles
 				->where('active', 1)
-				->sortByDesc('priority');
+				->sortBy('priority');
 			//Debugbar::info($category_item);				
 
 			//$dd($category_item);	
@@ -128,11 +128,11 @@ class FrontendInit {
 							array_push($child_articles, $article);
 						}
 					}
-					$child_articles = collect($child_articles)->sortByDesc('priority');
+					$child_articles = collect($child_articles)->sortBy('priority');
 					if($category->link == 'reviews'){
 						view()->share('children_' . $category->link . '_raty', $this->counterReviews($child_articles));
 						//Debugbar::info();
-						$child_articles = collect($child_articles)->sortByDesc('priority')->paginate( 10 );
+						$child_articles = collect($child_articles)->sortBy('priority')->paginate( 10 );
 						//dd($child_articles);
 					}
 					//dd($child_articles);
@@ -167,7 +167,7 @@ class FrontendInit {
 			if($category->link == 'reviews'){
 				view()->share($category->link . '_raty', $this->counterReviews($category_item));
 				//Debugbar::info($this->counterReviews($category_item));
-				$category_item = collect($category_item)->sortByDesc('priority')->paginate( 10 );
+				$category_item = collect($category_item)->sortBy('priority')->paginate( 10 );
 				//dd($child_articles);
 			}
 			view()->share($category->link, $category_item);

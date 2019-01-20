@@ -3,7 +3,7 @@
 @section('content') 
 <div class="main-slider-apart">
         <div class="slider-class-2">
-            @foreach($article->getImages() as $room_img)
+            @foreach(($article->getAttributeTranslate('is_hotel_photo')) ? $article->getImagesWithParentArticle() : $article->getImages() as $room_img)
 
                 <!-- <div class="fullscreen-img-2 d-flex justify-content-center" style="background-image:url('{{ asset( $room_img['full']) }}')">
                     <h5 class="apart-photo-title text-center">{{ $article->getAttributeTranslate('title_img')}}</h5>

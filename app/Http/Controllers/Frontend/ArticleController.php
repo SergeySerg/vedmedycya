@@ -30,69 +30,14 @@ class ArticleController extends Controller {
 	 */
 	public function index(Request $request)
 	{	
-		//dd(App::getLocale());
-		//dd($request->name);
-			$parent_hotel = Article::where('attributes->url->' . App::getLocale(), $request->name )->first();
+		$parent_hotel = Article::where('attributes->url->' . App::getLocale(), $request->name )->first();
 			
-		//}
-		
-		//dd($parent_hotel);
-		
-			// $hotels_articles = Category::where('link', $type)->first()->articles->where('subdomain', $subdomain);
-			// //dd($hotels_articles);
-			// //$article_group =  Article::where('category_id',$hotels_articles['parent_id'])->where('active', 1)->get();
-			// //dd($article_group);
-			// $test = Article::where('type', 'mark')->first();
-			// $tests = $hotels_articles->map(function ($hotel_article) {
-			// 	//dd($hotel_article);
-			// 	return $hotel_article->article_children()->where('category_id', 8)->get();
-			// });
-			//dd($tests->all());
-			// foreach($tests as $test){
-			// 	dd($test->first()->title);
-			// }
-			// $articles = $test->article_children()->where('category_id', 2);
-			// dd($articles);
-		
-		//dd(request()->subdomain);
-		
-		//dump($news);
-		//dd($video->category()->first()->active);
-		//return view((!$request->url) ? 'frontend.hotels' : 'frontend.' . $request->url)->with(compact('parent_hotel'));
 		return view('frontend.hotels')->with(compact('parent_hotel'));
 	}
 	public function renderUrl(Request $request)
 	{	
-		//dd($category);
-		
-			$parent_hotel = Article::where('attributes->url->' . App::getLocale(), $request->name )->first();
-			$type = Category::where('url->' . App::getLocale(), ($request->url) ? $request->url : $request->category)->first();
-			//dd($type);
-		//}
-		
-		//dd($parent_hotel);
-		
-			// $hotels_articles = Category::where('link', $type)->first()->articles->where('subdomain', $subdomain);
-			// //dd($hotels_articles);
-			// //$article_group =  Article::where('category_id',$hotels_articles['parent_id'])->where('active', 1)->get();
-			// //dd($article_group);
-			// $test = Article::where('type', 'mark')->first();
-			// $tests = $hotels_articles->map(function ($hotel_article) {
-			// 	//dd($hotel_article);
-			// 	return $hotel_article->article_children()->where('category_id', 8)->get();
-			// });
-			//dd($tests->all());
-			// foreach($tests as $test){
-			// 	dd($test->first()->title);
-			// }
-			// $articles = $test->article_children()->where('category_id', 2);
-			// dd($articles);
-		
-		//dd(request()->subdomain);
-		
-		//dump($news);
-		//dd($video->category()->first()->active);
-		//return view((!$request->url) ? 'frontend.hotels' : 'frontend.' . $request->url)->with(compact('parent_hotel'));
+		$parent_hotel = Article::where('attributes->url->' . App::getLocale(), $request->name )->first();
+        $type = Category::where('url->' . App::getLocale(), ($request->url) ? $request->url : $request->category)->first();
 		return view('frontend.' . $type->link)->with(compact('parent_hotel'));
 	}
 
@@ -103,15 +48,8 @@ class ArticleController extends Controller {
 	 */
 	public function indexMain(Request $request, $lang = null, $type = 'main')
 	{	
-		//dd('indexMain');
-		//$request->attributes->add(['myAttribute' => 'myValue']);
-		//dd($type);		
-		// $main_slides = $this->showMainPage('slides');
-		// $main_marketings = $this->showMainPage('marketings');
-		// $main_advantages = $this->showMainPage('advantages');
 		$main_reviews = $this->showMainPage('reviews');
 		$main_advantages = $this->showMainPage('advantages');
-		//dd($main_advantages);
 		return view('frontend.' .  $type)
 			->with(compact('main_reviews', 'main_advantages'));
 			
@@ -124,13 +62,6 @@ class ArticleController extends Controller {
 	 */
 	public function show(Request $request)
 	{
-		//dd('show');
-		//if ($request ->isMethod('post')){
-			/*get [] from request*/
-			//$value = session('key');
-		//dd($value);
-		//}
-		
 		$parent_hotel = Article::with('article_children')->where('attributes->url->' . App::getLocale(), $request->name )->first();
 		$article = Article::where('id', $request->id)->first();
 		$article_price = $article->getPrice($article->id, $article->article_parent->id);
@@ -159,17 +90,10 @@ class ArticleController extends Controller {
 	public function showSeo(Request $request)
 	{
 		$seo_article = Article::where('attributes->url->' . App::getLocale(), $request->url )->first();
-		
-		//dd($seo_article);
 		return view('frontend.seo')->with(compact('seo_article'));
 	}
 	public function show404(Request $request)
 	{
-		//dd('$lang');
-		
-		//$seo_article = Article::where('attributes->url->' . App::getLocale(), $request->url )->first();
-		
-		//dd($seo_article);
 		return view('frontend.404');
 	}
 	
@@ -186,21 +110,11 @@ class ArticleController extends Controller {
 	}
 	public function pumpkin(Request $request)
 	{
-		//dd('$lang');
-		
-		//$seo_article = Article::where('attributes->url->' . App::getLocale(), $request->url )->first();
-		
-		//dd($seo_article);
 		return view('pumpkin_party');
 	}
 
 	public function googleHtml(Request $request)
 	{
-		//dd('$lang');
-		
-		//$seo_article = Article::where('attributes->url->' . App::getLocale(), $request->url )->first();
-		
-		//dd($seo_article);
 		return view('google_html');
 	}
 

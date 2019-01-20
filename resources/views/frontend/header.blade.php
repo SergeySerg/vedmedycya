@@ -39,7 +39,7 @@
                             <i class="fas fa-chevron-down ml-2"></i><br>
                             <div class="dropdown-content">
                                 <span class=“ringo-phone-prod”>
-                                    {{ $texts->get('tel_1') }}
+                                    z{{ $texts->get('tel_1') }}
                                     {{ $texts->get('tel_2') }}
                                 </span>
                                 <div class="h-line-bold"></div>

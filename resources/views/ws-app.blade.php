@@ -71,7 +71,7 @@
                                 @endif
                                 <br>
                                 <a href="mailto:{{ $texts->get('email') }}">{{ $texts->get('email') }}</a><br>
-                                {{ $texts->get('address') }}
+                                {{ $texts->get('address') }}z
                             </p>
                         </div>
                     </div>
