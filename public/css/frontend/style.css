@@ -2579,6 +2579,21 @@ div#justify > .fa-plus:first-child {
 }
 
 /* Raund mix */
+.text-white.phones-included a{
+    color: #ffffff;
+}
+#mobile-phones h5 a{
+    color: #4D3431;
+}
+a.social_r:hover{
+    text-decoration: none;
+}
+.navbar-light .navbar-nav .nav-link .header_tel_r a{
+    color: rgba(0,0,0,.5);
+}
+.navbar-light .navbar-nav .nav-link .link_r a{
+    color: rgba(0,0,0);
+}
 .rest-details_r{
     position: relative;
 }

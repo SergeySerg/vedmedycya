@@ -60,8 +60,8 @@
                         <h5 class="feature-text-brown mb-4 text-center text-md-left">{{ trans('base.reception') }}</h5>
                         <p class="contacts-text">
                             <i class="fas fa-phone text-orange mr-1"></i>
-                            <span class="ringo-phone-prod">{{ $children_contacts->first()->getAttributeTranslate(' reception_tel1') }}</span><br>
-                            <span class="ml-4 ringo-phone-prod">{{ $children_contacts->first()->getAttributeTranslate(' reception_tel2') }}</span>
+                            <a href="tel:{{ str_replace([' ', '(', ')'], '', $children_contacts->first()->getAttributeTranslate(' reception_tel1'))}}" class="ringo-phone-prod">{{ $children_contacts->first()->getAttributeTranslate(' reception_tel1') }}</a><br>
+                            <a href="tel:{{ str_replace([' ', '(', ')'], '', $children_contacts->first()->getAttributeTranslate(' reception_tel2'))}}" class="ml-4 ringo-phone-prod">{{ $children_contacts->first()->getAttributeTranslate(' reception_tel2') }}</a><br>
                         </p>
                         <p class="contacts-text mb-5">
                             <i class="fas fa-envelope text-orange mr-1"></i>
@@ -71,8 +71,11 @@
                         <h5 class="feature-text-brown mb-4 text-center text-md-left">{{ trans('base.reservation_department') }}</h5>
                         <p class="contacts-text">
                             <i class="fas fa-phone text-orange mr-1"></i>
-                            <span class="ringo-phone-prod">{{ $children_contacts->first()->getAttributeTranslate('reservation_tel1') }}</span><br>
-                            <span class="ml-4 ringo-phone-prod">{{ $children_contacts->first()->getAttributeTranslate('reservation_tel2') }}</span>
+                            <a href="tel:{{ str_replace([' ', '(', ')'], '', $children_contacts->first()->getAttributeTranslate('reservation_tel1'))}}" class="ringo-phone-prod">{{ $children_contacts->first()->getAttributeTranslate('reservation_tel1') }}</a><br>
+                            <a href="tel:{{ str_replace([' ', '(', ')'], '', $children_contacts->first()->getAttributeTranslate('reservation_tel1'))}}" class="ml-4 ringo-phone-prod">{{ $children_contacts->first()->getAttributeTranslate('reservation_tel1') }}</a><br>
+
+                            <!-- <span class="ringo-phone-prod">{{ $children_contacts->first()->getAttributeTranslate('reservation_tel1') }}</span><br>
+                            <span class="ml-4 ringo-phone-prod">{{ $children_contacts->first()->getAttributeTranslate('reservation_tel2') }}</span> -->
                         </p>
                         <p class="contacts-text mb-5">
                             <i class="fas fa-envelope text-orange mr-2"></i>
@@ -84,9 +87,8 @@
                         <h5 class="feature-text-brown mb-4 text-center text-md-left">{{ trans('base.restaurant') }}</h5>
                         <p class="contacts-text mb-5">
                             <i class="fas fa-phone text-orange mr-2"></i>
-                            <span class="ringo-phone-prod">
-                                {{ $children_contacts->first()->getAttributeTranslate('restaurant_tel1') }}
-                            </span>
+                            <a href="tel:{{ str_replace([' ', '(', ')'], '', $children_contacts->first()->getAttributeTranslate('restaurant_tel1'))}}" class="ringo-phone-prod">{{ $children_contacts->first()->getAttributeTranslate('restaurant_tel1') }}</a>
+                            <br>
                         </p>
                         <h5 class="feature-text-brown mb-4 text-center text-md-left">{{ trans('base.address') }}</h5>
                         <p class="contacts-text mb-5">

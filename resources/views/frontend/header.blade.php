@@ -34,14 +34,12 @@
                 <div class="navbar-side-container text-left">
                     <span class="nav-link navbar-phone" href="#">
                         @if($texts->get('tel_test') AND getSetting('ip_tel'))<span class="ringo-phone-dev">1234567890</span>@endif
-                        <div class="dropdown">
-                            <span class="ringo-phone-prod">{{ $texts->get('tel_1') }}</span>
+                        <div class="dropdown header_tel_r">
+                            <a href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_1'))}}" class="ringo-phone-prod">{{ $texts->get('tel_1') }}</a>
                             <i class="fas fa-chevron-down ml-2"></i><br>
-                            <div class="dropdown-content">
-                                <span class=“ringo-phone-prod”>
-                                    {{ $texts->get('tel_1') }}
-                                    {{ $texts->get('tel_2') }}
-                                </span>
+                            <div class="dropdown-content link_r">
+                                <a href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_1'))}}" class="ringo-phone-prod">{{ $texts->get('tel_1') }}</a>
+                                <a href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_1'))}}" class="ringo-phone-prod">{{ $texts->get('tel_2') }}</a>
                                 <div class="h-line-bold"></div>
                                 @if(isset($messengers) AND count($messengers) !== 0 AND $categories_data['messengers']->active == 1)
                                     <small class="text-muted">{{trans('base.write_in_messenger')}}</small><br>

@@ -59,14 +59,15 @@
                         </div>
                         <div class="col-md-9 col-8">
                             <p class="text-white phones-included">
-                                <span href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_1'))}}"  class="text-white"><span class=“ringo-phone-prod”>{{ $texts->get('tel_1') }}</span></a><br>
-                                <a href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_2'))}}" class="text-white"><span class=“ringo-phone-prod”>{{ $texts->get('tel_2') }}</span></a><br>
+                                <a href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_1'))}}" class="ringo-phone-prod">{{ $texts->get('tel_1') }}</a>
+                                <br>
+                                <a href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_2'))}}" class="ringo-phone-prod">{{ $texts->get('tel_2') }}</a>
+                                <br>
                                 @if(isset($messengers) AND count($messengers) !== 0 AND $categories_data['messengers']->active == 1)
                                     @foreach($messengers as $messenger)    
-                                        <a href="{{ $messenger->getAttributeTranslate('messenger_link') ? $messenger->getAttributeTranslate('messenger_link') : "#"}}">
+                                        <a href="{{ $messenger->getAttributeTranslate('messenger_link') ? $messenger->getAttributeTranslate('messenger_link') : "#"}}" class="social_r">
                                             {!! $messenger->getAttributeTranslate('icon_footer') ? $messenger->getAttributeTranslate('icon_footer') : " " !!}
                                         </a>
-                                        
                                     @endforeach
                                 @endif
                                 <br>
