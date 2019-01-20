@@ -57,14 +57,6 @@ class Article extends Translate {
         return $this->belongsTo('App\Models\Article', 'article_id_2
         ');
     }
-    /*public function getAttributes($key, $lang){
-        if(isset($this->attributes)){
-            $attributes = json_decode($this->attributes, true);
-            if(is_array($attributes)){
-
-            }
-        }
-    }*/
 
     public function getImages(){
         if (isset($this->imgs)){
@@ -85,10 +77,26 @@ class Article extends Translate {
         else{
             return [];
         }
-    }    
+    }
+    public function getImagesWithParentArticle(){
+        if (isset($this->article_parent()->first()->imgs)){
+            $imgs_parent_hotel = $this->imagesTransform($this->article_parent()->first()->imgs);
+        }
+
+        if (isset($this->imgs)){
+            $imgs_article = $this->imagesTransform($this->imgs);
+        }
+        $result_imgs = array_merge($imgs_article, $imgs_parent_hotel);
+        if($result_imgs){
+            return $result_imgs;
+        }
+        else{
+            return [];
+        }
+    }
     public function scopeactiveAndSortArticles($query){
         $query->where ('active',1)
-              ->orderBy('priority','desc');
+              ->orderBy('priority','asc');
     }
     public function scopeactiveAndSortForDateArticles($query){
         $query->where ('active',1)
@@ -248,5 +256,22 @@ class Article extends Translate {
         
         // $price_array conrain all price for day from date range
         return $result;
+    }
+    private function imagesTransform($imgs){
+        $images = json_decode($imgs, true);
+        if(is_array($images)){
+            foreach($images as $key => $img){
+                if(!is_array($images)){
+                    $images[$key] = [
+                        'min' => $img,
+                        'full' => $img
+                    ];
+                }
+            }
+        }
+        //dd($imgs);
+        return $images ?: [];
+
+
     }
 }

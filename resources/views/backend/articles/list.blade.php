@@ -25,6 +25,8 @@
     @include('backend.articles.custom_sections.seasons_list')
 @elseif($type == 'prices')
     @include('backend.articles.custom_sections.prices_list')
+@elseif($type == 'slides')
+    @include('backend.articles.custom_sections.slides_list')
 @else
 <div class="page-content">
     <div class="row-fluid">
