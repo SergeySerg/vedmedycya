@@ -75,7 +75,7 @@
                     <tbody>
                     @foreach($admin_articles as $admin_article)
                         @if(Session::get('base_hotel_id') AND Session::get('base_hotel_id') != 'all')
-                            @if($admin_article->article_id == Session::get('base_hotel_id') AND $admin_article->getAttributeTranslate(Session::get('season')) == '1' )
+                            @if($admin_article->article_id == Session::get('base_hotel_id'))
                                 @include('backend.articles.custom_sections.row_for_slider_list')
                             @endif
                         @else

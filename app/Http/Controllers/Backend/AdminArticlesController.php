@@ -28,8 +28,7 @@ class AdminArticlesController extends Controller
         $admin_category = Category::where("link", $type)->first();
         $admin_category_parent = $admin_category->category_parent()->first();
         $admin_category_children = $admin_category->category_children()->get();
-        //$admin_articles = $admin_category->articles;
-            $admin_articles = Article::with('article_parent')->with('article_parent_price')->where('category_id', $admin_category->id)->get();
+        $admin_articles = Article::with('article_parent')->with('article_parent_price')->where('category_id', $admin_category->id)->orderBy('priority','asc')->get();
         //dd($admin_articles);
         $hotels = Category::where('link', "hotels")->first()->articles()->get();
 
@@ -66,9 +65,9 @@ class AdminArticlesController extends Controller
                 $base_hotel_id = $all['base_hotel_id'];
                 $season = $all['season'];
                 if($season != 'all') {
-                    $slides = Article::with('article_parent')->where('attributes->' . $season, '1')->where('category_id', $admin_category->id)->get();
+                    $slides = Article::with('article_parent')->where('attributes->' . $season, '1')->where('category_id', $admin_category->id)->orderBy('priority','asc')->get();
                 }else {
-                    $slides = Article::with('article_parent')->where('category_id', $admin_category->id)->get();
+                    $slides = Article::with('article_parent')->where('category_id', $admin_category->id)->orderBy('priority','asc')->get();
                 }
                 //dd($slides);
                 if ($base_hotel_id) {

@@ -199,8 +199,12 @@
                                             <i class="fas fa-phone color-ff8c00 m-xl-0 mx-auto"></i>
                                         </div>
                                         <div class="col-xl-11 col-10 d-flex flex-xl-row flex-column">
-                                            <p class="pl-xl-2 phone-discount-card m-0 text-xl-left text-center">{{ $texts->get('tel_1') }}</p>
-                                            <p class="pl-xl-2 phone-discount-card m-0 text-xl-left text-center">{{ $texts->get('tel_2') }}</p>
+                                            @if($texts->get('tel_1'))
+                                                <p class="pl-xl-2 phone-discount-card m-0 text-xl-left text-center">{{ $texts->get('tel_1') }}</p>
+                                            @endif
+                                            @if($texts->get('tel_2'))
+                                                <p class="pl-xl-2 phone-discount-card m-0 text-xl-left text-center">{{ $texts->get('tel_2') }}</p>
+                                            @endif
                                         </div>                      
                                     </div>
                                 </div>

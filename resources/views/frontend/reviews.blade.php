@@ -159,7 +159,9 @@
                                     {!! $review->getAttributeTranslate('answer_reviews') !!}                                    
                                 </div>
                                 <div class="card-footer pt-3">
-                                    <p class="name bigbear-name-font m-sm-0 mb-0 mt-1">{{ $texts->get('admin_name') }}</p>
+                                    @if($texts->get('admin_name'))
+                                        <p class="name bigbear-name-font m-sm-0 mb-0 mt-1">{{ $texts->get('admin_name') }}</p>
+                                    @endif
                                     <p class="date">{{ $review->getAttributeTranslate('date_answer_reviews') }}</p>
                                 </div>
                             </div>

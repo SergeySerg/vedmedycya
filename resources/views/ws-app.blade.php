@@ -59,10 +59,14 @@
                         </div>
                         <div class="col-md-9 col-8">
                             <p class="text-white phones-included">
-                                <a href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_1'))}}" class="ringo-phone-prod">{{ $texts->get('tel_1') }}</a>
-                                <br>
+                                @if($texts->get('tel_1'))
+                                    <a href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_1'))}}" class="ringo-phone-prod">{{ $texts->get('tel_1') }}</a>
+                                    <br>
+                                @endif
+                                @if($texts->get('tel_2'))
                                 <a href="tel:{{ str_replace([' ', '(', ')'], '', $texts->get('tel_2'))}}" class="ringo-phone-prod">{{ $texts->get('tel_2') }}</a>
                                 <br>
+                                @endif
                                 @if(isset($messengers) AND count($messengers) !== 0 AND $categories_data['messengers']->active == 1)
                                     @foreach($messengers as $messenger)    
                                         <a href="{{ $messenger->getAttributeTranslate('messenger_link') ? $messenger->getAttributeTranslate('messenger_link') : "#"}}" class="social_r">
@@ -71,8 +75,12 @@
                                     @endforeach
                                 @endif
                                 <br>
-                                <a href="mailto:{{ $texts->get('email') }}">{{ $texts->get('email') }}</a><br>
-                                {{ $texts->get('address') }}z
+                                @if($texts->get('email'))
+                                    <a href="mailto:{{ $texts->get('email') }}">{{ $texts->get('email') }}</a><br>
+                                @endif
+                                @if($texts->get('address'))
+                                    {{ $texts->get('address') }}
+                                @endif
                             </p>
                         </div>
                     </div>

@@ -19,7 +19,10 @@
         <a class="nav-link my-1 hover-underline" href="{{ route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $base_hotel->getAttributeTranslate('url'), $categories_data['reviews']->getTranslate('url')]) }}">{{ strstr( $categories_data['reviews']->getTranslate('title') ? $categories_data['reviews']->getTranslate('title') : 'отзывы' . ' ', ' ', true ) }}</a>
     </li>
 @endif
-@if(isset($discounts) AND $categories_data['discounts']->active == 1)
+    @if (isset($discounts) AND
+    count(((isset($children_discounts)) ? $discounts->where('article_id', 0)->merge($children_discounts) : $discounts->where('article_id', 0))) !== 0
+    || count($children_rooms->filter(function ($room){ return $room->getAttributeTranslate('discount_room') || $room->getAttributeTranslate('marketing_hot_sale', App::getLocale()) ;})->all()) !== 0
+    )
     <li class="nav-item">
         <a class="nav-link my-1 hover-underline" href="{{ route('article_url', [setLangToRedirect(App::getLocale()), $categories_data['hotels']->getTranslate('url'), $base_hotel->getAttributeTranslate('url'), $categories_data['discounts']->getTranslate('url')]) }}">{{ $categories_data['discounts']->getTranslate('title') ? $categories_data['discounts']->getTranslate('title') : 'акции' }}</a>
     </li>

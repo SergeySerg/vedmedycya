@@ -35,12 +35,22 @@
                     <span class="nav-link navbar-phone" href="#">
                         @if($texts->get('tel_test') AND getSetting('ip_tel'))<span class="ringo-phone-dev">1234567890</span>@endif
                         <div class="dropdown">
-                            <span class="ringo-phone-prod">{{ $texts->get('tel_1') }}</span>
+                            <span class="ringo-phone-prod">
+                                @if($texts->get('tel_1'))
+                                    {{ $texts->get('tel_1') }}
+                                @else($texts->get('tel_2'))
+                                    {{ $texts->get('tel_2') }}
+                                @endif
+                            </span>
                             <i class="fas fa-chevron-down ml-2"></i><br>
                             <div class="dropdown-content">
                                 <span class=“ringo-phone-prod”>
-                                    z{{ $texts->get('tel_1') }}
-                                    {{ $texts->get('tel_2') }}
+                                    @if($texts->get('tel_1'))
+                                        {{ $texts->get('tel_1') }}
+                                    @endif
+                                    @if($texts->get('tel_2'))
+                                        {{ $texts->get('tel_2') }}
+                                    @endif
                                 </span>
                                 <div class="h-line-bold"></div>
                                 @if(isset($messengers) AND count($messengers) !== 0 AND $categories_data['messengers']->active == 1)

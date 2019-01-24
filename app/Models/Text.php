@@ -31,7 +31,7 @@ class Text extends Translate {
     }
 
     public function get($value){
-        return isset($this->fields[$value]) ? $this->fields[$value] : $value;
+        return isset($this->fields[$value]) ? $this->fields[$value] : null;
     }
 
 }

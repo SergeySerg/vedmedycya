@@ -6,11 +6,16 @@
     <li class="nav-item">
         <a class="nav-link my-1 hover-underline" href="@if(Route::currentRouteName() == 'article_index')#aboutAnchor @else {{ route('article_index', [setLangToRedirect(App::getLocale()) . '#aboutAnchor'])}} @endif">{{trans('base.about_us')}}</a>
     </li>
-@if(isset($discounts)  AND $categories_data['discounts']->active == 1)
+@if (isset($discounts) AND
+count($discounts) !== 0
+|| count($rooms->filter(function ($room){ return $room->getAttributeTranslate('discount_room') || $room->getAttributeTranslate('marketing_hot_sale', App::getLocale()) ;})->all()) !== 0
+)
     <li class="nav-item">
         <a class="nav-link my-1 hover-underline" href="{{ route('article_category', [setLangToRedirect(App::getLocale()), $categories_data['discounts']->getTranslate('url')]) }}">{{ $categories_data['discounts']->getTranslate('title') ? $categories_data['discounts']->getTranslate('title') : 'Акции' }}</a>
     </li>
+
 @endif
+
 <li class="nav-item text-center my-xl-1">
     <a id="desktop-logo" href="{{ route('article_index', [setLangToRedirect(App::getLocale())])}}"><img class="img-fluid mx-center" src="{{ asset('/img/frontend/logo.png') }}" width="140px"></a>
 </li>
