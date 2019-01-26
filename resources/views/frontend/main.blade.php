@@ -17,7 +17,7 @@
     <!-- mobile_messenger -->
         @include('frontend.sections.mobile_messengers')
     <!-- END mobile_messenger -->    
-    <div class="container-fluid px-sm-5" id='section-hotels'>
+    <div class="container-fluid px-sm-5" id='section-hotels' style="position: relative;">
         <div class="row text-center">
             <div class="col">
                 <h2 id="hotelsAnchor" class="section-header-huge">{{ $main->first()->getTranslate('title') }}</h2>
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="row justify-content-center no-gutters px-md-5 px-0">
-        <?php $i = 0 ?>
+        <?php $j = count($hotels) ?>
         @foreach($hotels as $key => $hotel)
         
             <div class="col-xl-4 col-lg-6 p-2 mt-4">            
@@ -82,13 +82,15 @@
                     </div>
                 </a>
             </div>            
-            @if($i == 2)
+            @if(bcmod($j,3) != 0)
                 <div class="align-self-center fake col-xl-2 fake-left"></div>
             @endif
-            <?php $i++ ?>
         @endforeach
-                       
+                    
+        @if(bcmod($j,3) != 0)
             <div class="align-self-center fake col-xl-2 fake-right"></div>
+        @endif
+
         </div>
     </div>    
     @if($main->first()->getAttributeTranslate('slogan'))
@@ -104,7 +106,7 @@
     <div class="container-fluid py-sm-5 py-3 back-f4f4f4">
         <div id="feature" class="row no-gutters text-center">
         
-                @foreach($main_advantages->take(4) as $advantage)                   
+                @foreach($main_advantages->take(5) as $advantage)                   
                     <div class="col-md-3 col-6 py-2 my-2">
                         {!! $advantage->getAttributeTranslate('icon') !!}
                         <h5 class="feature-text">{!! $advantage->getTranslate('title') !!}</h5>
