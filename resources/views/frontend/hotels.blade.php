@@ -16,7 +16,7 @@
     <!-- mobile_messenger -->
         @include('frontend.sections.mobile_messengers')
     <!-- END mobile_messenger --> 
-    <div class="container-fluid px-sm-5 pb-5">
+    <div class="container-fluid px-sm-5 pb-5" style="position: relative;">
         <div class="row text-center">
             <div class="col">
                 <h2 class="section-header-huge">{{ $parent_hotel->getAttributeTranslate('type_build')}} {{ $parent_hotel->getTranslate('title')}}</h2>
@@ -26,7 +26,7 @@
         </div>
         
         <div class="row justify-content-center no-gutters px-md-5 px-0">
-        <?php $i = 0 ?>
+        <?php $j = count($hotels) ?>
             @foreach($children_rooms->take(5) as $key => $room)
                 @if($room->getAttributeTranslate('show_hotel_page') AND $room->getAttributeTranslate('show_hotel_page') == 1)
                 <!-- Типова мала карточка номеру -->
@@ -43,7 +43,7 @@
                                         <p class="alt-dates m-0">з 05.10 по 08.10</p>
                                     </div> -->
                                 </div>
-                                <div class="row pb-1  px-md-4 px-3">
+                                <div class="row pb-3  px-md-4 px-3">
                                     <div class="col-8">
                                         <small class="small-card-hotel">{{ $room->article_parent->getAttributeTranslate('type_build')}} {{ $room->article_parent->getTranslate('title')}}</small>
                                     </div>
@@ -83,17 +83,16 @@
                             </div>
                         </a>
                     </div>                
-                    @if($i == 2)
+                    @if(bcmod($j,3) != 0)
                         <div class="align-self-center fake col-xl-2 fake-left"></div>
                     @endif
-                    <?php $i++;
-                        
-                    ?>                  
                 @endif
             @endforeach
-            <div class="align-self-center fake col-xl-2 fake-right"></div>
-            
 
+            @if(bcmod($j,3) != 0)
+                <div class="align-self-center fake col-xl-2 fake-right"></div>
+            @endif
+            
         </div>
     </div>
     @if(isset($children_advantages) AND $children_advantages)

@@ -195,7 +195,7 @@ body, footer {
 
     .rest-image {
         width: 100% !important;
-        height: 50vh !important;
+        /* height: 50vh !important; */
     }
 
     .rest-details {
@@ -2579,9 +2579,15 @@ div#justify > .fa-plus:first-child {
 }
 
 /* Raund mix */
+#section-hotels{
+    position: relative;
+}
+#section-hotels .fake{
+    bottom: 60px;
+}
 .fake{
     position: absolute;
-    bottom: 60px;
+    bottom: 100px;
 }
 .fake-left{
     left: 0;
@@ -2623,7 +2629,7 @@ a.social_r:hover{
 .rest-image_r{
     position: relative;
     height: auto;
-    min-height: 504px;
+    min-height: 450px;
     padding-top: 0;
 }
 .left-click,
@@ -2722,4 +2728,7 @@ a.social_r:hover{
     }
 }
 @media screen and (max-width: 768px) {
+    .rest-image_r{
+        min-height: auto;
+    }    
 }
