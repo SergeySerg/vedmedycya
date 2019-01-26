@@ -56,7 +56,7 @@ return [
 	'сhildren_room' => 'Дитяча кімната',
 	'ski_storage_room' => 'Кімната зберігання лиж',	
 	'bowl_ski_equipment' => 'Cушка лижнього спорядження',
-	'complactation' => 'Комплектація',
+	'complactation' => 'Зручності',
 	'price_for' => 'Вартість вказана для',
 	'max_count_guests' => 'максимальне розміщення',
 	"same_room" => "Cхожі номери",

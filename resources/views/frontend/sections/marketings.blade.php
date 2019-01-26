@@ -1,7 +1,7 @@
 @if(isset($marketings) AND count($marketings) !== 0 AND $categories_data['marketings']->active == 1)
     <div class="container-fluid">
         <div class="row text-center">
-            <div class="col padding-0">
+            <div class="col padding-0 marketing_block">
                 <h2 class="section-header-huge">{{ $categories_data['marketings']->getTranslate('title')}}</h2>
                 <div class="section-description">{!! $categories_data['marketings']->getTranslate('short_description') !!}</div>
                 <div class="rest-slider px-3">
@@ -13,8 +13,8 @@
                                         <picture>
                                             <img data-lazy="{{ asset( $marketing->getAttributeTranslate('marketing_img')) }}">
                                         </picture>
-                                        <div class="left-click"></div>
-                                        <div class="right-click"></div>
+                                        <!-- <div class="left-click"></div>
+                                        <div class="right-click"></div> -->
                                     </div>
                                     <div class="rest-details rest-details_r">
                                         <h4 class="text-uppercase">{{ $marketing->getTranslate('title')}}</h4>
@@ -42,7 +42,19 @@
                             @endforeach 
                         @endif
                     @endif
-                    
+
+                </div>
+                <div id="p-arrow" class="p-arrow">
+                    <div class="arrow-left arrow-left_r marketing-arrow-left">
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+                <div id="n-arrow" class="n-arrow">
+                    <div class="arrow-right arrow-right_r marketing-arrow-right">
+                        <div></div>
+                        <div></div>
+                    </div>
                 </div>
                 <nav class="rest-dots"></nav>
             </div>

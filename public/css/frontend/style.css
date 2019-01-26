@@ -195,7 +195,7 @@ body, footer {
 
     .rest-image {
         width: 100% !important;
-        height: 50vh !important;
+        /* height: 50vh !important; */
     }
 
     .rest-details {
@@ -2579,6 +2579,35 @@ div#justify > .fa-plus:first-child {
 }
 
 /* Raund mix */
+#section-hotels{
+    position: relative;
+}
+#section-hotels .fake{
+    bottom: 60px;
+}
+.fake{
+    position: absolute;
+    bottom: 100px;
+}
+.fake-left{
+    left: 0;
+}
+.fake-right{
+    right: 0;
+}
+.marketing_block #p-arrow,
+.marketing_block #n-arrow{
+    height: 100%;
+}
+.marketing_block #p-arrow{
+    left: 4%;
+}
+.marketing_block #n-arrow{
+    right: 4%;
+}
+#main-slider{
+    margin-top: 92px;
+}
 .text-white.phones-included a{
     color: #ffffff;
 }
@@ -2600,7 +2629,7 @@ a.social_r:hover{
 .rest-image_r{
     position: relative;
     height: auto;
-    min-height: 504px;
+    min-height: 450px;
     padding-top: 0;
 }
 .left-click,
@@ -2647,9 +2676,13 @@ a.social_r:hover{
 .main-slider-apart .p-apart-arrow,
 .main-slider-apart #n-arrow, 
 .main-slider-apart .n-apart-arrow{
-    height: inherit;
+    height: 100%;
 }
 @media screen and (max-width: 1199px) {
+    #main-slider{
+        margin-top: 64px;
+        position: relative;
+    }
     .main-dots-2 {
         bottom: 40px;
     }
@@ -2682,10 +2715,6 @@ a.social_r:hover{
         position: relative;
         bottom: 0 !important;
     }
-    #main-slider{
-        margin-top: 66px;
-        position: relative;
-    }
     .fullscreen-img {
         height: auto !important;
     }
@@ -2699,4 +2728,7 @@ a.social_r:hover{
     }
 }
 @media screen and (max-width: 768px) {
+    .rest-image_r{
+        min-height: auto;
+    }    
 }
