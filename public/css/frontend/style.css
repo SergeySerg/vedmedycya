@@ -2579,6 +2579,16 @@ div#justify > .fa-plus:first-child {
 }
 
 /* Raund mix */
+.marketing_block #p-arrow,
+.marketing_block #n-arrow{
+    height: 100%;
+}
+.marketing_block #p-arrow{
+    left: 4%;
+}
+.marketing_block #n-arrow{
+    right: 4%;
+}
 #main-slider{
     margin-top: 92px;
 }
