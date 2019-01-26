@@ -2579,6 +2579,9 @@ div#justify > .fa-plus:first-child {
 }
 
 /* Raund mix */
+#main-slider{
+    margin-top: 92px;
+}
 .text-white.phones-included a{
     color: #ffffff;
 }
@@ -2647,9 +2650,13 @@ a.social_r:hover{
 .main-slider-apart .p-apart-arrow,
 .main-slider-apart #n-arrow, 
 .main-slider-apart .n-apart-arrow{
-    height: inherit;
+    height: 100%;
 }
 @media screen and (max-width: 1199px) {
+    #main-slider{
+        margin-top: 64px;
+        position: relative;
+    }
     .main-dots-2 {
         bottom: 40px;
     }
@@ -2681,10 +2688,6 @@ a.social_r:hover{
     .main-form {
         position: relative;
         bottom: 0 !important;
-    }
-    #main-slider{
-        margin-top: 66px;
-        position: relative;
     }
     .fullscreen-img {
         height: auto !important;
