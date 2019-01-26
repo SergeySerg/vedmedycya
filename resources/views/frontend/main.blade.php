@@ -82,7 +82,7 @@
                     </div>
                 </a>
             </div>            
-            @if($i == 2)
+            @if($i == 2 )
                 <div class="align-self-center fake col-xl-2 fake-left"></div>
             @endif
             <?php $i++ ?>
