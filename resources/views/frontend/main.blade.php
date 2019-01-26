@@ -104,9 +104,9 @@
         </div>
     @endif
     <div class="container-fluid py-sm-5 py-3 back-f4f4f4">
-        <div id="feature" class="row no-gutters text-center">
+        <div id="feature" class="row no-gutters text-center justify-content-center">
         
-                @foreach($main_advantages->take(5) as $advantage)                   
+                @foreach($main_advantages as $advantage)                   
                     <div class="col-md-3 col-6 py-2 my-2">
                         {!! $advantage->getAttributeTranslate('icon') !!}
                         <h5 class="feature-text">{!! $advantage->getTranslate('title') !!}</h5>
