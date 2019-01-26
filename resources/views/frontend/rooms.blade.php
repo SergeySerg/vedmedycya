@@ -187,7 +187,14 @@
             </div>
             {{--//TODO:order--}}
             <div class="col-md-4 text-md-right text-center">
-                <small id="people_max">{{ trans('base.price_for')}} <i class="fa fa-male align-text-top text-orange"></i> х <span id='base_guests'>{{ $article->getAttributeTranslate('base_count_ guests') }}</span>, {{ trans('base.max_count_guests')}} <i class="fa fa-male align-text-top text-orange"></i> х<span id='max_guests'>{{ $article->getAttributeTranslate('max_count_guests') }}</span></small>
+                <div id="people_max">
+                    <div>
+                        {{ trans('base.price_for')}} <i class="fa fa-male align-text-top text-orange"></i> х <span id='base_guests'>{{ $article->getAttributeTranslate('base_count_ guests') }}</span>
+                    </div>
+                    <div>
+                        {{ trans('base.max_count_guests')}} <i class="fa fa-male align-text-top text-orange"></i> х <span id='max_guests'>{{ $article->getAttributeTranslate('max_count_guests') }}</span>
+                    </div>
+                </div>
                 <div class="order-card mt-4">
                     <div class="d-flex justify-content-center margin-left-15">
                         <div class="apart-price-discount back-707070">
