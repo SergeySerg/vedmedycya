@@ -56,7 +56,7 @@ return [
 	'сhildren_room' => 'Детская комната',
 	'ski_storage_room' => 'Комната хранения лыж',	
 	'bowl_ski_equipment' => 'Сушка лыжного снаряжения',
-	'complactation' => 'Комплектация',
+	'complactation' => 'Удобства',
 	'price_for' => 'Стоимость указана для',
 	'max_count_guests' => 'максимальное размещение',
 	"same_room" => "Похожие номера",
