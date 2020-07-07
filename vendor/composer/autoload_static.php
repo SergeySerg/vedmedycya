@@ -28,6 +28,10 @@ class ComposerStaticInitb7887ae7b6c910dea90c8ef87cc8ead4
         array (
             'phpDocumentor\\Reflection\\' => 25,
         ),
+        'l' => 
+        array (
+            'linkprofit\\AmoCRM\\' => 18,
+        ),
         'X' => 
         array (
             'XdgBaseDir\\' => 11,
@@ -99,6 +103,7 @@ class ComposerStaticInitb7887ae7b6c910dea90c8ef87cc8ead4
         ),
         'B' => 
         array (
+            'Bigperson\\AmoCrmApi\\' => 20,
             'Barryvdh\\LaravelIdeHelper\\' => 26,
             'Barryvdh\\Debugbar\\' => 18,
         ),
@@ -114,6 +119,10 @@ class ComposerStaticInitb7887ae7b6c910dea90c8ef87cc8ead4
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'linkprofit\\AmoCRM\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/linkprofit-cpa/amocrm-api/src',
         ),
         'XdgBaseDir\\' => 
         array (
@@ -270,6 +279,10 @@ class ComposerStaticInitb7887ae7b6c910dea90c8ef87cc8ead4
         'ClassPreloader\\' => 
         array (
             0 => __DIR__ . '/..' . '/classpreloader/classpreloader/src',
+        ),
+        'Bigperson\\AmoCrmApi\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bigperson/amocrm-api-laravel/src',
         ),
         'Barryvdh\\LaravelIdeHelper\\' => 
         array (
