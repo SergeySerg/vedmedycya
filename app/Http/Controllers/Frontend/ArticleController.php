@@ -21,7 +21,8 @@ use Mail;
 use Illuminate\Support\Facades\Validator;
 use Debugbar;
 use Illuminate\Pagination\Paginator;
-class ArticleController extends Controller {	
+use linkprofit\AmoCRM\services\CatalogElementService;
+class ArticleController extends Controller {
 
 	/**
 	 * Display a listing of the resource with subdomain.
@@ -208,6 +209,13 @@ class ArticleController extends Controller {
 	}
 	public function reserved(Request $request, $lang)
 	{
+    $lead = new \linkprofit\AmoCRM\entities\Lead();
+    $lead->status_id = 17077744;
+    $lead->sale = 0;
+    $lead->responsible_user_id = 1924000;
+//    $leadService = new \linkprofit\AmoCRM\services\LeadService($request);
+//    $leadService->add($lead);
+    dd($lead);
 		//dd('reserved');
 		if ($request ->isMethod('post')){
 			/*get [] from request*/

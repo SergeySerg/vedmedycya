@@ -11,7 +11,11 @@
 		"barryvdh/laravel-ide-helper": "^2.3",
 		"zjango/laracurl": "dev-master",
 		"laravelcollective/bus": "^5.2.0",
-		"barryvdh/laravel-debugbar": "~2.4"
+		"barryvdh/laravel-debugbar": "~2.4",
+		"bigperson/amocrm-api-laravel": "^0.1.5",
+		"dotzero/laravel-amocrm": "^0.8.0",
+		"amocrm/amocrm-api-library": "^0.3.2",
+		"ixudra/curl": "^6.19"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

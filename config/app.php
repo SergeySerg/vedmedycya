@@ -154,6 +154,7 @@ return [
 		 */
 		Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 		Barryvdh\Debugbar\ServiceProvider::class,
+    Ixudra\Curl\CurlServiceProvider::class,
 	],
 
 	/*
@@ -206,6 +207,7 @@ return [
 		'Form' => Collective\Html\FormFacade::class,
 		'Html' => Collective\Html\HtmlFacade::class,
 		  'Debugbar' => Barryvdh\Debugbar\Facade::class,
+    'Curl'          => Ixudra\Curl\Facades\Curl::class,
 	],
 
 ];

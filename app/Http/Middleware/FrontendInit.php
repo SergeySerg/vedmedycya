@@ -3,6 +3,7 @@
 use Closure;
 use App;
 
+use function GuzzleHttp\default_ca_bundle;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use App\Models\Article;
@@ -14,7 +15,8 @@ use League\Flysystem\Config;
 use Debugbar;
 //use Config;
 use Input;
-
+use Ixudra\Curl\Facades\Curl;
+//use Curl;
 
 class FrontendInit {
 
@@ -27,7 +29,34 @@ class FrontendInit {
 	 */
 	public function handle($request, Closure $next)
 	{
-	    // For ringostat script
+    $response = Curl::to('https://vorser87.amocrm.ru/oauth2/access_token')
+//      ->withHeader('Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInNJZCI6MSwiaWF0IjoxNTM4MjI4ODk1fQ.Rmeg9--plid64AFfhyQzaXqkLFceq-treSecXYUm8Uk')
+//      ->withHeader('MySecondHeader: 456')
+      ->withData( array(
+        'client_id' => 'dcecfee2-94d9-454a-b5c7-bcbd63da13cf',
+        "client_secret" => "EdvCxwLPtpiKfUgAzFfWPsgxrquUGkS2SKKqjzC0lA0q1ThotoDr1bfvtUwtmcJZ",
+        "grant_type" => "refresh_token",
+        "refresh_token" => "def502004a316207d1b417f2921c4831b637762cc540bc2beaf2eb0c314ec9cdcfd6bfa054a0970d0a2859da83f8cea408502c7d5ae3f52551e878e8011586a69c5cd59c01e0d6b8e25d49fb90635ab7ef179abba078da65ea172ca10b49cd892ba942c80de7ffe9f34c95933a475f686ab62f0f0ce28c30d7036414e2878f117a26e46c48e0d939aba10aefd611451c73c38f55b68d4b5c82a87befcafae26928cf8fdb1d8e59c0624414d5b21f84f818cc054ac95bc6071065b445900ecd2a904510d90d4dadb952ad664f4c7199e6eb16d5d1f5514419fff8dca5327d16d4813e311cee8fe3cd73f0ab51365a06f159df3347589c65e736d4322a2286f7960b70c207d200fc461fa19a368e69f3d5c7dbba5e10f03ed3dec2701eb8e81cd14128fa905b81af442425f621a7f0c59f29e84da7c5cccad19dc0b8324171fdbb6b124938063a832fc0b203c65bb177347b2b3f453cb66b2f0a7e2bd69608940a49d36b50d3bbd0191b5298a606890dcee4ad5ca168381fe8f81381c5ccd7bbc0212239c8f556e965a94c717bb41fad416df75680148f79d9c04af559b91940b33a314ccddaf4a1220422835cbfa9c7c9c7acb53a",
+        "redirect_uri" => "http://vedmedycya.com.ua/redirect"
+      ) )
+      ->asJson()
+      ->post();
+//dd($response->access_token);
+    $object = (object) [
+      'name' => 'Сделка для примера 6',
+    ];
+    $response2 = Curl::to('https://vorser87.amocrm.ru/api/v4/leads')
+      ->withHeader('Authorization: Bearer ' . $response->access_token)
+//      ->withHeader('MySecondHeader: 456')
+      ->withData( array(
+        $object
+      ) )
+      ->asJson()
+      ->post();
+    dd($response2);
+//    dd($response->access_token);
+
+    // For ringostat script
          if(isset($request->lastpage)){
              $pieces = explode("/", $request->lastpage);
              $id = (int) $pieces[count($pieces)-1];
