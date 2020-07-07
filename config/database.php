@@ -54,7 +54,7 @@ return [
 
 		'mysql' => [
 			'driver'    => 'mysql',
-			'host'      => env('DB_HOST', 'localhost:8889'),
+			'host'      => env('DB_HOST', 'localhost:3306'),
 			'database'  => env('DB_DATABASE', 'vedmedycya_db'),
 			'username'  => env('DB_USERNAME', 'root' ),
 			'password'  => env('DB_PASSWORD', 'root'),
