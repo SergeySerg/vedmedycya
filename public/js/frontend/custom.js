@@ -177,6 +177,12 @@ $(function () {
         var email = $("input[name='email']").val();
         var lang =  $("input[name='lang']").val();
         var token = $("input[name='csrf-token']").val();
+        var utmSource = $("input[name='utm_source']").val();
+        var utmMedium = $("input[name='utm_medium']").val();
+        var utmCampaign = $("input[name='utm_campaign']").val();
+        var utmContent = $("input[name='utm_content']").val();
+        var gclid = $("input[name='gclid']").val();
+
         data = {
             roomName: roomName,
             hotelName: hotelName,
@@ -187,7 +193,12 @@ $(function () {
             sumPrice: sumPrice,
             name: name,
             phone: phone,
-            email: email       
+            email: email,
+            utmSource: utmSource,
+            utmMedium: utmMedium,
+            utmCampaign: utmCampaign,
+            utmContent: utmContent,
+            gclid: gclid
         }
         data = JSON.stringify(data);
         //console.log('дата', data);

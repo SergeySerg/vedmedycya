@@ -68,3 +68,9 @@
     </div>
     <input type="hidden" name='lang' value="{{ App::getLocale() }}"/>
     <input type="hidden" name='csrf-token' value="{{csrf_token()}}"/>
+    <input type="hidden" name='utm_source' value="{{ Request::get('utm_source') }}"/>
+    <input type="hidden" name='utm_medium' value="{{ Request::get('utm_medium') }}"/>
+    <input type="hidden" name='utm_campaign' value="{{ Request::get('utm_campaign') }}"/>
+    <input type="hidden" name='utm_content' value="{{ Request::get('utm_content') }}"/>
+    <input type="hidden" name='gclid' value="{{ Request::get('gclid') }}"/>
+    <input type="hidden" name='_gid' value="{{ Cookie::get('_gid') }}"/>
