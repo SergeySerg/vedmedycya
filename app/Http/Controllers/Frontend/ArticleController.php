@@ -214,7 +214,7 @@ class ArticleController extends Controller {
 		if ($request ->isMethod('post')){
 			/*get [] from request*/
 			$all = $request->json()->all();
-			dd($request->cookie('_gid'));
+			//dd($request->cookie('_gid'));
 			/*make rules for validation*/
 			$rules = [
 				'name' => 'required|max:30',
@@ -241,8 +241,8 @@ class ArticleController extends Controller {
           "refresh_token" => $refresh_token_setting->description,
           "redirect_uri" => "https://vedmedycya.com.ua/redirect"
         ) )
-        ->asJson();
-        //->post();
+        ->asJson()
+        ->post();
       //dd($response);
       $refresh_token_setting->description = $response->refresh_token;
       $refresh_token_setting->save();
