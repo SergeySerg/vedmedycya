@@ -271,8 +271,7 @@ class ArticleController extends Controller {
         (object)['field_id' => 701601, 'values' => $refererData]
 //        (object)['field_id' => 701601, 'values' => $cookiesData]
         );
-      if(empty($all['gclid'])){
-        $utmSource[0] = (object)["value" => $all['utmSource']];
+      if(isset($all['utmSource']) && $all['utmSource'] == 'fb'){        $utmSource[0] = (object)["value" => $all['utmSource']];
         $utmMedium[0] = (object)["value" => $all['utmMedium']];
         $utmCampaign[0] = (object)["value" => $all['utmCampaign']];
         $utmContent[0] = (object)["value" => $all['utmContent']];
@@ -286,7 +285,7 @@ class ArticleController extends Controller {
 
         );
 
-      }else{
+      }else if(isset($all['gclid'])){
         $trafSrc[0] = (object)["value" => 'google'];
         $trafType[0] = (object)["value" => 'cpc'];
         $googleId[0] = (object)["value" => $all['_gid']];
