@@ -9,25 +9,25 @@ $(function () {
 
         var lastclear = localStorage.getItem('lastclear'),
             time_now  = (new Date()).getTime();
-      
+
         // .getTime() returns milliseconds so 1000 * 60 * 60 * 24 = 24 days
         if ((time_now - lastclear) > 1000 * 60 * 60 * 24) {
-      
+
           localStorage.setItem('hotsate', true);
-      
+
           localStorage.setItem('lastclear', time_now);
         }
-      
+
       })();
     if(localStorage.getItem('hotsate') === 'false'){
-        $('#freedates-bar').hide();    
+        $('#freedates-bar').hide();
     }
-    
+
     /*Add check*/
-    $('div.small-features div.col-md-4 p').prepend('<i class="fas fa-check text-orange"></i> ');  
+    $('div.small-features div.col-md-4 p').prepend('<i class="fas fa-check text-orange"></i> ');
     /* Reserved room in search page*/
-    $('.apart-card .reserved').click(function(){    
-       
+    $('.apart-card .reserved').click(function(){
+
         iterId = $(this).attr('data-id');
         //console.log('ціна', iterId);
         var roomName = $('.apart-header[data-id='+ iterId +']').text();
@@ -38,33 +38,33 @@ $(function () {
         dates = range_date.split("-");
         dateStart = dates[0];
         dateFinish = dates[1];
-        
+
         if(!dateStart || !dateFinish){
-            alert(trans['base.date_comes_arrives']);   
-            return false; 
+            alert(trans['base.date_comes_arrives']);
+            return false;
         }
         if(adults == 0 ){
             alert(trans['base.enter_count_guests']);
-            return false;     
+            return false;
         }
-        children = $("#children").val();        
-        $('#sum_price').text(sumPrice);    
+        children = $("#children").val();
+        $('#sum_price').text(sumPrice);
         $('#adults_modal').text(adults);
         if(children != 0 && children == 1){
             $('#children_modal').text(trans['base.and'] + ' ' + children + " " + trans['base.child']);
         }else{
-            $('#children_modal').text(trans['base.and'] + ' ' + children + " "+ trans['base.kids']);    
-        }        
+            $('#children_modal').text(trans['base.and'] + ' ' + children + " "+ trans['base.kids']);
+        }
         //$('#sum_guests').text((+children) + (+adults));
         $('.date_from').text(dateStart);
         $('.date_to').text(dateFinish);
         $('#room').text(roomName);
         $('#hotel').text(hotelName);
-        //console.log('елемент', sumPrice);	        
+        //console.log('елемент', sumPrice);
     })
     /* /Reserved room in search page*/
     /*get params for redirect to search page*/
-    $('a.redirect').click(function(e){        
+    $('a.redirect').click(function(e){
         var selectHotelName = $('#location').val();
         adults = $("#adults").val();
         range_date = $("#datepicker").val();
@@ -73,22 +73,22 @@ $(function () {
         dateFinish = dates[1];
         console.log('дата виїзду====>', dates);
         console.log('дата заїзду', dateStart);
-        var token = $("input[name='csrf-token']").val();        
-        
+        var token = $("input[name='csrf-token']").val();
+
         if(!dateStart && !dateFinish || dateFinish== " " ){
-            alert(trans['base.date_comes_arrives']);   
-            return false; 
+            alert(trans['base.date_comes_arrives']);
+            return false;
         }
         if(adults == 0 ){
             alert(trans['base.enter_count_guests']);
-            return false;     
+            return false;
         }
         children = $("#children").val();
-        data = {            
+        data = {
             adults: adults,
             children: children,
             dateStart: dateStart,
-            dateFinish: dateFinish                 
+            dateFinish: dateFinish
         }
         data = JSON.stringify(data);
         //console.log('Дата', data);
@@ -99,40 +99,40 @@ $(function () {
         /* save var in cookies */
         // deleteCookie('dateStart');
         // deleteCookie('dateFinish');
-        
+
         // setCookie('dateStart', dateStart);
         // setCookie('dateFinish', dateFinish);
 
 
-        
+
 
         // $.ajax({
         //     url: 'get_dates',
         //     method: 'POST',
         //     headers: {
-        //         'X-CSRF-TOKEN': token              
-        //     },            
+        //         'X-CSRF-TOKEN': token
+        //     },
         //     data: data,
-        //     dataType: "json"            
+        //     dataType: "json"
 
-        // });  
+        // });
         if(!selectHotelName){
             e.preventDefault();
             alert(trans['base.enter_hotel']);
             return false;
         }
-        
-        
-    })   
-    $('.input-location').click(function(){        
-        redirectPath = $(this).attr('data-redirect');  
+
+
+    })
+    $('.input-location').click(function(){
+        redirectPath = $(this).attr('data-redirect');
         $("a.redirect").prop('href', redirectPath);
-        //console.log('Ссилка для переходу', redirectPath);      
-        //console.log('Шлях', redirectPath);    
-    }) 
+        //console.log('Ссилка для переходу', redirectPath);
+        //console.log('Шлях', redirectPath);
+    })
     /*/get params for redirect to search page*/
 
-   
+
     $('.apart-buy').click(function(e){
         e.preventDefault();
         //getCount();
@@ -141,31 +141,31 @@ $(function () {
         dates = range_date.split("-");
         dateStart = dates[0];
         dateFinish = dates[1];
-        
+
         if(!dateStart && !dateFinish || dateFinish== " " ){
-            alert(trans['base.date_comes_arrives']);   
-            return false; 
+            alert(trans['base.date_comes_arrives']);
+            return false;
         }
         if(adults == 0 ){
             alert(trans['base.enter_count_guests']);
-            return false;     
+            return false;
         }
         children = $("#children").val();
         sumPrice = $('p.color-black').text();
-        $('#sum_price').text(sumPrice);    
+        $('#sum_price').text(sumPrice);
         $('#adults_modal').text(adults);
         if(children != 0 && children == 1){
             $('#children_modal').text(trans['base.and'] + ' ' + children + " " + trans['base.child']);
         }else{
-            $('#children_modal').text(trans['base.and'] + ' ' + children + " "+ trans['base.kids']);    
-        }        
+            $('#children_modal').text(trans['base.and'] + ' ' + children + " "+ trans['base.kids']);
+        }
         $('#sum_guests').text((+children) + (+adults));
         $('.date_from').text(dateStart);
         $('.date_to').text(dateFinish);
         //saveLocalStorage();
         //console.log('Кількість дорослих - ', adults);
-        //console.log('Кількість дітей - ', children);       
-    }) 
+        //console.log('Кількість дітей - ', children);
+    })
     $("button[name='reserved']").click(function(e){
         e.preventDefault();
         var locationData = window.location.href.split('#');
@@ -231,17 +231,18 @@ $(function () {
                 //$("#submit-send").attr('disabled', false);
             }
 
-        });        
-    
+        });
+
     /**********END call-back**************/
     })
 
     $('#submit-callback').click(function(e){
-        e.preventDefault();        
+        e.preventDefault();
         //e.preventDefault();
         var data = $('form#callback').serialize();
         var lang =  $("input[name='lang']").val();
-        var token = $("input[name='csrf-token']").val();      
+        var token = $("input[name='csrf-token']").val();
+
         var locationData = window.location.href.split('#');
 
         $.ajax({
@@ -257,12 +258,12 @@ $(function () {
             success: function (data) {
                 // console.log('Data ', data);
                 if (data.success) {
-                    // alert('urlParam ' + urlParam); 
+                    // alert('urlParam ' + urlParam);
                     if(!$.urlParam('status')){
                         window.location.replace(locationData[0] + '?status=callback');
 
                     }else{
-                        window.location.replace(window.location.href);   
+                        window.location.replace(window.location.href);
                     }
                     //$('#exampleModal3').modal('toggle');
                     //swal(trans['base.success'], "", "success");
@@ -279,32 +280,32 @@ $(function () {
                 //$("#submit-send").attr('disabled', false);
             }
 
-        });  
-    }) 
+        });
+    })
     /*Show popup after callback*/
     if($.urlParam('status') == 'callback'){
        $('#exampleModal3').modal('toggle');
 
-    }  
+    }
 
     /*Show popup after callback*/
     /*Show popup after reservation*/
     if($.urlParam('status') == "success"){
         $('#exampleModal4').modal('toggle');
- 
-     }  
- 
+
+     }
+
      /*Show popup after reservation*/
-    /*Add review*/ 
+    /*Add review*/
     $('#send_review').click(function(e){
-        e.preventDefault();        
+        e.preventDefault();
         //e.preventDefault();
         var data = $('form#add_review').serialize();
 
         //console.log('дата відгуку', data);
         var lang =  $("input[name='lang']").val();
-        var token = $("input[name='csrf-token']").val();      
-       
+        var token = $("input[name='csrf-token']").val();
+
         $.ajax({
             url: '/' + lang + '/add_review',
             method: 'POST',
@@ -332,46 +333,46 @@ $(function () {
                 //$("#submit-send").attr('disabled', false);
             }
 
-        });  
-    }) 
+        });
+    })
 
-    /*/Add review*/ 
+    /*/Add review*/
     /*Hide hotsale*/
     $('.order-hotsale, #close-button-container').click(function(){
-        localStorage.setItem('hotsate', false); 
+        localStorage.setItem('hotsate', false);
         localStorage.setItem('lastclear', (new Date()).getTime());
 
     })
-        
+
     /*Hide hotsale*/
-    
+
 /*Pagination*/
     //  $('#more_reviews').click(function(e){
-    //     e.preventDefault();    
-    //     window.location.replace(window.location.href + '?page=2');    
+    //     e.preventDefault();
+    //     window.location.replace(window.location.href + '?page=2');
     //     //e.preventDefault();
     //     //var data = $('form#add_review').serialize();
     //  });
     /*/Pagination*/
 
 
-    
-   
+
+
 })
 // function getQuantityDays() {
 //     var range_date = $("#datepicker").val();
 //     var dates = range_date.split("-");
 //     var dateStart = dates[0];
-//     var dateFinish = dates[1];   
+//     var dateFinish = dates[1];
 //     var days = (daydiff(parseDate(dateFinish), parseDate(dateStart)));
 
 // }
 // function parseDate(str) {
 //     console.log('Строка', str);
-//     var mdy = str.split('.');    
+//     var mdy = str.split('.');
 //     return new Date(mdy[2], mdy[1]-1, mdy[0]);
 // }
-// function daydiff(second, first) {   
+// function daydiff(second, first) {
 //     return (second-first)/(1000*60*60*24);
 // }
 // function getCount(){
@@ -380,14 +381,14 @@ $(function () {
 //         dates = range_date.split("-");
 //         dateStart = dates[0];
 //         dateFinish = dates[1];
-        
+
 //         if(!dateStart || !dateFinish){
-//             alert('Введіть дати заїзду та виїзду');   
-//             return false; 
+//             alert('Введіть дати заїзду та виїзду');
+//             return false;
 //         }
 //         if(adults == 0 ){
 //             alert('Введіть кількість гостей');
-//             return false;     
+//             return false;
 //         }
 //         children = $("#children").val();
 // }

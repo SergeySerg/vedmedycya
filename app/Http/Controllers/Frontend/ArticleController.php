@@ -350,6 +350,88 @@ class ArticleController extends Controller {
 					'message' => $validator->messages()->first()
 				));
 			}
+      $refresh_token_setting = Setting::where('name', '=','refresh_token')->first();
+      $response = Curl::to('https://nestorvmandry.amocrm.ru/oauth2/access_token')
+        ->withData( array(
+          'client_id' => '2bba3de7-6564-4f10-8ea0-1645e5367f4b',
+          "client_secret" => "ucnc7zkSjuTweNYPC2CqQxrrEQEBlyAC6NJnhKjtriTMtTSjk1ff3TEGvUZU0DuU",
+          "grant_type" => "refresh_token",
+          "refresh_token" => $refresh_token_setting->description,
+          "redirect_uri" => "https://vedmedycya.com.ua/redirect"
+        ) )
+        ->asJson()
+        ->post();
+      //dd($response);
+      $refresh_token_setting->description = $response->refresh_token;
+      $refresh_token_setting->save();
+      $finishData = [];
+      $ids = [];
+      $dateOnArr = [];
+      $countArr = [];
+      $dateOffArr = [];
+      $custom_fields_values = [];
+      $ids[0] = (object)['id' => 703527];
+      $tags = (object)['tags' => $ids];
+//      $dateOnArr[0] = (object)["value" => $all['dateStart']];
+//      $dateOffArr[0] = (object)["value" => $all['dateFinish']];
+//      $countArr[0] = (object)["value" => $all['adults']];
+//      $cottageArr[0] = (object)["value" => trim(str_replace("\n", "", $all['hotelName']))];
+//      $roomData[0] = (object)["value" => trim(str_replace("\n", "", $all['roomName']))];
+      $refererData[0] = (object)["value" => $_SERVER['HTTP_REFERER']];
+      $cookiesData[0] = (object)["value" => Cookie::get()];
+
+      array_push ( $custom_fields_values,
+//        (object)['field_id' => 709859, 'values' => $dateOnArr],
+//        (object)['field_id' => 701977, 'values' => $countArr],
+//        (object)['field_id' => 709861, 'values' => $dateOffArr],
+//        (object)['field_id' => 701979, 'values' => $cottageArr],
+//        (object)['field_id' => 709853, 'values' => $roomData],
+        (object)['field_id' => 701601, 'values' => $refererData]
+//        (object)['field_id' => 701601, 'values' => $cookiesData]
+      );
+      if(isset($all['utmSource']) && $all['utmSource'] == 'fb'){
+        $utmSource[0] = (object)["value" => $all['utmSource']];
+        $utmMedium[0] = (object)["value" => $all['utmMedium']];
+        $utmCampaign[0] = (object)["value" => $all['utmCampaign']];
+        $utmContent[0] = (object)["value" => $all['utmContent']];
+
+        array_push ( $custom_fields_values,
+          (object)['field_id' => 701607, 'values' => $utmSource],
+          (object)['field_id' => 701609, 'values' => $utmMedium],
+          (object)['field_id' => 701611, 'values' => $utmCampaign],
+          (object)['field_id' => 701613, 'values' => $utmContent],
+          (object)['field_id' => 703637, 'values' => $utmSource]
+
+        );
+
+      }else if($all['gclid']){
+        $trafSrc[0] = (object)["value" => 'google'];
+        $trafType[0] = (object)["value" => 'cpc'];
+        $googleId[0] = (object)["value" => $all['_gid']];
+        $trafContent[0] = (object)["value" => 'auto'];
+
+        array_push ( $custom_fields_values,
+          (object)['field_id' => 701607, 'values' => $trafSrc],
+          (object)['field_id' => 701639, 'values' => $trafType],
+          (object)['field_id' => 703647, 'values' => $googleId],
+          (object)['field_id' => 703645, 'values' => $trafContent]
+        );
+
+      }
+      $object = (object) [
+        'name' => "Зворотній звязок з " . $_SERVER['SERVER_NAME']  . PHP_EOL .  $all['callback_phone']   . PHP_EOL .  $all['callback_name'],
+        //'price' => intval($all['sumPrice']),
+        'responsible_user_id' => 2604826,
+        "pipeline_id" => 2316298,
+        '_embedded' => $tags,
+        'custom_fields_values'=> $custom_fields_values
+      ];
+      //dd($object);
+      $response2 = Curl::to('https://nestorvmandry.amocrm.ru/api/v4/leads')
+        ->withHeader('Authorization: Bearer ' . $response->access_token)
+        ->withData( array($object))
+        ->asJson()
+        ->post();
 
 			//Send item on admin email address
 			Mail::send('emails.callback', $all, function($message) use ($all){
