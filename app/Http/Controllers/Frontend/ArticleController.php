@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Validator;
 use Debugbar;
 use Illuminate\Pagination\Paginator;
 use Cookie;
+use URL;
 class ArticleController extends Controller {
 
 	/**
@@ -285,7 +286,7 @@ class ArticleController extends Controller {
 
         );
 
-      }else if(isset($all['gclid'])){
+      }else if($all['gclid']){
         $trafSrc[0] = (object)["value" => 'google'];
         $trafType[0] = (object)["value" => 'cpc'];
         $googleId[0] = (object)["value" => $all['_gid']];
@@ -311,9 +312,9 @@ class ArticleController extends Controller {
       $response2 = Curl::to('https://nestorvmandry.amocrm.ru/api/v4/leads')
         ->withHeader('Authorization: Bearer ' . $response->access_token)
         ->withData( array($object))
-        ->asJson();
-        //->post();
-      dd($response2);
+        ->asJson()
+        ->post();
+      //dd($response2);
       //Send item on admin email address
 			Mail::send('emails.reserved', $all, function($message){
 				$email = getSetting('config.email');
@@ -321,7 +322,8 @@ class ArticleController extends Controller {
 						->subject('Бронювання з сайту Велика Ведмедиця');
 			});
 			return response()->json([
-				'success' => 'true'
+				'success' => 'true',
+        'redirect' =>  URL::route('thankyou_page', ['lang' => $lang])
 			]);
 		}
 	}
@@ -355,7 +357,8 @@ class ArticleController extends Controller {
 				$message->to($email, 'Велика Ведмедиця')->subject('Зворотній зв\'язок "' . $all['type'] . '"');
 			});
 			return response()->json([
-				'success' => 'true'
+				'success' => 'true',
+        'redirect' =>  URL::route('thankyou_page', ['lang' => $lang])
 			]);
 		}
 	}
